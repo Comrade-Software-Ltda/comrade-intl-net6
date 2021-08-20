@@ -1,0 +1,13 @@
+bin/
+obj/
+git/
+.vs/
+*.user
+*.cache
+*.targets
+*.dll
+*.pdb
+*.cache
+*.props
+log*.txt
+key*.xml
