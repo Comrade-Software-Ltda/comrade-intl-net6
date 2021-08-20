@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "aaaa",
+    "email": "777@testObject",
+    "password": "100.SdwfwU4tDWbBkLlBNd7Vcg==.cGEYFjBRNpLrCxzYNIbSdnbbY1zFvBHcyIslMTSmwy8=",
+    "registration": "123",
+    "registerDate": "2019-05-13T08:25:00"
+  },
+  {
+    "id": 2,
+    "name": "bbbb",
+    "email": "888@testObject",
+    "password": "100.fsSHTMiMs/JsNth6Hlg/Pg==.+IYtLdw9oTLyYitCcKJzlyWkmxzvSNyw27BYxJtXHq0=",
+    "registration": "234",
+    "registerDate": "2019-06-13T08:25:00"
+  },
+  {
+    "id": 3,
+    "name": "cccc",
+    "email": "999@testObject",
+    "password": "100.63tHFQEtSCWgvtMYxLVfRw==.i42OQQG11aP4tdgto5SD5tCaxka47oBhpvfkBhetm0Q=",
+    "registration": "345",
+    "registerDate": "2019-07-13T08:25:00"
+  },
+  {
+    "id": 4,
+    "name": "dddd",
+    "email": "444@testObject",
+    "password": "100.9RIgQMvr7sxKRxquUEzveA==.5rsqWQZQ4Z2YOBmfPApsB36n8qAA3hwStSEqbDzndTg=",
+    "registration": "568",
+    "registerDate": "2019-09-13T08:25:00"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "model": "111",
+    "code": "123",
+    "passengerQuantity": 34,
+    "registerDate": "2017-06-18"
+  },
+  {
+    "id": 2,
+    "model": "222",
+    "code": "456",
+    "passengerQuantity": 23,
+    "registerDate": "2017-07-18"
+  },
+  {
+    "id": 3,
+    "model": "333",
+    "code": "567",
+    "passengerQuantity": 12,
+    "registerDate": "2017-05-18"
+  }
+]
