@@ -16,7 +16,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public class SystemUserControllerEditTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
 
     [Fact]
     public async Task SystemUserController_Edit()
@@ -43,7 +42,7 @@ public class SystemUserControllerEditTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.Edit(testObject);
 
         if (result is OkObjectResult okObjectResult)
@@ -83,7 +82,7 @@ public class SystemUserControllerEditTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.Edit(testObject);
 
         if (result is OkObjectResult okObjectResult)

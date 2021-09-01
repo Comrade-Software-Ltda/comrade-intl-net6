@@ -15,9 +15,6 @@ namespace Comrade.IntegrationTests.Tests.AuthenticationIntegrationTests;
 
 public sealed class AuthenticationControllerUpdatePasswordTests
 {
-    private readonly AuthenticationInjectionController _authenticationInjectionController =
-        new();
-
     [Fact]
     public async Task AuthenticationController_UpdatePassword()
     {
@@ -37,7 +34,7 @@ public sealed class AuthenticationControllerUpdatePasswordTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var authenticationController =
-            _authenticationInjectionController.GetAuthenticationController(context);
+            AuthenticationInjectionController.GetAuthenticationController(context);
         var result = await authenticationController.UpdatePassword(testObject);
 
         if (result is OkObjectResult okResult)

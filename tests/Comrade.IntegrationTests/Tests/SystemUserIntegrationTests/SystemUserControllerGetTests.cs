@@ -15,8 +15,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public class SystemUserControllerGetTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
-
     [Fact]
     public async Task SystemUserController_Get()
     {
@@ -29,7 +27,7 @@ public class SystemUserControllerGetTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.GetById(1);
 
         if (result is OkObjectResult okResult)

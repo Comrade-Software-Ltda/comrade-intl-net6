@@ -11,7 +11,7 @@ namespace Comrade.UnitTests.Mocks;
 
 public class GetIFormFileMock
 {
-    public async Task<IFormFile> Execute()
+    public static async Task<IFormFile> Execute()
     {
         var fileMock = new Mock<IFormFile>();
         var jsonPath = "Comrade.Persistence.SeedData.Sheets";

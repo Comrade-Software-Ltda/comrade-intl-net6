@@ -13,7 +13,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public class SystemUserControllerDeleteTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
 
     [Fact]
     public async Task SystemUserController_Delete()
@@ -27,7 +26,7 @@ public class SystemUserControllerDeleteTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         _ = await systemUserController.Delete(1);
 
         var respository = new SystemUserRepository(context);

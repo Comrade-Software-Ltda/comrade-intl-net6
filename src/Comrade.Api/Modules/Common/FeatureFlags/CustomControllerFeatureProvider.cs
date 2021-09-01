@@ -41,7 +41,10 @@ public sealed class
                     typeof(FeatureGateAttribute).FullName) continue;
 
                 var constructorArgument = customAttribute.ConstructorArguments.First();
-                if (!(constructorArgument.Value is IEnumerable arguments)) continue;
+                if (constructorArgument.Value is not IEnumerable arguments)
+                {
+                    continue;
+                }
 
                 foreach (var argumentValue in arguments)
                 {

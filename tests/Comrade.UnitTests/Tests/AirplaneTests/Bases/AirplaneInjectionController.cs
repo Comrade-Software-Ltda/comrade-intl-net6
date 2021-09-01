@@ -12,16 +12,15 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public class AirplaneInjectionController
 {
-    private readonly AirplaneInjectionService _airplaneInjectionService = new();
 
-    public AirplaneController GetAirplaneController(ComradeContext context)
+    public static AirplaneController GetAirplaneController(ComradeContext context)
     {
         var mapper = MapperHelper.ConfigMapper();
 
         var logger = Mock.Of<ILogger<AirplaneController>>();
 
-        var airplaneCommand = _airplaneInjectionService.GetAirplaneCommand(context, mapper);
-        var airplaneQuery = _airplaneInjectionService.GetAirplaneQuery(context, mapper);
+        var airplaneCommand = AirplaneInjectionService.GetAirplaneCommand(context, mapper);
+        var airplaneQuery = AirplaneInjectionService.GetAirplaneQuery(context, mapper);
 
         return new AirplaneController(airplaneCommand, airplaneQuery, mapper, logger);
     }

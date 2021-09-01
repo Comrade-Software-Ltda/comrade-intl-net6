@@ -14,7 +14,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public sealed class SystemUserControllerCreateTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
 
     [Fact]
     public async Task SystemUserController_Create()
@@ -36,7 +35,7 @@ public sealed class SystemUserControllerCreateTests
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         _ = await systemUserController.Create(testObject);
         Assert.Equal(1, context.SystemUsers.Count());
     }
@@ -59,7 +58,7 @@ public sealed class SystemUserControllerCreateTests
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.Create(testObject);
 
         if (result is OkObjectResult okObjectResult)

@@ -10,14 +10,12 @@ namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public class AuthenticationInjectionController
 {
-    private readonly AuthenticationInjectionService _authenticationInjectionService = new();
-
-    public AuthenticationController GetAuthenticationController(ComradeContext context)
+    public static AuthenticationController GetAuthenticationController(ComradeContext context)
     {
         var mapper = MapperHelper.ConfigMapper();
 
         var authenticationCommand =
-            _authenticationInjectionService.GetAuthenticationCommand(context, mapper);
+            AuthenticationInjectionService.GetAuthenticationCommand(context, mapper);
 
         return new AuthenticationController(authenticationCommand);
     }

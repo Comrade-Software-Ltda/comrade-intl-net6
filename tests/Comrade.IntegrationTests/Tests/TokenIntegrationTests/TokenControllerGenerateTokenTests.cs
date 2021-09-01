@@ -15,8 +15,6 @@ namespace Comrade.IntegrationTests.Tests.TokenIntegrationTests;
 
 public sealed class TokenControllerGenerateTokenTests
 {
-    private readonly TokenInjectionController _tokenInjectionController = new();
-
     [Fact]
     public async Task TokenController_GenerateToken()
     {
@@ -35,7 +33,7 @@ public sealed class TokenControllerGenerateTokenTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var tokenController = _tokenInjectionController.GetTokenController(context);
+        var tokenController = TokenInjectionController.GetTokenController(context);
         var result = await tokenController.GenerateToken(testObject);
 
         if (result is OkObjectResult okResult)
@@ -64,7 +62,7 @@ public sealed class TokenControllerGenerateTokenTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var tokenController = _tokenInjectionController.GetTokenController(context);
+        var tokenController = TokenInjectionController.GetTokenController(context);
         var result = await tokenController.GenerateToken(testObject);
 
         if (result is OkObjectResult okResult)

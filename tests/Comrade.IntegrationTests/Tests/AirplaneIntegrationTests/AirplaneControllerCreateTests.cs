@@ -14,8 +14,6 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public sealed class AirplaneControllerCreateTests
 {
-    private readonly AirplaneInjectionController _airplaneInjectionController = new();
-
     [Fact]
     public async Task AirplaneController_Create()
     {
@@ -33,7 +31,7 @@ public sealed class AirplaneControllerCreateTests
 
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Create(testObject);
 
         if (result is OkObjectResult okResult)
@@ -62,7 +60,7 @@ public sealed class AirplaneControllerCreateTests
 
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Create(testObject);
 
         if (result is OkObjectResult okResult)
@@ -91,7 +89,7 @@ public sealed class AirplaneControllerCreateTests
 
         await using var context = new ComradeContext(options);
 
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Create(testObject);
 
         if (result is ObjectResult objectResult)

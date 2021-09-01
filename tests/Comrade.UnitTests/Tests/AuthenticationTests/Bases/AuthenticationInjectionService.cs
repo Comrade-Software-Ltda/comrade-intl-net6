@@ -10,17 +10,16 @@ namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public class AuthenticationInjectionService
 {
-    private readonly UcAuthenticationInjection _ucAuthenticationInjection = new();
 
-    public AuthenticationCommand GetAuthenticationCommand(ComradeContext context,
+    public static AuthenticationCommand GetAuthenticationCommand(ComradeContext context,
         IMapper mapper)
     {
         var getUcUpdatePassword =
-            _ucAuthenticationInjection.GetUcUpdatePassword(context);
+            UcAuthenticationInjection.GetUcUpdatePassword(context);
         var getUcForgotPassword =
-            _ucAuthenticationInjection.GetUcForgotPassword(context);
+            UcAuthenticationInjection.GetUcForgotPassword(context);
         var getUcValidateLogin =
-            _ucAuthenticationInjection.GetUcValidateLogin(context);
+            UcAuthenticationInjection.GetUcValidateLogin(context);
 
         var authenticationService = new AuthenticationCommand(getUcUpdatePassword,
             getUcValidateLogin, getUcForgotPassword, mapper);

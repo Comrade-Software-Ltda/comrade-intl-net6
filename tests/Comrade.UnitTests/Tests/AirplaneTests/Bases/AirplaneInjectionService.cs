@@ -14,7 +14,7 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class AirplaneInjectionService
 {
-    public AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper)
+    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper)
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
@@ -37,7 +37,7 @@ public sealed class AirplaneInjectionService
             ucAirplaneDelete, mapper);
     }
 
-    public AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)
+    public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)
     {
         var airplaneRepository = new AirplaneRepository(context);
 

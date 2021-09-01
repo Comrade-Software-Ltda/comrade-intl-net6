@@ -89,12 +89,12 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await query.FirstOrDefaultAsync().ConfigureAwait(false);
     }
 
-    public virtual async Task<TEntity> GetByValue(string value)
+    public virtual async Task<TEntity?> GetByValue(string value)
     {
         return await GetByValue(value, null).ConfigureAwait(false);
     }
 
-    public virtual async Task<TEntity> GetByValue(string value,
+    public virtual async Task<TEntity?> GetByValue(string value,
         Expression<Func<TEntity, TEntity>>? projection)
     {
         var query = GetAll();

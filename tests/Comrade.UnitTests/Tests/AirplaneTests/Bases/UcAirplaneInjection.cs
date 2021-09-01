@@ -11,7 +11,7 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class UcAirplaneInjection
 {
-    public UcAirplaneCreate GetUcAirplaneCreate(ComradeContext context)
+    public static UcAirplaneCreate GetUcAirplaneCreate(ComradeContext context)
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
@@ -24,7 +24,7 @@ public sealed class UcAirplaneInjection
         return new UcAirplaneCreate(airplaneRepository, airplaneCreateValidation, uow);
     }
 
-    public UcAirplaneEdit GetUcAirplaneEdit(ComradeContext context)
+    public static UcAirplaneEdit GetUcAirplaneEdit(ComradeContext context)
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);

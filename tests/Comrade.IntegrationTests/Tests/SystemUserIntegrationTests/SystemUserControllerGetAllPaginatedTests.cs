@@ -16,7 +16,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public class SystemUserControllerGetAllPaginatedTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
 
     [Fact]
     public async Task SystemUserController_GetAll_Paginated()
@@ -30,7 +29,7 @@ public class SystemUserControllerGetAllPaginatedTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var pagination = new PaginationQuery(1, 3);
         var result = await systemUserController.GetAll(pagination);
 

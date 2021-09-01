@@ -15,7 +15,6 @@ namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
 public class SystemUserControllerGetAllTests
 {
-    private readonly SystemUserInjectionController _systemUserInjectionController = new();
 
     [Fact]
     public async Task SystemUserController_GetAll()
@@ -29,7 +28,7 @@ public class SystemUserControllerGetAllTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            _systemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.GetAll(null);
 
         if (result is OkObjectResult okObjectResult)

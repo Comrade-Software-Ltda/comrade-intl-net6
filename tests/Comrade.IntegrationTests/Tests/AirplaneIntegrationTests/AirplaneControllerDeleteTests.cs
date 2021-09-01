@@ -13,7 +13,6 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerDeleteTests
 {
-    private readonly AirplaneInjectionController _airplaneInjectionController = new();
 
     [Fact]
     public async Task AirplaneController_Delete()
@@ -29,7 +28,7 @@ public class AirplaneControllerDeleteTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         _ = await airplaneController.Delete(idAirplane);
 
         var repository = new AirplaneRepository(context);

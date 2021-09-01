@@ -16,7 +16,6 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerGetAllPaginatedTests
 {
-    private readonly AirplaneInjectionController _airplaneInjectionController = new();
 
     [Fact]
     public async Task AirplaneController_GetAll_Paginated()
@@ -30,7 +29,7 @@ public class AirplaneControllerGetAllPaginatedTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);
 

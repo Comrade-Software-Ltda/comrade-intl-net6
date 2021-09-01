@@ -7,21 +7,16 @@ using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 using Comrade.UnitTests.Tests.AuthenticationTests.TestDatas;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using Xunit.Abstractions;
 
 #endregion
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests;
 
 public sealed class UcGenerateTokenTests
-
 {
-    private readonly ITestOutputHelper _output;
-    private readonly UcAuthenticationInjection _ucAuthenticationInjection = new();
 
-    public UcGenerateTokenTests(ITestOutputHelper output)
+    public UcGenerateTokenTests()
     {
-        _output = output;
     }
 
     [Theory]
@@ -37,7 +32,7 @@ public sealed class UcGenerateTokenTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var ucGenerateTokenLogin =
-            _ucAuthenticationInjection.GetUcValidateLogin(context);
+            UcAuthenticationInjection.GetUcValidateLogin(context);
         var result =
             await ucGenerateTokenLogin.Execute(testObjectInput.Key,
                 testObjectInput.Password);

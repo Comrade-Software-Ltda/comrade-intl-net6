@@ -18,7 +18,6 @@ public sealed class UcForgotPasswordTests
 
 {
     private readonly ITestOutputHelper _output;
-    private readonly UcAuthenticationInjection _ucAuthenticationInjection = new();
 
     public UcForgotPasswordTests(ITestOutputHelper output)
     {
@@ -46,7 +45,7 @@ public sealed class UcForgotPasswordTests
         var passwordBefore = returnBefore!.Password;
 
         var ucUpdatePassword =
-            _ucAuthenticationInjection.GetUcForgotPassword(context);
+            UcAuthenticationInjection.GetUcForgotPassword(context);
         var result = await ucUpdatePassword.Execute(testObject);
         _output.WriteLine(result.Message);
 

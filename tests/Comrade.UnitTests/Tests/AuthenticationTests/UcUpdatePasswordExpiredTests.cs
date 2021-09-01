@@ -17,7 +17,6 @@ namespace Comrade.UnitTests.Tests.AuthenticationTests;
 public sealed class UcUpdatePasswordTests
 {
     private readonly ITestOutputHelper _output;
-    private readonly UcAuthenticationInjection _ucAuthenticationInjection = new();
 
     public UcUpdatePasswordTests(ITestOutputHelper output)
     {
@@ -46,7 +45,7 @@ public sealed class UcUpdatePasswordTests
         var passwordBefore = returnBefore!.Password;
 
         var ucUpdatePassword =
-            _ucAuthenticationInjection.GetUcUpdatePassword(context);
+            UcAuthenticationInjection.GetUcUpdatePassword(context);
         var result = await ucUpdatePassword.Execute(testObject);
         _output.WriteLine(result.Message);
 

@@ -14,7 +14,7 @@ namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public sealed class UcAuthenticationInjection
 {
-    public UcUpdatePassword GetUcUpdatePassword(ComradeContext context)
+    public static UcUpdatePassword GetUcUpdatePassword(ComradeContext context)
     {
         var uow = new UnitOfWork(context);
         var systemUserCoreRepository = new SystemUserRepository(context);
@@ -28,7 +28,7 @@ public sealed class UcAuthenticationInjection
             systemUserCoreEditValidation, passwordHasher, uow);
     }
 
-    public UcForgotPassword GetUcForgotPassword(ComradeContext context)
+    public static UcForgotPassword GetUcForgotPassword(ComradeContext context)
     {
         var uow = new UnitOfWork(context);
         var systemUserCoreRepository = new SystemUserRepository(context);
@@ -44,7 +44,7 @@ public sealed class UcAuthenticationInjection
             passwordHasher, uow);
     }
 
-    public UcValidateLogin GetUcValidateLogin(ComradeContext context)
+    public static UcValidateLogin GetUcValidateLogin(ComradeContext context)
     {
         var myConfiguration = new Dictionary<string, string>
             {

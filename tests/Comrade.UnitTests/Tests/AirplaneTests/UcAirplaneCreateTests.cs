@@ -6,21 +6,16 @@ using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Comrade.UnitTests.Tests.AirplaneTests.TestDatas;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using Xunit.Abstractions;
 
 #endregion
 
 namespace Comrade.UnitTests.Tests.AirplaneTests;
 
 public sealed class UcAirplaneCreateTests
-
 {
-    private readonly ITestOutputHelper _output;
-    private readonly UcAirplaneInjection _ucAirplaneInjection = new();
 
-    public UcAirplaneCreateTests(ITestOutputHelper output)
+    public UcAirplaneCreateTests()
     {
-        _output = output;
     }
 
     [Theory]
@@ -34,7 +29,7 @@ public sealed class UcAirplaneCreateTests
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
 
-        var airplaneCreate = _ucAirplaneInjection.GetUcAirplaneCreate(context);
+        var airplaneCreate = UcAirplaneInjection.GetUcAirplaneCreate(context);
         var result = await airplaneCreate.Execute(testObjectInput);
 
         Assert.Equal(expected, result.Code);
@@ -57,7 +52,7 @@ public sealed class UcAirplaneCreateTests
 
         await using var context = new ComradeContext(options);
 
-        var ucAirplaneCreate = _ucAirplaneInjection.GetUcAirplaneCreate(context);
+        var ucAirplaneCreate = UcAirplaneInjection.GetUcAirplaneCreate(context);
         try
         {
             var result = await ucAirplaneCreate.Execute(testObject);

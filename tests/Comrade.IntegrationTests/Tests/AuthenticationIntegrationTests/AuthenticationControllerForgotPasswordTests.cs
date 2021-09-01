@@ -15,8 +15,6 @@ namespace Comrade.IntegrationTests.Tests.AuthenticationIntegrationTests;
 
 public sealed class AuthenticationControllerForgotPasswordTests
 {
-    private readonly AuthenticationInjectionController _authenticationInjectionController =
-        new();
 
     [Fact]
     public async Task AuthenticationController_ForgotPassword()
@@ -37,7 +35,7 @@ public sealed class AuthenticationControllerForgotPasswordTests
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var authenticationController =
-            _authenticationInjectionController.GetAuthenticationController(context);
+            AuthenticationInjectionController.GetAuthenticationController(context);
         var result = await authenticationController.ForgotPassword(testObject);
 
         if (result is OkObjectResult okResult)

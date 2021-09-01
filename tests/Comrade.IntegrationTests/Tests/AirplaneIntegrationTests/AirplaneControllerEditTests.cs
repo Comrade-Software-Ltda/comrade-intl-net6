@@ -16,7 +16,6 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerEditTests
 {
-    private readonly AirplaneInjectionController _airplaneInjectionController = new();
 
     [Fact]
     public async Task AirplaneController_Edit()
@@ -39,7 +38,7 @@ public class AirplaneControllerEditTests
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Edit(testObject);
 
         if (result is OkObjectResult okResult)
@@ -76,7 +75,7 @@ public class AirplaneControllerEditTests
         await using var context = new ComradeContext(options);
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Edit(testObject);
 
         if (result is OkObjectResult okResult)

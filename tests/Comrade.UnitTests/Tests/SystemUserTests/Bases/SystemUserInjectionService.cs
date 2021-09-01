@@ -15,7 +15,7 @@ namespace Comrade.UnitTests.Tests.SystemUserTests.Bases;
 
 public sealed class SystemUserInjectionService
 {
-    public SystemUserCommand GetSystemUserCommand(ComradeContext context, IMapper mapper)
+    public static SystemUserCommand GetSystemUserCommand(ComradeContext context, IMapper mapper)
     {
         var uow = new UnitOfWork(context);
         var systemUserRepository = new SystemUserRepository(context);
@@ -38,7 +38,7 @@ public sealed class SystemUserInjectionService
             mapper);
     }
 
-    public SystemUserQuery GetSystemUserQuery(ComradeContext context, IMapper mapper)
+    public static SystemUserQuery GetSystemUserQuery(ComradeContext context, IMapper mapper)
     {
         var systemUserRepository = new SystemUserRepository(context);
 

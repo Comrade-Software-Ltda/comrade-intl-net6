@@ -15,7 +15,7 @@ namespace Comrade.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "6.0.0-preview.7.21378.4")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Comrade.Domain.Models.Airplane", b =>
@@ -47,7 +47,8 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("airp_dt_registro");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_airp_airplane");
 
                     b.HasIndex("Code")
                         .IsUnique()
@@ -91,7 +92,8 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("ussi_tx_matricula");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_ussi_usuario_sistema");
 
                     b.HasIndex("Email")
                         .IsUnique()

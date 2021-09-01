@@ -18,7 +18,6 @@ namespace Comrade.IntegrationTests.Tests.LookupIntegrationTests;
 public sealed class CommonControllerTests
 {
     private readonly ITestOutputHelper _output;
-    private readonly SystemUserInjectionService _systemUserInjectionService = new();
 
     public CommonControllerTests(ITestOutputHelper output)
     {
@@ -26,12 +25,12 @@ public sealed class CommonControllerTests
     }
 
 
-    private CommonController GetCommonControllerMemDb()
+    private static CommonController GetCommonControllerMemDb()
     {
         var mapper = MapperHelper.ConfigMapper();
         var serviceProvider = GetServiceProviderMemDb.Execute();
         var context = serviceProvider.GetService<ComradeContext>();
-        var systemUserQuery = _systemUserInjectionService.GetSystemUserQuery(context!, mapper);
+        var systemUserQuery = SystemUserInjectionService.GetSystemUserQuery(context!, mapper);
 
         return new CommonController(serviceProvider, systemUserQuery);
     }

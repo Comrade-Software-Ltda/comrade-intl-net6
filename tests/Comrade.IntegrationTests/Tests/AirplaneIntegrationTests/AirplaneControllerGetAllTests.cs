@@ -15,7 +15,6 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerGetAllTests
 {
-    private readonly AirplaneInjectionController _airplaneInjectionController = new();
 
     [Fact]
     public async Task AirplaneController_GetAll()
@@ -29,7 +28,7 @@ public class AirplaneControllerGetAllTests
         await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var airplaneController = _airplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.GetAll(null);
 
         if (result is OkObjectResult okResult)
