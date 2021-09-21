@@ -1,6 +1,7 @@
 #region
 
 using Comrade.Api.Modules.Common;
+using Microsoft.AspNetCore.Hosting;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
