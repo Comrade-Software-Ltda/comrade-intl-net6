@@ -60,7 +60,7 @@ public class AirplaneController : ComradeController
     ///     Get an airplane details.
     /// </summary>
     /// <param name="airplaneId"></param>
-    [HttpGet("get-by-id/{id:int}")]
+    [HttpGet("get-by-id/{airplaneId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
     public async Task<IActionResult> GetById([FromRoute][Required] int airplaneId)
     {

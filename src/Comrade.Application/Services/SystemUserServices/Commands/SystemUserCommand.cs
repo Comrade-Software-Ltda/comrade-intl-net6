@@ -26,49 +26,49 @@ public class SystemUserCommand : Service, ISystemUserCommand
         _deleteSystemUser = deleteSystemUser;
     }
 
-    public async Task<ISingleResultDto<SystemUserDto>> Create(SystemUserCreateDto dto)
+    public async Task<ISingleResultDto<EntityDto>> Create(SystemUserCreateDto dto)
     {
         var validator = await new SystemUserCreateValidation().ValidateAsync(dto)
             .ConfigureAwait(false);
 
         if (!validator.IsValid)
         {
-            return new SingleResultDto<SystemUserDto>(validator);
+            return new SingleResultDto<EntityDto>(validator);
         }
 
         var mappedObject = Mapper.Map<SystemUser>(dto);
 
         var result = await _createSystemUser.Execute(mappedObject).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<SystemUserDto>(result);
+        var resultDto = new SingleResultDto<EntityDto>(result);
 
         return resultDto;
     }
 
-    public async Task<ISingleResultDto<SystemUserDto>> Edit(SystemUserEditDto dto)
+    public async Task<ISingleResultDto<EntityDto>> Edit(SystemUserEditDto dto)
     {
         var validator = await new SystemUserEditValidation().ValidateAsync(dto)
             .ConfigureAwait(false);
 
         if (!validator.IsValid)
         {
-            return new SingleResultDto<SystemUserDto>(validator);
+            return new SingleResultDto<EntityDto>(validator);
         }
 
         var mappedObject = Mapper.Map<SystemUser>(dto);
 
         var result = await _editSystemUser.Execute(mappedObject).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<SystemUserDto>(result);
+        var resultDto = new SingleResultDto<EntityDto>(result);
 
         return resultDto;
     }
 
-    public async Task<ISingleResultDto<SystemUserDto>> Delete(int id)
+    public async Task<ISingleResultDto<EntityDto>> Delete(int id)
     {
         var result = await _deleteSystemUser.Execute(id).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<SystemUserDto>(result);
+        var resultDto = new SingleResultDto<EntityDto>(result);
 
         return resultDto;
     }
