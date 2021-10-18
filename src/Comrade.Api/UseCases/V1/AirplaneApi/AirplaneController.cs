@@ -54,6 +54,7 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
@@ -78,6 +79,7 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
@@ -98,6 +100,7 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
@@ -118,6 +121,7 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
@@ -138,6 +142,7 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }

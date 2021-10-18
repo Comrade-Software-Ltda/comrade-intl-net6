@@ -27,12 +27,18 @@ public class SystemUserPasswordValidation : EntityValidation<SystemUser>
 
         if (keyValidation)
         {
-            var (Verified, NeedsUpgrade) = _passwordHasher.Check(usuSession!.Password, password);
+            var (verified, needsUpgrade) = _passwordHasher.Check(usuSession!.Password, password);
 
-            if (!Verified)
+            if (!verified)
             {
                 return new SingleResult<SystemUser>(1001,
                     "Usuário ou password informados não são válidos");
+            }
+
+            if (needsUpgrade)
+            {
+                return new SingleResult<SystemUser>(1009,
+                    "Senha precisa ser atualizada");
             }
 
 

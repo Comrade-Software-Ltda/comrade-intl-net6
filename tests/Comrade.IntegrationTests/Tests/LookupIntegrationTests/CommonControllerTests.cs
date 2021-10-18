@@ -39,6 +39,7 @@ public sealed class CommonControllerTests
         {
             var actualResultValue = okResult.Value as ListResultDto<LookupDto>;
             Assert.NotNull(actualResultValue);
+            _output.WriteLine(actualResultValue?.Code.ToString());
             Assert.NotNull(actualResultValue?.Data);
             Assert.Equal(4, actualResultValue?.Data?.Count);
         }
