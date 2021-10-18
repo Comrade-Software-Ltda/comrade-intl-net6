@@ -63,4 +63,10 @@
 		<Folder Include="Repositories\Views\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="DataAccess\ComradeMemoryContextFake.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

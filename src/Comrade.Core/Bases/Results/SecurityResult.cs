@@ -8,7 +8,7 @@ namespace Comrade.Core.Bases.Results
         public SecurityResult(TokenUser tokenUser)
         {
             TokenUser = tokenUser;
-            Code = (int)EnumResponse.Success;
+            Code = (int)EnumResponse.Ok;
             Success = true;
         }
 

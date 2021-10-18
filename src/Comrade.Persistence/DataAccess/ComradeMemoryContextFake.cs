@@ -3,11 +3,14 @@ using Comrade.Persistence.Extensions;
 
 namespace Comrade.Persistence.DataAccess;
 
-public static class ComradeContextFake
+public static class ComradeMemoryContextFake
 {
     private const string JsonPath = "Comrade.Persistence.SeedData";
     private static readonly object SyncLock = new();
 
+    /// <summary>
+    ///     To reset memory database use -> context.Database.EnsureDeleted().
+    /// </summary>
     public static void AddDataFakeContext(IServiceCollection serviceCollection)
     {
         var context = serviceCollection.BuildServiceProvider()
@@ -24,14 +27,11 @@ public static class ComradeContextFake
         {
             if (context != null && assembly is not null)
             {
-                var airplanes = assembly.GetManifestResourceStream($"{JsonPath}.airplane.json");
-                var oto = JsonUtilities.GetListFromJson<Airplane>(airplanes);
-                context.Airplanes.AddRange(oto!);
+                var airplanes = JsonUtilities.GetListFromJson<Airplane>(assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
+                var systemUser = JsonUtilities.GetListFromJson<SystemUser>(assembly.GetManifestResourceStream($"{JsonPath}.system-user.json"));
 
-                var systemUsers =
-                    assembly.GetManifestResourceStream($"{JsonPath}.system-user.json");
-                var oto2 = JsonUtilities.GetListFromJson<SystemUser>(systemUsers);
-                context.SystemUsers.AddRange(oto2!);
+                context.Airplanes.AddRange(airplanes!);
+                context.SystemUsers.AddRange(systemUser!);
 
                 if (context.Airplanes.Any())
                 {

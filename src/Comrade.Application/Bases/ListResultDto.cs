@@ -7,15 +7,15 @@ namespace Comrade.Application.Bases;
 public class ListResultDto<T> : ResultDto, IListResultDto<T>
     where T : Dto
 {
-    public ListResultDto(IList<T> data)
+    public ListResultDto(List<T>? data)
     {
         Data = data;
-        Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
+        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
         Success = data != null;
         Message = data == null
-            ? BusinessMessage.ResourceManager.GetString("MSG04", CultureInfo.CurrentCulture)
+            ? BusinessMessage.MSG04
             : string.Empty;
     }
 
-    public IList<T>? Data { get; set; }
+    public List<T>? Data { get; set; }
 }

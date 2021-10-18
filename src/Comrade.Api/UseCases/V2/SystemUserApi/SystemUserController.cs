@@ -45,7 +45,7 @@ public class SystemUserController : ControllerBase
             }
 
             var result = await _systemUserQuery.GetAll(paginationFilter).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
@@ -62,7 +62,7 @@ public class SystemUserController : ControllerBase
         try
         {
             var result = await _systemUserQuery.GetById(systemUserId).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
@@ -78,7 +78,7 @@ public class SystemUserController : ControllerBase
         try
         {
             var result = await _systemUserCommand.Create(dto).ConfigureAwait(false);
-            return StatusCode(StatusCodes.Status201Created, result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
@@ -94,7 +94,7 @@ public class SystemUserController : ControllerBase
         try
         {
             var result = await _systemUserCommand.Edit(dto).ConfigureAwait(false);
-            return StatusCode(StatusCodes.Status204NoContent, result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
@@ -110,7 +110,7 @@ public class SystemUserController : ControllerBase
         try
         {
             var result = await _systemUserCommand.Delete(systemUserId).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {

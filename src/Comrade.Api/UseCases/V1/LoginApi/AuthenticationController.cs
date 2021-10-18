@@ -28,7 +28,7 @@ public class AuthenticationController : ControllerBase
         try
         {
             var result = await _authenticationCommand.UpdatePassword(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
@@ -47,7 +47,7 @@ public class AuthenticationController : ControllerBase
         try
         {
             var result = await _authenticationCommand.ForgotPassword(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {

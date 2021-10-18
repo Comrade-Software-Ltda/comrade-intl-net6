@@ -5,6 +5,6 @@ namespace Comrade.Application.Lookups;
 public interface ILookupService<TEntity>
     where TEntity : Entity
 {
-    Task<IList<LookupDto>> GetLookup();
-    Task<IList<LookupDto>> GetLookup(Expression<Func<TEntity, bool>> predicate);
+    Task<List<LookupDto>> GetLookup();
+    Task<List<LookupDto>> GetLookup(Expression<Func<TEntity, bool>> predicate);
 }

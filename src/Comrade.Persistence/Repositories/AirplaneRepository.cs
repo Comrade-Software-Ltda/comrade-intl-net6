@@ -2,6 +2,7 @@
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
+using Comrade.Domain.Enums;
 using Comrade.Domain.Models;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
@@ -26,7 +27,8 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<Airplane>(BusinessMessage.MSG08)
+            ? new SingleResult<Airplane>((int)EnumResponse.ErrorBusinessValidation,
+                BusinessMessage.MSG08)
             : new SingleResult<Airplane>();
     }
 }

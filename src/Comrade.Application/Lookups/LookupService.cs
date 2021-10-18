@@ -17,21 +17,16 @@ public class LookupService<TEntity> : Service, ILookupService<TEntity>
         _repository = repository;
     }
 
-    public async Task<IList<LookupDto>> GetLookup()
+    public async Task<List<LookupDto>> GetLookup()
     {
         var list = await Task.Run(() => _repository.GetLookup()
             .ProjectTo<LookupDto>(Mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 
-        if (list != null)
-        {
-            return list.OrderBy(x => x.Value).ToList();
-        }
-
-        return new List<LookupDto>();
+        return list.OrderBy(x => x.Value).ToList();
     }
 
-    public async Task<IList<LookupDto>> GetLookup(Expression<Func<TEntity, bool>> predicate)
+    public async Task<List<LookupDto>> GetLookup(Expression<Func<TEntity, bool>> predicate)
     {
         var list = await Task.Run(() => _repository.GetLookup(predicate)
             .ProjectTo<LookupDto>(Mapper.ConfigurationProvider)

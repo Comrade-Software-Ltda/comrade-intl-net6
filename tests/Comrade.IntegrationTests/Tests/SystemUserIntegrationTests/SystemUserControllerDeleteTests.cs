@@ -23,8 +23,8 @@ public class SystemUserControllerDeleteTests
             SystemUserInjectionController.GetSystemUserController(context);
         _ = await systemUserController.Delete(1);
 
-        var respository = new SystemUserRepository(context);
-        var user = await respository.GetById(1);
+        var repository = new SystemUserRepository(context);
+        var user = await repository.GetById(1);
         Assert.Null(user);
     }
 }

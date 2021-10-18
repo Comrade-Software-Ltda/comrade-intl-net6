@@ -10,20 +10,13 @@ namespace Comrade.Core.Bases.Results
     {
         public SingleResult()
         {
-            Code = (int)EnumResponse.Success;
+            Code = (int)EnumResponse.Ok;
             Success = true;
-        }
-
-        public SingleResult(string message)
-        {
-            Code = (int)EnumResponse.ErrorBusinessValidation;
-            Success = false;
-            Message = message;
         }
 
         public SingleResult(IEnumerable<string> messages)
         {
-            Code = (int)EnumResponse.ErrorBusinessValidation;
+            Code = (int)EnumResponse.BadRequest;
             Success = false;
             Messages = messages;
         }
@@ -38,10 +31,10 @@ namespace Comrade.Core.Bases.Results
 
         public SingleResult(TEntity? data)
         {
-            Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
+            Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
             Success = data != null;
             Message = data == null
-                ? BusinessMessage.ResourceManager.GetString("MSG04", CultureInfo.CurrentCulture)
+                ? BusinessMessage.MSG04
                 : string.Empty;
             Data = data;
         }

@@ -1,8 +1,10 @@
-﻿using Comrade.Api.Modules.Common.FeatureFlags;
+﻿using Comrade.Api.Modules.Common;
+using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Domain.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.UseCases.V1;
 
@@ -22,14 +24,13 @@ public class CommonController : Controller
     }
 
 
-    [HttpGet]
-    [Route("lookup-system-user")]
+    [HttpGet("lookup-system-user")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetLookupSystemUser()
     {
         try
         {
             var service = _serviceProvider.GetService<ILookupService<SystemUser>>()!;
-
             var result = await service.GetLookup().ConfigureAwait(false);
 
             return Ok(new ListResultDto<LookupDto>(result));
@@ -40,8 +41,8 @@ public class CommonController : Controller
         }
     }
 
-    [HttpGet]
-    [Route("lookup-predicate-system-user-by-name/{name}")]
+    [HttpGet("lookup-predicate-system-user-by-name/{name}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetLookupPredicateSystemUserByName(string name)
     {
         try
@@ -55,22 +56,24 @@ public class CommonController : Controller
         }
         catch (Exception e)
         {
-            return Ok(new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
         }
     }
 
-    [HttpGet]
-    [Route("lookup-system-user-by-name/{name}")]
+    [HttpGet("lookup-system-user-by-name/{name}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetLookupSystemUserByName(string name)
     {
         try
         {
             var result = await _systemUserQuery.FindByName(name).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {
-            return Ok(new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
         }
     }
 }

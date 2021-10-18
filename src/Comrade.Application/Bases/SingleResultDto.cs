@@ -12,12 +12,12 @@ namespace Comrade.Application.Bases;
 public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
     where TDto : Dto
 {
-    public SingleResultDto(TDto data)
+    public SingleResultDto(TDto? data)
     {
-        Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
+        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
         Success = data != null;
         Message = data == null
-            ? BusinessMessage.ResourceManager.GetString("MSG04", CultureInfo.CurrentCulture)
+            ? BusinessMessage.MSG04
             : string.Empty;
         Data = data;
     }
@@ -40,7 +40,7 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
 
     public SingleResultDto(Exception ex)
     {
-        Code = (int)EnumResponse.ErrorServer;
+        Code = (int)EnumResponse.InternalServerError;
         Success = false;
         Message = ex.Message;
         ExceptionMessage = ex.Message;

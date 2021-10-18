@@ -41,7 +41,7 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
         _ = await Commit().ConfigureAwait(false);
 
         return new EditResult<Airplane>(true,
-            BusinessMessage.ResourceManager.GetString("MSG02", CultureInfo.CurrentCulture));
+            BusinessMessage.MSG02);
     }
 
     private static void HydrateValues(Airplane target, Airplane source)

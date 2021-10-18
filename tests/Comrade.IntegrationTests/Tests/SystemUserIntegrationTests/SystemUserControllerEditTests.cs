@@ -38,18 +38,17 @@ public class SystemUserControllerEditTests
             SystemUserInjectionController.GetSystemUserController(context);
         var result = await systemUserController.Edit(testObject);
 
-        if (result is OkObjectResult okObjectResult)
+        if (result is ObjectResult objectResult)
         {
-            var actualResultValue = okObjectResult.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = objectResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(200, actualResultValue?.Code);
+            Assert.Equal(204, actualResultValue?.Code);
         }
 
         var repository = new SystemUserRepository(context);
         var user = await repository.GetById(1);
         Assert.Equal(changeName, user!.Name);
         Assert.Equal(changeEmail, user.Email);
-        // Assert.Equal(changePassword, tokenUser.Password);
         Assert.Equal(changeRegistration, user.Registration);
     }
 

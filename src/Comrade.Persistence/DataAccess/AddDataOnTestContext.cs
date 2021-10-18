@@ -3,7 +3,7 @@ using Comrade.Persistence.Extensions;
 
 namespace Comrade.Persistence.DataAccess;
 
-public static class AddDataOnContext
+public static class AddDataOnTestContext
 {
     private const string JsonPath = "Comrade.Persistence.SeedData";
     private static readonly object SyncLock = new();
@@ -11,6 +11,8 @@ public static class AddDataOnContext
     public static void Execute(ComradeContext? context)
     {
         var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
+
+        context.Database.EnsureDeleted();
 
         if (context != null)
         {
@@ -21,14 +23,11 @@ public static class AddDataOnContext
         {
             if (context != null && assembly is not null)
             {
-                var airplanes = assembly.GetManifestResourceStream($"{JsonPath}.airplane.json");
-                var oto = JsonUtilities.GetListFromJson<Airplane>(airplanes);
-                context.Airplanes.AddRange(oto!);
+                var airplanes = JsonUtilities.GetListFromJson<Airplane>(assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
+                var systemUser = JsonUtilities.GetListFromJson<SystemUser>(assembly.GetManifestResourceStream($"{JsonPath}.system-user.json"));
 
-                var systemUsers =
-                    assembly.GetManifestResourceStream($"{JsonPath}.system-user.json");
-                var oto2 = JsonUtilities.GetListFromJson<SystemUser>(systemUsers);
-                context.SystemUsers.AddRange(oto2!);
+                context.Airplanes.AddRange(airplanes!);
+                context.SystemUsers.AddRange(systemUser!);
 
                 if (context.Airplanes.Any())
                 {

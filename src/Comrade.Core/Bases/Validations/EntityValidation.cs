@@ -2,6 +2,7 @@
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
+using Comrade.Domain.Enums;
 
 namespace Comrade.Core.Bases.Validations
 {
@@ -18,7 +19,10 @@ namespace Comrade.Core.Bases.Validations
         public async Task<ISingleResult<TEntity>> RecordExists(int id, params string[] includes)
         {
             var entity = await _repository.GetById(id, includes).ConfigureAwait(false);
-            if (entity == null) return new SingleResult<TEntity>(BusinessMessage.MSG04);
+            if (entity == null)
+            {
+                return new SingleResult<TEntity>((int)EnumResponse.NotFound, BusinessMessage.MSG04);
+            }
 
             return new SingleResult<TEntity>(entity);
         }

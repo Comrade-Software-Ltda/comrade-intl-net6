@@ -8,7 +8,7 @@ internal class AirplaneEditTestData : IEnumerable<object[]>
     {
         yield return new object[]
         {
-            200, new Airplane
+            204, new Airplane
             {
                 Id = 1,
                 Code = "123",

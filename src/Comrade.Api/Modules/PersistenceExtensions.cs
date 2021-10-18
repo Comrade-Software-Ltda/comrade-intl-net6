@@ -48,7 +48,7 @@ public static class PersistenceExtensions
         {
             services.AddDbContext<ComradeContext>(options =>
                 options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging());
-            ComradeContextFake.AddDataFakeContext(services);
+            ComradeMemoryContextFake.AddDataFakeContext(services);
         }
 
         return services;

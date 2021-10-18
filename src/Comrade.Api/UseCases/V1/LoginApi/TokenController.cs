@@ -28,8 +28,7 @@ public class TokenController : ControllerBase
         try
         {
             var result = await _authenticationCommand.GenerateToken(dto).ConfigureAwait(false);
-
-            return Ok(result);
+            return StatusCode(result.Code, result);
         }
         catch (Exception e)
         {

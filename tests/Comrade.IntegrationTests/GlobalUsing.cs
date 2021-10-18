@@ -6,4 +6,4 @@ global using System.Linq;
 global using System.Threading.Tasks;
 
 
-namespace Comrade.Persistence;
+namespace Comrade.IntegrationTests;

@@ -38,6 +38,6 @@ public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
         _ = await Commit().ConfigureAwait(false);
 
         return new CreateResult<Airplane>(true,
-            BusinessMessage.ResourceManager.GetString("MSG01", CultureInfo.CurrentCulture));
+            BusinessMessage.MSG01);
     }
 }

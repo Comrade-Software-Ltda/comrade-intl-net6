@@ -28,11 +28,11 @@ public sealed class AirplaneControllerCreateTests
         var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Create(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(200, actualResultValue?.Code);
+            Assert.Equal(201, actualResultValue?.Code);
         }
 
         Assert.Equal(1, context.Airplanes.Count());

@@ -31,6 +31,6 @@ public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
         _ = await Commit().ConfigureAwait(false);
 
         return new DeleteResult<Airplane>(true,
-            BusinessMessage.ResourceManager.GetString("MSG03", CultureInfo.CurrentCulture));
+            BusinessMessage.MSG03);
     }
 }

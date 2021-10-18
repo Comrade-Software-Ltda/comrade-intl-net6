@@ -3,5 +3,5 @@
 public interface IListResultDto<TDto> : IResultDto
     where TDto : Dto
 {
-    IList<TDto>? Data { get; set; }
+    List<TDto>? Data { get; set; }
 }

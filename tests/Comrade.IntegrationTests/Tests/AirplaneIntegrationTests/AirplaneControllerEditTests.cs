@@ -34,11 +34,11 @@ public class AirplaneControllerEditTests
         var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         var result = await airplaneController.Edit(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult objectResult)
         {
-            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = objectResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(200, actualResultValue?.Code);
+            Assert.Equal(204, actualResultValue?.Code);
         }
 
         var repository = new AirplaneRepository(context);

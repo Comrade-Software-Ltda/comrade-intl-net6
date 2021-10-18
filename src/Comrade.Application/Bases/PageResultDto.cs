@@ -11,10 +11,10 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
     public PageResultDto(List<T>? data)
     {
         Data = data;
-        Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
+        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
         Success = data != null;
         Message = data == null
-            ? BusinessMessage.ResourceManager.GetString("MSG04", CultureInfo.CurrentCulture)
+            ? BusinessMessage.MSG04
             : string.Empty;
     }
 
@@ -25,10 +25,10 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
         PageSize = pagination.PageNumber >= 1 ? pagination.PageSize : null;
         NextPage = pagination.PageNumber + 1;
         PreviousPage = pagination.PageNumber > 1 ? pagination.PageNumber - 1 : null;
-        Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
-        Success = data != null;
+        Code = (int)EnumResponse.Ok;
+        Success = true;
         Message = data == null
-            ? BusinessMessage.ResourceManager.GetString("MSG04", CultureInfo.CurrentCulture)
+            ? BusinessMessage.MSG04
             : string.Empty;
     }
 

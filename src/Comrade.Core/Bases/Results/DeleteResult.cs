@@ -9,15 +9,14 @@ namespace Comrade.Core.Bases.Results
     {
         public DeleteResult()
         {
-            Code = (int)EnumResponse.Success;
+            Code = (int)EnumResponse.Ok;
             Success = true;
-            Message = BusinessMessage.ResourceManager.GetString("MSG03",
-                CultureInfo.CurrentCulture);
+            Message = BusinessMessage.MSG03;
         }
 
         public DeleteResult(bool success, string? message)
         {
-            Code = success ? (int)EnumResponse.Success : (int)EnumResponse.ErrorNotFound;
+            Code = success ? (int)EnumResponse.Ok : (int)EnumResponse.NotFound;
             Success = success;
             Message = message;
         }
