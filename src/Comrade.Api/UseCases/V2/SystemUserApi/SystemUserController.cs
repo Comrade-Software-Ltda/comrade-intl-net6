@@ -1,4 +1,5 @@
 using AutoMapper;
+using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Paginations;
@@ -6,6 +7,7 @@ using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V2.SystemUserApi;
 
@@ -29,12 +31,8 @@ public class SystemUserController : ControllerBase
     }
 
 
-    [HttpGet]
-    [Route("get-all")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
+    [HttpGet("get-all")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAll([FromQuery] PaginationQuery? paginationQuery)
     {
         try
@@ -57,17 +55,13 @@ public class SystemUserController : ControllerBase
     }
 
 
-    [HttpGet]
-    [Route("get-by-id/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("get-by-id/{systemUserId:int}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
+    public async Task<IActionResult> GetById([FromRoute][Required] int systemUserId)
     {
         try
         {
-            var result = await _systemUserQuery.GetById(id).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetById(systemUserId).ConfigureAwait(false);
             return Ok(result);
         }
         catch (Exception e)
@@ -77,18 +71,14 @@ public class SystemUserController : ControllerBase
         }
     }
 
-    [Route("create")]
-    [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Create([FromBody] SystemUserCreateDto dto)
+    [HttpPost("create")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
+    public async Task<IActionResult> Create([FromBody][Required] SystemUserCreateDto dto)
     {
         try
         {
             var result = await _systemUserCommand.Create(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(StatusCodes.Status201Created, result);
         }
         catch (Exception e)
         {
@@ -97,18 +87,14 @@ public class SystemUserController : ControllerBase
         }
     }
 
-    [HttpPut]
-    [Route("edit")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Edit([FromBody] SystemUserEditDto dto)
+    [HttpPut("edit")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
+    public async Task<IActionResult> Edit([FromBody][Required] SystemUserEditDto dto)
     {
         try
         {
             var result = await _systemUserCommand.Edit(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(StatusCodes.Status204NoContent, result);
         }
         catch (Exception e)
         {
@@ -117,17 +103,13 @@ public class SystemUserController : ControllerBase
         }
     }
 
-    [HttpDelete]
-    [Route("delete/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("delete/{systemUserId:int}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
+    public async Task<IActionResult> Delete([FromRoute][Required] int systemUserId)
     {
         try
         {
-            var result = await _systemUserCommand.Delete(id).ConfigureAwait(false);
+            var result = await _systemUserCommand.Delete(systemUserId).ConfigureAwait(false);
             return Ok(result);
         }
         catch (Exception e)

@@ -1,13 +1,14 @@
 using AutoMapper;
 using Comrade.Api.Bases;
+using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Paginations;
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V1.AirplaneApi;
 
@@ -32,12 +33,8 @@ public class AirplaneController : ComradeController
         _logger = logger;
     }
 
-    [HttpGet]
-    [Route("get-all")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
+    [HttpGet("get-all")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAll([FromQuery] PaginationQuery? paginationQuery)
     {
         try
@@ -54,95 +51,74 @@ public class AirplaneController : ComradeController
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
     }
 
     /// <summary>
-    ///     get por id
+    ///     Get an airplane details.
     /// </summary>
-    /// <param name="id"></param>
-    [HttpGet]
-    [Route("get-by-id/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> GetById(int id)
+    /// <param name="airplaneId"></param>
+    [HttpGet("get-by-id/{id:int}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
+    public async Task<IActionResult> GetById([FromRoute][Required] int airplaneId)
     {
         try
         {
-            var result = await _airplaneQuery.GetById(id).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetById(airplaneId).ConfigureAwait(false);
             return Ok(result);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
     }
 
-    [Route("create")]
-    [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Create([FromBody] AirplaneCreateDto dto)
+    [HttpPost("create")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
+    public async Task<IActionResult> Create([FromBody][Required] AirplaneCreateDto dto)
     {
         try
         {
             var result = await _airplaneCommand.Create(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(StatusCodes.Status201Created, result);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
     }
 
-    [HttpPut]
-    [Route("edit")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Edit([FromBody] AirplaneEditDto dto)
+    [HttpPut("edit")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
+    public async Task<IActionResult> Edit([FromBody][Required] AirplaneEditDto dto)
     {
         try
         {
             var result = await _airplaneCommand.Edit(dto).ConfigureAwait(false);
-            return Ok(result);
+            return StatusCode(StatusCodes.Status204NoContent, result);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }
     }
 
-    [HttpDelete]
-    [Route("delete/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ISingleResultDto<EntityDto>))]
-    [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
-        StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("delete/{airplaneId:int}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
+    public async Task<IActionResult> Delete([FromRoute][Required] int airplaneId)
     {
         try
         {
-            var result = await _airplaneCommand.Delete(id).ConfigureAwait(false);
+            var result = await _airplaneCommand.Delete(airplaneId).ConfigureAwait(false);
             return Ok(result);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new SingleResultDto<EntityDto>(e));
         }

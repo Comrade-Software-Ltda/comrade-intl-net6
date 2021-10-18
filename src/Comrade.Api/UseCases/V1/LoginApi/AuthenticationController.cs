@@ -18,8 +18,7 @@ public class AuthenticationController : ControllerBase
         _authenticationCommand = authenticationCommand;
     }
 
-    [HttpPost]
-    [Route("update-password")]
+    [HttpPost("update-password")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
         StatusCodes.Status500InternalServerError)]
@@ -38,8 +37,7 @@ public class AuthenticationController : ControllerBase
         }
     }
 
-    [HttpPost]
-    [Route("forgot-password")]
+    [HttpPost("forgot-password")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
         StatusCodes.Status500InternalServerError)]
