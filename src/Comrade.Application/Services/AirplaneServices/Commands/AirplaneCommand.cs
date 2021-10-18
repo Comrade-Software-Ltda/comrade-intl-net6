@@ -25,52 +25,49 @@ public class AirplaneCommand : Service, IAirplaneCommand
         _deleteAirplane = deleteAirplane;
     }
 
-    public async Task<ISingleResultDto<EntityDto>> Create(AirplaneCreateDto dto)
+    public async Task<ISingleResultDto<AirplaneDto>> Create(AirplaneCreateDto dto)
     {
         var validator = await new AirplaneCreateValidation().ValidateAsync(dto)
             .ConfigureAwait(false);
 
         if (!validator.IsValid)
         {
-            return new SingleResultDto<EntityDto>(validator);
+            return new SingleResultDto<AirplaneDto>(validator);
         }
 
         var mappedObject = Mapper.Map<Airplane>(dto);
 
         var result = await _createAirplane.Execute(mappedObject).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<EntityDto>(result);
-        resultDto.SetData(result, Mapper);
+        var resultDto = new SingleResultDto<AirplaneDto>(result);
 
         return resultDto;
     }
 
-    public async Task<ISingleResultDto<EntityDto>> Edit(AirplaneEditDto dto)
+    public async Task<ISingleResultDto<AirplaneDto>> Edit(AirplaneEditDto dto)
     {
         var validator =
             await new AirplaneEditValidation().ValidateAsync(dto).ConfigureAwait(false);
 
         if (!validator.IsValid)
         {
-            return new SingleResultDto<EntityDto>(validator);
+            return new SingleResultDto<AirplaneDto>(validator);
         }
 
         var mappedObject = Mapper.Map<Airplane>(dto);
 
         var result = await _editAirplane.Execute(mappedObject).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<EntityDto>(result);
-        resultDto.SetData(result, Mapper);
+        var resultDto = new SingleResultDto<AirplaneDto>(result);
 
         return resultDto;
     }
 
-    public async Task<ISingleResultDto<EntityDto>> Delete(int id)
+    public async Task<ISingleResultDto<AirplaneDto>> Delete(int id)
     {
         var result = await _deleteAirplane.Execute(id).ConfigureAwait(false);
 
-        var resultDto = new SingleResultDto<EntityDto>(result);
-        resultDto.SetData(result, Mapper);
+        var resultDto = new SingleResultDto<AirplaneDto>(result);
 
         return resultDto;
     }
