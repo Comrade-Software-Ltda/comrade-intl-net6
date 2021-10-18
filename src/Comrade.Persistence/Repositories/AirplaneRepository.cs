@@ -7,7 +7,6 @@ using Comrade.Core.Messages;
 using Comrade.Domain.Models;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
-using Microsoft.EntityFrameworkCore;
 
 #endregion
 
@@ -27,7 +26,7 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
     public async Task<ISingleResult<Airplane>> ValidateSameCode(int id, string code)
     {
         var exists = await _context.Airplanes
-            .Where(p => p.Id != id && code.Equals(p.Code))
+            .Where(p => p.Id != id && code.Equals(p.Code, StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
 
         return exists
