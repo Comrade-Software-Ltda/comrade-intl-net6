@@ -4,13 +4,6 @@ using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.FeatureManagement;
-using System.Net.Mime;
-using System.Text.Json;
 
 #endregion
 

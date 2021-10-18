@@ -1,11 +1,3 @@
-#region
-
-using Microsoft.AspNetCore.Routing;
-using System.Globalization;
-using System.Text.RegularExpressions;
-
-#endregion
-
 namespace Comrade.Api.Modules.Common;
 
 public class SlugifyParameterTransformer : IOutboundParameterTransformer

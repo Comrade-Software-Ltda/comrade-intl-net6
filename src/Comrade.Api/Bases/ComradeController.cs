@@ -1,11 +1,4 @@
-﻿#region
-
-using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
-
-#endregion
-
-namespace Comrade.Api.Bases;
+﻿namespace Comrade.Api.Bases;
 
 public class ComradeController : ControllerBase
 {

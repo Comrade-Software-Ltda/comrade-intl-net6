@@ -1,8 +1,7 @@
 ﻿#region
 
 using Comrade.Application.Bases;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+
 
 #endregion
 

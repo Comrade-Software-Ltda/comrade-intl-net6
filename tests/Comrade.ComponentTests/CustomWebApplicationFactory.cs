@@ -21,9 +21,17 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                 config.AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
-                        ["FeatureManagement:SQLServer"] = "false",
                         ["JWT:Key"] =
-                            "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs"
+                            "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs",
+                        ["AllowedHosts"] = "*",
+                        ["FeatureManagement:Airplane"] = "true",
+                        ["FeatureManagement:SystemUser"] = "true",
+                        ["FeatureManagement:Common"] = "true",
+                        ["FeatureManagement:HealthChecks"] = "false",
+                        ["FeatureManagement:Swagger"] = "true",
+                        ["FeatureManagement:Authentication"] = "true",
+                        ["FeatureManagement:SQLServer"] = "false",
+                        ["FeatureManagement:PostgresSql"] = "false",
                     });
             });
     }

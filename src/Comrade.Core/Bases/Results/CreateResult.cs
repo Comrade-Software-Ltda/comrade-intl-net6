@@ -1,6 +1,6 @@
 ﻿#region
 
-using System.Globalization;
+
 using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
@@ -14,7 +14,7 @@ namespace Comrade.Core.Bases.Results
     {
         public CreateResult()
         {
-            Code = (int) EnumResponse.Success;
+            Code = (int)EnumResponse.Success;
             Success = true;
             Message = BusinessMessage.ResourceManager.GetString("MSG01",
                 CultureInfo.CurrentCulture);
@@ -22,7 +22,7 @@ namespace Comrade.Core.Bases.Results
 
         public CreateResult(bool success, string? message)
         {
-            Code = success ? (int) EnumResponse.Success : (int) EnumResponse.ErrorNotFound;
+            Code = success ? (int)EnumResponse.Success : (int)EnumResponse.ErrorNotFound;
             Success = success;
             Message = message;
         }

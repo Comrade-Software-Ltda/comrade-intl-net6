@@ -3,10 +3,6 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.UseCases;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.FeatureManagement;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 #endregion
 

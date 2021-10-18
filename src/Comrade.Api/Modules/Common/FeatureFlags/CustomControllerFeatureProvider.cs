@@ -1,14 +1,3 @@
-#region
-
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.FeatureManagement;
-using Microsoft.FeatureManagement.Mvc;
-using System.Collections;
-using System.Reflection;
-
-#endregion
-
 namespace Comrade.Api.Modules.Common.FeatureFlags;
 
 /// <summary>
