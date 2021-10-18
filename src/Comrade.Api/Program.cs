@@ -1,17 +1,10 @@
-#region
-
 using Comrade.Api.Modules.Common;
-using Microsoft.AspNetCore.Hosting;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
-using Serilog;
 using Serilog.Extensions.Logging;
 
-#endregion
-
 namespace Comrade.Api;
-
 
 /// <summary>
 /// </summary>

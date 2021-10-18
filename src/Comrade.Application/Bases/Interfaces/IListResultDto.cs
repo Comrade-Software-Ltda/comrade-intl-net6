@@ -1,12 +1,7 @@
-﻿#region
-
-
-#endregion
-
-namespace Comrade.Application.Bases.Interfaces;
+﻿namespace Comrade.Application.Bases.Interfaces;
 
 public interface IListResultDto<TDto> : IResultDto
-        where TDto : Dto
+    where TDto : Dto
 {
     IList<TDto>? Data { get; set; }
 }

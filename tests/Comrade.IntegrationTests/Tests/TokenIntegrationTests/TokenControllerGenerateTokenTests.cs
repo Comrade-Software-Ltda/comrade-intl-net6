@@ -1,15 +1,9 @@
-#region
-
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
-
-#endregion
 
 namespace Comrade.IntegrationTests.Tests.TokenIntegrationTests;
 

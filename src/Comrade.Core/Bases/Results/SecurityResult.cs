@@ -1,9 +1,5 @@
-﻿#region
-
-using Comrade.Domain.Enums;
+﻿using Comrade.Domain.Enums;
 using Comrade.Domain.Token;
-
-#endregion
 
 namespace Comrade.Core.Bases.Results
 {
@@ -12,7 +8,7 @@ namespace Comrade.Core.Bases.Results
         public SecurityResult(TokenUser tokenUser)
         {
             TokenUser = tokenUser;
-            Code = (int) EnumResponse.Success;
+            Code = (int)EnumResponse.Success;
             Success = true;
         }
 

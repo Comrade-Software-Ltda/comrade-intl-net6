@@ -1,16 +1,12 @@
-﻿#region
-
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Messages;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using FluentValidation;
 
-#endregion
-
 namespace Comrade.Application.Services.SystemUserServices.Validations;
 
 public class SystemUserValidation<TDto> : DtoValidation<TDto>
-        where TDto : SystemUserDto
+    where TDto : SystemUserDto
 {
     protected void ValidateId()
     {

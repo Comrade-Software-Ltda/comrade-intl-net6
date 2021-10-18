@@ -1,15 +1,5 @@
-#region
-
 using Comrade.Api.Modules.Common.FeatureFlags;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.PlatformAbstractions;
-using Microsoft.FeatureManagement;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-
-
-#endregion
 
 namespace Comrade.Api.Modules.Common.Swagger;
 
@@ -22,8 +12,8 @@ public static class SwaggerExtensions
     {
         get
         {
-            string basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            string fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+            var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+            var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
             return Path.Combine(basePath, fileName);
         }
     }
@@ -34,7 +24,7 @@ public static class SwaggerExtensions
     /// </summary>
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        IFeatureManager featureManager = services
+        var featureManager = services
             .BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 
@@ -62,16 +52,16 @@ public static class SwaggerExtensions
                             });
                         c.AddSecurityRequirement(new OpenApiSecurityRequirement
                         {
+                            {
+                                new OpenApiSecurityScheme
                                 {
-                                    new OpenApiSecurityScheme
+                                    Reference = new OpenApiReference
                                     {
-                                        Reference = new OpenApiReference
-                                        {
-                                            Type = ReferenceType.SecurityScheme, Id = "Bearer"
-                                        }
-                                    },
-                                    new List<string>()
-                                }
+                                        Type = ReferenceType.SecurityScheme, Id = "Bearer"
+                                    }
+                                },
+                                new List<string>()
+                            }
                         });
                     });
         }
@@ -91,11 +81,11 @@ public static class SwaggerExtensions
         app.UseSwaggerUI(
             options =>
             {
-                foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
+                foreach (var description in provider.ApiVersionDescriptions)
                 {
                     string swaggerEndpoint;
 
-                    string basePath = configuration["ASPNETCORE_BASEPATH"];
+                    var basePath = configuration["ASPNETCORE_BASEPATH"];
 
                     if (!string.IsNullOrEmpty(basePath))
                     {

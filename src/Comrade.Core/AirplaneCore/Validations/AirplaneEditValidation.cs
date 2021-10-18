@@ -1,23 +1,17 @@
-﻿#region
-
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Validations;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Core.AirplaneCore.Validations;
 
 public class AirplaneEditValidation : EntityValidation<Airplane>
 {
     private readonly AirplaneValidateSameCode _airplaneValidateSameCode;
-    private readonly IAirplaneRepository _repository;
 
     public AirplaneEditValidation(IAirplaneRepository repository,
         AirplaneValidateSameCode airplaneValidateSameCode)
         : base(repository)
     {
-        _repository = repository;
         _airplaneValidateSameCode = airplaneValidateSameCode;
     }
 

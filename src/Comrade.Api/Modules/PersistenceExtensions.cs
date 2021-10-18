@@ -1,11 +1,5 @@
-#region
-
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Persistence.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.FeatureManagement;
-
-#endregion
 
 namespace Comrade.Api.Modules;
 
@@ -21,7 +15,7 @@ public static class PersistenceExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        IFeatureManager featureManager = services
+        var featureManager = services
             .BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 

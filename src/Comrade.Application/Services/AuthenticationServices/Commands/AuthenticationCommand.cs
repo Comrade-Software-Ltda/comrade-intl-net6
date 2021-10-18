@@ -1,13 +1,9 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Core.SecurityCore;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Application.Services.AuthenticationServices.Commands;
 

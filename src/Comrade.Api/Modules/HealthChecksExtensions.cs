@@ -1,11 +1,8 @@
-#region
-
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using HealthChecks.UI.Client;
-
-#endregion
+using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Modules;
 
@@ -21,9 +18,9 @@ public static class HealthChecksExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        IHealthChecksBuilder healthChecks = services.AddHealthChecks();
+        var healthChecks = services.AddHealthChecks();
 
-        IFeatureManager featureManager = services
+        var featureManager = services
             .BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 

@@ -1,12 +1,8 @@
-#region
-
 using Comrade.Core.SystemUserCore;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
-
-#endregion
 
 namespace Comrade.Persistence.Repositories;
 

@@ -1,23 +1,13 @@
-#region
-
 using Comrade.Domain.Models;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Comrade.UnitTests.Tests.AirplaneTests.TestDatas;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AirplaneTests;
 
 public sealed class UcAirplaneCreateTests
 {
-
-    public UcAirplaneCreateTests()
-    {
-    }
-
     [Theory]
     [ClassData(typeof(AirplaneCreateTestData))]
     public async Task UcAirplaneCreate_Test(int expected, Airplane testObjectInput)

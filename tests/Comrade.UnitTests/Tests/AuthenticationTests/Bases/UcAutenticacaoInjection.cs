@@ -1,14 +1,9 @@
-﻿#region
-
-using Comrade.Core.SecurityCore.UseCases;
+﻿using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
-using Microsoft.Extensions.Configuration;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
@@ -47,9 +42,9 @@ public sealed class UcAuthenticationInjection
     public static UcValidateLogin GetUcValidateLogin(ComradeContext context)
     {
         var myConfiguration = new Dictionary<string, string>
-            {
-                {"JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs"}
-            };
+        {
+            { "JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs" }
+        };
 
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(myConfiguration)

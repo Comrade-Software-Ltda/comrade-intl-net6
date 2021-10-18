@@ -1,17 +1,11 @@
-﻿#region
-
-using Comrade.Api.UseCases.V1;
+﻿using Comrade.Api.UseCases.V1;
 using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
-
-#endregion
 
 namespace Comrade.IntegrationTests.Tests.LookupIntegrationTests;
 

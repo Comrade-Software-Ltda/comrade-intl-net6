@@ -1,9 +1,4 @@
-﻿#region
-
-using Comrade.Domain.Bases.Interfaces;
-using System.ComponentModel.DataAnnotations;
-
-#endregion
+﻿using Comrade.Domain.Bases.Interfaces;
 
 namespace Comrade.Domain.Bases;
 

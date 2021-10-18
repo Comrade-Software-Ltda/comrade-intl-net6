@@ -1,11 +1,4 @@
-#region
-
 using Comrade.Api;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
-
-#endregion
 
 namespace Comrade.ComponentTests;
 
@@ -31,7 +24,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:Swagger"] = "true",
                         ["FeatureManagement:Authentication"] = "true",
                         ["FeatureManagement:SQLServer"] = "false",
-                        ["FeatureManagement:PostgresSql"] = "false",
+                        ["FeatureManagement:PostgresSql"] = "false"
                     });
             });
     }

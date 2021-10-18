@@ -1,6 +1,4 @@
-﻿#region
-
-using Comrade.Api.Modules;
+﻿using Comrade.Api.Modules;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
@@ -8,10 +6,6 @@ using Comrade.Application.Lookups;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-#endregion
 
 namespace Comrade.UnitTests.Helpers;
 

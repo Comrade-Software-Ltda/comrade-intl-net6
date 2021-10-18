@@ -1,12 +1,8 @@
-#region
-
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemUserCore;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
-
-#endregion
 
 namespace Comrade.Api.Modules;
 

@@ -1,10 +1,4 @@
-﻿#region
-
-using Comrade.Domain.Bases;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-#endregion
+﻿using Comrade.Domain.Bases;
 
 namespace Comrade.UnitTests.JsonConverters;
 

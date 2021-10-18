@@ -1,13 +1,8 @@
-﻿#region
-
-using Comrade.Application.Extensions;
+﻿using Comrade.Application.Extensions;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Http;
-using System.Text.RegularExpressions;
-
-#endregion
 
 namespace Comrade.Application.Spreadsheets.SpreadsheetFunctions;
 

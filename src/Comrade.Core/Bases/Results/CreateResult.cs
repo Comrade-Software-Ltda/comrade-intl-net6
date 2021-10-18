@@ -1,11 +1,6 @@
-﻿#region
-
-
-using Comrade.Core.Messages;
+﻿using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
-
-#endregion
 
 namespace Comrade.Core.Bases.Results
 {

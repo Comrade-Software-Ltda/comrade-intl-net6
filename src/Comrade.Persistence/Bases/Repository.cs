@@ -1,17 +1,11 @@
-﻿#region
-
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using Comrade.Persistence.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-#endregion
 
 namespace Comrade.Persistence.Bases;
 
 public class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : Entity
+    where TEntity : Entity
 {
     private readonly ComradeContext _db;
     private readonly DbSet<TEntity> _dbSet;
@@ -174,8 +168,6 @@ public class Repository<TEntity> : IRepository<TEntity>
         return query;
     }
 
-    #region Dispose
-
     public void Dispose()
     {
         Dispose(true);
@@ -191,6 +183,4 @@ public class Repository<TEntity> : IRepository<TEntity>
 
         _disposed = true;
     }
-
-    #endregion
 }

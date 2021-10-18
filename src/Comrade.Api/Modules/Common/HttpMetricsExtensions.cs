@@ -1,8 +1,3 @@
-#region
-
-
-#endregion
-
 namespace Comrade.Api.Modules.Common;
 
 /// <summary>

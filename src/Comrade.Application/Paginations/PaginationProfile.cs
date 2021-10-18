@@ -1,8 +1,4 @@
-﻿#region
-
-using AutoMapper;
-
-#endregion
+﻿using AutoMapper;
 
 namespace Comrade.Application.Paginations;
 

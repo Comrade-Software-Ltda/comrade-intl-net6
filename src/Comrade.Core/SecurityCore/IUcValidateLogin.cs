@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Core.Bases.Results;
-
-#endregion
+﻿using Comrade.Core.Bases.Results;
 
 namespace Comrade.Core.SecurityCore;
 

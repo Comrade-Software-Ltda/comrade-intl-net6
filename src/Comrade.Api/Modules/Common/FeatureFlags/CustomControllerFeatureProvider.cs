@@ -4,7 +4,7 @@ namespace Comrade.Api.Modules.Common.FeatureFlags;
 ///     Custom Controller Feature Provider.
 /// </summary>
 public sealed class
-        CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
+    CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
 {
     private readonly IFeatureManager _featureManager;
 
@@ -23,8 +23,8 @@ public sealed class
     {
         for (var i = feature.Controllers.Count - 1; i >= 0; i--)
         {
-            Type controller = feature.Controllers[i].AsType();
-            foreach (CustomAttributeData customAttribute in controller.CustomAttributes)
+            var controller = feature.Controllers[i].AsType();
+            foreach (var customAttribute in controller.CustomAttributes)
             {
                 if (customAttribute.AttributeType.FullName !=
                     typeof(FeatureGateAttribute).FullName) continue;

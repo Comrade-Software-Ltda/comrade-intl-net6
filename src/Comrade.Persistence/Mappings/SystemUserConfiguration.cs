@@ -1,10 +1,4 @@
-#region
-
 using Comrade.Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-#endregion
 
 namespace Comrade.Persistence.Mappings;
 

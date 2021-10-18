@@ -1,14 +1,10 @@
-﻿#region
-
-using Comrade.Core.Bases;
+﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Core.SecurityCore.UseCases;
 

@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Application.Bases;
-
-#endregion
+﻿using Comrade.Application.Bases;
 
 namespace Comrade.Application.Services.SystemUserServices.Dtos;
 

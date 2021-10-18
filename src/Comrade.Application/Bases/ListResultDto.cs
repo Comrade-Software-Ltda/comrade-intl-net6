@@ -1,16 +1,11 @@
-﻿#region
-
-using Comrade.Application.Bases.Interfaces;
+﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Core.Messages;
 using Comrade.Domain.Enums;
-using System.Globalization;
-
-#endregion
 
 namespace Comrade.Application.Bases;
 
 public class ListResultDto<T> : ResultDto, IListResultDto<T>
-        where T : Dto
+    where T : Dto
 {
     public ListResultDto(IList<T> data)
     {

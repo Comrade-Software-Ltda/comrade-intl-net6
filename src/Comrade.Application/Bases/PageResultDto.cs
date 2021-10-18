@@ -1,17 +1,12 @@
-﻿#region
-
-using Comrade.Application.Bases.Interfaces;
+﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Paginations;
 using Comrade.Core.Messages;
 using Comrade.Domain.Enums;
-using System.Globalization;
-
-#endregion
 
 namespace Comrade.Application.Bases;
 
 public class PageResultDto<T> : ResultDto, IPageResultDto<T>
-        where T : Dto
+    where T : Dto
 {
     public PageResultDto(IList<T> data)
     {

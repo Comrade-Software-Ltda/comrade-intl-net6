@@ -1,5 +1,3 @@
-#region
-
 using AutoMapper;
 using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common.FeatureFlags;
@@ -10,14 +8,8 @@ using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.FeatureManagement.Mvc;
-
-#endregion
 
 namespace Comrade.Api.UseCases.V1.AirplaneApi;
-
 
 // [Authorize]
 [FeatureGate(CustomFeature.Airplane)]

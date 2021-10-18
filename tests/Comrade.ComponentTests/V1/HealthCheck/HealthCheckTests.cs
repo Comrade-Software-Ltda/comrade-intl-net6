@@ -1,12 +1,6 @@
-﻿#region
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Net;
-using System.Net.Http;
 using Xunit;
-
-#endregion
 
 namespace Comrade.ComponentTests.V1.HealthCheck;
 
@@ -23,15 +17,15 @@ public class HealthCheckTests
     [Fact]
     public async Task GetAccountsReturnsList()
     {
-        HttpClient client = _fixture
+        var client = _fixture
             .CustomWebApplicationFactory
             .CreateClient();
 
-        HttpResponseMessage actualResponse = await client
+        var actualResponse = await client
             .GetAsync("/health")
             .ConfigureAwait(false);
 
-        string actualResponseString = await actualResponse.Content
+        var actualResponseString = await actualResponse.Content
             .ReadAsStringAsync()
             .ConfigureAwait(false);
 
@@ -39,8 +33,8 @@ public class HealthCheckTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-        { DateParseHandling = DateParseHandling.None };
-        JObject jsonResponse = await JObject.LoadAsync(reader)
+            { DateParseHandling = DateParseHandling.None };
+        var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 
         Assert.NotEmpty(jsonResponse);

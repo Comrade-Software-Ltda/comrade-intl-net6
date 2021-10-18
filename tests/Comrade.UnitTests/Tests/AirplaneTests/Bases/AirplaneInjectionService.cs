@@ -1,14 +1,10 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 

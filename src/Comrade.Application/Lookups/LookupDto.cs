@@ -1,9 +1,5 @@
-﻿#region
-
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-
-#endregion
 
 namespace Comrade.Application.Lookups;
 

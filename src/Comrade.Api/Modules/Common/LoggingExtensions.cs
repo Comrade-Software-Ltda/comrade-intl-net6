@@ -1,12 +1,5 @@
-﻿#region
-
-using Serilog;
-using Serilog.Extensions.Logging;
+﻿using Serilog.Extensions.Logging;
 using Serilog.Sinks.MSSqlServer;
-using System.Collections.ObjectModel;
-using System.Data;
-
-#endregion
 
 namespace Comrade.Api.Modules.Common;
 
@@ -34,9 +27,9 @@ public static class LoggingExtensions
         var columnOptions = new ColumnOptions
         {
             AdditionalColumns = new Collection<SqlColumn>
-                {
-                    new("UserName", SqlDbType.VarChar)
-                }
+            {
+                new("UserName", SqlDbType.VarChar)
+            }
         };
 
         Log.Logger = new LoggerConfiguration()
@@ -54,5 +47,4 @@ public static class LoggingExtensions
             .WriteTo.Providers(providers)
             .CreateLogger();
     }
-
 }

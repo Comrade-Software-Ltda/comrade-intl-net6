@@ -1,10 +1,4 @@
-﻿#region
-
-using System.Text.Json;
-
-#endregion
-
-namespace Comrade.UnitTests.JsonConverters;
+﻿namespace Comrade.UnitTests.JsonConverters;
 
 public class SaveJsonObjectToFile<TEntity>
 {

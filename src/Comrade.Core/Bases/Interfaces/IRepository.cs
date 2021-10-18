@@ -1,15 +1,10 @@
-﻿#region
-
-using Comrade.Domain.Bases;
+﻿using Comrade.Domain.Bases;
 using Comrade.Domain.Bases.Interfaces;
-
-
-#endregion
 
 namespace Comrade.Core.Bases.Interfaces;
 
 public interface IRepository<TEntity> : IDisposable
-        where TEntity : IEntity
+    where TEntity : IEntity
 {
     Task Add(TEntity obj);
     Task Add(IList<TEntity> obj);

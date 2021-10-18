@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Application.Services.SystemUserServices.Dtos;
-
-#endregion
+﻿using Comrade.Application.Services.SystemUserServices.Dtos;
 
 namespace Comrade.Application.Services.SystemUserServices.Validations;
 

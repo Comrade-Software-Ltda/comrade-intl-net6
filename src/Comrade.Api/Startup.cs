@@ -1,5 +1,3 @@
-#region
-
 using Comrade.Api.Modules;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
@@ -8,11 +6,6 @@ using Comrade.Application.Lookups;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Serilog;
-
-#endregion
 
 namespace Comrade.Api;
 
@@ -84,9 +77,6 @@ public sealed class Startup
             .UseAuthentication()
             .UseAuthorization()
             .UseSerilogRequestLogging()
-            .UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

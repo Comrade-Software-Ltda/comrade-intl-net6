@@ -1,13 +1,9 @@
-﻿#region
-
-using FluentValidation;
-
-#endregion
+﻿using FluentValidation;
 
 namespace Comrade.Application.Bases;
 
 public class DtoValidation<TDto> : AbstractValidator<TDto>
-        where TDto : EntityDto
+    where TDto : EntityDto
 {
     public const string CampoObrigatorio = "CAMPO_OBRIGATORIO";
     public const string TamanhoEspecificoCampo = "TAMANHO_ESPECIFICO_CAMPO";

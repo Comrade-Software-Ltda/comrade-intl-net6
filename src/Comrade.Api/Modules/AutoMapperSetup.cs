@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Application.AutoMapper;
-
-#endregion
+﻿using Comrade.Application.AutoMapper;
 
 namespace Comrade.Api.Modules;
 

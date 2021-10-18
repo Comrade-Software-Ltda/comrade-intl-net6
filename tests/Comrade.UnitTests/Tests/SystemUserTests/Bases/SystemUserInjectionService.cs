@@ -1,6 +1,4 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Core.SystemUserCore.UseCases;
@@ -8,8 +6,6 @@ using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.SystemUserTests.Bases;
 

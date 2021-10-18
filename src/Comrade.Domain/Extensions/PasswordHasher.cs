@@ -1,8 +1,4 @@
-﻿#region
-
-#endregion
-
-namespace Comrade.Domain.Extensions;
+﻿namespace Comrade.Domain.Extensions;
 
 public sealed class PasswordHasher : IPasswordHasher
 {

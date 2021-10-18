@@ -1,9 +1,5 @@
-﻿#region
-
-using Comrade.Application.Extensions;
+﻿using Comrade.Application.Extensions;
 using Xunit;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.UtilTests
 {

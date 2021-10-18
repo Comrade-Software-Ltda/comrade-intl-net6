@@ -1,19 +1,13 @@
-﻿#region
-
-using Comrade.Persistence.DataAccess;
+﻿using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
-
-#endregion
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerDeleteTests
 {
-
     [Fact]
     public async Task AirplaneController_Delete()
     {

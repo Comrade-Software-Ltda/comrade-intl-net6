@@ -1,9 +1,5 @@
-﻿#region
-
-using Serilog.Core;
+﻿using Serilog.Core;
 using Serilog.Events;
-
-#endregion
 
 namespace Comrade.Api.Modules;
 

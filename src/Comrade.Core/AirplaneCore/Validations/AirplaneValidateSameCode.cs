@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Validations;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Core.AirplaneCore.Validations;
 

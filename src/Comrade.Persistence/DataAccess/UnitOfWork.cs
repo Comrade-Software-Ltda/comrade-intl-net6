@@ -1,8 +1,4 @@
-#region
-
 using Comrade.Core.Bases.Interfaces;
-
-#endregion
 
 namespace Comrade.Persistence.DataAccess;
 

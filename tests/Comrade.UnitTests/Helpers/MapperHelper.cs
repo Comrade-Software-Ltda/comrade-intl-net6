@@ -1,10 +1,6 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.AutoMapper;
 using Comrade.Application.Paginations;
-
-#endregion
 
 namespace Comrade.UnitTests.Helpers;
 

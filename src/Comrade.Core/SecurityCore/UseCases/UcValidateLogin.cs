@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Core.Bases.Results;
+﻿using Comrade.Core.Bases.Results;
 using Comrade.Core.SecurityCore.Validation;
 using Comrade.Domain.Token;
-
-#endregion
 
 namespace Comrade.Core.SecurityCore.UseCases;
 

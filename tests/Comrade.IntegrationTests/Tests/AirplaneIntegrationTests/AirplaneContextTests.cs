@@ -1,12 +1,7 @@
-﻿#region
-
-using Comrade.Persistence.DataAccess;
+﻿using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
-
-#endregion
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 

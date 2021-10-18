@@ -1,10 +1,5 @@
-﻿#region
-
-using Comrade.Core.SecurityCore.UseCases;
+﻿using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Domain.Token;
-using Microsoft.Extensions.Configuration;
-
-#endregion
 
 namespace Comrade.ComponentTests;
 
@@ -13,9 +8,9 @@ public static class GenerateFakeToken
     public static string Execute()
     {
         var myConfiguration = new Dictionary<string, string>
-            {
-                {"JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs"}
-            };
+        {
+            { "JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs" }
+        };
 
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(myConfiguration)
@@ -24,9 +19,9 @@ public static class GenerateFakeToken
         var ucGenerateToken = new UcGenerateToken(configuration);
 
         var roles = new List<string>
-            {
-                "Test"
-            };
+        {
+            "Test"
+        };
 
         var user = new TokenUser("1", "Test", "", roles);
 

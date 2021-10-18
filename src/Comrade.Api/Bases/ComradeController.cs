@@ -10,5 +10,4 @@ public class ComradeController : ControllerBase
                 CultureInfo.CurrentCulture)
             : 0;
     }
-
 }

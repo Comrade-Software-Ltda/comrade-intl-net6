@@ -1,5 +1,3 @@
-#region
-
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Application.Services.AuthenticationServices.Commands;
@@ -14,8 +12,6 @@ using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
-
-#endregion
 
 namespace Comrade.Api.Modules;
 
@@ -63,6 +59,7 @@ public static class UseCasesExtensions
 
         #endregion
 
+
         #region SystemUser
 
         // Application - Services
@@ -82,6 +79,7 @@ public static class UseCasesExtensions
         services.AddScoped<SystemUserCreateValidation>();
 
         #endregion
+
 
         return services;
     }

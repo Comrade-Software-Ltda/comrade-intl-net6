@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
-
-#endregion
 
 namespace Comrade.Application.Services.AuthenticationServices.Commands;
 

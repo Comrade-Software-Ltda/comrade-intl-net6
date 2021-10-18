@@ -1,9 +1,5 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Paginations;
-
-#endregion
 
 namespace Comrade.Application.AutoMapper;
 
@@ -11,7 +7,7 @@ public static class AutoMapperConfig
 {
     public static MapperConfiguration RegisterMappings()
     {
-        return new(cfg =>
+        return new MapperConfiguration(cfg =>
         {
             cfg.AddProfile(new DomainToDtoMappingProfile());
             cfg.AddProfile(new DtoToDomainMappingProfile());
@@ -19,4 +15,3 @@ public static class AutoMapperConfig
         });
     }
 }
-

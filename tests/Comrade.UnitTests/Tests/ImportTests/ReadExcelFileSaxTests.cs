@@ -1,16 +1,11 @@
-﻿#region
-
-using Comrade.Application.Spreadsheets.SpreadsheetFunctions;
+﻿using Comrade.Application.Spreadsheets.SpreadsheetFunctions;
 using Comrade.UnitTests.Mocks;
 using Xunit;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.ImportTests;
 
 public class ReadExcelFileSaxTests
 {
-
     [Fact]
     public async Task ReadExcelFileSaxTest()
     {

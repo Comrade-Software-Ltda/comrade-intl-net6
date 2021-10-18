@@ -1,6 +1,4 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
@@ -8,14 +6,11 @@ using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
 using FluentValidation.Results;
-using System.Globalization;
-
-#endregion
 
 namespace Comrade.Application.Bases;
 
 public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
-        where TDto : Dto
+    where TDto : Dto
 {
     public SingleResultDto(TDto data)
     {

@@ -1,24 +1,14 @@
-#region
-
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 using Comrade.UnitTests.Tests.AuthenticationTests.TestDatas;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests;
 
 public sealed class UcGenerateTokenTests
 {
-
-    public UcGenerateTokenTests()
-    {
-    }
-
     [Theory]
     [ClassData(typeof(AuthenticationDtoTestData))]
     public async Task UcValidateLogin_Test(int expected, AuthenticationDto testObjectInput)

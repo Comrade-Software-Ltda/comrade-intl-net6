@@ -1,11 +1,6 @@
-﻿#region
-
-using Comrade.Domain.Token;
-
-#endregion
+﻿using Comrade.Domain.Token;
 
 namespace Comrade.Core.SecurityCore.UseCases;
-
 
 public class UcGenerateToken : IUcGenerateToken
 {
@@ -25,10 +20,10 @@ public class UcGenerateToken : IUcGenerateToken
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>
-            {
-                new("Key", tokenUser.Key),
-                new(ClaimTypes.Name, tokenUser.Name)
-            };
+        {
+            new("Key", tokenUser.Key),
+            new(ClaimTypes.Name, tokenUser.Name)
+        };
 
         foreach (var role in tokenUser.Roles)
         {

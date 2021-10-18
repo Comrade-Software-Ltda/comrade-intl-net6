@@ -1,11 +1,6 @@
-﻿#region
-
-using System.Globalization;
-using Comrade.Core.Messages;
+﻿using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
-
-#endregion
 
 namespace Comrade.Core.Bases.Results
 {
@@ -14,7 +9,7 @@ namespace Comrade.Core.Bases.Results
     {
         public DeleteResult()
         {
-            Code = (int) EnumResponse.Success;
+            Code = (int)EnumResponse.Success;
             Success = true;
             Message = BusinessMessage.ResourceManager.GetString("MSG03",
                 CultureInfo.CurrentCulture);
@@ -22,7 +17,7 @@ namespace Comrade.Core.Bases.Results
 
         public DeleteResult(bool success, string? message)
         {
-            Code = success ? (int) EnumResponse.Success : (int) EnumResponse.ErrorNotFound;
+            Code = success ? (int)EnumResponse.Success : (int)EnumResponse.ErrorNotFound;
             Success = success;
             Message = message;
         }

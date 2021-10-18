@@ -1,5 +1,3 @@
-#region
-
 using AutoMapper;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
@@ -8,10 +6,6 @@ using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.FeatureManagement.Mvc;
-
-#endregion
 
 namespace Comrade.Api.UseCases.V2.SystemUserApi;
 

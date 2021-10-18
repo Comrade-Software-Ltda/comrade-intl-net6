@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Domain.Token;
-
-#endregion
+﻿using Comrade.Domain.Token;
 
 namespace Comrade.Core.SecurityCore;
 

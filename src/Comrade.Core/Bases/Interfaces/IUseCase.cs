@@ -1,9 +1,4 @@
-﻿#region
-
-
-#endregion
-
-namespace Comrade.Core.Bases.Interfaces;
+﻿namespace Comrade.Core.Bases.Interfaces;
 
 public interface IUseCase
 {

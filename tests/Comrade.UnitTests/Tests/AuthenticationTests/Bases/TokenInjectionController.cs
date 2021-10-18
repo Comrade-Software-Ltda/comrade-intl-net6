@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Api.UseCases.V1.LoginApi;
+﻿using Comrade.Api.UseCases.V1.LoginApi;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 

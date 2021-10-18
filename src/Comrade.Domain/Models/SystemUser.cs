@@ -1,13 +1,6 @@
-#region
-
 using Comrade.Domain.Bases;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-#endregion
 
 namespace Comrade.Domain.Models;
-
 
 [Table("ussi_usuario_sistema")]
 public class SystemUser : Entity

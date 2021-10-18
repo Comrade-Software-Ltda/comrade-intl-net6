@@ -1,8 +1,4 @@
-#region
-
 using Microsoft.AspNetCore.HttpOverrides;
-
-#endregion
 
 namespace Comrade.Api.Modules.Common;
 
@@ -31,7 +27,7 @@ public static class ReverseProxyExtensions
     public static IApplicationBuilder UseProxy(this IApplicationBuilder app,
         IConfiguration configuration)
     {
-        string basePath = configuration["ASPNETCORE_BASEPATH"];
+        var basePath = configuration["ASPNETCORE_BASEPATH"];
         if (!string.IsNullOrEmpty(basePath))
             app.Use(async (context, next) =>
             {
@@ -45,5 +41,4 @@ public static class ReverseProxyExtensions
 
         return app;
     }
-
 }

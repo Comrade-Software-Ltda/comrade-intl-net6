@@ -1,14 +1,10 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Validations;
 using Comrade.Core.SystemUserCore;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Application.Services.SystemUserServices.Commands;
 

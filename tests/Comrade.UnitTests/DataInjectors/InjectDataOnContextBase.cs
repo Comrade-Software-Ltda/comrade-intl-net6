@@ -1,19 +1,12 @@
-﻿#region
-
-using Comrade.Domain.Models;
+﻿using Comrade.Domain.Models;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Extensions;
-using System.Reflection;
-
-#endregion
 
 namespace Comrade.UnitTests.DataInjectors;
 
 public static class InjectDataOnContextBase
 {
     private const string JsonPath = "Comrade.Persistence.SeedData";
-
-    #region DadosIniciais
 
     public static void InitializeDbForTests(ComradeContext db)
     {
@@ -41,6 +34,4 @@ public static class InjectDataOnContextBase
             throw;
         }
     }
-
-    #endregion
 }

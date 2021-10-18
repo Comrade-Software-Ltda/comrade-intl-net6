@@ -1,10 +1,6 @@
-﻿#region
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
-
-#endregion
 
 namespace Comrade.ComponentTests.V1.AirplaneApi;
 
@@ -21,7 +17,7 @@ public class AirplaneComponentTests
     [Fact]
     public async Task GetAccountsReturnsList()
     {
-        HttpClient client = _fixture
+        var client = _fixture
             .CustomWebApplicationFactory
             .CreateClient();
 
@@ -30,11 +26,11 @@ public class AirplaneComponentTests
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
 
-        HttpResponseMessage actualResponse = await client
+        var actualResponse = await client
             .GetAsync("/api/v1/airplane/get-all")
             .ConfigureAwait(false);
 
-        string actualResponseString = await actualResponse.Content
+        var actualResponseString = await actualResponse.Content
             .ReadAsStringAsync()
             .ConfigureAwait(false);
 
@@ -42,8 +38,8 @@ public class AirplaneComponentTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-        { DateParseHandling = DateParseHandling.None };
-        JObject jsonResponse = await JObject.LoadAsync(reader)
+            { DateParseHandling = DateParseHandling.None };
+        var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 
         Assert.Equal(JTokenType.String, jsonResponse["data"]![0]!["model"]!.Type);

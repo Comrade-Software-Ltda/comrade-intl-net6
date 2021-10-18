@@ -11,5 +11,5 @@ global using System.Security.Claims;
 global using System.Text;
 global using System.Threading.Tasks;
 
-namespace Comrade.Core;
 
+namespace Comrade.Core;

@@ -1,8 +1,4 @@
-﻿#region
-
-using Comrade.Application.Services.AirplaneServices.Dtos;
-
-#endregion
+﻿using Comrade.Application.Services.AirplaneServices.Dtos;
 
 namespace Comrade.Application.Services.AirplaneServices.Validations;
 

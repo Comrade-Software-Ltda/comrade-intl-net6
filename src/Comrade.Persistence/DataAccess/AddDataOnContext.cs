@@ -1,10 +1,5 @@
-#region
-
 using Comrade.Domain.Models;
 using Comrade.Persistence.Extensions;
-using System.Reflection;
-
-#endregion
 
 namespace Comrade.Persistence.DataAccess;
 

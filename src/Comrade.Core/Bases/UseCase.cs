@@ -1,11 +1,6 @@
-﻿#region
-
-
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Domain.Bases.Interfaces;
-
-#endregion
 
 namespace Comrade.Core.Bases
 {

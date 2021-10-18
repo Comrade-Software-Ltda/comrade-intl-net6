@@ -1,18 +1,13 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
-using System.Linq.Expressions;
-
-#endregion
 
 namespace Comrade.Application.Lookups;
 
 public class LookupService<TEntity> : Service, ILookupService<TEntity>
-        where TEntity : Entity
+    where TEntity : Entity
 {
     private readonly IRepository<TEntity> _repository;
 

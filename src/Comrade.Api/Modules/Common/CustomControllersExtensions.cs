@@ -1,9 +1,4 @@
-#region
-
 using Comrade.Api.Modules.Common.FeatureFlags;
-
-
-#endregion
 
 namespace Comrade.Api.Modules.Common;
 
@@ -17,7 +12,7 @@ public static class CustomControllersExtensions
     /// </summary>
     public static IServiceCollection AddCustomControllers(this IServiceCollection services)
     {
-        IFeatureManager featureManager = services
+        var featureManager = services
             .BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 

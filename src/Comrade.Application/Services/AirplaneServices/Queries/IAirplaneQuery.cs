@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Application.Bases.Interfaces;
+﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Paginations;
 using Comrade.Application.Services.AirplaneServices.Dtos;
-
-#endregion
 
 namespace Comrade.Application.Services.AirplaneServices.Queries;
 

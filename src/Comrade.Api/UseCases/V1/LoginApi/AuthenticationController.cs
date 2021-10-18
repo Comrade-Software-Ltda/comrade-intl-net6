@@ -1,13 +1,7 @@
-#region
-
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AuthenticationServices.Commands;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-#endregion
 
 namespace Comrade.Api.UseCases.V1.LoginApi;
 

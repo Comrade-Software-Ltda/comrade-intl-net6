@@ -1,11 +1,5 @@
-﻿#region
-
-using Comrade.Persistence.Extensions;
+﻿using Comrade.Persistence.Extensions;
 using Microsoft.AspNetCore.Http;
-using Moq;
-using System.Reflection;
-
-#endregion
 
 namespace Comrade.UnitTests.Mocks;
 

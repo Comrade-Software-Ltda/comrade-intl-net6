@@ -1,16 +1,12 @@
-﻿#region
-
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Messages;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using FluentValidation;
 
-#endregion
-
 namespace Comrade.Application.Services.AirplaneServices.Validations;
 
 public class AirplaneValidation<TDto> : DtoValidation<TDto>
-        where TDto : AirplaneDto
+    where TDto : AirplaneDto
 {
     protected void ValidateId()
     {

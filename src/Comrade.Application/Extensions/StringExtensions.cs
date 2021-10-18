@@ -1,9 +1,4 @@
-﻿#region
-
-
-#endregion
-
-namespace Comrade.Application.Extensions;
+﻿namespace Comrade.Application.Extensions;
 
 public static class StringExtension
 {
@@ -57,8 +52,8 @@ public static class StringExtension
 
     public static string ToProperCase(this string source)
     {
-        CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
-        TextInfo textInfo = cultureInfo.TextInfo;
+        var cultureInfo = Thread.CurrentThread.CurrentCulture;
+        var textInfo = cultureInfo.TextInfo;
         return textInfo.ToTitleCase(source);
     }
 

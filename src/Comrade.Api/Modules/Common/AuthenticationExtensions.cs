@@ -1,10 +1,6 @@
-#region
-
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.UseCases;
-
-#endregion
 
 namespace Comrade.Api.Modules.Common;
 
@@ -20,7 +16,7 @@ public static class AuthenticationExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        IFeatureManager featureManager = services
+        var featureManager = services
             .BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 

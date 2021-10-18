@@ -1,11 +1,4 @@
-#region
-
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-
-#endregion
 
 namespace Comrade.Api.Modules.Common.Swagger;
 
@@ -42,7 +35,7 @@ public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOption
     {
         // add a swagger document for each discovered API version
         // note: you might choose to skip or document deprecated API versions differently
-        foreach (ApiVersionDescription description in _provider.ApiVersionDescriptions)
+        foreach (var description in _provider.ApiVersionDescriptions)
             options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
     }
 

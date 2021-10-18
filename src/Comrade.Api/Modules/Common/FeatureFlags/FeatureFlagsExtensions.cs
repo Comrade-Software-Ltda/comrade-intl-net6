@@ -1,9 +1,3 @@
-#region
-
-using Microsoft.FeatureManagement;
-
-#endregion
-
 namespace Comrade.Api.Modules.Common.FeatureFlags;
 
 /// <summary>
@@ -19,7 +13,7 @@ public static class FeatureFlagsExtensions
     {
         services.AddFeatureManagement(configuration);
 
-        IFeatureManager featureManager = services.BuildServiceProvider()
+        var featureManager = services.BuildServiceProvider()
             .GetRequiredService<IFeatureManager>();
 
         services.AddMvc()

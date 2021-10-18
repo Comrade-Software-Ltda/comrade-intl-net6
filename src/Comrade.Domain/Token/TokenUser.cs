@@ -1,9 +1,4 @@
-﻿#region
-
-
-#endregion
-
-namespace Comrade.Domain.Token;
+﻿namespace Comrade.Domain.Token;
 
 public class TokenUser
 {

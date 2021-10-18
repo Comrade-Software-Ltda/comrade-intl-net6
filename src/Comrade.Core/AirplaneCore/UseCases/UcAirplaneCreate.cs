@@ -1,15 +1,10 @@
-﻿#region
-
-using Comrade.Core.AirplaneCore.Validations;
+﻿using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
-using System.Globalization;
-
-#endregion
 
 namespace Comrade.Core.AirplaneCore.UseCases;
 

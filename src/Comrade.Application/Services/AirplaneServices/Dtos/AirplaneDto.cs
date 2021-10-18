@@ -1,9 +1,6 @@
-﻿#region
-
-using Comrade.Application.Bases;
-
-
-#endregion
+﻿using Comrade.Application.Bases;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Application.Services.AirplaneServices.Dtos;
 

@@ -1,16 +1,11 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Services.AuthenticationServices.Commands;
 using Comrade.Persistence.DataAccess;
-
-#endregion
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public class AuthenticationInjectionService
 {
-
     public static AuthenticationCommand GetAuthenticationCommand(ComradeContext context,
         IMapper mapper)
     {

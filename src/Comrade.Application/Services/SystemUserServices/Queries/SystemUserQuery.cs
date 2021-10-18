@@ -1,6 +1,4 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
@@ -9,8 +7,6 @@ using Comrade.Application.Paginations;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Core.SystemUserCore;
 using Comrade.Domain.Bases;
-
-#endregion
 
 namespace Comrade.Application.Services.SystemUserServices.Queries;
 
@@ -59,7 +55,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
             if (entity != null)
             {
                 var dto = Mapper.Map<LookupDto>(new Lookup
-                { Key = entity.Id, Value = entity.Name });
+                    { Key = entity.Id, Value = entity.Name });
                 list = new List<LookupDto> { dto };
             }
         }

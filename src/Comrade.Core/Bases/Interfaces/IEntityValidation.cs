@@ -1,13 +1,9 @@
-﻿#region
-
-using Comrade.Domain.Bases.Interfaces;
-
-#endregion
+﻿using Comrade.Domain.Bases.Interfaces;
 
 namespace Comrade.Core.Bases.Interfaces;
 
 public interface IEntityValidation<TEntity>
-        where TEntity : IEntity
+    where TEntity : IEntity
 {
     Task<ISingleResult<TEntity>> RecordExists(int id, params string[] includes);
 }

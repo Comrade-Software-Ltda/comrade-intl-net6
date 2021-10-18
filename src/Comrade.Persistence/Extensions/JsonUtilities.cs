@@ -1,10 +1,6 @@
-﻿#region
-
-using Comrade.Domain.Bases;
+﻿using Comrade.Domain.Bases;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
-#endregion
 
 namespace Comrade.Persistence.Extensions;
 
@@ -28,7 +24,8 @@ public static class JsonUtilities
         return new List<TTargetModel>();
     }
 
-    public static List<TTargetModel>? GetListFromJsonSnakeCaseNamingStrategy<TTargetModel>(Stream? jsonStream)
+    public static List<TTargetModel>? GetListFromJsonSnakeCaseNamingStrategy<TTargetModel>(
+        Stream? jsonStream)
         where TTargetModel : Entity
     {
         if (jsonStream != null)

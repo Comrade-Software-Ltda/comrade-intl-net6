@@ -1,14 +1,10 @@
-﻿#region
-
-using AutoMapper;
+﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Validations;
 using Comrade.Core.AirplaneCore;
 using Comrade.Domain.Models;
-
-#endregion
 
 namespace Comrade.Application.Services.AirplaneServices.Commands;
 

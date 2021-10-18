@@ -6,11 +6,11 @@ public sealed class HashingOptions
 
     public static implicit operator HashingOptions(int v)
     {
-        return new();
+        return new HashingOptions();
     }
 
     public static HashingOptions ToHashingOptions()
     {
-        return new();
+        return new HashingOptions();
     }
 }
