@@ -55,7 +55,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
             if (entity != null)
             {
                 var dto = Mapper.Map<LookupDto>(new Lookup
-                    { Key = entity.Id, Value = entity.Name });
+                { Key = entity.Id, Value = entity.Name });
                 list = new List<LookupDto> { dto };
             }
         }

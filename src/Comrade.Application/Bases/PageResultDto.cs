@@ -8,7 +8,7 @@ namespace Comrade.Application.Bases;
 public class PageResultDto<T> : ResultDto, IPageResultDto<T>
     where T : Dto
 {
-    public PageResultDto(IList<T> data)
+    public PageResultDto(List<T>? data)
     {
         Data = data;
         Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
@@ -18,13 +18,13 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
             : string.Empty;
     }
 
-    public PageResultDto(PaginationFilter pagination, IList<T> data)
+    public PageResultDto(PaginationFilter pagination, List<T>? data)
     {
         Data = data;
         PageNumber = pagination.PageNumber >= 1 ? pagination.PageNumber : null;
         PageSize = pagination.PageNumber >= 1 ? pagination.PageSize : null;
         NextPage = pagination.PageNumber + 1;
-        PreviusPage = pagination.PageNumber > 1 ? pagination.PageNumber - 1 : null;
+        PreviousPage = pagination.PageNumber > 1 ? pagination.PageNumber - 1 : null;
         Code = data == null ? (int)EnumResponse.ErrorNotFound : (int)EnumResponse.Success;
         Success = data != null;
         Message = data == null
@@ -35,7 +35,6 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
     public int? PageNumber { get; set; }
     public int? PageSize { get; set; }
     public int? NextPage { get; set; }
-    public int? PreviusPage { get; set; }
-
+    public int? PreviousPage { get; set; }
     public IList<T>? Data { get; set; }
 }

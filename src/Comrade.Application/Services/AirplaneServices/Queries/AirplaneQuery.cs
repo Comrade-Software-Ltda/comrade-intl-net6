@@ -39,7 +39,7 @@ public class AirplaneQuery : Service, IAirplaneQuery
             .ProjectTo<AirplaneDto>(Mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 
-        return new PageResultDto<AirplaneDto>(list);
+        return new PageResultDto<AirplaneDto>(paginationFilter, list);
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetById(int id)
