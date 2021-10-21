@@ -5,7 +5,7 @@ using MediatR;
 namespace Comrade.Application.PipelineBehaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+    where TRequest : IRequest<TResponse> where TResponse : SingleResultDto<EntityDto>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -28,7 +28,8 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         if (failures.Any())
         {
-            var teste = new SingleResultDto<EntityDto>(failures);
+            var validationResult = new SingleResultDto<EntityDto>(failures);
+            return Task.FromResult(validationResult as TResponse)!;
         }
 
         //next
