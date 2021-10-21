@@ -5,7 +5,7 @@ using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
-using Comrade.Application.Services.AirplaneServices.Commands;
+using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;

@@ -60,6 +60,13 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
         Message = result.Message;
     }
 
+    public SingleResultDto(List<ValidationFailure> failures)
+    {
+        Code = (int)EnumResponse.ErrorBusinessValidation;
+        Success = false;
+        Messages = failures.Select(x => x.ErrorMessage).ToList();
+    }
+
     public ValidationResult? ValidationResult { get; }
 
     public TDto? Data { get; private set; }

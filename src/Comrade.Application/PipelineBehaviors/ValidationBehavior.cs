@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Comrade.Application.Bases;
+using FluentValidation;
 using MediatR;
 
 namespace Comrade.Application.PipelineBehaviors;
@@ -27,6 +28,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         if (failures.Any())
         {
+            var teste = new SingleResultDto<EntityDto>(failures);
         }
 
         //next

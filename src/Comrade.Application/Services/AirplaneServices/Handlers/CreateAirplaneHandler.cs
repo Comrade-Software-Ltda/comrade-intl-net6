@@ -6,7 +6,7 @@ using Comrade.Core.AirplaneCore;
 using Comrade.Domain.Models;
 using MediatR;
 
-namespace Comrade.Application.Services.AirplaneServices.Commands;
+namespace Comrade.Application.Services.AirplaneServices.Handlers;
 
 public class CreateAirplaneHandler : IRequestHandler<AirplaneCreateDto, ISingleResultDto<EntityDto>>
 {
@@ -23,9 +23,7 @@ public class CreateAirplaneHandler : IRequestHandler<AirplaneCreateDto, ISingleR
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<Airplane>(request);
-
         var result = await _createAirplane.Execute(mappedObject).ConfigureAwait(false);
-
         return new SingleResultDto<EntityDto>(result);
     }
 }

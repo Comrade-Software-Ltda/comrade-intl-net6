@@ -6,7 +6,7 @@ public class ComradeController : ControllerBase
     protected int? GetUserId()
     {
         return User != null
-            ? int.Parse(User.Claims.First(i => i.Type == "Key").Value,
+            ? int.Parse(User.Claims.First(i => i.Type == "email").Value,
                 CultureInfo.CurrentCulture)
             : 0;
     }
