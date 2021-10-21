@@ -15,6 +15,6 @@ public class AirplaneInjectionController
         var airplaneCommand = AirplaneInjectionService.GetAirplaneCommand(context, mapper);
         var airplaneQuery = AirplaneInjectionService.GetAirplaneQuery(context, mapper);
 
-        return new AirplaneController(airplaneCommand, airplaneQuery, mapper, logger);
+        return new AirplaneController(airplaneCommand, airplaneQuery, logger);
     }
 }

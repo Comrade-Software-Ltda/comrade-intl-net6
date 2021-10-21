@@ -13,6 +13,6 @@ public class SystemUserInjectionController
             SystemUserInjectionService.GetSystemUserCommand(context, mapper);
         var systemUserQuery = SystemUserInjectionService.GetSystemUserQuery(context, mapper);
 
-        return new SystemUserController(systemUserCommand, systemUserQuery, mapper);
+        return new SystemUserController(systemUserCommand, systemUserQuery);
     }
 }

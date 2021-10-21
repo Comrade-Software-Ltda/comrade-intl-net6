@@ -1,4 +1,3 @@
-using AutoMapper;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
@@ -18,16 +17,14 @@ namespace Comrade.Api.UseCases.V2.SystemUserApi;
 [ApiController]
 public class SystemUserController : ControllerBase
 {
-    private readonly IMapper _mapper;
     private readonly ISystemUserCommand _systemUserCommand;
     private readonly ISystemUserQuery _systemUserQuery;
 
     public SystemUserController(ISystemUserCommand systemUserCommand,
-        ISystemUserQuery systemUserQuery, IMapper mapper)
+        ISystemUserQuery systemUserQuery)
     {
         _systemUserCommand = systemUserCommand;
         _systemUserQuery = systemUserQuery;
-        _mapper = mapper;
     }
 
 
@@ -37,14 +34,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            PaginationFilter? paginationFilter = null;
-            if (paginationQuery != null)
-            {
-                paginationFilter =
-                    _mapper.Map<PaginationQuery, PaginationFilter>(paginationQuery);
-            }
-
-            var result = await _systemUserQuery.GetAll(paginationFilter).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetAll(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

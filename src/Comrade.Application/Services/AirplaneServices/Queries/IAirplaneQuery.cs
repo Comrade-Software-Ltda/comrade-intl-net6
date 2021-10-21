@@ -6,6 +6,6 @@ namespace Comrade.Application.Services.AirplaneServices.Queries;
 
 public interface IAirplaneQuery : IService
 {
-    Task<IPageResultDto<AirplaneDto>> GetAll(PaginationFilter? paginationFilter = null);
+    Task<IPageResultDto<AirplaneDto>> GetAll(PaginationQuery? paginationQuery = null);
     Task<ISingleResultDto<AirplaneDto>> GetById(int id);
 }

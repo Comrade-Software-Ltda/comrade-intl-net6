@@ -1,4 +1,3 @@
-using AutoMapper;
 using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
@@ -22,14 +21,12 @@ public class AirplaneController : ComradeController
     private readonly IAirplaneCommand _airplaneCommand;
     private readonly IAirplaneQuery _airplaneQuery;
     private readonly ILogger<AirplaneController> _logger;
-    private readonly IMapper _mapper;
 
     public AirplaneController(IAirplaneCommand airplaneCommand,
-        IAirplaneQuery airplaneQuery, IMapper mapper, ILogger<AirplaneController> logger)
+        IAirplaneQuery airplaneQuery, ILogger<AirplaneController> logger)
     {
         _airplaneCommand = airplaneCommand;
         _airplaneQuery = airplaneQuery;
-        _mapper = mapper;
         _logger = logger;
     }
 
@@ -39,14 +36,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            PaginationFilter? paginationFilter = null;
-            if (paginationQuery != null)
-            {
-                paginationFilter =
-                    _mapper.Map<PaginationQuery, PaginationFilter>(paginationQuery);
-            }
-
-            var result = await _airplaneQuery.GetAll(paginationFilter).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetAll(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

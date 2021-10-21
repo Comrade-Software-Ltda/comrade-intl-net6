@@ -20,8 +20,9 @@ public class AirplaneQuery : Service, IAirplaneQuery
     }
 
     public async Task<IPageResultDto<AirplaneDto>> GetAll(
-        PaginationFilter? paginationFilter = null)
+        PaginationQuery? paginationQuery = null)
     {
+        var paginationFilter = Mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<AirplaneDto> list;
         if (paginationFilter == null)
         {

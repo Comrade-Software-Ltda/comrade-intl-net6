@@ -22,8 +22,10 @@ public class SystemUserQuery : Service, ISystemUserQuery
     }
 
     public async Task<IPageResultDto<SystemUserDto>> GetAll(
-        PaginationFilter? paginationFilter = null)
+        PaginationQuery? paginationQuery = null)
     {
+        var paginationFilter = Mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+
         List<SystemUserDto> list;
         if (paginationFilter == null)
         {
