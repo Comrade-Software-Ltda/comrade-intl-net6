@@ -5,6 +5,7 @@ using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
@@ -14,6 +15,7 @@ public sealed class AirplaneInjectionService
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
+        var mediator = new Mock<IMediator>();
 
         var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
 
@@ -30,7 +32,7 @@ public sealed class AirplaneInjectionService
             new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
 
         return new AirplaneCommand(ucAirplaneEdit, ucAirplaneCreate,
-            ucAirplaneDelete, mapper);
+            ucAirplaneDelete, mapper, mediator.Object);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)

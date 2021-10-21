@@ -2,10 +2,10 @@ using Comrade.Api.Modules;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
+using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Application.Services.AirplaneServices.Commands;
-using Comrade.Application.Services.AirplaneServices.Validations;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
@@ -57,7 +57,8 @@ public sealed class Startup
         services.AddMediatR(typeof(Startup));
         services.AddMediatR(typeof(CreateAirplaneHandler).GetTypeInfo().Assembly);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddValidatorsFromAssembly(typeof(AirplaneCreateValidation).Assembly);
+        services.AddValidatorsFromAssemblyContaining<EntityDto>();
+        ;
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();
