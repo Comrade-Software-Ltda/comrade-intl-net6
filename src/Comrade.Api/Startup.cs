@@ -5,7 +5,6 @@ using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
-using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
@@ -54,8 +53,9 @@ public sealed class Startup
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+
         services.AddMediatR(typeof(Startup));
-        services.AddMediatR(typeof(AirplaneCreateHandler).GetTypeInfo().Assembly);
+
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
 

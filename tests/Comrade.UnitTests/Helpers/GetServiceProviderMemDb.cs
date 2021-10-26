@@ -3,8 +3,10 @@ using Comrade.Api.Modules;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
+using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
+using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
@@ -45,8 +47,9 @@ public static class GetServiceProviderMemDb
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddMediatR(typeof(Startup));
+        services.AddMediatR(typeof(AirplaneCreateHandler).GetTypeInfo().Assembly);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+        services.AddValidatorsFromAssemblyContaining<EntityDto>();
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();

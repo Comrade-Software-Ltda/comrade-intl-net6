@@ -1,4 +1,7 @@
+using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Commands;
+using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Application.Services.AuthenticationServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Commands;
@@ -12,6 +15,7 @@ using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
+using MediatR;
 
 namespace Comrade.Api.Modules;
 
@@ -45,6 +49,9 @@ public static class UseCasesExtensions
         // Application - Services
         services.AddScoped<IAirplaneCommand, AirplaneCommand>();
         services.AddScoped<IAirplaneQuery, AirplaneQuery>();
+
+        // Application - Handlers
+        services.AddScoped<IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>, AirplaneCreateHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcAirplaneEdit, UcAirplaneEdit>();

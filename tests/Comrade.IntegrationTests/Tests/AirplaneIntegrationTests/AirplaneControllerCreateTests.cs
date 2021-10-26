@@ -38,6 +38,36 @@ public sealed class AirplaneControllerCreateTests
         Assert.Equal(1, context.Airplanes.Count());
     }
 
+
+    [Fact]
+    public async Task AirplaneMediatRController_Create()
+    {
+        var options = new DbContextOptionsBuilder<ComradeContext>()
+            .UseInMemoryDatabase("test_database_AirplaneController_Create")
+            .EnableSensitiveDataLogging().Options;
+
+
+        var testObject = new AirplaneCreateDto
+        {
+            Code = "123",
+            Model = "234",
+            PassengerQuantity = 456
+        };
+
+        await using var context = new ComradeContext(options);
+        await context.Database.EnsureCreatedAsync();
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var result = await airplaneController.Create(testObject);
+
+        if (result is ObjectResult okResult)
+        {
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
+            Assert.NotNull(actualResultValue);
+            Assert.Equal(201, actualResultValue?.Code);
+        }
+
+    }
+
     [Fact]
     public async Task AirplaneController_Create_Error()
     {
