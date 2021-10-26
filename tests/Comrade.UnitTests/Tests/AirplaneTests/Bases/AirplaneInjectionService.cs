@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Commands;
-using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
@@ -19,11 +16,6 @@ public sealed class AirplaneInjectionService
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
         var mediator = new Mock<IMediator>();
-
-        mediator
-            .Setup(m => m.Send(It.IsAny<AirplaneCreateDto>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new SingleResultDto<EntityDto>()) //<-- return Task to allow await to continue
-            .Verifiable("Notification was not sent.");
 
         var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
 

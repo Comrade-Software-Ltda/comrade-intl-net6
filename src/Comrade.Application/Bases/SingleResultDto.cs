@@ -12,12 +12,6 @@ namespace Comrade.Application.Bases;
 public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
     where TDto : Dto
 {
-    public SingleResultDto()
-    {
-        Code = (int)EnumResponse.ErrorBusinessValidation;
-        Success = false;
-    }
-
     public SingleResultDto(TDto? data)
     {
         Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;

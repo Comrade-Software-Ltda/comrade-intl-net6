@@ -15,7 +15,7 @@ public class AirplaneComponentTests
     }
 
     [Fact]
-    public async Task GetAccountsReturnsList()
+    public async Task GetAirplaneReturnsList()
     {
         var client = _fixture
             .CustomWebApplicationFactory
@@ -38,7 +38,7 @@ public class AirplaneComponentTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-            { DateParseHandling = DateParseHandling.None };
+        { DateParseHandling = DateParseHandling.None };
         var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 

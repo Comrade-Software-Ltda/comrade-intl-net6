@@ -65,7 +65,6 @@ public sealed class AirplaneControllerCreateTests
             Assert.NotNull(actualResultValue);
             Assert.Equal(201, actualResultValue?.Code);
         }
-
     }
 
     [Fact]
