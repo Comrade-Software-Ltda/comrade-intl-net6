@@ -6,7 +6,7 @@ using Comrade.Application.Services.SystemUserServices.Dtos;
 
 namespace Comrade.Application.Services.SystemUserServices.Queries;
 
-public interface ISystemUserQuery : IService
+public interface ISystemUserQuery
 {
     Task<IPageResultDto<SystemUserDto>> GetAll(PaginationQuery? paginationQuery = null);
     Task<ISingleResultDto<SystemUserDto>> GetById(int id);

@@ -4,7 +4,7 @@ using Comrade.Application.Services.AuthenticationServices.Dtos;
 
 namespace Comrade.Application.Services.AuthenticationServices.Commands;
 
-public interface IAuthenticationCommand : IService
+public interface IAuthenticationCommand
 {
     Task<ISingleResultDto<UserDto>> GenerateToken(AuthenticationDto dto);
     Task<ISingleResultDto<EntityDto>> ForgotPassword(AuthenticationDto dto);

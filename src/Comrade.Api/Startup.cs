@@ -55,10 +55,9 @@ public sealed class Startup
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddMediatR(typeof(Startup));
-        services.AddMediatR(typeof(CreateAirplaneHandler).GetTypeInfo().Assembly);
+        services.AddMediatR(typeof(AirplaneCreateHandler).GetTypeInfo().Assembly);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
-        ;
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();

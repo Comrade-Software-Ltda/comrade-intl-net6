@@ -9,22 +9,20 @@ using MediatR;
 
 namespace Comrade.Application.Services.AirplaneServices.Commands;
 
-public class AirplaneCommand : Service, IAirplaneCommand
+public class AirplaneCommand : IAirplaneCommand
 {
-    private readonly IUcAirplaneCreate _createAirplane;
     private readonly IUcAirplaneDelete _deleteAirplane;
     private readonly IUcAirplaneEdit _editAirplane;
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
     public AirplaneCommand(IUcAirplaneEdit editAirplane,
-        IUcAirplaneCreate createAirplane,
         IUcAirplaneDelete deleteAirplane,
         IMapper mapper, IMediator mediator)
-        : base(mapper)
     {
         _editAirplane = editAirplane;
-        _createAirplane = createAirplane;
         _deleteAirplane = deleteAirplane;
+        _mapper = mapper;
         _mediator = mediator;
     }
 
@@ -43,7 +41,7 @@ public class AirplaneCommand : Service, IAirplaneCommand
             return new SingleResultDto<EntityDto>(validator);
         }
 
-        var mappedObject = Mapper.Map<Airplane>(dto);
+        var mappedObject = _mapper.Map<Airplane>(dto);
 
         var result = await _editAirplane.Execute(mappedObject).ConfigureAwait(false);
 

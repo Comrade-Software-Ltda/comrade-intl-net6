@@ -10,27 +10,28 @@ using Comrade.Domain.Bases;
 
 namespace Comrade.Application.Services.SystemUserServices.Queries;
 
-public class SystemUserQuery : Service, ISystemUserQuery
+public class SystemUserQuery : ISystemUserQuery
 {
     private readonly ISystemUserRepository _repository;
+    private readonly IMapper _mapper;
 
     public SystemUserQuery(ISystemUserRepository repository,
         IMapper mapper)
-        : base(mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     public async Task<IPageResultDto<SystemUserDto>> GetAll(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = Mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
 
         List<SystemUserDto> list;
         if (paginationFilter == null)
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemUserDto>(Mapper.ConfigurationProvider)
+                .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
                 .ToList()).ConfigureAwait(false);
 
             return new PageResultDto<SystemUserDto>(list);
@@ -40,7 +41,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
 
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemUserDto>(Mapper.ConfigurationProvider)
+            .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 
         return new PageResultDto<SystemUserDto>(paginationFilter, list);
@@ -56,7 +57,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
             var entity = await _repository.GetById(number).ConfigureAwait(false);
             if (entity != null)
             {
-                var dto = Mapper.Map<LookupDto>(new Lookup
+                var dto = _mapper.Map<LookupDto>(new Lookup
                 { Key = entity.Id, Value = entity.Name });
                 list = new List<LookupDto> { dto };
             }
@@ -64,7 +65,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
         else if (!string.IsNullOrEmpty(name))
         {
             list = await Task.Run(() => _repository.FindByName(name)
-                .ProjectTo<LookupDto>(Mapper.ConfigurationProvider)
+                .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
                 .ToList()).ConfigureAwait(false);
         }
 
@@ -75,7 +76,7 @@ public class SystemUserQuery : Service, ISystemUserQuery
     public async Task<ISingleResultDto<SystemUserDto>> GetById(int id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
-        var dto = Mapper.Map<SystemUserDto>(entity);
+        var dto = _mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
 }

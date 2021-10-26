@@ -7,21 +7,23 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Services.AuthenticationServices.Commands;
 
-public class AuthenticationCommand : Service, IAuthenticationCommand
+public class AuthenticationCommand : IAuthenticationCommand
 {
     private readonly IUcForgotPassword _forgotPassword;
     private readonly IUcUpdatePassword _updatePassword;
     private readonly IUcValidateLogin _validateLogin;
+    private readonly IMapper _mapper;
+
 
     public AuthenticationCommand(IUcUpdatePassword updatePassword,
         IUcValidateLogin validateLogin,
         IUcForgotPassword forgotPassword,
-        IMapper mapper) :
-        base(mapper)
+        IMapper mapper)
     {
         _updatePassword = updatePassword;
         _forgotPassword = forgotPassword;
         _validateLogin = validateLogin;
+        _mapper = mapper;
     }
 
     public async Task<ISingleResultDto<UserDto>> GenerateToken(AuthenticationDto dto)
@@ -44,7 +46,7 @@ public class AuthenticationCommand : Service, IAuthenticationCommand
 
     public async Task<ISingleResultDto<EntityDto>> ForgotPassword(AuthenticationDto dto)
     {
-        var mappedObject = Mapper.Map<SystemUser>(dto);
+        var mappedObject = _mapper.Map<SystemUser>(dto);
 
         var result = await _forgotPassword.Execute(mappedObject).ConfigureAwait(false);
 
@@ -55,7 +57,7 @@ public class AuthenticationCommand : Service, IAuthenticationCommand
 
     public async Task<ISingleResultDto<EntityDto>> UpdatePassword(AuthenticationDto dto)
     {
-        var mappedObject = Mapper.Map<SystemUser>(dto);
+        var mappedObject = _mapper.Map<SystemUser>(dto);
 
         var result = await _updatePassword.Execute(mappedObject).ConfigureAwait(false);
 

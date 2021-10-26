@@ -31,8 +31,7 @@ public sealed class AirplaneInjectionService
         var ucAirplaneEdit =
             new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
 
-        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneCreate,
-            ucAirplaneDelete, mapper, mediator.Object);
+        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneDelete, mapper, mediator.Object);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)
