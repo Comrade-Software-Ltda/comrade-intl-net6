@@ -6,8 +6,12 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
+[Collection(nameof(SliceFixture))]
 public sealed class AirplaneControllerCreateTests
 {
+    private readonly SliceFixture _fixture;
+    public AirplaneControllerCreateTests(SliceFixture fixture) => _fixture = fixture;
+
     [Fact]
     public async Task AirplaneController_Create()
     {
