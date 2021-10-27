@@ -1,35 +1,23 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-[Collection(nameof(SliceFixture))]
 public sealed class AirplaneControllerCreateTests
 {
-    private readonly SliceFixture _fixture;
-    public AirplaneControllerCreateTests(SliceFixture fixture) => _fixture = fixture;
-
     [Fact]
     public async Task AirplaneController_Create()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Create")
-            .EnableSensitiveDataLogging().Options;
-
-
         var testObject = new AirplaneCreateDto
         {
-            Code = "123",
-            Model = "234",
+            Code = "444",
+            Model = "585",
             PassengerQuantity = 456
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController();
         var result = await airplaneController.Create(testObject);
 
         if (result is ObjectResult okResult)
@@ -39,55 +27,20 @@ public sealed class AirplaneControllerCreateTests
             Assert.Equal(201, actualResultValue?.Code);
         }
 
-        Assert.Equal(1, context.Airplanes.Count());
+
     }
 
-
-    [Fact]
-    public async Task AirplaneMediatorController_Create()
-    {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Create")
-            .EnableSensitiveDataLogging().Options;
-
-
-        var testObject = new AirplaneCreateDto
-        {
-            Code = "123",
-            Model = "234",
-            PassengerQuantity = 456
-        };
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
-        var result = await airplaneController.Create(testObject);
-
-        if (result is ObjectResult okResult)
-        {
-            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
-            Assert.NotNull(actualResultValue);
-            Assert.Equal(201, actualResultValue?.Code);
-        }
-    }
 
     [Fact]
     public async Task AirplaneController_Create_Error()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Create_Error")
-            .EnableSensitiveDataLogging().Options;
-
-
         var testObject = new AirplaneCreateDto
         {
             Code = "123",
             PassengerQuantity = 456
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController();
         var result = await airplaneController.Create(testObject);
 
         if (result is OkObjectResult okResult)
@@ -96,28 +49,13 @@ public sealed class AirplaneControllerCreateTests
             Assert.NotNull(actualResultValue);
             Assert.Equal(400, actualResultValue?.Code);
         }
-
-        Assert.Equal(0, context.Airplanes.Count());
     }
 
     [Fact]
     public async Task UcAirplaneCreate_Test_Exception()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseSqlServer("error")
-            .EnableSensitiveDataLogging().Options;
-
-        var testObject = new AirplaneCreateDto
-        {
-            Code = "123",
-            Model = "234",
-            PassengerQuantity = 456
-        };
-
-        await using var context = new ComradeContext(options);
-
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
-        var result = await airplaneController.Create(testObject);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController();
+        var result = await airplaneController.Create(new AirplaneCreateDto());
 
         if (result is ObjectResult objectResult)
         {

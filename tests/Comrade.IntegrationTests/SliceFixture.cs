@@ -25,10 +25,8 @@ namespace Comrade.IntegrationTests
         public SliceFixture()
         {
             _factory = new ComradeTestApplicationFactory();
-
             _configuration = _factory.Services.GetRequiredService<IConfiguration>();
             _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
-
             _checkpoint = new Checkpoint();
         }
 

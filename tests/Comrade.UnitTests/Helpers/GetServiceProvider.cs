@@ -14,7 +14,7 @@ using MediatR;
 
 namespace Comrade.UnitTests.Helpers;
 
-public static class GetServiceProviderMemDb
+public static class GetServiceProvider
 {
     public static ServiceProvider Execute()
     {

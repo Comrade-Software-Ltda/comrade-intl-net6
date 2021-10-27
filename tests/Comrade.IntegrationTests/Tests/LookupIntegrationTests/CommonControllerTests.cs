@@ -22,7 +22,7 @@ public sealed class CommonControllerTests
     private static CommonController GetCommonControllerMemDb()
     {
         var mapper = MapperHelper.ConfigMapper();
-        var serviceProvider = GetServiceProviderMemDb.Execute();
+        var serviceProvider = GetServiceProvider.Execute();
         var context = serviceProvider.GetService<ComradeContext>();
         var systemUserQuery = SystemUserInjectionService.GetSystemUserQuery(context!, mapper);
 

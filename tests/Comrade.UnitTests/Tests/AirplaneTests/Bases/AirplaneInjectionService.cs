@@ -11,11 +11,11 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class AirplaneInjectionService
 {
-    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper)
+    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper, IMediator mediator)
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
-        var mediator = new Mock<IMediator>();
+
 
         var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
 
@@ -31,7 +31,7 @@ public sealed class AirplaneInjectionService
         var ucAirplaneEdit =
             new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
 
-        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneDelete, mapper, mediator.Object);
+        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneDelete, mapper, mediator);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)
