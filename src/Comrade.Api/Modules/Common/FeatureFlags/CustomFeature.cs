@@ -21,11 +21,6 @@ public enum CustomFeature
     Common,
 
     /// <summary>
-    ///     Filter errors out.
-    /// </summary>
-    ErrorFilter,
-
-    /// <summary>
     ///     HealthChecks.
     /// </summary>
     HealthChecks,

@@ -37,16 +37,16 @@ public class ComradeContext : DbContext
             return;
         }
 
-        _currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+        _currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted).ConfigureAwait(false);
     }
 
     public async Task CommitTransactionAsync()
     {
         try
         {
-            await SaveChangesAsync();
+            await SaveChangesAsync().ConfigureAwait(false);
 
-            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask);
+            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask).ConfigureAwait(false);
         }
         catch
         {

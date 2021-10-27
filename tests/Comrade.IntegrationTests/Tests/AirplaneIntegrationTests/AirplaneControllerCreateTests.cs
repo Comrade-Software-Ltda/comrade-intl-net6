@@ -44,7 +44,7 @@ public sealed class AirplaneControllerCreateTests
 
 
     [Fact]
-    public async Task AirplaneMediatRController_Create()
+    public async Task AirplaneMediatorController_Create()
     {
         var options = new DbContextOptionsBuilder<ComradeContext>()
             .UseInMemoryDatabase("test_database_AirplaneController_Create")
