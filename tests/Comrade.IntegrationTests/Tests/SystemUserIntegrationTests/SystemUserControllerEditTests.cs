@@ -27,7 +27,7 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
 
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var changeName = "Novo Name";
+        var changeName = "new name";
         var changeEmail = "novo@email.com";
         var changePassword = "NovaPassword";
         var changeRegistration = "NovaRegistration";
