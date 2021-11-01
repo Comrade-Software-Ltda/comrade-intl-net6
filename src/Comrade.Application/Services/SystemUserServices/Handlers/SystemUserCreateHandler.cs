@@ -7,7 +7,8 @@ using MediatR;
 
 namespace Comrade.Application.Services.SystemUserServices.Handlers;
 
-public class SystemUserCreateHandler : IRequestHandler<SystemUserCreateDto, SingleResultDto<EntityDto>>
+public class
+    SystemUserCreateHandler : IRequestHandler<SystemUserCreateDto, SingleResultDto<EntityDto>>
 {
     private readonly IUcSystemUserCreate _createSystemUser;
     private readonly IMapper _mapper;

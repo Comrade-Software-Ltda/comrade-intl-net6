@@ -11,13 +11,13 @@ public static class AddDataOnTestContext
     public static void Execute(ComradeContext? context)
     {
         var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
-
         context.Database.EnsureDeleted();
 
         if (context != null)
         {
             return;
         }
+
 
         lock (SyncLock)
         {
