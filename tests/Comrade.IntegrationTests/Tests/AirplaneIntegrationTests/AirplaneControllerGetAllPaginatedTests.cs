@@ -9,14 +9,13 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-
 public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneControllerGetAllPaginatedTests(ServiceProviderFixture fixture)
     {
-        this._fixture = fixture;
+        _fixture = fixture;
     }
 
     [Fact]
@@ -27,7 +26,8 @@ public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProvi
         var context = sp.GetService<ComradeContext>()!;
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);
 

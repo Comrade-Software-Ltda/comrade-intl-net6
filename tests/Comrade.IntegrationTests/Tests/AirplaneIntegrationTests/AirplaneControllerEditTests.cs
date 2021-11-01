@@ -11,11 +11,11 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneControllerEditTests(ServiceProviderFixture fixture)
     {
-        this._fixture = fixture;
+        _fixture = fixture;
     }
 
     [Fact]
@@ -38,7 +38,8 @@ public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
             PassengerQuantity = 6666
         };
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
         var result = await airplaneController.Edit(testObject);
 
         if (result is ObjectResult objectResult)
@@ -74,7 +75,8 @@ public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
             PassengerQuantity = 6666
         };
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
         var result = await airplaneController.Edit(testObject);
 
         if (result is OkObjectResult okResult)

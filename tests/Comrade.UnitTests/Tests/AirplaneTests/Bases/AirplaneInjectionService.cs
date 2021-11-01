@@ -11,7 +11,8 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class AirplaneInjectionService
 {
-    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper, IMediator mediator)
+    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper,
+        IMediator mediator)
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);

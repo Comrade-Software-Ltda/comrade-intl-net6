@@ -9,11 +9,11 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerDeleteTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneControllerDeleteTests(ServiceProviderFixture fixture)
     {
-        this._fixture = fixture;
+        _fixture = fixture;
     }
 
     [Fact]
@@ -27,7 +27,8 @@ public class AirplaneControllerDeleteTests : IClassFixture<ServiceProviderFixtur
 
         var idAirplane = 1;
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
         _ = await airplaneController.Delete(idAirplane);
 
         var repository = new AirplaneRepository(context);

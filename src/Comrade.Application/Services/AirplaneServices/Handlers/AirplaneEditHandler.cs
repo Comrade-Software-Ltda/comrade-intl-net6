@@ -9,8 +9,8 @@ namespace Comrade.Application.Services.AirplaneServices.Handlers;
 
 public class AirplaneEditHandler : IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>
 {
-    private readonly IMapper _mapper;
     private readonly IUcAirplaneEdit _editAirplane;
+    private readonly IMapper _mapper;
 
     public AirplaneEditHandler(IMapper mapper, IUcAirplaneEdit editAirplane)
     {

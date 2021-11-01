@@ -9,7 +9,7 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneControllerCreateTests(ServiceProviderFixture fixture)
     {
@@ -30,7 +30,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create");
         var mediator = sp.GetRequiredService<IMediator>();
         var context = sp.GetService<ComradeContext>()!;
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
 
         var result = await airplaneController.Create(testObject);
 
@@ -55,7 +56,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create_Error");
         var mediator = sp.GetRequiredService<IMediator>();
         var context = sp.GetService<ComradeContext>()!;
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
 
         var result = await airplaneController.Create(testObject);
 

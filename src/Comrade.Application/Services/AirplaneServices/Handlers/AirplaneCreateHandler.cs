@@ -9,8 +9,8 @@ namespace Comrade.Application.Services.AirplaneServices.Handlers;
 
 public class AirplaneCreateHandler : IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>
 {
-    private readonly IMapper _mapper;
     private readonly IUcAirplaneCreate _createAirplane;
+    private readonly IMapper _mapper;
 
     public AirplaneCreateHandler(IMapper mapper, IUcAirplaneCreate createAirplane)
     {

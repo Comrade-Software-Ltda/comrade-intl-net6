@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Comrade.Application.Bases;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Comrade.Application.Bases;
 
 namespace Comrade.Application.Services.AirplaneServices.Dtos;
 
