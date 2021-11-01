@@ -16,7 +16,6 @@ public sealed class AirplaneInjectionService
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
 
-
         var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
 
         var airplaneEditValidation =

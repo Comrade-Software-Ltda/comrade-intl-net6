@@ -1,12 +1,22 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public sealed class AirplaneControllerCreateTests
+public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProviderFixture>
 {
+    readonly ServiceProviderFixture _fixture;
+
+    public AirplaneControllerCreateTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
+
     [Fact]
     public async Task AirplaneController_Create()
     {
@@ -17,7 +27,11 @@ public sealed class AirplaneControllerCreateTests
             PassengerQuantity = 456
         };
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController();
+        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+
         var result = await airplaneController.Create(testObject);
 
         if (result is ObjectResult okResult)
@@ -26,8 +40,6 @@ public sealed class AirplaneControllerCreateTests
             Assert.NotNull(actualResultValue);
             Assert.Equal(201, actualResultValue?.Code);
         }
-
-
     }
 
 
@@ -40,7 +52,11 @@ public sealed class AirplaneControllerCreateTests
             PassengerQuantity = 456
         };
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController();
+        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create_Error");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+
         var result = await airplaneController.Create(testObject);
 
         if (result is OkObjectResult okResult)
@@ -48,20 +64,6 @@ public sealed class AirplaneControllerCreateTests
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(400, actualResultValue?.Code);
-        }
-    }
-
-    [Fact]
-    public async Task UcAirplaneCreate_Test_Exception()
-    {
-        var airplaneController = AirplaneInjectionController.GetAirplaneController();
-        var result = await airplaneController.Create(new AirplaneCreateDto());
-
-        if (result is ObjectResult objectResult)
-        {
-            var actualResultValue = objectResult.Value as SingleResultDto<EntityDto>;
-            Assert.NotNull(actualResultValue);
-            Assert.Equal(500, actualResultValue?.Code);
         }
     }
 }

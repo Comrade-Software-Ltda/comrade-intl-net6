@@ -31,6 +31,12 @@ public static class PersistenceExtensions
             .GetAwaiter()
             .GetResult();
 
+        var injectInitialData = featureManager
+            .IsEnabledAsync(nameof(CustomFeature.InjectInitialData))
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
+
 
         if (isMsSqlServerEnabled)
         {
@@ -48,7 +54,11 @@ public static class PersistenceExtensions
         {
             services.AddDbContext<ComradeContext>(options =>
                 options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging());
-            ComradeMemoryContextFake.AddDataFakeContext(services);
+
+            if (injectInitialData)
+            {
+                ComradeMemoryContextFake.AddDataFakeContext(services);
+            }
         }
 
         return services;

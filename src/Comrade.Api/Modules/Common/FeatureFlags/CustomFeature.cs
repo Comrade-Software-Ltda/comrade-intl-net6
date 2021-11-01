@@ -42,6 +42,12 @@ public enum CustomFeature
 
 
     /// <summary>
+    ///     Inject Initial Data on memory Db.
+    /// </summary>
+    InjectInitialData,
+
+
+    /// <summary>
     ///     Use authentication.
     /// </summary>
     Authentication

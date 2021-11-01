@@ -4,25 +4,30 @@ using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneControllerGetAllPaginatedTests
+
+public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProviderFixture>
 {
+    readonly ServiceProviderFixture _fixture;
+
+    public AirplaneControllerGetAllPaginatedTests(ServiceProviderFixture fixture)
+    {
+        this._fixture = fixture;
+    }
+
     [Fact]
     public async Task AirplaneController_GetAll_Paginated()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_GetAll_Paginated")
-            .EnableSensitiveDataLogging().Options;
-
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
+        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_GetAll_Paginated");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);
 

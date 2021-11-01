@@ -4,18 +4,28 @@ using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneControllerEditTests
+public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
 {
+    readonly ServiceProviderFixture _fixture;
+
+    public AirplaneControllerEditTests(ServiceProviderFixture fixture)
+    {
+        this._fixture = fixture;
+    }
+
     [Fact]
     public async Task AirplaneController_Edit()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Edit")
-            .EnableSensitiveDataLogging().Options;
+        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Edit");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+
+        InjectDataOnContextBase.InitializeDbForTests(context);
 
         var changeCode = "Code testObject edit";
         var changeModel = "Model testObject edit";
@@ -28,10 +38,7 @@ public class AirplaneControllerEditTests
             PassengerQuantity = 6666
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
         var result = await airplaneController.Edit(testObject);
 
         if (result is ObjectResult objectResult)
@@ -51,9 +58,11 @@ public class AirplaneControllerEditTests
     [Fact]
     public async Task AirplaneController_Edit_Error()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Edit_Error")
-            .EnableSensitiveDataLogging().Options;
+        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Edit_Error");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+
+        InjectDataOnContextBase.InitializeDbForTests(context);
 
         var changeCode = "Code testObject edit";
         var changeModel = "Model testObject edit";
@@ -65,10 +74,7 @@ public class AirplaneControllerEditTests
             PassengerQuantity = 6666
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
         var result = await airplaneController.Edit(testObject);
 
         if (result is OkObjectResult okResult)

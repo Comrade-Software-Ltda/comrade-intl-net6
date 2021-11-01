@@ -2,26 +2,35 @@
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneClaimTests
+public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
 {
-    [Fact]
-    public async Task Airplane_Context()
-    {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Create")
-            .EnableSensitiveDataLogging().Options;
+    readonly ServiceProviderFixture _fixture;
 
+    public AirplaneClaimTests(ServiceProviderFixture fixture)
+    {
+        this._fixture = fixture;
+    }
+
+
+    [Fact]
+    public async Task Airplane_Claim()
+    {
+        var sp = _fixture.InitiateConxtext("Airplane_Claim");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
 
         var testObject = new AirplaneCreateDto
         {
-            Code = "123",
-            Model = "234",
+            Code = "444",
+            Model = "585",
             PassengerQuantity = 456
         };
 
@@ -32,12 +41,10 @@ public class AirplaneClaimTests
             new("Name", "John Doe"),
             new("Key", "1")
         };
+
         var identity = new ClaimsIdentity(claims, "TestAuthType");
         var claimsPrincipal = new ClaimsPrincipal(identity);
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
         airplaneController.ControllerContext = new ControllerContext
         {
             HttpContext = new DefaultHttpContext { User = claimsPrincipal }
@@ -51,7 +58,5 @@ public class AirplaneClaimTests
             Assert.NotNull(actualResultValue);
             Assert.Equal(201, actualResultValue?.Code);
         }
-
-        Assert.Equal(1, context.Airplanes.Count());
     }
 }
