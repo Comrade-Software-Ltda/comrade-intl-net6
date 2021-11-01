@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -39,7 +39,7 @@ public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
         {
             new(ClaimTypes.Name, "username"),
             new(ClaimTypes.NameIdentifier, "userId"),
-            new("Name", "John Doe"),
+            new("Name", "User Name"),
             new("Key", "1")
         };
 

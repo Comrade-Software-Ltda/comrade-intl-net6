@@ -4,18 +4,28 @@ using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public class SystemUserControllerEditTests
+public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public SystemUserControllerEditTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
     [Fact]
     public async Task SystemUserController_Edit()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUserController_Edit")
-            .EnableSensitiveDataLogging().Options;
+        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Edit");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+
+        InjectDataOnContextBase.InitializeDbForTests(context);
 
         var changeName = "Novo Name";
         var changeEmail = "novo@email.com";
@@ -31,11 +41,9 @@ public class SystemUserControllerEditTests
             Registration = changeRegistration
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
+
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context, mediator);
         var result = await systemUserController.Edit(testObject);
 
         if (result is ObjectResult objectResult)
@@ -53,11 +61,13 @@ public class SystemUserControllerEditTests
     }
 
     [Fact]
-    public async Task Edit_SystemUser_Error()
+    public async Task SystemUserController_Edit_Error()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_Edit_SystemUser_Error")
-            .EnableSensitiveDataLogging().Options;
+        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Edit_Error");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
+
+        InjectDataOnContextBase.InitializeDbForTests(context);
 
         var changeName = "Novo Name";
         var changeEmail = "novo@email.com";
@@ -69,17 +79,13 @@ public class SystemUserControllerEditTests
             Name = changeName
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context, mediator);
         var result = await systemUserController.Edit(testObject);
 
-        if (result is OkObjectResult okObjectResult)
+        if (result is OkObjectResult okResult)
         {
-            var actualResultValue = okObjectResult.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(400, actualResultValue?.Code);
         }

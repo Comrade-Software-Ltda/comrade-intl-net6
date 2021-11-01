@@ -26,11 +26,10 @@ public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
 
         InjectDataOnContextBase.InitializeDbForTests(context);
 
-        var idAirplane = 1;
-
+        var airplaneId = 1;
         var airplaneController =
             AirplaneInjectionController.GetAirplaneController(context, mediator);
-        var result = await airplaneController.GetById(idAirplane);
+        var result = await airplaneController.GetById(airplaneId);
 
         if (result is OkObjectResult okResult)
         {

@@ -5,6 +5,8 @@ using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Application.Services.AuthenticationServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Commands;
+using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserServices.Handlers;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.UseCases;
@@ -77,6 +79,14 @@ public static class UseCasesExtensions
         // Application - Services
         services.AddScoped<ISystemUserCommand, SystemUserCommand>();
         services.AddScoped<ISystemUserQuery, SystemUserQuery>();
+
+        // Application - Handlers
+        services
+            .AddScoped<IRequestHandler<SystemUserCreateDto, SingleResultDto<EntityDto>>,
+                SystemUserCreateHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserEditDto, SingleResultDto<EntityDto>>,
+                SystemUserEditHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemUserEdit, UcSystemUserEdit>();

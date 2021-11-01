@@ -5,18 +5,20 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public class SystemUserContextTests
+public class SystemUserContextTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public SystemUserContextTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
     [Fact]
     public async Task SystemUser_Context()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUser_Context")
-            .EnableSensitiveDataLogging().Options;
-
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
+        var sp = _fixture.InitiateConxtext("test_database_SystemUser_Context");
+        var context = sp.GetService<ComradeContext>()!;
         InjectDataOnContextBase.InitializeDbForTests(context);
         var repository = new SystemUserRepository(context);
         var systemUser = await repository.GetById(1);

@@ -3,34 +3,40 @@ using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public class SystemUserControllerGetAllTests
+public class SystemUserControllerGetAllTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public SystemUserControllerGetAllTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
     [Fact]
     public async Task SystemUserController_GetAll()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUserController_GetAll")
-            .EnableSensitiveDataLogging().Options;
+        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_GetAll");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
         InjectDataOnContextBase.InitializeDbForTests(context);
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context, mediator);
         var result = await systemUserController.GetAll(null);
 
-        if (result is OkObjectResult okObjectResult)
+        if (result is OkObjectResult okResult)
         {
-            var actualResultValue = okObjectResult.Value as PageResultDto<SystemUserDto>;
+            var actualResultValue = okResult.Value as PageResultDto<SystemUserDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(200, actualResultValue?.Code);
             Assert.NotNull(actualResultValue?.Data);
-            Assert.Equal(4, actualResultValue?.Data?.Count);
+            Assert.Equal(3, actualResultValue?.Data?.Count);
         }
     }
 }

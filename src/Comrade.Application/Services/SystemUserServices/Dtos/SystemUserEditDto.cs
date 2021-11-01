@@ -1,5 +1,8 @@
-﻿namespace Comrade.Application.Services.SystemUserServices.Dtos;
+﻿using Comrade.Application.Bases;
+using MediatR;
 
-public class SystemUserEditDto : SystemUserDto
+namespace Comrade.Application.Services.SystemUserServices.Dtos;
+
+public class SystemUserEditDto : SystemUserDto, IRequest<SingleResultDto<EntityDto>>
 {
 }

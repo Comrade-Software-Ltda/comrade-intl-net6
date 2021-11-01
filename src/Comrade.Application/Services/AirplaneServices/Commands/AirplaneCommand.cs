@@ -10,7 +10,6 @@ namespace Comrade.Application.Services.AirplaneServices.Commands;
 public class AirplaneCommand : IAirplaneCommand
 {
     private readonly IUcAirplaneDelete _deleteAirplane;
-    private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
     public AirplaneCommand(
@@ -18,7 +17,6 @@ public class AirplaneCommand : IAirplaneCommand
         IMapper mapper, IMediator mediator)
     {
         _deleteAirplane = deleteAirplane;
-        _mapper = mapper;
         _mediator = mediator;
     }
 

@@ -11,11 +11,10 @@ public class AirplaneInjectionController
         IMediator mediator)
     {
         var mapper = MapperHelper.ConfigMapper();
-
         var logger = Mock.Of<ILogger<AirplaneController>>();
 
         var airplaneCommand =
-            AirplaneInjectionService.GetAirplaneCommand(context!, mapper, mediator);
+            AirplaneInjectionService.GetAirplaneCommand(context, mapper, mediator);
         var airplaneQuery = AirplaneInjectionService.GetAirplaneQuery(context!, mapper);
         return new AirplaneController(airplaneCommand, airplaneQuery, logger);
     }

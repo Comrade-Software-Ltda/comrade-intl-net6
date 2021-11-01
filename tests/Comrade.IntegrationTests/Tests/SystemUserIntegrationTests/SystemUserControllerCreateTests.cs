@@ -2,20 +2,24 @@ using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public sealed class SystemUserControllerCreateTests
+public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public SystemUserControllerCreateTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
+
     [Fact]
     public async Task SystemUserController_Create()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUserController_Create")
-            .EnableSensitiveDataLogging().Options;
-
-
         var testObject = new SystemUserCreateDto
         {
             Name = "111",
@@ -24,23 +28,26 @@ public sealed class SystemUserControllerCreateTests
             Registration = "123"
         };
 
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
+        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Create");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
-        _ = await systemUserController.Create(testObject);
-        Assert.Equal(1, context.SystemUsers.Count());
+            SystemUserInjectionController.GetSystemUserController(context, mediator);
+
+        var result = await systemUserController.Create(testObject);
+
+        if (result is ObjectResult okResult)
+        {
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
+            Assert.NotNull(actualResultValue);
+            Assert.Equal(201, actualResultValue?.Code);
+        }
     }
 
 
     [Fact]
     public async Task SystemUserController_Create_Error()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUserController_Create_Error")
-            .EnableSensitiveDataLogging().Options;
-
         var testObject = new SystemUserCreateDto
         {
             Email = "777@testObject",
@@ -48,19 +55,19 @@ public sealed class SystemUserControllerCreateTests
             Registration = "123"
         };
 
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
+        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Create_Error");
+        var mediator = sp.GetRequiredService<IMediator>();
+        var context = sp.GetService<ComradeContext>()!;
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
+            SystemUserInjectionController.GetSystemUserController(context, mediator);
+
         var result = await systemUserController.Create(testObject);
 
-        if (result is OkObjectResult okObjectResult)
+        if (result is OkObjectResult okResult)
         {
-            var actualResultValue = okObjectResult.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(400, actualResultValue?.Code);
         }
-
-        Assert.False(context.SystemUsers.Any());
     }
 }
