@@ -10,9 +10,9 @@ namespace Comrade.Application.Services.AuthenticationServices.Commands;
 public class AuthenticationCommand : IAuthenticationCommand
 {
     private readonly IUcForgotPassword _forgotPassword;
+    private readonly IMapper _mapper;
     private readonly IUcUpdatePassword _updatePassword;
     private readonly IUcValidateLogin _validateLogin;
-    private readonly IMapper _mapper;
 
 
     public AuthenticationCommand(IUcUpdatePassword updatePassword,

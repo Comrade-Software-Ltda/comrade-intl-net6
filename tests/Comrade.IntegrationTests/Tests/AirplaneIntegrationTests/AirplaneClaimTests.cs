@@ -1,21 +1,21 @@
-﻿using Comrade.Application.Bases;
+﻿using System.Security.Claims;
+using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneClaimTests(ServiceProviderFixture fixture)
     {
-        this._fixture = fixture;
+        _fixture = fixture;
     }
 
 
@@ -25,7 +25,8 @@ public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
         var sp = _fixture.InitiateConxtext("Airplane_Claim");
         var mediator = sp.GetRequiredService<IMediator>();
         var context = sp.GetService<ComradeContext>()!;
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
 
         var testObject = new AirplaneCreateDto
         {

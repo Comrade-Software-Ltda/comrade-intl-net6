@@ -10,7 +10,7 @@ namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
 {
-    readonly ServiceProviderFixture _fixture;
+    private readonly ServiceProviderFixture _fixture;
 
     public AirplaneControllerGetTests(ServiceProviderFixture fixture)
     {
@@ -28,7 +28,8 @@ public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
 
         var idAirplane = 1;
 
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context, mediator);
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(context, mediator);
         var result = await airplaneController.GetById(idAirplane);
 
         if (result is OkObjectResult okResult)

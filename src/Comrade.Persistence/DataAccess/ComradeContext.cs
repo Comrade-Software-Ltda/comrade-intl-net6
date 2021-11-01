@@ -1,7 +1,7 @@
+using System.Data;
 using Comrade.Domain.Models;
 using Comrade.Persistence.Mappings;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
 
 namespace Comrade.Persistence.DataAccess;
 
@@ -37,7 +37,8 @@ public class ComradeContext : DbContext
             return;
         }
 
-        _currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted).ConfigureAwait(false);
+        _currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
+            .ConfigureAwait(false);
     }
 
     public async Task CommitTransactionAsync()

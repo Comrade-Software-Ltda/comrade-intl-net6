@@ -10,8 +10,8 @@ namespace Comrade.Application.Services.AirplaneServices.Queries;
 
 public class AirplaneQuery : IAirplaneQuery
 {
-    private readonly IAirplaneRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IAirplaneRepository _repository;
 
     public AirplaneQuery(IAirplaneRepository repository,
         IMapper mapper)

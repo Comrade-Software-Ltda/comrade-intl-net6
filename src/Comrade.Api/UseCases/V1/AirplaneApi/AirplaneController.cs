@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
@@ -7,7 +8,6 @@ using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V1.AirplaneApi;
 
@@ -52,7 +52,7 @@ public class AirplaneController : ComradeController
     /// <param name="airplaneId"></param>
     [HttpGet("get-by-id/{airplaneId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] int airplaneId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] int airplaneId)
     {
         try
         {
@@ -68,7 +68,7 @@ public class AirplaneController : ComradeController
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] AirplaneCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] AirplaneCreateDto dto)
     {
         try
         {
@@ -84,7 +84,7 @@ public class AirplaneController : ComradeController
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] AirplaneEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] AirplaneEditDto dto)
     {
         try
         {
@@ -100,7 +100,7 @@ public class AirplaneController : ComradeController
 
     [HttpDelete("delete/{airplaneId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] int airplaneId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] int airplaneId)
     {
         try
         {

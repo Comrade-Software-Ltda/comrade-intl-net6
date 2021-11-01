@@ -7,7 +7,8 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public class AirplaneInjectionController
 {
-    public static AirplaneController GetAirplaneController(ComradeContext context, IMediator mediator)
+    public static AirplaneController GetAirplaneController(ComradeContext context,
+        IMediator mediator)
     {
         var mapper = MapperHelper.ConfigMapper();
 

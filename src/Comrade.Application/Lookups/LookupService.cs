@@ -8,8 +8,8 @@ namespace Comrade.Application.Lookups;
 public class LookupService<TEntity> : ILookupService<TEntity>
     where TEntity : Entity
 {
-    private readonly IRepository<TEntity> _repository;
     private readonly IMapper _mapper;
+    private readonly IRepository<TEntity> _repository;
 
     public LookupService(IRepository<TEntity> repository, IMapper mapper)
     {

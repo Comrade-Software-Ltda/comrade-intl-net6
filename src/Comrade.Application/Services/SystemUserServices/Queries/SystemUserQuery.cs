@@ -12,8 +12,8 @@ namespace Comrade.Application.Services.SystemUserServices.Queries;
 
 public class SystemUserQuery : ISystemUserQuery
 {
-    private readonly ISystemUserRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ISystemUserRepository _repository;
 
     public SystemUserQuery(ISystemUserRepository repository,
         IMapper mapper)
@@ -58,7 +58,7 @@ public class SystemUserQuery : ISystemUserQuery
             if (entity != null)
             {
                 var dto = _mapper.Map<LookupDto>(new Lookup
-                { Key = entity.Id, Value = entity.Name });
+                    { Key = entity.Id, Value = entity.Name });
                 list = new List<LookupDto> { dto };
             }
         }

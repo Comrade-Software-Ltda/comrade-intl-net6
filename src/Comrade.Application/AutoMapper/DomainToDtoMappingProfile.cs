@@ -15,13 +15,8 @@ public class DomainToDtoMappingProfile : Profile
     {
         CreateMap<Entity, EntityDto>();
         CreateMap<Lookup, LookupDto>();
-
-        CreateMap<Airplane, AirplaneEditDto>();
         CreateMap<Airplane, AirplaneDto>();
-
-        CreateMap<SystemUser, SystemUserEditDto>();
         CreateMap<SystemUser, SystemUserDto>();
-
         CreateMap<SystemUser, AuthenticationDto>()
             .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));

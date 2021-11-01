@@ -5,7 +5,7 @@ public static class QueryableExtension
     public static IQueryable<TEntity> OrderByCustom<TEntity>(this IQueryable<TEntity> source,
         string propertyName, bool descending)
     {
-        string command = descending ? "OrderByDescending" : "OrderBy";
+        var command = descending ? "OrderByDescending" : "OrderBy";
         var type = typeof(TEntity);
         var property = type.GetProperty(propertyName);
         var parameter = Expression.Parameter(type, "p");
@@ -18,7 +18,7 @@ public static class QueryableExtension
         var propertyAccess = Expression.MakeMemberAccess(parameter, property);
         var orderByExpression = Expression.Lambda(propertyAccess, parameter);
         var resultExpression = Expression.Call(typeof(Queryable), command,
-            new Type[] { type, property.PropertyType },
+            new[] { type, property.PropertyType },
             source.Expression, Expression.Quote(orderByExpression));
 
         return source.Provider.CreateQuery<TEntity>(resultExpression);

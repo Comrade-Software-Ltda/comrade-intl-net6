@@ -15,22 +15,11 @@ public sealed class AirplaneInjectionService
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
-
-        var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
-
-        var airplaneEditValidation =
-            new AirplaneEditValidation(airplaneRepository, airplaneValidateSameCode);
         var airplaneDeleteValidation = new AirplaneDeleteValidation(airplaneRepository);
-        var airplaneCreateValidation =
-            new AirplaneCreateValidation(airplaneRepository, airplaneValidateSameCode);
-        var ucAirplaneCreate =
-            new UcAirplaneCreate(airplaneRepository, airplaneCreateValidation, uow);
         var ucAirplaneDelete =
             new UcAirplaneDelete(airplaneRepository, airplaneDeleteValidation, uow);
-        var ucAirplaneEdit =
-            new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
 
-        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneDelete, mapper, mediator);
+        return new AirplaneCommand(ucAirplaneDelete, mapper, mediator);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)

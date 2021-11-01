@@ -52,6 +52,7 @@ public static class UseCasesExtensions
 
         // Application - Handlers
         services.AddScoped<IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>, AirplaneCreateHandler>();
+        services.AddScoped<IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>, AirplaneEditHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcAirplaneEdit, UcAirplaneEdit>();

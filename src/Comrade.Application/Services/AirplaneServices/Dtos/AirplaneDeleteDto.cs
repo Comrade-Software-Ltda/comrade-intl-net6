@@ -1,5 +1,8 @@
-﻿namespace Comrade.Application.Services.AirplaneServices.Dtos;
+﻿using Comrade.Application.Bases;
+using MediatR;
 
-public class AirplaneDeleteDto : AirplaneDto
+namespace Comrade.Application.Services.AirplaneServices.Dtos;
+
+public class AirplaneDeleteDto : AirplaneDto, IRequest<SingleResultDto<EntityDto>>
 {
 }
