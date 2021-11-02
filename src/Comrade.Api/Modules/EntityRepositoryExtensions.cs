@@ -18,6 +18,7 @@ public static class EntityRepositoryExtensions
         this IServiceCollection services)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IMongoDbClient, MongoDbClient>();
         services.AddScoped<IAirplaneRepository, AirplaneRepository>();
         services.AddScoped<ISystemUserRepository, SystemUserRepository>();
 
