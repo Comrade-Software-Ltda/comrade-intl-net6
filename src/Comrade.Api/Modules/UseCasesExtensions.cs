@@ -1,4 +1,5 @@
 using Comrade.Application.Bases;
+using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Handlers;
@@ -9,14 +10,18 @@ using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Handlers;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Core.AirplaneCore;
+using Comrade.Core.AirplaneCore.Commands;
+using Comrade.Core.AirplaneCore.Handlers;
 using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
+using Comrade.Domain.Bases;
 using MediatR;
 
 namespace Comrade.Api.Modules;
@@ -54,16 +59,21 @@ public static class UseCasesExtensions
 
         // Application - ServiceHandlers
         services
-            .AddScoped<IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>,
+            .AddScoped<IRequestHandler<AirplaneCreateDto, ISingleResultDto<EntityDto>>,
                 AirplaneCreateServiceHandler>();
         services
-            .AddScoped<IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>,
+            .AddScoped<IRequestHandler<AirplaneEditDto, ISingleResultDto<EntityDto>>,
                 AirplaneEditServiceHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcAirplaneEdit, UcAirplaneEdit>();
         services.AddScoped<IUcAirplaneCreate, UcAirplaneCreate>();
         services.AddScoped<IUcAirplaneDelete, UcAirplaneDelete>();
+
+        // Core - CoreHandlers
+        services
+            .AddScoped<IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>,
+                AirplaneCreateCoreHandler>();
 
         // Core - Validations
         services.AddScoped<AirplaneEditValidation>();
