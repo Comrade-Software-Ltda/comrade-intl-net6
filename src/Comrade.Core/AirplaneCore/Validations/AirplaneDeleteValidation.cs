@@ -1,24 +1,14 @@
 ﻿using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Validations;
+using Comrade.Core.Bases.Results;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
 namespace Comrade.Core.AirplaneCore.Validations;
 
-public class AirplaneDeleteValidation : EntityValidation<Airplane>
+public class AirplaneDeleteValidation
 {
-    public AirplaneDeleteValidation(IAirplaneRepository repository)
-        : base(repository)
+    public ISingleResult<Entity> Execute(Airplane? recordExists)
     {
-    }
-
-    public async Task<ISingleResult<Airplane>> Execute(int id)
-    {
-        var recordExists = await RecordExists(id).ConfigureAwait(false);
-        if (!recordExists.Success)
-        {
-            return recordExists;
-        }
-
-        return recordExists;
+        return new SingleResult<Entity>(recordExists);
     }
 }

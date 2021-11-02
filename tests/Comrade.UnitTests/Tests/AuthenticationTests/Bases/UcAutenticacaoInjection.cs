@@ -15,7 +15,7 @@ public sealed class UcAuthenticationInjection
         var systemUserCoreRepository = new SystemUserRepository(context);
 
         var systemUserCoreEditValidation =
-            new SystemUserEditValidation(systemUserCoreRepository
+            new SystemUserEditValidation(
             );
         var passwordHasher = new PasswordHasher(new HashingOptions());
 
@@ -27,9 +27,9 @@ public sealed class UcAuthenticationInjection
     {
         var uow = new UnitOfWork(context);
         var systemUserCoreRepository = new SystemUserRepository(context);
-        var systemUserEditValidation = new SystemUserEditValidation(systemUserCoreRepository);
+        var systemUserEditValidation = new SystemUserEditValidation();
         var systemUserForgotPasswordValidation =
-            new SystemUserForgotPasswordValidation(systemUserCoreRepository,
+            new SystemUserForgotPasswordValidation(
                 systemUserEditValidation
             );
         var passwordHasher = new PasswordHasher(new HashingOptions());

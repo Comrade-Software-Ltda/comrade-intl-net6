@@ -2,7 +2,7 @@
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
@@ -20,15 +20,17 @@ public class UcSystemUserDelete : UseCase, IUcSystemUserDelete
         _systemUserDeleteValidation = systemUserDeleteValidation;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(int id)
+    public async Task<ISingleResult<Entity>> Execute(int id)
     {
-        var validate = await _systemUserDeleteValidation.Execute(id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(id).ConfigureAwait(false);
+
+        var validate = _systemUserDeleteValidation.Execute(recordExists);
         if (!validate.Success) return validate;
 
         _repository.Remove(id);
 
         _ = await Commit().ConfigureAwait(false);
 
-        return new DeleteResult<SystemUser>();
+        return new DeleteResult<Entity>();
     }
 }

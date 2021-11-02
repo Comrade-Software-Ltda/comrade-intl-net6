@@ -1,5 +1,6 @@
 ﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Bases.Interfaces;
 
 namespace Comrade.Core.Bases
@@ -20,7 +21,7 @@ namespace Comrade.Core.Bases
             return false;
         }
 
-        public static ISingleResult<T> ValidateEntity<T>(T entity) where T : IEntity
+        public static ISingleResult<Entity> ValidateEntity<T>(T entity) where T : IEntity
         {
             var context = new ValidationContext(entity, null, null);
             ICollection<ValidationResult> validationResults = new List<ValidationResult>();
@@ -28,10 +29,10 @@ namespace Comrade.Core.Bases
             if (!valid)
             {
                 var listErrors = validationResults.Select(x => x.ErrorMessage);
-                return new SingleResult<T>(listErrors!);
+                return new SingleResult<Entity>(listErrors!);
             }
 
-            return new SingleResult<T>();
+            return new SingleResult<Entity>();
         }
     }
 }

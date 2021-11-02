@@ -1,8 +1,10 @@
-﻿using Comrade.Core.AirplaneCore.Validations;
+﻿using Comrade.Core.AirplaneCore.Commands;
+using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
 namespace Comrade.Core.AirplaneCore.UseCases;
@@ -21,7 +23,7 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
         _airplaneEditValidation = airplaneEditValidation;
     }
 
-    public async Task<ISingleResult<Airplane>> Execute(Airplane entity)
+    public async Task<ISingleResult<Entity>> Execute(AirplaneEditCommand entity)
     {
         var isValid = ValidateEntity(entity);
         if (!isValid.Success)
@@ -29,10 +31,17 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
             return isValid;
         }
 
-        var result = await _airplaneEditValidation.Execute(entity).ConfigureAwait(false);
-        if (!result.Success) return result;
+        var recordExists = await _repository.GetById(entity.Id).ConfigureAwait(false);
 
-        var obj = result.Data!;
+        var result = await _airplaneEditValidation.Execute(entity, recordExists)
+            .ConfigureAwait(false);
+
+        if (!result.Success)
+        {
+            return result;
+        }
+
+        var obj = recordExists;
 
         HydrateValues(obj, entity);
 
@@ -40,7 +49,7 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
 
         _ = await Commit().ConfigureAwait(false);
 
-        return new EditResult<Airplane>(true,
+        return new EditResult<Entity>(true,
             BusinessMessage.MSG02);
     }
 

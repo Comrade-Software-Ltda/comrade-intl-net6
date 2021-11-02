@@ -16,7 +16,7 @@ public sealed class AirplaneInjectionService
     {
         var uow = new UnitOfWork(context);
         var airplaneRepository = new AirplaneRepository(context);
-        var airplaneDeleteValidation = new AirplaneDeleteValidation(airplaneRepository);
+        var airplaneDeleteValidation = new AirplaneDeleteValidation();
         var ucAirplaneDelete =
             new UcAirplaneDelete(airplaneRepository, airplaneDeleteValidation, uow);
 

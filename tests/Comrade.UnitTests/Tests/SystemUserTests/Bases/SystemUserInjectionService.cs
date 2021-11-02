@@ -15,7 +15,7 @@ public sealed class SystemUserInjectionService
     {
         var uow = new UnitOfWork(context);
         var systemUserRepository = new SystemUserRepository(context);
-        var systemUserDeleteValidation = new SystemUserDeleteValidation(systemUserRepository);
+        var systemUserDeleteValidation = new SystemUserDeleteValidation();
         var ucSystemUserDelete =
             new UcSystemUserDelete(systemUserRepository, systemUserDeleteValidation, uow);
 

@@ -28,7 +28,7 @@ public sealed class UcAirplaneInjection
         var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
 
         var airplaneEditValidation =
-            new AirplaneEditValidation(airplaneRepository, airplaneValidateSameCode);
+            new AirplaneEditValidation(airplaneValidateSameCode);
 
         return new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
     }

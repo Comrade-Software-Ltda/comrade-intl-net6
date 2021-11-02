@@ -1,6 +1,6 @@
-﻿using System;
-using Comrade.Persistence.DataAccess;
+﻿using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
+using System;
 
 namespace Comrade.IntegrationTests
 {
@@ -13,7 +13,6 @@ namespace Comrade.IntegrationTests
         public IServiceProvider InitiateConxtext(string contextName)
         {
             var serviceCollection = GetServiceCollection.Execute();
-
 
             serviceCollection.AddDbContext<ComradeContext>(options =>
                 options.UseInMemoryDatabase(contextName).EnableSensitiveDataLogging());

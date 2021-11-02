@@ -3,6 +3,7 @@ using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Validations;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 
@@ -24,12 +25,14 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(SystemUser entity)
+    public async Task<ISingleResult<Entity>> Execute(SystemUser entity)
     {
-        var result = _systemUserForgotPasswordValidation.Execute(entity);
+        var recordExists = await _repository.GetById(entity.Id).ConfigureAwait(false);
+
+        var result = _systemUserForgotPasswordValidation.Execute(entity, recordExists);
         if (!result.Success) return result;
 
-        var obj = result.Data!;
+        var obj = recordExists;
 
         HydrateValues(obj);
 
@@ -37,7 +40,7 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
 
         _ = await Commit().ConfigureAwait(false);
 
-        return new EditResult<SystemUser>();
+        return new EditResult<Entity>();
     }
 
     private void HydrateValues(SystemUser target)

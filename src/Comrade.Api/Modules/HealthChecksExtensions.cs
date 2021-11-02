@@ -53,14 +53,14 @@ public static class HealthChecksExtensions
             if (sqlServerIsEnabled)
             {
                 healthChecks.AddSqlServer(
-                    configuration.GetValue<string>("PersistenceModule:MsSqlDb"),
+                    configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection"),
                     name: "ms-sql", tags: new[] { "db", "data" });
             }
 
             if (isPostgresSqlEnabled)
             {
                 healthChecks.AddNpgSql(
-                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDb"),
+                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDbConnection"),
                     name: "postgres-sql", tags: new[] { "db", "data" });
             }
         }

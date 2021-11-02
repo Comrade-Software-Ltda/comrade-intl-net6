@@ -2,6 +2,7 @@
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.SystemUserCore.Validations;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
@@ -19,7 +20,7 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
         _systemUserEditValidation = systemUserEditValidation;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(SystemUser entity)
+    public async Task<ISingleResult<Entity>> Execute(SystemUser entity)
     {
         var isValid = ValidateEntity(entity);
         if (!isValid.Success)
@@ -27,10 +28,15 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
             return isValid;
         }
 
-        var result = await _systemUserEditValidation.Execute(entity).ConfigureAwait(false);
-        if (!result.Success) return result;
+        var recordExists = await _repository.GetById(entity.Id).ConfigureAwait(false);
 
-        var obj = result.Data!;
+        var result = _systemUserEditValidation.Execute(entity, recordExists);
+        if (!result.Success)
+        {
+            return result;
+        }
+
+        var obj = recordExists;
 
         HydrateValues(obj, entity);
 
@@ -38,7 +44,7 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
 
         _ = await Commit().ConfigureAwait(false);
 
-        return new EditResult<SystemUser>();
+        return new EditResult<Entity>();
     }
 
     private static void HydrateValues(SystemUser target, SystemUser source)

@@ -52,13 +52,13 @@ public static class UseCasesExtensions
         services.AddScoped<IAirplaneCommand, AirplaneCommand>();
         services.AddScoped<IAirplaneQuery, AirplaneQuery>();
 
-        // Application - Handlers
+        // Application - ServiceHandlers
         services
             .AddScoped<IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>,
-                AirplaneCreateHandler>();
+                AirplaneCreateServiceHandler>();
         services
             .AddScoped<IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>,
-                AirplaneEditHandler>();
+                AirplaneEditServiceHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcAirplaneEdit, UcAirplaneEdit>();
@@ -72,7 +72,6 @@ public static class UseCasesExtensions
         services.AddScoped<AirplaneValidateSameCode>();
 
         #endregion
-
 
         #region SystemUser
 
@@ -101,7 +100,6 @@ public static class UseCasesExtensions
         services.AddScoped<SystemUserCreateValidation>();
 
         #endregion
-
 
         return services;
     }

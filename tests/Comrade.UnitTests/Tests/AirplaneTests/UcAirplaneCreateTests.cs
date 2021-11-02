@@ -1,4 +1,4 @@
-using Comrade.Domain.Models;
+using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Comrade.UnitTests.Tests.AirplaneTests.TestDatas;
@@ -10,7 +10,7 @@ public sealed class UcAirplaneCreateTests
 {
     [Theory]
     [ClassData(typeof(AirplaneCreateTestData))]
-    public async Task UcAirplaneCreate_Test(int expected, Airplane testObjectInput)
+    public async Task UcAirplaneCreate_Test(int expected, AirplaneCreateCommand testObjectInput)
     {
         var options = new DbContextOptionsBuilder<ComradeContext>()
             .UseInMemoryDatabase("test_database_UcAirplaneCreate_Test")
@@ -32,7 +32,7 @@ public sealed class UcAirplaneCreateTests
             .UseSqlServer("error")
             .EnableSensitiveDataLogging().Options;
 
-        var testObject = new Airplane
+        var testObject = new AirplaneCreateCommand
         {
             Id = 1,
             Code = "123",
