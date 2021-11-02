@@ -1,4 +1,4 @@
-﻿using Comrade.Domain.Models;
+﻿using Comrade.Core.AirplaneCore.Commands;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.TestDatas;
 
@@ -8,7 +8,7 @@ internal class AirplaneEditTestData : IEnumerable<object[]>
     {
         yield return new object[]
         {
-            204, new Airplane
+            204, new AirplaneEditCommand
             {
                 Id = 1,
                 Code = "123",
@@ -18,7 +18,7 @@ internal class AirplaneEditTestData : IEnumerable<object[]>
         };
         yield return new object[]
         {
-            400, new Airplane
+            400, new AirplaneEditCommand
             {
                 Id = 2,
                 Code = "123",
