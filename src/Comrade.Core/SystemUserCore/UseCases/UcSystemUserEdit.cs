@@ -1,6 +1,7 @@
 ﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
+using Comrade.Core.Messages;
 using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
@@ -29,6 +30,12 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
         }
 
         var recordExists = await _repository.GetById(entity.Id).ConfigureAwait(false);
+
+        if (recordExists is null)
+        {
+            return new DeleteResult<Entity>(false,
+                BusinessMessage.MSG04);
+        }
 
         var result = _systemUserEditValidation.Execute(entity, recordExists);
         if (!result.Success)
