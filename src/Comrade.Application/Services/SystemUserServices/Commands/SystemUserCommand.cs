@@ -28,7 +28,7 @@ public class SystemUserCommand : ISystemUserCommand
         return await _mediator.Send(dto).ConfigureAwait(false);
     }
 
-    public async Task<ISingleResultDto<EntityDto>> Delete(int id)
+    public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
         var result = await _deleteSystemUser.Execute(id).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);

@@ -1,5 +1,6 @@
 ﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -17,8 +18,9 @@ public class AirplaneContextTests : IClassFixture<ServiceProviderFixture>
     [Fact]
     public async Task Airplane_Context()
     {
+        var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
         var repository = new AirplaneRepository(_fixture.PostgresContextFixture);
-        var airplane = await repository.GetById(1);
+        var airplane = await repository.GetById(airplaneId);
         Assert.NotNull(airplane);
     }
 }

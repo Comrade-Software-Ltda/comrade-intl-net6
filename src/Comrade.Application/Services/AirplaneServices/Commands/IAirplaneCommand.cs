@@ -8,5 +8,5 @@ public interface IAirplaneCommand
 {
     Task<ISingleResultDto<EntityDto>> Create(AirplaneCreateDto dto);
     Task<ISingleResultDto<EntityDto>> Edit(AirplaneEditDto dto);
-    Task<ISingleResultDto<EntityDto>> Delete(int id);
+    Task<ISingleResultDto<EntityDto>> Delete(Guid id);
 }

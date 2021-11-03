@@ -6,7 +6,6 @@ using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Core.SystemUserCore;
-using Comrade.Domain.Bases;
 
 namespace Comrade.Application.Services.SystemUserServices.Queries;
 
@@ -49,31 +48,15 @@ public class SystemUserQuery : ISystemUserQuery
 
     public async Task<ListResultDto<LookupDto>> FindByName(string name)
     {
-        var success = int.TryParse(name, out var number);
-        List<LookupDto> list = new();
-
-        if (success)
-        {
-            var entity = await _repository.GetById(number).ConfigureAwait(false);
-            if (entity != null)
-            {
-                var dto = _mapper.Map<LookupDto>(new Lookup
-                    { Key = entity.Id, Value = entity.Name });
-                list = new List<LookupDto> { dto };
-            }
-        }
-        else if (!string.IsNullOrEmpty(name))
-        {
-            list = await Task.Run(() => _repository.FindByName(name)
-                .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
-        }
+        var list = await Task.Run(() => _repository.FindByName(name)
+            .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
+            .ToList()).ConfigureAwait(false);
 
         return new ListResultDto<LookupDto>(list);
     }
 
 
-    public async Task<ISingleResultDto<SystemUserDto>> GetById(int id)
+    public async Task<ISingleResultDto<SystemUserDto>> GetById(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
         var dto = _mapper.Map<SystemUserDto>(entity);

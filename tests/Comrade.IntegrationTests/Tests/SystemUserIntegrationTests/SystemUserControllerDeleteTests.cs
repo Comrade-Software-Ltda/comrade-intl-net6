@@ -1,6 +1,7 @@
 ﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -18,14 +19,14 @@ public class SystemUserControllerDeleteTests : IClassFixture<ServiceProviderFixt
     [Fact]
     public async Task SystemUserController_Delete()
     {
-        var idSystemUser = 1;
+        var systemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5");
 
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
-        _ = await systemUserController.Delete(idSystemUser);
+        _ = await systemUserController.Delete(systemUserId);
 
         var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
-        var systemUser = await repository.GetById(1);
+        var systemUser = await repository.GetById(systemUserId);
         Assert.Null(systemUser);
     }
 }

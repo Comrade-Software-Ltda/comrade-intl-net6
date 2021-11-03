@@ -2,7 +2,7 @@
 
 public class TokenUser
 {
-    public TokenUser(string key, string name, string token, IList<string> roles)
+    public TokenUser(Guid key, string name, string token, IList<string> roles)
     {
         Key = key;
         Name = name;
@@ -10,7 +10,7 @@ public class TokenUser
         Roles = roles;
     }
 
-    public string Key { get; set; }
+    public Guid Key { get; set; }
     public string Name { get; set; }
     public string Token { get; set; }
     public IList<string> Roles { get; }

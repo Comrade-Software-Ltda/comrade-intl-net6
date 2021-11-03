@@ -8,5 +8,5 @@ public interface ISystemUserCommand
 {
     Task<ISingleResultDto<EntityDto>> Create(SystemUserCreateDto dto);
     Task<ISingleResultDto<EntityDto>> Edit(SystemUserEditDto dto);
-    Task<ISingleResultDto<EntityDto>> Delete(int id);
+    Task<ISingleResultDto<EntityDto>> Delete(Guid id);
 }

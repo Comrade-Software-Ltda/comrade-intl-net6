@@ -27,7 +27,7 @@ public sealed class UcForgotPasswordTests
             .EnableSensitiveDataLogging().Options;
 
 
-        var testObject = new SystemUser(1, "111", "777@testObject",
+        var testObject = new SystemUser(new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), "111", "777@testObject",
             "100.SdwfwU4tDWbBkLlBNd7Vcg==.cGEYFjBRNpLrCxzYNIbSdnbbY1zFvBHcyIslMTSmwy8=", "123",
             DateTimeBrasilia.GetDateTimeBrasilia());
 

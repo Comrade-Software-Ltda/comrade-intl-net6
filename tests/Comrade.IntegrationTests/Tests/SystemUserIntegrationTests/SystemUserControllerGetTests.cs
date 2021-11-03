@@ -2,6 +2,7 @@
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -19,7 +20,7 @@ public class SystemUserControllerGetTests : IClassFixture<ServiceProviderFixture
     [Fact]
     public async Task SystemUserController_Get()
     {
-        var systemUserId = 1;
+        var systemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5");
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.GetById(systemUserId);

@@ -3,6 +3,7 @@ using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -24,9 +25,11 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
         var changeEmail = "novo@email.com";
         var changeRegistration = "NovaRegistration";
 
+        var systemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5");
+
         var testObject = new SystemUserEditDto
         {
-            Id = 2,
+            Id = systemUserId,
             Name = changeName
         };
 
@@ -42,7 +45,7 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
         }
 
         var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
-        var user = await repository.GetById(1);
+        var user = await repository.GetById(systemUserId);
         Assert.NotEqual(changeName, user!.Name);
         Assert.NotEqual(changeEmail, user.Email);
         Assert.NotEqual(changeRegistration, user.Registration);

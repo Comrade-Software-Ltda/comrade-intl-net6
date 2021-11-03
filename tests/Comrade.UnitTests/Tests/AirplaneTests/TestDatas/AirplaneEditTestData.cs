@@ -10,7 +10,7 @@ internal class AirplaneEditTestData : IEnumerable<object[]>
         {
             204, new AirplaneEditCommand
             {
-                Id = 1,
+                Id = new Guid(),
                 Code = "123",
                 Model = "234",
                 PassengerQuantity = 456
@@ -20,7 +20,7 @@ internal class AirplaneEditTestData : IEnumerable<object[]>
         {
             400, new AirplaneEditCommand
             {
-                Id = 2,
+                Id = new Guid(),
                 Code = "123",
                 PassengerQuantity = 456
             }

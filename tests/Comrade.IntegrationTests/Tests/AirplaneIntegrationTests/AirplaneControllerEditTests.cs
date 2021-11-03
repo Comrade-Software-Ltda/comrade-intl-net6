@@ -3,6 +3,7 @@ using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -23,9 +24,11 @@ public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
         var changeCode = "Code testObject edit";
         var changeModel = "Model testObject edit";
 
+        var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
+
         var testObject = new AirplaneEditDto
         {
-            Id = 1,
+            Id = airplaneId,
             Code = changeCode,
             Model = changeModel,
             PassengerQuantity = 6666
@@ -43,7 +46,7 @@ public class AirplaneControllerEditTests : IClassFixture<ServiceProviderFixture>
         }
 
         var repository = new AirplaneRepository(_fixture.PostgresContextFixture);
-        var airplane = await repository.GetById(1);
+        var airplane = await repository.GetById(airplaneId);
         Assert.Equal(6666, airplane!.PassengerQuantity);
         Assert.Equal(changeCode, airplane.Code);
         Assert.Equal(changeModel, airplane.Model);

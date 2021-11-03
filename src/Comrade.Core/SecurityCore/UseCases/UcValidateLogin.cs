@@ -18,35 +18,28 @@ public class UcValidateLogin : IUcValidateLogin
         _generateToken = generateToken;
     }
 
-    public async Task<SecurityResult> Execute(string key, string password)
+    public async Task<SecurityResult> Execute(Guid key, string password)
     {
-        var success = int.TryParse(key, out var number);
-        if (success)
+        var result = await Task.Run(() =>
         {
-            var result = await Task.Run(() =>
+            var resultPassword = _systemUserPasswordValidation.Execute(key, password);
+
+            if (resultPassword.Success)
             {
-                var resultPassword = _systemUserPasswordValidation.Execute(number, password);
+                var selectedUser = resultPassword.Data!;
 
+                var profile = new List<string> { "Role" };
 
-                if (resultPassword.Success)
-                {
-                    var selectedUser = resultPassword.Data!;
+                var user = new TokenUser(key, selectedUser.Name, "", profile);
 
-                    var profile = new List<string> { "Role" };
+                user.Token = _generateToken.Execute(user);
 
-                    var user = new TokenUser(key, selectedUser.Name, "", profile);
+                return new SecurityResult(user);
+            }
 
-                    user.Token = _generateToken.Execute(user);
+            return new SecurityResult(resultPassword.Code, resultPassword.Message);
+        }).ConfigureAwait(false);
 
-                    return new SecurityResult(user);
-                }
-
-                return new SecurityResult(resultPassword.Code, resultPassword.Message);
-            }).ConfigureAwait(false);
-
-            return result;
-        }
-
-        return new SecurityResult(400, "Error");
+        return result;
     }
 }

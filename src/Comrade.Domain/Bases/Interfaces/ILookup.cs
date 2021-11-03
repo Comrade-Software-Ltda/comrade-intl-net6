@@ -2,6 +2,6 @@
 
 public interface ILookup
 {
-    int Key { get; set; }
+    Guid Key { get; set; }
     string? Value { get; set; }
 }

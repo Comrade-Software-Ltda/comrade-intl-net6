@@ -5,5 +5,5 @@ namespace Comrade.Core.AirplaneCore;
 
 public interface IUcAirplaneDelete
 {
-    Task<ISingleResult<Entity>> Execute(int id);
+    Task<ISingleResult<Entity>> Execute(Guid id);
 }

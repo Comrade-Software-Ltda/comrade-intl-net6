@@ -44,7 +44,7 @@ public class AirplaneQuery : IAirplaneQuery
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
     }
 
-    public async Task<ISingleResultDto<AirplaneDto>> GetById(int id)
+    public async Task<ISingleResultDto<AirplaneDto>> GetById(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
         var dto = _mapper.Map<AirplaneDto>(entity);

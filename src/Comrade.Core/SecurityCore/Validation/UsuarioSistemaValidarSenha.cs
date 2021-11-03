@@ -18,7 +18,7 @@ public class SystemUserPasswordValidation
         _passwordHasher = passwordHasher;
     }
 
-    public ISingleResult<SystemUser> Execute(int key, string password)
+    public ISingleResult<SystemUser> Execute(Guid key, string password)
     {
         var usuSession = _systemUserRepository.GetById(key).Result;
         var keyValidation = usuSession != null;

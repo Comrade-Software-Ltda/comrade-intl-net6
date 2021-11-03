@@ -20,7 +20,7 @@ public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
         _airplaneDeleteValidation = airplaneDeleteValidation;
     }
 
-    public async Task<ISingleResult<Entity>> Execute(int id)
+    public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var recordExists = await _repository.GetById(id).ConfigureAwait(false);
 

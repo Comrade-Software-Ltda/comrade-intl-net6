@@ -21,7 +21,7 @@ public class UcGenerateToken : IUcGenerateToken
 
         var claims = new List<Claim>
         {
-            new("Key", tokenUser.Key),
+            new("Key", tokenUser.Key.ToString()),
             new(ClaimTypes.Name, tokenUser.Name)
         };
 

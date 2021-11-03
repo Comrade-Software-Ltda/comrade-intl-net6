@@ -21,7 +21,7 @@ public class UcSystemUserDelete : UseCase, IUcSystemUserDelete
         _systemUserDeleteValidation = systemUserDeleteValidation;
     }
 
-    public async Task<ISingleResult<Entity>> Execute(int id)
+    public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var recordExists = await _repository.GetById(id).ConfigureAwait(false);
 

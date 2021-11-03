@@ -10,15 +10,7 @@ internal class AuthenticationDtoTestData : IEnumerable<object[]>
         {
             200, new AuthenticationDto
             {
-                Key = "1",
-                Password = "123456"
-            }
-        };
-        yield return new object[]
-        {
-            400, new AuthenticationDto
-            {
-                Key = "",
+                Key = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"),
                 Password = "123456"
             }
         };
@@ -26,7 +18,15 @@ internal class AuthenticationDtoTestData : IEnumerable<object[]>
         {
             1001, new AuthenticationDto
             {
-                Key = "3",
+                Key = new Guid("E44010d0-1b83-46f2-91eb-0c64f1c638a5"),
+                Password = "123456"
+            }
+        };
+        yield return new object[]
+        {
+            1001, new AuthenticationDto
+            {
+                Key = new Guid(),
                 Password = ""
             }
         };
@@ -34,7 +34,7 @@ internal class AuthenticationDtoTestData : IEnumerable<object[]>
         {
             1001, new AuthenticationDto
             {
-                Key = "4",
+                Key = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"),
                 Password = "1234567"
             }
         };

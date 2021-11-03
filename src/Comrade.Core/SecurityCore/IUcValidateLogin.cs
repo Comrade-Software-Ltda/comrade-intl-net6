@@ -4,5 +4,5 @@ namespace Comrade.Core.SecurityCore;
 
 public interface IUcValidateLogin
 {
-    Task<SecurityResult> Execute(string key, string password);
+    Task<SecurityResult> Execute(Guid key, string password);
 }

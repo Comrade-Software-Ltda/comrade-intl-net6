@@ -10,8 +10,7 @@ public class SystemUserValidation<TDto> : DtoValidation<TDto>
 {
     protected void ValidateId()
     {
-        RuleFor(c => c.Id)
-            .NotEqual(0);
+        RuleFor(c => c.Id);
     }
 
     protected void ValidateName()
