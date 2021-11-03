@@ -25,13 +25,13 @@ public class SystemUserControllerGetAllPaginatedTests : IClassFixture<ServicePro
         var paginationQuery = new PaginationQuery();
         var result = await systemUserController.GetAll(paginationQuery);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as PageResultDto<SystemUserDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(200, actualResultValue?.Code);
             Assert.NotNull(actualResultValue?.Data);
-            Assert.Equal(3, actualResultValue?.Data?.Count);
+            Assert.Equal(4, actualResultValue?.Data?.Count);
         }
     }
 }

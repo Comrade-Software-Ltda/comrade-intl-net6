@@ -23,7 +23,7 @@ public class AirplaneControllerGetAllTests : IClassFixture<ServiceProviderFixtur
             AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await airplaneController.GetAll(null);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as PageResultDto<AirplaneDto>;
             Assert.NotNull(actualResultValue);

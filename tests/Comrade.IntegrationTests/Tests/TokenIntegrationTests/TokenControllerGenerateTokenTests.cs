@@ -30,7 +30,7 @@ public sealed class TokenControllerGenerateTokenTests
         var tokenController = TokenInjectionController.GetTokenController(context);
         var result = await tokenController.GenerateToken(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<UserDto>;
             Assert.NotNull(actualResultValue);
@@ -59,7 +59,7 @@ public sealed class TokenControllerGenerateTokenTests
         var tokenController = TokenInjectionController.GetTokenController(context);
         var result = await tokenController.GenerateToken(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<UserDto>;
             Assert.NotNull(actualResultValue);

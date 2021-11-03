@@ -57,7 +57,9 @@ public static class PersistenceExtensions
 
             if (injectInitialData)
             {
-                ComradeMemoryContextFake.AddDataFakeContext(services);
+                var context = services.BuildServiceProvider()
+                    .GetService<ComradeContext>();
+                ComradeMemoryContextFake.AddDataFakeContext(context);
             }
         }
 

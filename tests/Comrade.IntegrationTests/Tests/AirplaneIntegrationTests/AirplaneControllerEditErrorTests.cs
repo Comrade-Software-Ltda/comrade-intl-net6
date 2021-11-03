@@ -34,7 +34,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
             AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await airplaneController.Edit(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);

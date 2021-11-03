@@ -55,11 +55,11 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
 
         var result = await systemUserController.Create(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(400, actualResultValue?.Code);
+            Assert.Equal(409, actualResultValue?.Code);
         }
     }
 }

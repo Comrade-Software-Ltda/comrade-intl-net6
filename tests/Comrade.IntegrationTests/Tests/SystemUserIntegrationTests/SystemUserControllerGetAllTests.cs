@@ -23,13 +23,13 @@ public class SystemUserControllerGetAllTests : IClassFixture<ServiceProviderFixt
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.GetAll(null);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as PageResultDto<SystemUserDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(200, actualResultValue?.Code);
             Assert.NotNull(actualResultValue?.Data);
-            Assert.Equal(3, actualResultValue?.Data?.Count);
+            Assert.Equal(4, actualResultValue?.Data?.Count);
         }
     }
 }

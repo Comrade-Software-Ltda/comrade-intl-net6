@@ -34,11 +34,11 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(400, actualResultValue?.Code);
+            Assert.Equal(409, actualResultValue?.Code);
         }
 
         var repository = new SystemUserRepository(_fixture.PostgresContextFixture);

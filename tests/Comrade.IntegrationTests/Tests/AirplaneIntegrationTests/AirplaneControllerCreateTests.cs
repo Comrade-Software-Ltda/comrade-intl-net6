@@ -53,7 +53,7 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
 
         var result = await airplaneController.Create(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);

@@ -24,7 +24,7 @@ public class SystemUserControllerGetTests : IClassFixture<ServiceProviderFixture
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.GetById(systemUserId);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<SystemUserDto>;
             Assert.NotNull(actualResultValue);

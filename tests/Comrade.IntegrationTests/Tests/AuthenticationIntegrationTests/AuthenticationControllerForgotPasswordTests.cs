@@ -31,11 +31,11 @@ public sealed class AuthenticationControllerForgotPasswordTests
             AuthenticationInjectionController.GetAuthenticationController(context);
         var result = await authenticationController.ForgotPassword(testObject);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(200, actualResultValue?.Code);
+            Assert.Equal(204, actualResultValue?.Code);
         }
     }
 }

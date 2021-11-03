@@ -25,7 +25,7 @@ public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProvi
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as PageResultDto<AirplaneDto>;
             Assert.NotNull(actualResultValue);

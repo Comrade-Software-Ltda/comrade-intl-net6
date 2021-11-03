@@ -11,11 +11,8 @@ public static class ComradeMemoryContextFake
     /// <summary>
     ///     To reset memory database use -> context.Database.EnsureDeleted().
     /// </summary>
-    public static void AddDataFakeContext(IServiceCollection serviceCollection)
+    public static void AddDataFakeContext(ComradeContext? context)
     {
-        var context = serviceCollection.BuildServiceProvider()
-            .GetService<ComradeContext>();
-
         var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
 
         if (context != null && context.Airplanes.Any())
