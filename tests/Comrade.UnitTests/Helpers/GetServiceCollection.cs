@@ -9,8 +9,10 @@ using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
+using Comrade.Persistence.DataAccess;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace Comrade.UnitTests.Helpers;
 
@@ -39,6 +41,12 @@ public static class GetServiceCollection
 
         services.AddAutoMapperSetup();
         services.AddLogging();
+
+        services.Configure<MongoDbContextSettings>(
+            configuration.GetSection(nameof(MongoDbContextSettings)));
+        services.AddSingleton<IMongoDbContextSettings>(sp =>
+            sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+        services.AddScoped<IMongoDbContext, MongoDbContext>();
 
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

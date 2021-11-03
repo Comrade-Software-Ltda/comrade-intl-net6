@@ -1,7 +1,5 @@
 ﻿using Comrade.Core.AirplaneCore.UseCases;
-using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
-using Comrade.Persistence.Repositories;
 using MediatR;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
@@ -15,16 +13,10 @@ public sealed class UcAirplaneInjection
         return new UcAirplaneCreate(mediator, uow);
     }
 
-    public static UcAirplaneEdit GetUcAirplaneEdit(ComradeContext context)
+    public static UcAirplaneEdit GetUcAirplaneEdit(ComradeContext context, IMediator mediator)
     {
         var uow = new UnitOfWork(context);
-        var airplaneRepository = new AirplaneRepository(context);
 
-        var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
-
-        var airplaneEditValidation =
-            new AirplaneEditValidation(airplaneValidateSameCode);
-
-        return new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
+        return new UcAirplaneEdit(mediator, uow);
     }
 }

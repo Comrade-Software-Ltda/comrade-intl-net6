@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Core.AirplaneCore;
@@ -14,7 +13,7 @@ public class AirplaneCommand : IAirplaneCommand
 
     public AirplaneCommand(
         IUcAirplaneDelete deleteAirplane,
-        IMapper mapper, IMediator mediator)
+        IMediator mediator)
     {
         _deleteAirplane = deleteAirplane;
         _mediator = mediator;

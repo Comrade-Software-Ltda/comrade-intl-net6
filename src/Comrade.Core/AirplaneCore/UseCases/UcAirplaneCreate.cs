@@ -25,6 +25,15 @@ public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        try
+        {
+            return await _mediator.Send(entity).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
 }

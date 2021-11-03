@@ -1,8 +1,6 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
-using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -27,11 +25,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
             PassengerQuantity = 456
         };
 
-        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(context, mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 
@@ -53,11 +48,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
             PassengerQuantity = 456
         };
 
-        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_Create_Error");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(context, mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 

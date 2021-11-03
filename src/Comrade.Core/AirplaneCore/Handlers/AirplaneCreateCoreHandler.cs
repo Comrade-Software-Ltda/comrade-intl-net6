@@ -15,14 +15,14 @@ public class
 {
     private readonly AirplaneCreateValidation _airplaneCreateValidation;
     private readonly IAirplaneRepository _repository;
-    private readonly IMongoDbClient _mongoDbClient;
+    private readonly IMongoDbContext _mongoDbContext;
 
     public AirplaneCreateCoreHandler(AirplaneCreateValidation airplaneCreateValidation,
-        IAirplaneRepository repository, IMongoDbClient mongoDbClient)
+        IAirplaneRepository repository, IMongoDbContext mongoDbContext)
     {
         _airplaneCreateValidation = airplaneCreateValidation;
         _repository = repository;
-        _mongoDbClient = mongoDbClient;
+        _mongoDbContext = mongoDbContext;
     }
 
     public async Task<ISingleResult<Entity>> Handle(AirplaneCreateCommand request,
@@ -37,7 +37,7 @@ public class
         request.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
         await _repository.AddCommit(request).ConfigureAwait(false);
 
-        _mongoDbClient.InsertOne(request);
+        _mongoDbContext.InsertOne(request);
 
         return new CreateResult<Entity>(true,
             BusinessMessage.MSG01);

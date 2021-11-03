@@ -12,8 +12,8 @@ public class DtoToDomainMappingProfile : Profile
     public DtoToDomainMappingProfile()
     {
         CreateMap<AirplaneDto, Airplane>();
-        CreateMap<AirplaneDto, AirplaneCreateCommand>();
-        CreateMap<AirplaneDto, AirplaneEditCommand>();
+        CreateMap<AirplaneCreateDto, AirplaneCreateCommand>();
+        CreateMap<AirplaneEditDto, AirplaneEditCommand>();
         CreateMap<SystemUserDto, SystemUser>();
         CreateMap<AuthenticationDto, SystemUser>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))

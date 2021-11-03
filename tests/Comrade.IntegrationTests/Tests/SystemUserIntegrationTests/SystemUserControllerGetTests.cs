@@ -1,9 +1,7 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -15,20 +13,15 @@ public class SystemUserControllerGetTests : IClassFixture<ServiceProviderFixture
     public SystemUserControllerGetTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
     }
 
     [Fact]
     public async Task SystemUserController_Get()
     {
-        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Get");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
-
-        InjectDataOnContextBase.InitializeDbForTests(context);
-
         var systemUserId = 1;
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context, mediator);
+            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.GetById(systemUserId);
 
         if (result is OkObjectResult okResult)

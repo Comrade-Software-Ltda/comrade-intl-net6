@@ -24,6 +24,12 @@ public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
     {
         var recordExists = await _repository.GetById(id).ConfigureAwait(false);
 
+        if (recordExists is null)
+        {
+            return new DeleteResult<Entity>(false,
+                BusinessMessage.MSG04);
+        }
+
         var validate = _airplaneDeleteValidation.Execute(recordExists);
         if (!validate.Success)
         {

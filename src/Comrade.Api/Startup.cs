@@ -8,6 +8,7 @@ using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
+using Comrade.Persistence.DataAccess;
 using FluentValidation;
 using MediatR;
 
@@ -50,6 +51,11 @@ public sealed class Startup
         services.AddAutoMapperSetup();
         services.AddLogging();
 
+        services.Configure<MongoDbContextSettings>(
+            Configuration.GetSection(nameof(MongoDbContextSettings)));
+        services.AddSingleton<IMongoDbContextSettings>(sp =>
+            sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+        services.AddScoped<IMongoDbContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -71,10 +77,14 @@ public sealed class Startup
         IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())
+        {
             app.UseDeveloperExceptionPage();
+        }
         else
+        {
             app.UseExceptionHandler("/api/V1/CustomError")
                 .UseHsts();
+        }
 
         app
             .UseProxy(Configuration)

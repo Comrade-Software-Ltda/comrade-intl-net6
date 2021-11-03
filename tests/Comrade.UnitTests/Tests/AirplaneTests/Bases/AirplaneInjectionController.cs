@@ -14,7 +14,7 @@ public class AirplaneInjectionController
         var logger = Mock.Of<ILogger<AirplaneController>>();
 
         var airplaneCommand =
-            AirplaneInjectionService.GetAirplaneCommand(context, mapper, mediator);
+            AirplaneInjectionService.GetAirplaneCommand(context, mediator);
         var airplaneQuery = AirplaneInjectionService.GetAirplaneQuery(context!, mapper);
         return new AirplaneController(airplaneCommand, airplaneQuery, logger);
     }

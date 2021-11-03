@@ -1,5 +1,4 @@
-﻿using Comrade.Persistence.DataAccess;
-using Comrade.Persistence.Repositories;
+﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Xunit;
 
@@ -12,15 +11,13 @@ public class SystemUserContextTests : IClassFixture<ServiceProviderFixture>
     public SystemUserContextTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
     }
 
     [Fact]
     public async Task SystemUser_Context()
     {
-        var sp = _fixture.InitiateConxtext("test_database_SystemUser_Context");
-        var context = sp.GetService<ComradeContext>()!;
-        InjectDataOnContextBase.InitializeDbForTests(context);
-        var repository = new SystemUserRepository(context);
+        var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
         var systemUser = await repository.GetById(1);
         Assert.NotNull(systemUser);
     }

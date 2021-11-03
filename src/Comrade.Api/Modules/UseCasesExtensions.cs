@@ -74,6 +74,9 @@ public static class UseCasesExtensions
         services
             .AddScoped<IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>,
                 AirplaneCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<AirplaneEditCommand, ISingleResult<Entity>>,
+                AirplaneEditCoreHandler>();
 
         // Core - Validations
         services.AddScoped<AirplaneEditValidation>();

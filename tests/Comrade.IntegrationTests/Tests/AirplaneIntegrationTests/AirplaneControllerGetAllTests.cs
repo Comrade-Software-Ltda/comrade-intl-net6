@@ -1,9 +1,7 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
-using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -15,19 +13,14 @@ public class AirplaneControllerGetAllTests : IClassFixture<ServiceProviderFixtur
     public AirplaneControllerGetAllTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
     }
 
     [Fact]
     public async Task AirplaneController_GetAll()
     {
-        var sp = _fixture.InitiateConxtext("test_database_AirplaneController_GetAll");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
-
-        InjectDataOnContextBase.InitializeDbForTests(context);
-
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(context, mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await airplaneController.GetAll(null);
 
         if (result is OkObjectResult okResult)

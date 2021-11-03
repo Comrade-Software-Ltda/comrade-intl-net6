@@ -11,7 +11,7 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class AirplaneInjectionService
 {
-    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper,
+    public static AirplaneCommand GetAirplaneCommand(ComradeContext context,
         IMediator mediator)
     {
         var uow = new UnitOfWork(context);
@@ -20,7 +20,7 @@ public sealed class AirplaneInjectionService
         var ucAirplaneDelete =
             new UcAirplaneDelete(airplaneRepository, airplaneDeleteValidation, uow);
 
-        return new AirplaneCommand(ucAirplaneDelete, mapper, mediator);
+        return new AirplaneCommand(ucAirplaneDelete, mediator);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)

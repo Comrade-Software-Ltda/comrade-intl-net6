@@ -1,5 +1,4 @@
-﻿using Comrade.Persistence.DataAccess;
-using Comrade.Persistence.Repositories;
+﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Xunit;
 
@@ -12,15 +11,13 @@ public class AirplaneContextTests : IClassFixture<ServiceProviderFixture>
     public AirplaneContextTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
     }
 
     [Fact]
     public async Task Airplane_Context()
     {
-        var sp = _fixture.InitiateConxtext("test_database_Airplane_Context");
-        var context = sp.GetService<ComradeContext>()!;
-        InjectDataOnContextBase.InitializeDbForTests(context);
-        var repository = new AirplaneRepository(context);
+        var repository = new AirplaneRepository(_fixture.PostgresContextFixture);
         var airplane = await repository.GetById(1);
         Assert.NotNull(airplane);
     }

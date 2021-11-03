@@ -1,8 +1,6 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using MediatR;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -28,11 +26,8 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
             Registration = "123"
         };
 
-        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Create");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context, mediator);
+            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);
 
@@ -55,11 +50,8 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
             Registration = "123"
         };
 
-        var sp = _fixture.InitiateConxtext("test_database_SystemUserController_Create_Error");
-        var mediator = sp.GetRequiredService<IMediator>();
-        var context = sp.GetService<ComradeContext>()!;
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context, mediator);
+            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);
 
