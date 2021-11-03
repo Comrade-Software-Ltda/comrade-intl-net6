@@ -47,9 +47,7 @@ public class
         var obj = recordExists;
         HydrateValues(obj, request);
 
-        await _repository.AddCommit(request).ConfigureAwait(false);
-
-        _mongoDbContext.InsertOne(request);
+        _repository.UpdateCommit(obj);
 
         return new EditResult<Entity>(true,
             BusinessMessage.MSG02);

@@ -7,49 +7,44 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixture>
+public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
 
-    public SystemUserControllerEditTests(ServiceProviderFixture fixture)
+    public SystemUserControllerEditErrorTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
         InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
     }
 
     [Fact]
-    public async Task SystemUserController_Edit()
+    public async Task SystemUserController_Edit_Error()
     {
-        var changeName = "new name";
+        var changeName = "new Name";
         var changeEmail = "novo@email.com";
-        var changePassword = "NovaPassword";
         var changeRegistration = "NovaRegistration";
 
         var testObject = new SystemUserEditDto
         {
-            Id = 1,
-            Name = changeName,
-            Email = changeEmail,
-            Password = changePassword,
-            Registration = changeRegistration
+            Id = 2,
+            Name = changeName
         };
-
 
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 
-        if (result is ObjectResult objectResult)
+        if (result is OkObjectResult okResult)
         {
-            var actualResultValue = objectResult.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(204, actualResultValue?.Code);
+            Assert.Equal(400, actualResultValue?.Code);
         }
 
         var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
         var user = await repository.GetById(1);
-        Assert.Equal(changeName, user!.Name);
-        Assert.Equal(changeEmail, user.Email);
-        Assert.Equal(changeRegistration, user.Registration);
+        Assert.NotEqual(changeName, user!.Name);
+        Assert.NotEqual(changeEmail, user.Email);
+        Assert.NotEqual(changeRegistration, user.Registration);
     }
 }
