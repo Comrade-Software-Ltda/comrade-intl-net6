@@ -11,36 +11,36 @@ using System.Threading;
 namespace Comrade.Core.AirplaneCore.Handlers;
 
 public class
-    AirplaneCreateCoreHandler : IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>
+    AirplaneDeleteCoreHandler : IRequestHandler<AirplaneDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly AirplaneCreateValidation _airplaneCreateValidation;
+    private readonly AirplaneDeleteValidation _airplaneDeleteValidation;
     private readonly IAirplaneRepository _repository;
     private readonly IMongoDbContext _mongoDbContext;
 
-    public AirplaneCreateCoreHandler(AirplaneCreateValidation airplaneCreateValidation,
+    public AirplaneDeleteCoreHandler(AirplaneDeleteValidation airplaneDeleteValidation,
         IAirplaneRepository repository, IMongoDbContext mongoDbContext)
     {
-        _airplaneCreateValidation = airplaneCreateValidation;
+        _airplaneDeleteValidation = airplaneDeleteValidation;
         _repository = repository;
         _mongoDbContext = mongoDbContext;
     }
 
-    public async Task<ISingleResult<Entity>> Handle(AirplaneCreateCommand request,
+    public async Task<ISingleResult<Entity>> Handle(AirplaneDeleteCommand request,
         CancellationToken cancellationToken)
     {
-        var validate = await _airplaneCreateValidation.Execute(request).ConfigureAwait(false);
+        var validate = _airplaneDeleteValidation.Execute(request);
         if (!validate.Success)
         {
             return validate;
         }
 
         request.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
-        await _repository.Add(request).ConfigureAwait(false);
+        _repository.Remove(request.Id);
         await _repository.CommitChangesAsync().ConfigureAwait(false);
 
         _mongoDbContext.InsertOne(request);
 
-        return new CreateResult<Entity>(true,
+        return new DeleteResult<Entity>(true,
             BusinessMessage.MSG01);
     }
 }

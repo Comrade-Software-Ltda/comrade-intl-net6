@@ -17,27 +17,18 @@ public class Repository<TEntity> : IRepository<TEntity>
         _dbSet = _db.Set<TEntity>();
     }
 
+    public virtual async Task CommitChangesAsync()
+    {
+        await _db.SaveChangesAsync().ConfigureAwait(false);
+    }
     public virtual async Task Add(TEntity obj)
     {
         await _dbSet.AddAsync(obj).ConfigureAwait(false);
     }
 
-    public virtual async Task AddCommit(TEntity obj)
-    {
-        await _dbSet.AddAsync(obj).ConfigureAwait(false);
-        await _db.SaveChangesAsync().ConfigureAwait(false);
-    }
-
-
     public virtual async Task AddAll(IList<TEntity> obj)
     {
         await _dbSet.AddRangeAsync(obj).ConfigureAwait(false);
-    }
-
-    public virtual async Task AddAllCommit(IList<TEntity> obj)
-    {
-        await _dbSet.AddRangeAsync(obj).ConfigureAwait(false);
-        await _db.SaveChangesAsync().ConfigureAwait(false);
     }
 
     public virtual void Update(TEntity obj)
@@ -45,21 +36,9 @@ public class Repository<TEntity> : IRepository<TEntity>
         _dbSet.Update(obj);
     }
 
-    public virtual void UpdateCommit(TEntity obj)
-    {
-        _dbSet.Update(obj);
-        _db.SaveChanges();
-    }
-
     public virtual void UpdateAll(IList<TEntity> obj)
     {
         _dbSet.UpdateRange(obj);
-    }
-
-    public virtual void UpdateAllCommit(IList<TEntity> obj)
-    {
-        _dbSet.UpdateRange(obj);
-        _db.SaveChanges();
     }
 
     public virtual void Remove(int id)
@@ -71,27 +50,10 @@ public class Repository<TEntity> : IRepository<TEntity>
         }
     }
 
-    public virtual void RemoveCommit(int id)
-    {
-        var removedItem = _dbSet.Find(id);
-        if (removedItem != null)
-        {
-            _dbSet.Remove(removedItem);
-            _db.SaveChanges();
-        }
-    }
-
     public virtual void RemoveAll(IList<int> id)
     {
         var remove = _dbSet.Where(x => id.Contains(x.Id));
         _dbSet.RemoveRange(remove);
-    }
-
-    public virtual void RemoveAllCommit(IList<int> id)
-    {
-        var remove = _dbSet.Where(x => id.Contains(x.Id));
-        _dbSet.RemoveRange(remove);
-        _db.SaveChanges();
     }
 
     public virtual async Task<TEntity?> GetById(int id)
