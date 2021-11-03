@@ -35,8 +35,10 @@ public class
         }
 
         request.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
+
+        await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Remove(request.Id);
-        await _repository.CommitChangesAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
         _mongoDbContext.InsertOne(request);
 

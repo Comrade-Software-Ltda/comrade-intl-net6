@@ -7,6 +7,8 @@ public interface IRepository<TEntity> : IDisposable
     where TEntity : IEntity
 {
     Task CommitChangesAsync();
+    Task BeginTransactionAsync();
+    Task CommitTransactionAsync();
     Task Add(TEntity obj);
     Task AddAll(IList<TEntity> obj);
     void Update(TEntity obj);

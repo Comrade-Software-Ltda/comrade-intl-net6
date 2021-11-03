@@ -1,5 +1,6 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Persistence.DataAccess;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Comrade.Api.Modules;
 
@@ -37,7 +38,6 @@ public static class PersistenceExtensions
             .GetAwaiter()
             .GetResult();
 
-
         if (isMsSqlServerEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
@@ -53,7 +53,8 @@ public static class PersistenceExtensions
         else
         {
             services.AddDbContext<ComradeContext>(options =>
-                options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging());
+                options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging()
+                    .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
             if (injectInitialData)
             {

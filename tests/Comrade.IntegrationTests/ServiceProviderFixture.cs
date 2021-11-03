@@ -1,6 +1,7 @@
 ﻿using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -29,7 +30,8 @@ namespace Comrade.IntegrationTests
             var connString = config.GetValue<string>("MongoDbContextSettings:ConnectionString");
 
             serviceCollection.AddDbContext<ComradeContext>(options =>
-                options.UseInMemoryDatabase(dbName).EnableSensitiveDataLogging());
+                options.UseInMemoryDatabase(dbName).EnableSensitiveDataLogging()
+                    .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
             serviceCollection.Configure<MongoDbContextSettings>(
                 config.GetSection(nameof(MongoDbContextSettings)));

@@ -1,6 +1,8 @@
 ﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using Comrade.Persistence.DataAccess;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 namespace Comrade.Persistence.Bases;
 
@@ -9,12 +11,63 @@ public class Repository<TEntity> : IRepository<TEntity>
 {
     private readonly ComradeContext _db;
     private readonly DbSet<TEntity> _dbSet;
+    private IDbContextTransaction? _currentTransaction;
     private bool _disposed;
 
     public Repository(ComradeContext context)
     {
         _db = context;
         _dbSet = _db.Set<TEntity>();
+    }
+
+    public async Task BeginTransactionAsync()
+    {
+        if (_currentTransaction != null)
+        {
+            return;
+        }
+
+        _currentTransaction = await _db.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
+            .ConfigureAwait(false);
+    }
+
+    public async Task CommitTransactionAsync()
+    {
+        try
+        {
+            await _db.SaveChangesAsync().ConfigureAwait(false);
+
+            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask).ConfigureAwait(false);
+        }
+        catch
+        {
+            RollbackTransaction();
+            throw;
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
+    }
+
+    public void RollbackTransaction()
+    {
+        try
+        {
+            _currentTransaction?.Rollback();
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
     }
 
     public virtual async Task CommitChangesAsync()

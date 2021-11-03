@@ -47,8 +47,9 @@ public class
         var obj = recordExists;
         HydrateValues(obj, request);
 
+        await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Update(obj);
-        await _repository.CommitChangesAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
         return new EditResult<Entity>(true,
             BusinessMessage.MSG02);
