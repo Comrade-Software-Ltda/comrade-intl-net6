@@ -6,6 +6,5 @@ public class SystemUserDeleteValidation : SystemUserValidation<SystemUserDto>
 {
     public SystemUserDeleteValidation()
     {
-        ValidateId();
     }
 }

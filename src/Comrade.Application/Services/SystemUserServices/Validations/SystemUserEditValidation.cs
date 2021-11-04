@@ -6,7 +6,6 @@ public class SystemUserEditValidation : SystemUserValidation<SystemUserEditDto>
 {
     public SystemUserEditValidation()
     {
-        ValidateId();
         ValidateName();
         ValidateEmail();
         PasswordValidation();

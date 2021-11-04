@@ -1,5 +1,4 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Handlers;
@@ -59,10 +58,10 @@ public static class UseCasesExtensions
 
         // Application - ServiceHandlers
         services
-            .AddScoped<IRequestHandler<AirplaneCreateDto, ISingleResultDto<EntityDto>>,
+            .AddScoped<IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>,
                 AirplaneCreateServiceHandler>();
         services
-            .AddScoped<IRequestHandler<AirplaneEditDto, ISingleResultDto<EntityDto>>,
+            .AddScoped<IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>,
                 AirplaneEditServiceHandler>();
 
         // Core - UseCases

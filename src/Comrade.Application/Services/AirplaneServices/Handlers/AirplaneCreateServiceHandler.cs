@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
@@ -8,7 +7,7 @@ using MediatR;
 
 namespace Comrade.Application.Services.AirplaneServices.Handlers;
 
-public class AirplaneCreateServiceHandler : IRequestHandler<AirplaneCreateDto, ISingleResultDto<EntityDto>>
+public class AirplaneCreateServiceHandler : IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>
 {
     private readonly IUcAirplaneCreate _createAirplane;
     private readonly IMapper _mapper;
@@ -19,7 +18,7 @@ public class AirplaneCreateServiceHandler : IRequestHandler<AirplaneCreateDto, I
         _createAirplane = createAirplane;
     }
 
-    public async Task<ISingleResultDto<EntityDto>> Handle(AirplaneCreateDto request,
+    public async Task<SingleResultDto<EntityDto>> Handle(AirplaneCreateDto request,
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<AirplaneCreateCommand>(request);

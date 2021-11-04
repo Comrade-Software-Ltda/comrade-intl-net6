@@ -53,17 +53,17 @@ public sealed class Startup
 
         services.Configure<MongoDbContextSettings>(
             Configuration.GetSection(nameof(MongoDbContextSettings)));
+
         services.AddSingleton<IMongoDbContextSettings>(sp =>
             sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+
         services.AddScoped<IMongoDbContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
         services.AddMediatR(typeof(Startup));
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
-
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();
     }

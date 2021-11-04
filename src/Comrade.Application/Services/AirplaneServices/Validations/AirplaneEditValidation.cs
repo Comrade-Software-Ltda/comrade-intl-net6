@@ -6,7 +6,6 @@ public class AirplaneEditValidation : AirplaneValidation<AirplaneEditDto>
 {
     public AirplaneEditValidation()
     {
-        ValidateId();
         ValidateCode();
         ValidateModel();
         ValidatePassengerQuantity();

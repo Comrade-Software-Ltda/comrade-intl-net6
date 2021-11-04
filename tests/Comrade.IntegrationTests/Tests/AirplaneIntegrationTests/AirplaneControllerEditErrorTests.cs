@@ -41,7 +41,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(400, actualResultValue?.Code);
+            Assert.Equal(409, actualResultValue?.Code);
         }
 
         var repository = new AirplaneRepository(_fixture.PostgresContextFixture);

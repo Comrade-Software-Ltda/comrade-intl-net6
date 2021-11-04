@@ -8,11 +8,6 @@ namespace Comrade.Application.Services.SystemUserServices.Validations;
 public class SystemUserValidation<TDto> : DtoValidation<TDto>
     where TDto : SystemUserDto
 {
-    protected void ValidateId()
-    {
-        RuleFor(c => c.Id);
-    }
-
     protected void ValidateName()
     {
         RuleFor(v => v.Name)

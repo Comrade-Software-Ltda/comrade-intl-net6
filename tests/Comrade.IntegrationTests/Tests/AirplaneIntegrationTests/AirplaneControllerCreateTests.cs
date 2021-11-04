@@ -57,7 +57,7 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(400, actualResultValue?.Code);
+            Assert.Equal(409, actualResultValue?.Code);
         }
     }
 }
