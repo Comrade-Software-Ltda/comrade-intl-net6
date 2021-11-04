@@ -1,8 +1,8 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Data;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using Comrade.Persistence.DataAccess;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
 
 namespace Comrade.Persistence.Bases;
 
@@ -54,26 +54,11 @@ public class Repository<TEntity> : IRepository<TEntity>
         }
     }
 
-    public void RollbackTransaction()
-    {
-        try
-        {
-            _currentTransaction?.Rollback();
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                _currentTransaction.Dispose();
-                _currentTransaction = null;
-            }
-        }
-    }
-
     public virtual async Task CommitChangesAsync()
     {
         await _db.SaveChangesAsync().ConfigureAwait(false);
     }
+
     public virtual async Task Add(TEntity obj)
     {
         await _dbSet.AddAsync(obj).ConfigureAwait(false);
@@ -229,6 +214,22 @@ public class Repository<TEntity> : IRepository<TEntity>
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    public void RollbackTransaction()
+    {
+        try
+        {
+            _currentTransaction?.Rollback();
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
     }
 
     protected virtual void Dispose(bool disposing)

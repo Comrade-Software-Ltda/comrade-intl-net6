@@ -1,30 +1,30 @@
-﻿using Comrade.Core.AirplaneCore.Commands;
-using Comrade.Core.AirplaneCore.Validations;
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 using System.Threading;
 
-namespace Comrade.Core.AirplaneCore.Handlers;
+namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    AirplaneDeleteCoreHandler : IRequestHandler<AirplaneDeleteCommand, ISingleResult<Entity>>
+    SystemUserDeleteCoreHandler : IRequestHandler<SystemUserDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly AirplaneDeleteValidation _airplaneDeleteValidation;
     private readonly IMongoDbContext _mongoDbContext;
-    private readonly IAirplaneRepository _repository;
+    private readonly ISystemUserRepository _repository;
+    private readonly SystemUserDeleteValidation _systemUserDeleteValidation;
 
-    public AirplaneDeleteCoreHandler(AirplaneDeleteValidation airplaneDeleteValidation,
-        IAirplaneRepository repository, IMongoDbContext mongoDbContext)
+    public SystemUserDeleteCoreHandler(SystemUserDeleteValidation systemUserDeleteValidation,
+        ISystemUserRepository repository, IMongoDbContext mongoDbContext)
     {
-        _airplaneDeleteValidation = airplaneDeleteValidation;
+        _systemUserDeleteValidation = systemUserDeleteValidation;
         _repository = repository;
         _mongoDbContext = mongoDbContext;
     }
 
-    public async Task<ISingleResult<Entity>> Handle(AirplaneDeleteCommand request,
+    public async Task<ISingleResult<Entity>> Handle(SystemUserDeleteCommand request,
         CancellationToken cancellationToken)
     {
         var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
@@ -35,13 +35,13 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = _airplaneDeleteValidation.Execute(recordExists);
+        var validate = _systemUserDeleteValidation.Execute(recordExists);
         if (!validate.Success)
         {
             return validate;
         }
 
-        _repository.Remove(recordExists.Id);
+        _repository.Remove(request.Id);
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Remove(recordExists.Id);

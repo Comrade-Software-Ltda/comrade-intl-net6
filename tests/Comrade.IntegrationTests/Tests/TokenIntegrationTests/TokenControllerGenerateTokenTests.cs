@@ -1,9 +1,9 @@
+using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.TokenIntegrationTests;

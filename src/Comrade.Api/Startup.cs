@@ -12,6 +12,7 @@ using Comrade.Persistence.DataAccess;
 using FluentValidation;
 using HealthChecks.UI.Client;
 using MediatR;
+
 namespace Comrade.Api;
 
 /// <summary>

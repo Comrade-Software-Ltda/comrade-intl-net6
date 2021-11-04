@@ -4,6 +4,7 @@ using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,10 +25,12 @@ public sealed class UcForgotPasswordTests
     {
         var options = new DbContextOptionsBuilder<ComradeContext>()
             .UseInMemoryDatabase("test_database_UcForgotPassword_Test")
+            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .EnableSensitiveDataLogging().Options;
 
 
-        var testObject = new SystemUser(new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), "111", "777@testObject",
+        var testObject = new SystemUser(new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), "111",
+            "777@testObject",
             "100.SdwfwU4tDWbBkLlBNd7Vcg==.cGEYFjBRNpLrCxzYNIbSdnbbY1zFvBHcyIslMTSmwy8=", "123",
             DateTimeBrasilia.GetDateTimeBrasilia());
 

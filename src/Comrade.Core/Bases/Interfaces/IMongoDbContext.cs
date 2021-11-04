@@ -1,4 +1,5 @@
 ﻿using Comrade.Domain.Bases;
+
 namespace Comrade.Core.Bases.Interfaces;
 
 public interface IMongoDbContext

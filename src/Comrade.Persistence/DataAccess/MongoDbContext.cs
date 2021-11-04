@@ -16,18 +16,28 @@ public class MongoDbContext : IMongoDbContext
         _mongoDatabase = client.GetDatabase(configuration.DatabaseName);
     }
 
-    private IMongoCollection<T> GetCollection<T>()
-        => _mongoDatabase.GetCollection<T>(nameof(T));
-
-    public IQueryable<T> Get<T>() where T : EntityDto
-        => GetCollection<T>().AsQueryable();
-
     public void InsertOne<T>(T obj) where T : Entity
-        => GetCollection<T>().InsertOne(obj);
+    {
+        GetCollection<T>().InsertOne(obj);
+    }
 
     public void ReplaceOne<T>(T obj) where T : Entity
-        => GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj);
+    {
+        GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj);
+    }
 
     public void DeleteOne<T>(int id) where T : Entity
-        => GetCollection<T>().DeleteOne(x => x.Id.Equals(id));
+    {
+        GetCollection<T>().DeleteOne(x => x.Id.Equals(id));
+    }
+
+    private IMongoCollection<T> GetCollection<T>()
+    {
+        return _mongoDatabase.GetCollection<T>(nameof(T));
+    }
+
+    public IQueryable<T> Get<T>() where T : EntityDto
+    {
+        return GetCollection<T>().AsQueryable();
+    }
 }

@@ -10,8 +10,7 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
 {
     private readonly IMediator _mediator;
 
-    public UcAirplaneEdit(IMediator mediator, IUnitOfWork uow)
-        : base(uow)
+    public UcAirplaneEdit(IMediator mediator)
     {
         _mediator = mediator;
     }

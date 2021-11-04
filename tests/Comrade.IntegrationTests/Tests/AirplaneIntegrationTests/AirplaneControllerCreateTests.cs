@@ -26,7 +26,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+                _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 
@@ -49,7 +50,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+                _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 

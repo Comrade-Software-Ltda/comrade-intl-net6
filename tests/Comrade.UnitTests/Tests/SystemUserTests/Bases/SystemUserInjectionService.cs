@@ -2,7 +2,6 @@
 using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Core.SystemUserCore.UseCases;
-using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using MediatR;
@@ -13,11 +12,8 @@ public sealed class SystemUserInjectionService
 {
     public static SystemUserCommand GetSystemUserCommand(ComradeContext context, IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var systemUserRepository = new SystemUserRepository(context);
-        var systemUserDeleteValidation = new SystemUserDeleteValidation();
         var ucSystemUserDelete =
-            new UcSystemUserDelete(systemUserRepository, systemUserDeleteValidation, uow);
+            new UcSystemUserDelete(mediator);
 
         return new SystemUserCommand(ucSystemUserDelete, mediator);
     }

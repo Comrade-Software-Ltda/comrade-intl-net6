@@ -18,8 +18,7 @@ public class UcUpdatePassword : UseCase, IUcUpdatePassword
 
     public UcUpdatePassword(ISystemUserRepository repository,
         SystemUserEditValidation systemUserEditValidation,
-        IPasswordHasher passwordHasher, IUnitOfWork uow)
-        : base(uow)
+        IPasswordHasher passwordHasher)
     {
         _repository = repository;
         _systemUserEditValidation = systemUserEditValidation;
@@ -46,9 +45,9 @@ public class UcUpdatePassword : UseCase, IUcUpdatePassword
 
         HydrateValues(obj, entity);
 
+        await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Update(obj);
-
-        _ = await Commit().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
 
         return new SingleResult<Entity>(entity);

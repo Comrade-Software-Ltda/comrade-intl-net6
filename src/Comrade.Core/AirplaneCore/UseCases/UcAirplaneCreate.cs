@@ -10,9 +10,7 @@ public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
 {
     private readonly IMediator _mediator;
 
-    public UcAirplaneCreate(IMediator mediator,
-        IUnitOfWork uow)
-        : base(uow)
+    public UcAirplaneCreate(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -25,15 +23,6 @@ public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
             return isValid;
         }
 
-        try
-        {
-            return await _mediator.Send(entity).ConfigureAwait(false);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

@@ -1,6 +1,6 @@
-﻿using Comrade.Persistence.Repositories;
+﻿using System;
+using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;

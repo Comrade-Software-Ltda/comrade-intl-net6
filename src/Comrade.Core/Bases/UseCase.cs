@@ -7,20 +7,6 @@ namespace Comrade.Core.Bases
 {
     public class UseCase : IUseCase
     {
-        private readonly IUnitOfWork _uow;
-
-        public UseCase(IUnitOfWork uow)
-        {
-            _uow = uow;
-        }
-
-        public async Task<bool> Commit()
-        {
-            if (await _uow.Commit().ConfigureAwait(false)) return true;
-
-            return false;
-        }
-
         public static ISingleResult<Entity> ValidateEntity<T>(T entity) where T : IEntity
         {
             var context = new ValidationContext(entity, null, null);

@@ -18,8 +18,7 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
 
     public UcForgotPassword(ISystemUserRepository repository,
         SystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
-        IPasswordHasher passwordHasher, IUnitOfWork uow)
-        : base(uow)
+        IPasswordHasher passwordHasher)
     {
         _repository = repository;
         _systemUserForgotPasswordValidation = systemUserForgotPasswordValidation;
@@ -43,9 +42,9 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
 
         HydrateValues(obj);
 
+        await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Update(obj);
-
-        _ = await Commit().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
         return new EditResult<Entity>();
     }

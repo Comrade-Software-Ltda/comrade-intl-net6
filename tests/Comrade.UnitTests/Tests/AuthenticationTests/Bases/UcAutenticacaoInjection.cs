@@ -11,7 +11,6 @@ public sealed class UcAuthenticationInjection
 {
     public static UcUpdatePassword GetUcUpdatePassword(ComradeContext context)
     {
-        var uow = new UnitOfWork(context);
         var systemUserCoreRepository = new SystemUserRepository(context);
 
         var systemUserCoreEditValidation =
@@ -20,12 +19,11 @@ public sealed class UcAuthenticationInjection
         var passwordHasher = new PasswordHasher(new HashingOptions());
 
         return new UcUpdatePassword(systemUserCoreRepository,
-            systemUserCoreEditValidation, passwordHasher, uow);
+            systemUserCoreEditValidation, passwordHasher);
     }
 
     public static UcForgotPassword GetUcForgotPassword(ComradeContext context)
     {
-        var uow = new UnitOfWork(context);
         var systemUserCoreRepository = new SystemUserRepository(context);
         var systemUserEditValidation = new SystemUserEditValidation();
         var systemUserForgotPasswordValidation =
@@ -36,7 +34,7 @@ public sealed class UcAuthenticationInjection
 
         return new UcForgotPassword(systemUserCoreRepository,
             systemUserForgotPasswordValidation,
-            passwordHasher, uow);
+            passwordHasher);
     }
 
     public static UcValidateLogin GetUcValidateLogin(ComradeContext context)

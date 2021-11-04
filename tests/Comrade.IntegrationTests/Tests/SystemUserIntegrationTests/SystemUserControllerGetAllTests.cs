@@ -20,7 +20,8 @@ public class SystemUserControllerGetAllTests : IClassFixture<ServiceProviderFixt
     public async Task SystemUserController_GetAll()
     {
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture, _fixture.Mediator);
+            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+                _fixture.Mediator);
         var result = await systemUserController.GetAll(null);
 
         if (result is ObjectResult okResult)

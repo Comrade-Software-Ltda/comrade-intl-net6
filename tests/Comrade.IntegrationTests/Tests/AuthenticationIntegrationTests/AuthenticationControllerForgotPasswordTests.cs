@@ -3,6 +3,7 @@ using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using Xunit;
 
@@ -15,6 +16,7 @@ public sealed class AuthenticationControllerForgotPasswordTests
     {
         var options = new DbContextOptionsBuilder<ComradeContext>()
             .UseInMemoryDatabase("test_database_AuthenticationController_ForgotPassword")
+            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .EnableSensitiveDataLogging().Options;
 
 

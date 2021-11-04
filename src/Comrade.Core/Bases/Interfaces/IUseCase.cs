@@ -2,5 +2,4 @@
 
 public interface IUseCase
 {
-    Task<bool> Commit();
 }

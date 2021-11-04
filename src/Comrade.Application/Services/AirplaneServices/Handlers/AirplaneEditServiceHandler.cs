@@ -7,7 +7,8 @@ using MediatR;
 
 namespace Comrade.Application.Services.AirplaneServices.Handlers;
 
-public class AirplaneEditServiceHandler : IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>
+public class
+    AirplaneEditServiceHandler : IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>
 {
     private readonly IUcAirplaneEdit _editAirplane;
     private readonly IMapper _mapper;

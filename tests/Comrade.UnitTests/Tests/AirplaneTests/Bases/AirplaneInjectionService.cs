@@ -2,7 +2,6 @@
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Core.AirplaneCore.UseCases;
-using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 using MediatR;
@@ -14,11 +13,8 @@ public sealed class AirplaneInjectionService
     public static AirplaneCommand GetAirplaneCommand(ComradeContext context,
         IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var airplaneRepository = new AirplaneRepository(context);
-        var airplaneDeleteValidation = new AirplaneDeleteValidation();
         var ucAirplaneDelete =
-            new UcAirplaneDelete(airplaneRepository, airplaneDeleteValidation, uow);
+            new UcAirplaneDelete(mediator);
 
         return new AirplaneCommand(ucAirplaneDelete, mediator);
     }

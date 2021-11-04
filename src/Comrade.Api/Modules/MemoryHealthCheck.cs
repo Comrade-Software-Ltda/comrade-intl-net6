@@ -15,28 +15,28 @@ public class MemoryHealthCheck : IHealthCheck
 
     public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
     {
         var options = _options.Get(context.Registration.Name);
 
-        var allocated = GC.GetTotalMemory(forceFullCollection: false);
-        var data = new Dictionary<string, object>()
+        var allocated = GC.GetTotalMemory(false);
+        var data = new Dictionary<string, object>
         {
             { "AllocatedBytes", allocated },
             { "Gen0Collections", GC.CollectionCount(0) },
             { "Gen1Collections", GC.CollectionCount(1) },
-            { "Gen2Collections", GC.CollectionCount(2) },
+            { "Gen2Collections", GC.CollectionCount(2) }
         };
-        var status = (allocated < options.Threshold)
+        var status = allocated < options.Threshold
             ? HealthStatus.Healthy
             : context.Registration.FailureStatus;
 
         return Task.FromResult(new HealthCheckResult(
             status,
-            description: "Reports degraded status if allocated bytes " +
-                         $">= {options.Threshold} bytes.",
-            exception: null,
-            data: data));
+            "Reports degraded status if allocated bytes " +
+            $">= {options.Threshold} bytes.",
+            null,
+            data));
     }
 }
 

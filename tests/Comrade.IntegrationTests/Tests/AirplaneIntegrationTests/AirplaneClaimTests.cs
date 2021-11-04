@@ -1,8 +1,8 @@
-﻿using Comrade.Application.Bases;
+﻿using System.Security.Claims;
+using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -21,7 +21,8 @@ public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
     public async Task Airplane_Claim()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+                _fixture.Mediator);
 
         var testObject = new AirplaneCreateDto
         {

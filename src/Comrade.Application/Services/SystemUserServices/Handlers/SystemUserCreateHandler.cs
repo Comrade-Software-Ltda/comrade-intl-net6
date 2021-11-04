@@ -2,7 +2,7 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Core.SystemUserCore;
-using Comrade.Domain.Models;
+using Comrade.Core.SystemUserCore.Commands;
 using MediatR;
 
 namespace Comrade.Application.Services.SystemUserServices.Handlers;
@@ -22,7 +22,7 @@ public class
     public async Task<SingleResultDto<EntityDto>> Handle(SystemUserCreateDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemUser>(request);
+        var mappedObject = _mapper.Map<SystemUserCreateCommand>(request);
         var result = await _createSystemUser.Execute(mappedObject).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);
     }

@@ -18,6 +18,8 @@ using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Core.SystemUserCore.Handlers;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
@@ -74,6 +76,9 @@ public static class UseCasesExtensions
             .AddScoped<IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>,
                 AirplaneCreateCoreHandler>();
         services
+            .AddScoped<IRequestHandler<AirplaneDeleteCommand, ISingleResult<Entity>>,
+                AirplaneDeleteCoreHandler>();
+        services
             .AddScoped<IRequestHandler<AirplaneEditCommand, ISingleResult<Entity>>,
                 AirplaneEditCoreHandler>();
 
@@ -103,6 +108,17 @@ public static class UseCasesExtensions
         services.AddScoped<IUcSystemUserEdit, UcSystemUserEdit>();
         services.AddScoped<IUcSystemUserCreate, UcSystemUserCreate>();
         services.AddScoped<IUcSystemUserDelete, UcSystemUserDelete>();
+
+        // Core - CoreHandlers
+        services
+            .AddScoped<IRequestHandler<SystemUserCreateCommand, ISingleResult<Entity>>,
+                SystemUserCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserDeleteCommand, ISingleResult<Entity>>,
+                SystemUserDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>,
+                SystemUserEditCoreHandler>();
 
         // Core - Validations
         services.AddScoped<SystemUserForgotPasswordValidation>();

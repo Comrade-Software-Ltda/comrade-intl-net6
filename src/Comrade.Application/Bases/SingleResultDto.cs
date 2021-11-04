@@ -52,5 +52,5 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
 
     public ValidationResult? ValidationResult { get; }
 
-    public TDto? Data { get; private set; }
+    public TDto? Data { get; }
 }

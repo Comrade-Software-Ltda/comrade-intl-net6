@@ -21,7 +21,8 @@ public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProvi
     public async Task AirplaneController_GetAll_Paginated()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture, _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+                _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);
 
