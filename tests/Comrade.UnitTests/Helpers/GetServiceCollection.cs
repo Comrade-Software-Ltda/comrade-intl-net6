@@ -28,7 +28,6 @@ public static class GetServiceCollection
         services
             .AddFeatureFlags(configuration)
             .AddEntityRepository()
-            .AddHealthChecks(configuration)
             .AddAuthentication(configuration)
             .AddVersioning()
             .AddSwagger()

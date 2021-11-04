@@ -28,7 +28,6 @@ public static class GetServiceProvider
             .AddFeatureFlags(configuration)
             .AddSqlServer(configuration)
             .AddEntityRepository()
-            .AddHealthChecks(configuration)
             .AddAuthentication(configuration)
             .AddVersioning()
             .AddSwagger()

@@ -22,7 +22,7 @@ public class HealthCheckTests
             .CreateClient();
 
         var actualResponse = await client
-            .GetAsync("/health")
+            .GetAsync("/hc")
             .ConfigureAwait(false);
 
         var actualResponseString = await actualResponse.Content
@@ -33,7 +33,7 @@ public class HealthCheckTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-            { DateParseHandling = DateParseHandling.None };
+        { DateParseHandling = DateParseHandling.None };
         var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 

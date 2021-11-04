@@ -10,8 +10,8 @@ using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
 using FluentValidation;
+using HealthChecks.UI.Client;
 using MediatR;
-
 namespace Comrade.Api;
 
 /// <summary>
@@ -38,7 +38,6 @@ public sealed class Startup
             .AddFeatureFlags(Configuration)
             .AddSqlServer(Configuration)
             .AddEntityRepository()
-            .AddHealthChecks(Configuration)
             .AddAuthentication(Configuration)
             .AddVersioning()
             .AddSwagger()
@@ -50,6 +49,7 @@ public sealed class Startup
 
         services.AddAutoMapperSetup();
         services.AddLogging();
+        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
         services.Configure<MongoDbContextSettings>(
             Configuration.GetSection(nameof(MongoDbContextSettings)));
@@ -88,7 +88,6 @@ public sealed class Startup
 
         app
             .UseProxy(Configuration)
-            .UseHealthChecks()
             .UseCustomCors()
             .UseCustomHttpMetrics()
             .UseRouting()
@@ -96,6 +95,15 @@ public sealed class Startup
             .UseAuthentication()
             .UseAuthorization()
             .UseSerilogRequestLogging()
-            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapControllers();
+            });
     }
 }
