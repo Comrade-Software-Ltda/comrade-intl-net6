@@ -13,14 +13,14 @@ public class SystemUserControllerGetAllTests : IClassFixture<ServiceProviderFixt
     public SystemUserControllerGetAllTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
     public async Task SystemUserController_GetAll()
     {
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.GetAll(null);
 

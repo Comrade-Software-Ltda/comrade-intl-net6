@@ -15,6 +15,8 @@ using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SecurityCore;
+using Comrade.Core.SecurityCore.Commands;
+using Comrade.Core.SecurityCore.Handlers;
 using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
 using Comrade.Core.SystemUserCore;
@@ -49,6 +51,17 @@ public static class UseCasesExtensions
         services.AddScoped<IUcValidateLogin, UcValidateLogin>();
         services.AddScoped<IUcForgotPassword, UcForgotPassword>();
         services.AddScoped<IUcGenerateToken, UcGenerateToken>();
+
+        // Core - CoreHandlers
+        services
+            .AddScoped<IRequestHandler<ForgotPasswordCommand, ISingleResult<Entity>>,
+                ForgotPasswordCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<GenerateTokenCommand, string>,
+                GenerateTokenCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<UpdatePasswordCommand, ISingleResult<Entity>>,
+                UpdatePasswordCoreHandler>();
 
         #endregion
 

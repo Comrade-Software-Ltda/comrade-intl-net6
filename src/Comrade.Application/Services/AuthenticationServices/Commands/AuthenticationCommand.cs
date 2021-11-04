@@ -3,7 +3,7 @@ using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Core.SecurityCore;
-using Comrade.Domain.Models;
+using Comrade.Core.SecurityCore.Commands;
 
 namespace Comrade.Application.Services.AuthenticationServices.Commands;
 
@@ -46,23 +46,17 @@ public class AuthenticationCommand : IAuthenticationCommand
 
     public async Task<ISingleResultDto<EntityDto>> ForgotPassword(AuthenticationDto dto)
     {
-        var mappedObject = _mapper.Map<SystemUser>(dto);
-
+        var mappedObject = _mapper.Map<ForgotPasswordCommand>(dto);
         var result = await _forgotPassword.Execute(mappedObject).ConfigureAwait(false);
-
         var resultDto = new SingleResultDto<EntityDto>(result);
-
         return resultDto;
     }
 
     public async Task<ISingleResultDto<EntityDto>> UpdatePassword(AuthenticationDto dto)
     {
-        var mappedObject = _mapper.Map<SystemUser>(dto);
-
+        var mappedObject = _mapper.Map<UpdatePasswordCommand>(dto);
         var result = await _updatePassword.Execute(mappedObject).ConfigureAwait(false);
-
         var resultDto = new SingleResultDto<EntityDto>(result);
-
         return resultDto;
     }
 }

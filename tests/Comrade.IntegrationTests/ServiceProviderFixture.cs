@@ -1,11 +1,11 @@
-﻿using System;
-using Comrade.Persistence.DataAccess;
+﻿using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System;
 
 namespace Comrade.IntegrationTests
 {
@@ -41,7 +41,7 @@ namespace Comrade.IntegrationTests
             var sp = serviceCollection.BuildServiceProvider();
             Sp = sp;
             Mediator = sp.GetRequiredService<IMediator>();
-            PostgresContextFixture = sp.GetService<ComradeContext>()!;
+            SqlContextFixture = sp.GetService<ComradeContext>()!;
             var mongoDbContextSettings = new MongoDbContextSettings
             {
                 ConnectionString = connString,
@@ -53,7 +53,7 @@ namespace Comrade.IntegrationTests
 
         public IServiceProvider Sp { get; }
         public IMediator Mediator { get; }
-        public ComradeContext PostgresContextFixture { get; }
+        public ComradeContext SqlContextFixture { get; }
         public MongoDbContextSettings MongoDbContextFixtureSettings { get; }
         public MongoDbContext MongoDbContextFixture { get; }
 

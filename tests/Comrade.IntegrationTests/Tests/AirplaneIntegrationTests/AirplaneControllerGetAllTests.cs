@@ -13,14 +13,14 @@ public class AirplaneControllerGetAllTests : IClassFixture<ServiceProviderFixtur
     public AirplaneControllerGetAllTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
     public async Task AirplaneController_GetAll()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.GetAll(null);
 

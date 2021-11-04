@@ -23,8 +23,13 @@ public static class GenerateFakeToken
             "Test"
         };
 
-        var user = new TokenUser(new Guid(), "Test", "", roles);
-
+        var user = new TokenUser()
+        {
+            Id = new Guid(),
+            Name = "Test",
+            Token = "",
+            Roles = roles
+        };
 
         var token = ucGenerateToken.Execute(user);
         return token;

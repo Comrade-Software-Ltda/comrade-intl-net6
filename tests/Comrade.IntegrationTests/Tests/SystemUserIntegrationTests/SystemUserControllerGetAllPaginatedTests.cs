@@ -14,14 +14,14 @@ public class SystemUserControllerGetAllPaginatedTests : IClassFixture<ServicePro
     public SystemUserControllerGetAllPaginatedTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
     public async Task SystemUserController_GetAll_Paginated()
     {
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await systemUserController.GetAll(paginationQuery);

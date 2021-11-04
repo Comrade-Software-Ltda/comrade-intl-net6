@@ -1,9 +1,9 @@
-﻿using System;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -15,7 +15,7 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
     public SystemUserControllerEditErrorTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 
@@ -45,7 +45,7 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
             Assert.Equal(409, actualResultValue?.Code);
         }
 
-        var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
+        var repository = new SystemUserRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(systemUserId);
         Assert.NotEqual(changeName, user!.Name);
         Assert.NotEqual(changeEmail, user.Email);

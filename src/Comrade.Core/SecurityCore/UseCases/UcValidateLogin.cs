@@ -28,10 +28,15 @@ public class UcValidateLogin : IUcValidateLogin
             {
                 var selectedUser = resultPassword.Data!;
 
-                var profile = new List<string> { "Role" };
+                var roles = new List<string> { "Role" };
 
-                var user = new TokenUser(key, selectedUser.Name, "", profile);
-
+                var user = new TokenUser()
+                {
+                    Id = key,
+                    Name = selectedUser.Name,
+                    Token = "",
+                    Roles = roles
+                };
                 user.Token = _generateToken.Execute(user);
 
                 return new SecurityResult(user);

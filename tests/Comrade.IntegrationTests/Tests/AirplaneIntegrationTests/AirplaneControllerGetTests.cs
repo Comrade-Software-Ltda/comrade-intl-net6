@@ -14,7 +14,7 @@ public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
     public AirplaneControllerGetTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
     {
         var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.GetById(airplaneId);
 

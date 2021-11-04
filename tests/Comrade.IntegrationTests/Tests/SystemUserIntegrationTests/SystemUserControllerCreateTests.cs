@@ -27,7 +27,7 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);
@@ -52,7 +52,7 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);

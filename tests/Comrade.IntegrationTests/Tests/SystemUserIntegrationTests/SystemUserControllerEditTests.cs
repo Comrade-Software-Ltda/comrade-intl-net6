@@ -15,7 +15,7 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
     public SystemUserControllerEditTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
 
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.PostgresContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 
@@ -50,7 +50,7 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
             Assert.Equal(204, actualResultValue?.Code);
         }
 
-        var repository = new SystemUserRepository(_fixture.PostgresContextFixture);
+        var repository = new SystemUserRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(systemUserId);
         Assert.Equal(changeName, user!.Name);
         Assert.Equal(changeEmail, user.Email);

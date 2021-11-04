@@ -1,40 +1,22 @@
 ﻿using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
-using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public sealed class UcAuthenticationInjection
 {
-    public static UcUpdatePassword GetUcUpdatePassword(ComradeContext context)
+    public static UcUpdatePassword GetUcUpdatePassword(IMediator mediator)
     {
-        var systemUserCoreRepository = new SystemUserRepository(context);
-
-        var systemUserCoreEditValidation =
-            new SystemUserEditValidation(
-            );
-        var passwordHasher = new PasswordHasher(new HashingOptions());
-
-        return new UcUpdatePassword(systemUserCoreRepository,
-            systemUserCoreEditValidation, passwordHasher);
+        return new UcUpdatePassword(mediator);
     }
 
-    public static UcForgotPassword GetUcForgotPassword(ComradeContext context)
+    public static UcForgotPassword GetUcForgotPassword(IMediator mediator)
     {
-        var systemUserCoreRepository = new SystemUserRepository(context);
-        var systemUserEditValidation = new SystemUserEditValidation();
-        var systemUserForgotPasswordValidation =
-            new SystemUserForgotPasswordValidation(
-                systemUserEditValidation
-            );
-        var passwordHasher = new PasswordHasher(new HashingOptions());
-
-        return new UcForgotPassword(systemUserCoreRepository,
-            systemUserForgotPasswordValidation,
-            passwordHasher);
+        return new UcForgotPassword(mediator);
     }
 
     public static UcValidateLogin GetUcValidateLogin(ComradeContext context)

@@ -15,7 +15,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
     public AirplaneControllerEditErrorTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
-        InjectDataOnContextBase.InitializeDbForTests(_fixture.PostgresContextFixture);
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.PostgresContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.Edit(testObject);
 
@@ -45,7 +45,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
             Assert.Equal(409, actualResultValue?.Code);
         }
 
-        var repository = new AirplaneRepository(_fixture.PostgresContextFixture);
+        var repository = new AirplaneRepository(_fixture.SqlContextFixture);
         var airplane = await repository.GetById(airplaneId);
         Assert.NotEqual(6666, airplane!.PassengerQuantity);
         Assert.NotEqual(changeCode, airplane.Code);
