@@ -1,8 +1,8 @@
-﻿using Comrade.Domain.Token;
+﻿using Comrade.Core.SecurityCore.Commands;
 
 namespace Comrade.Core.SecurityCore;
 
 public interface IUcGenerateToken
 {
-    string Execute(TokenUser tokenUser);
+    Task<string> Execute(GenerateTokenCommand entity);
 }

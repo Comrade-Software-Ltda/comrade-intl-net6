@@ -15,7 +15,7 @@ public class AuthenticationInjectionService
         var getUcForgotPassword =
             UcAuthenticationInjection.GetUcForgotPassword(mediator);
         var getUcValidateLogin =
-            UcAuthenticationInjection.GetUcValidateLogin(context);
+            UcAuthenticationInjection.GetUcValidateLogin(context, mediator);
 
         var authenticationService = new AuthenticationCommand(getUcUpdatePassword,
             getUcValidateLogin, getUcForgotPassword, mapper);

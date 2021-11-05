@@ -17,7 +17,7 @@ namespace Comrade.IntegrationTests
 
             var dbName = $"test_db_{Guid.NewGuid()}";
 
-            var config = new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.test.json")
                 .AddInMemoryCollection(
                     new Dictionary<string, string>
@@ -27,14 +27,17 @@ namespace Comrade.IntegrationTests
                     })
                 .Build();
 
-            var connString = config.GetValue<string>("MongoDbContextSettings:ConnectionString");
+
+            serviceCollection.AddSingleton<IConfiguration>(configuration);
+
+            var connString = configuration.GetValue<string>("MongoDbContextSettings:ConnectionString");
 
             serviceCollection.AddDbContext<ComradeContext>(options =>
                 options.UseInMemoryDatabase(dbName).EnableSensitiveDataLogging()
                     .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
             serviceCollection.Configure<MongoDbContextSettings>(
-                config.GetSection(nameof(MongoDbContextSettings)));
+                configuration.GetSection(nameof(MongoDbContextSettings)));
             serviceCollection.AddSingleton<IMongoDbContextSettings>(x =>
                 x.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
 

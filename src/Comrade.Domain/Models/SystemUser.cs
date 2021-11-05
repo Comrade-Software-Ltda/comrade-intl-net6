@@ -2,7 +2,7 @@ using Comrade.Domain.Bases;
 
 namespace Comrade.Domain.Models;
 
-[Table("syus_usuario_sistema")]
+[Table("syus_system_user")]
 public class SystemUser : Entity
 {
     public SystemUser()
@@ -45,5 +45,4 @@ public class SystemUser : Entity
     [Column("syus_dt_register", TypeName = "varchar")]
     public DateTime? RegisterDate { get; set; }
 
-    public override string Value => Name;
 }

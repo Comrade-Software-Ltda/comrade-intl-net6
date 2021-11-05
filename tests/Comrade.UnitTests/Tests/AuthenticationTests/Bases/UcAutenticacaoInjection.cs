@@ -19,19 +19,10 @@ public sealed class UcAuthenticationInjection
         return new UcForgotPassword(mediator);
     }
 
-    public static UcValidateLogin GetUcValidateLogin(ComradeContext context)
+    public static UcValidateLogin GetUcValidateLogin(ComradeContext context, IMediator mediator)
     {
-        var myConfiguration = new Dictionary<string, string>
-        {
-            { "JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs" }
-        };
-
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(myConfiguration)
-            .Build();
-
         var systemUserCoreRepository = new SystemUserRepository(context);
-        var ucGenerateToken = new UcGenerateToken(configuration);
+        var ucGenerateToken = new UcGenerateToken(mediator);
 
         var passwordHasher = new PasswordHasher(new HashingOptions());
 

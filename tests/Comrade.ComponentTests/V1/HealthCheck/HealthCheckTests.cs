@@ -4,8 +4,7 @@ using Xunit;
 
 namespace Comrade.ComponentTests.V1.HealthCheck;
 
-[Collection("Api Collection")]
-public class HealthCheckTests
+public class HealthCheckTests : IClassFixture<CustomWebApplicationFactoryFixture>
 {
     private readonly CustomWebApplicationFactoryFixture _fixture;
 
@@ -33,7 +32,7 @@ public class HealthCheckTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-            { DateParseHandling = DateParseHandling.None };
+        { DateParseHandling = DateParseHandling.None };
         var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 

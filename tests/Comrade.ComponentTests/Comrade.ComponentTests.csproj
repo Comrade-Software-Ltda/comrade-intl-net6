@@ -12,6 +12,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="appsettings.test.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="appsettings.test.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
 		<PackageReference Include="xunit" Version="2.4.2-pre.12" />
 		<PackageReference Include="xunit.runner.console" Version="2.4.2-pre.12">
@@ -32,6 +44,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\comrade.Api\Comrade.Api.csproj" />
+		<ProjectReference Include="..\comrade.UnitTests\Comrade.UnitTests.csproj" />
 	</ItemGroup>
 
 </Project>

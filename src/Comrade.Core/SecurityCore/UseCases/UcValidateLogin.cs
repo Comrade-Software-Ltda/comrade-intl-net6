@@ -1,6 +1,6 @@
 ﻿using Comrade.Core.Bases.Results;
+using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SecurityCore.Validation;
-using Comrade.Domain.Token;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
@@ -20,7 +20,7 @@ public class UcValidateLogin : IUcValidateLogin
 
     public async Task<SecurityResult> Execute(Guid key, string password)
     {
-        var result = await Task.Run(() =>
+        var result = await Task.Run(async () =>
         {
             var resultPassword = _systemUserPasswordValidation.Execute(key, password);
 
@@ -30,14 +30,14 @@ public class UcValidateLogin : IUcValidateLogin
 
                 var roles = new List<string> { "Role" };
 
-                var user = new TokenUser()
+                var user = new GenerateTokenCommand()
                 {
                     Id = key,
                     Name = selectedUser.Name,
                     Token = "",
                     Roles = roles
                 };
-                user.Token = _generateToken.Execute(user);
+                user.Token = await _generateToken.Execute(user).ConfigureAwait(false);
 
                 return new SecurityResult(user);
             }

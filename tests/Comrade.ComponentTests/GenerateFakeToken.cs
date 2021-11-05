@@ -1,29 +1,21 @@
-﻿using Comrade.Core.SecurityCore.UseCases;
-using Comrade.Domain.Token;
+﻿using Comrade.Core.SecurityCore.Commands;
+using Comrade.Core.SecurityCore.UseCases;
+using MediatR;
 
 namespace Comrade.ComponentTests;
 
 public static class GenerateFakeToken
 {
-    public static string Execute()
+    public static async Task<string> Execute(IMediator mediator)
     {
-        var myConfiguration = new Dictionary<string, string>
-        {
-            { "JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs" }
-        };
-
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(myConfiguration)
-            .Build();
-
-        var ucGenerateToken = new UcGenerateToken(configuration);
+        var ucGenerateToken = new UcGenerateToken(mediator);
 
         var roles = new List<string>
         {
             "Test"
         };
 
-        var user = new TokenUser()
+        var user = new GenerateTokenCommand()
         {
             Id = new Guid(),
             Name = "Test",
@@ -31,7 +23,7 @@ public static class GenerateFakeToken
             Roles = roles
         };
 
-        var token = ucGenerateToken.Execute(user);
+        var token = await ucGenerateToken.Execute(user);
         return token;
     }
 }
