@@ -96,7 +96,7 @@ public static class UseCasesExtensions
                 AirplaneEditCoreHandler>();
 
         // Core - Validations
-        services.AddScoped<AirplaneEditValidation>();
+        services.AddScoped<IAirplaneEditValidation, AirplaneEditValidation>();
         services.AddScoped<AirplaneDeleteValidation>();
         services.AddScoped<AirplaneCreateValidation>();
         services.AddScoped<AirplaneValidateSameCode>();

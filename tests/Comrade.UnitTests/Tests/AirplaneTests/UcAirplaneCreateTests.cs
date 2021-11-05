@@ -24,34 +24,5 @@
 
 //        Assert.Equal(expected, result.Code);
 //    }
-
-//    [Fact]
-//    public async Task UcAirplaneCreate_Test_Error()
-//    {
-//        var options = new DbContextOptionsBuilder<ComradeContext>()
-//            .UseSqlServer("error")
-//            .EnableSensitiveDataLogging().Options;
-
-//        var testObject = new AirplaneCreateCommand
-//        {
-//            Id = 1,
-//            Code = "123",
-//            Model = "234",
-//            PassengerQuantity = 456
-//        };
-
-//        await using var context = new ComradeContext(options);
-
-//        var ucAirplaneCreate = UcAirplaneInjection.GetUcAirplaneCreate(context);
-//        try
-//        {
-//            var result = await ucAirplaneCreate.Execute(testObject);
-//            Assert.True(false);
-//        }
-//        catch (Exception e)
-//        {
-//            Assert.NotEmpty(e.Message);
-//        }
-//    }
 //}
 

@@ -5,7 +5,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.AirplaneCore.Validations;
 
-public class AirplaneEditValidation
+public class AirplaneEditValidation : IAirplaneEditValidation
 {
     private readonly AirplaneValidateSameCode _airplaneValidateSameCode;
 
