@@ -8,5 +8,5 @@ public interface IMongoDbContext
 
     void ReplaceOne<T>(T obj) where T : Entity;
 
-    void DeleteOne<T>(int id) where T : Entity;
+    void DeleteOne<T>(Guid id) where T : Entity;
 }

@@ -15,9 +15,11 @@ public static class Program
     /// <summary>
     /// </summary>
     /// <param name="args"></param>
+    [Obsolete]
     public static void Main(string[] args)
     {
         BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
 
         var hostBuilder = CreateHostBuilder(args).Build();
         try

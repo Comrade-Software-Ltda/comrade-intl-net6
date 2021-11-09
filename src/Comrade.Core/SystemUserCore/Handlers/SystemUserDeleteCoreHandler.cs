@@ -4,6 +4,7 @@ using Comrade.Core.Messages;
 using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
+using Comrade.Domain.Models;
 using MediatR;
 using System.Threading;
 
@@ -41,11 +42,14 @@ public class
             return validate;
         }
 
-        _repository.Remove(request.Id);
+        var systemUserId = recordExists.Id;
+        _repository.Remove(systemUserId);
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Remove(recordExists.Id);
+        _repository.Remove(systemUserId);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
+
+        _mongoDbContext.DeleteOne<SystemUser>(systemUserId);
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

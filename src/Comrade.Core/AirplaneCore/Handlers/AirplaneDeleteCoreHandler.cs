@@ -4,6 +4,7 @@ using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
+using Comrade.Domain.Models;
 using MediatR;
 using System.Threading;
 
@@ -41,11 +42,14 @@ public class
             return validate;
         }
 
-        _repository.Remove(recordExists.Id);
+        var airplaneId = recordExists.Id;
+        _repository.Remove(airplaneId);
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Remove(recordExists.Id);
+        _repository.Remove(airplaneId);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
+
+        _mongoDbContext.DeleteOne<Airplane>(airplaneId);
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

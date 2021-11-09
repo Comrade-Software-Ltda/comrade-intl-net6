@@ -55,6 +55,7 @@ public class
         _repository.Update(obj);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
+        _mongoDbContext.ReplaceOne(obj);
 
         return new SingleResult<Entity>(request);
     }

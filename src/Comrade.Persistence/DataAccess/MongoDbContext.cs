@@ -23,10 +23,11 @@ public class MongoDbContext : IMongoDbContext
 
     public void ReplaceOne<T>(T obj) where T : Entity
     {
-        GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj);
+        GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj,
+            new ReplaceOptions() { IsUpsert = true });
     }
 
-    public void DeleteOne<T>(int id) where T : Entity
+    public void DeleteOne<T>(Guid id) where T : Entity
     {
         GetCollection<T>().DeleteOne(x => x.Id.Equals(id));
     }
