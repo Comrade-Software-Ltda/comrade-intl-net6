@@ -2,36 +2,20 @@
 using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Comrade.Core.SystemUserCore.UseCases;
-using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.SystemUserTests.Bases;
 
 public sealed class SystemUserInjectionService
 {
-    public static SystemUserCommand GetSystemUserCommand(ComradeContext context, IMapper mapper)
+    public static SystemUserCommand GetSystemUserCommand(ComradeContext context, IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var systemUserRepository = new SystemUserRepository(context);
-        var passwordHasher = new PasswordHasher(new HashingOptions());
-
-        var systemUserEditValidation =
-            new SystemUserEditValidation(systemUserRepository);
-        var systemUserDeleteValidation = new SystemUserDeleteValidation(systemUserRepository);
-
-        var ucSystemUserCreate =
-            new UcSystemUserCreate(systemUserRepository, passwordHasher,
-                uow);
         var ucSystemUserDelete =
-            new UcSystemUserDelete(systemUserRepository, systemUserDeleteValidation, uow);
-        var ucSystemUserEdit =
-            new UcSystemUserEdit(systemUserRepository, systemUserEditValidation, uow);
+            new UcSystemUserDelete(mediator);
 
-        return new SystemUserCommand(ucSystemUserEdit, ucSystemUserCreate,
-            ucSystemUserDelete,
-            mapper);
+        return new SystemUserCommand(ucSystemUserDelete, mediator);
     }
 
     public static SystemUserQuery GetSystemUserQuery(ComradeContext context, IMapper mapper)

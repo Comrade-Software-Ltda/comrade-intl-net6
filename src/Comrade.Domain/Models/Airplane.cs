@@ -20,21 +20,21 @@ public class Airplane : Entity
         RegisterDate = registerDate;
     }
 
-    [Column("airp_tx_codigo", TypeName = "varchar")]
+    [Column("airp_tx_code", TypeName = "varchar")]
     [MaxLength(255)]
     [Required(ErrorMessage = "Code is required")]
     public string Code { get; set; }
 
-    [Column("airp_tx_modelo", TypeName = "varchar")]
+    [Column("airp_tx_model", TypeName = "varchar")]
     [MaxLength(255)]
     [Required(ErrorMessage = "Model is required")]
     public string? Model { get; set; }
 
-    [Column("airp_qt_passageiro", TypeName = "int")]
+    [Column("airp_qt_passenger", TypeName = "int")]
     [Required(ErrorMessage = "PassengerQuantity is required")]
     public int PassengerQuantity { get; set; }
 
-    [Column("airp_dt_registro", TypeName = "varchar")]
+    [Column("airp_dt_register", TypeName = "varchar")]
     [Required(ErrorMessage = "RegisterDate is required")]
     public DateTime RegisterDate { get; set; }
 

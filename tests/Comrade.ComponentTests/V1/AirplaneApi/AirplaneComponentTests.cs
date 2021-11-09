@@ -4,8 +4,7 @@ using Xunit;
 
 namespace Comrade.ComponentTests.V1.AirplaneApi;
 
-[Collection("Api Collection")]
-public class AirplaneComponentTests
+public class AirplaneComponentTests : IClassFixture<CustomWebApplicationFactoryFixture>
 {
     private readonly CustomWebApplicationFactoryFixture _fixture;
 
@@ -15,13 +14,13 @@ public class AirplaneComponentTests
     }
 
     [Fact]
-    public async Task GetAccountsReturnsList()
+    public async Task GetAirplaneReturnsList()
     {
         var client = _fixture
             .CustomWebApplicationFactory
             .CreateClient();
 
-        var token = GenerateFakeToken.Execute();
+        var token = await GenerateFakeToken.Execute(_fixture.Mediator);
 
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
@@ -38,7 +37,7 @@ public class AirplaneComponentTests
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader)
-            { DateParseHandling = DateParseHandling.None };
+        { DateParseHandling = DateParseHandling.None };
         var jsonResponse = await JObject.LoadAsync(reader)
             .ConfigureAwait(false);
 

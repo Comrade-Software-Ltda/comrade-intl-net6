@@ -12,6 +12,8 @@ public static class InjectDataOnContextBase
     {
         try
         {
+            db.Database.EnsureDeleted();
+
             var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
 
             if (assembly is not null)

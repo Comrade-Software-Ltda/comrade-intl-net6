@@ -1,26 +1,21 @@
 ﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Domain.Extensions;
-using Comrade.Domain.Models;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases
 {
     public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
     {
-        private readonly IPasswordHasher _passwordHasher;
-        private readonly ISystemUserRepository _repository;
+        private readonly IMediator _mediator;
 
-        public UcSystemUserCreate(ISystemUserRepository repository,
-            IPasswordHasher passwordHasher, IUnitOfWork uow)
-            : base(uow)
+        public UcSystemUserCreate(IMediator mediator)
         {
-            _repository = repository;
-            _passwordHasher = passwordHasher;
+            _mediator = mediator;
         }
 
-        public async Task<ISingleResult<SystemUser>> Execute(SystemUser entity)
+        public async Task<ISingleResult<Entity>> Execute(SystemUserCreateCommand entity)
         {
             var isValid = ValidateEntity(entity);
             if (!isValid.Success)
@@ -28,17 +23,7 @@ namespace Comrade.Core.SystemUserCore.UseCases
                 return isValid;
             }
 
-            var validate = SystemUserCreateValidation.Execute(entity);
-            if (!validate.Success) return validate;
-
-            entity.Password = _passwordHasher.Hash(entity.Password);
-            entity.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
-
-            await _repository.Add(entity).ConfigureAwait(false);
-
-            _ = await Commit().ConfigureAwait(false);
-
-            return new CreateResult<SystemUser>();
+            return await _mediator.Send(entity).ConfigureAwait(false);
         }
     }
 }

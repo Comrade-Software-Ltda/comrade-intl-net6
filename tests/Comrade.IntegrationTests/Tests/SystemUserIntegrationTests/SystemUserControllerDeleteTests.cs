@@ -1,4 +1,4 @@
-﻿using Comrade.Persistence.DataAccess;
+﻿using System;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
@@ -6,25 +6,28 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public class SystemUserControllerDeleteTests
+public class SystemUserControllerDeleteTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public SystemUserControllerDeleteTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
+    }
+
     [Fact]
     public async Task SystemUserController_Delete()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_SystemUserController_Delete")
-            .EnableSensitiveDataLogging().Options;
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
+        var systemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5");
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(context);
-        _ = await systemUserController.Delete(1);
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
+                _fixture.Mediator);
+        _ = await systemUserController.Delete(systemUserId);
 
-        var repository = new SystemUserRepository(context);
-        var user = await repository.GetById(1);
-        Assert.Null(user);
+        var repository = new SystemUserRepository(_fixture.SqlContextFixture);
+        var systemUser = await repository.GetById(systemUserId);
+        Assert.Null(systemUser);
     }
 }

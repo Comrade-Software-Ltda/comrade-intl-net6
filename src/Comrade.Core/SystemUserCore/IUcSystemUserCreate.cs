@@ -1,9 +1,10 @@
 ﻿using Comrade.Core.Bases.Interfaces;
-using Comrade.Domain.Models;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Domain.Bases;
 
 namespace Comrade.Core.SystemUserCore;
 
 public interface IUcSystemUserCreate
 {
-    Task<ISingleResult<SystemUser>> Execute(SystemUser entity);
+    Task<ISingleResult<Entity>> Execute(SystemUserCreateCommand entity);
 }

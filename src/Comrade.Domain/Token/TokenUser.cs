@@ -1,17 +1,10 @@
-﻿namespace Comrade.Domain.Token;
+﻿using Comrade.Domain.Bases;
 
-public class TokenUser
+namespace Comrade.Domain.Token;
+
+public class TokenUser : Entity
 {
-    public TokenUser(string key, string name, string token, IList<string> roles)
-    {
-        Key = key;
-        Name = name;
-        Token = token;
-        Roles = roles;
-    }
-
-    public string Key { get; set; }
     public string Name { get; set; }
     public string Token { get; set; }
-    public IList<string> Roles { get; }
+    public List<string> Roles { get; set; }
 }

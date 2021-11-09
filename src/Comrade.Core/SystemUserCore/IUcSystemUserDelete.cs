@@ -1,9 +1,9 @@
 ﻿using Comrade.Core.Bases.Interfaces;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
 
 namespace Comrade.Core.SystemUserCore;
 
 public interface IUcSystemUserDelete
 {
-    Task<ISingleResult<SystemUser>> Execute(int id);
+    Task<ISingleResult<Entity>> Execute(Guid id);
 }

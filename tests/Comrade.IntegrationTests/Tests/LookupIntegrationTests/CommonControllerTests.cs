@@ -22,7 +22,7 @@ public sealed class CommonControllerTests
     private static CommonController GetCommonControllerMemDb()
     {
         var mapper = MapperHelper.ConfigMapper();
-        var serviceProvider = GetServiceProviderMemDb.Execute();
+        var serviceProvider = GetServiceProvider.Execute();
         var context = serviceProvider.GetService<ComradeContext>();
         var systemUserQuery = SystemUserInjectionService.GetSystemUserQuery(context!, mapper);
 
@@ -35,7 +35,7 @@ public sealed class CommonControllerTests
         var commonController = GetCommonControllerMemDb();
         var result = await commonController.GetLookupSystemUser();
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as ListResultDto<LookupDto>;
             Assert.NotNull(actualResultValue);
@@ -51,7 +51,7 @@ public sealed class CommonControllerTests
         var commonController = GetCommonControllerMemDb();
         var result = await commonController.GetLookupPredicateSystemUserByName("aa");
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as ListResultDto<LookupDto>;
             Assert.NotNull(actualResultValue);
@@ -66,7 +66,7 @@ public sealed class CommonControllerTests
         var commonController = GetCommonControllerMemDb();
         var result = await commonController.GetLookupSystemUserByName("aa");
 
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as ListResultDto<LookupDto>;
             Assert.NotNull(actualResultValue);

@@ -1,4 +1,4 @@
-﻿using Comrade.Persistence.DataAccess;
+﻿using System;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
@@ -6,27 +6,28 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneControllerDeleteTests
+public class AirplaneControllerDeleteTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public AirplaneControllerDeleteTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
+    }
+
     [Fact]
     public async Task AirplaneController_Delete()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Delete")
-            .EnableSensitiveDataLogging().Options;
+        var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
 
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.Mediator);
+        _ = await airplaneController.Delete(airplaneId);
 
-        var idAirplane = 1;
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
-        _ = await airplaneController.Delete(idAirplane);
-
-        var repository = new AirplaneRepository(context);
-        var airplane = await repository.GetById(1);
+        var repository = new AirplaneRepository(_fixture.SqlContextFixture);
+        var airplane = await repository.GetById(airplaneId);
         Assert.Null(airplane);
     }
 }

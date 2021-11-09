@@ -1,34 +1,23 @@
 ﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Domain.Models;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
 public class UcSystemUserDelete : UseCase, IUcSystemUserDelete
 {
-    private readonly ISystemUserRepository _repository;
-    private readonly SystemUserDeleteValidation _systemUserDeleteValidation;
+    private readonly IMediator _mediator;
 
-    public UcSystemUserDelete(ISystemUserRepository repository,
-        SystemUserDeleteValidation systemUserDeleteValidation,
-        IUnitOfWork uow)
-        : base(uow)
+    public UcSystemUserDelete(IMediator mediator)
     {
-        _repository = repository;
-        _systemUserDeleteValidation = systemUserDeleteValidation;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(int id)
+    public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
-        var validate = await _systemUserDeleteValidation.Execute(id).ConfigureAwait(false);
-        if (!validate.Success) return validate;
-
-        _repository.Remove(id);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new DeleteResult<SystemUser>();
+        var entity = new SystemUserDeleteCommand { Id = id };
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

@@ -1,31 +1,28 @@
 ﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
-using Comrade.Core.Bases.Validations;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemUserCore.Validations;
 
-public class SystemUserForgotPasswordValidation : EntityValidation<SystemUser>
+public class SystemUserForgotPasswordValidation
 {
     private readonly SystemUserEditValidation _systemUserEditValidation;
 
-    public SystemUserForgotPasswordValidation(ISystemUserRepository repository,
-        SystemUserEditValidation systemUserEditValidation)
-        : base(repository)
+    public SystemUserForgotPasswordValidation(SystemUserEditValidation systemUserEditValidation)
     {
         _systemUserEditValidation = systemUserEditValidation;
     }
 
-    public ISingleResult<SystemUser> Execute(SystemUser entity)
+    public ISingleResult<Entity> Execute(SystemUser entity, SystemUser? recordExists)
     {
-        var recordExists = _systemUserEditValidation.Execute(entity).Result;
-
-        if (!recordExists.Success)
+        var systemUserEditValidationResult =
+            _systemUserEditValidation.Execute(entity, recordExists);
+        if (!systemUserEditValidationResult.Success)
         {
-            return new SingleResult<SystemUser>(1001, "TokenUser não exists");
+            return systemUserEditValidationResult;
         }
 
-
-        return recordExists;
+        return new SingleResult<Entity>(recordExists);
     }
 }

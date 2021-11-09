@@ -120,8 +120,11 @@
   <data name="CAMPO_DATA_MAIOR_QUE_HOJE" xml:space="preserve">
     <value>O campo {PropertyName} não pode ser maior do que a data atual.</value>
   </data>
-  <data name="CAMPO_MAIOR_IGUAL_ZERO" xml:space="preserve">
-    <value>O campo {PropertyName} precisa ser maior que ou igual a zero</value>
+  <data name="CAMPO_MAIOR_QUE_ZERO" xml:space="preserve">
+    <value>O campo {PropertyName} precisa ser maior que zero</value>
+  </data>
+  <data name="CAMPO_MENOR_QUE_ZERO" xml:space="preserve">
+    <value>O campo {PropertyName} precisa ser menor que zero</value>
   </data>
   <data name="CAMPO_OBRIGATORIO" xml:space="preserve">
     <value>O campo {PropertyName} é obrigatório!</value>

@@ -8,12 +8,6 @@ namespace Comrade.Application.Services.AirplaneServices.Validations;
 public class AirplaneValidation<TDto> : DtoValidation<TDto>
     where TDto : AirplaneDto
 {
-    protected void ValidateId()
-    {
-        RuleFor(c => c.Id)
-            .NotEqual(0);
-    }
-
     protected void ValidateCode()
     {
         RuleFor(v => v.Code)
@@ -33,8 +27,8 @@ public class AirplaneValidation<TDto> : DtoValidation<TDto>
     protected void ValidatePassengerQuantity()
     {
         RuleFor(v => v.PassengerQuantity)
-            .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
-            .GreaterThanOrEqualTo(0).WithMessage(ApplicationMessage.CAMPO_MAIOR_IGUAL_ZERO)
+            .NotNull().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
+            .GreaterThan(0).WithMessage(ApplicationMessage.CAMPO_MAIOR_QUE_ZERO)
             .WithName("PassengerQuantity");
     }
 }

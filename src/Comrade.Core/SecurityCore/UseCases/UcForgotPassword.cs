@@ -1,48 +1,23 @@
 ﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.SystemUserCore;
-using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Domain.Extensions;
-using Comrade.Domain.Models;
+using Comrade.Core.SecurityCore.Commands;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
 public class UcForgotPassword : UseCase, IUcForgotPassword
 {
-    private readonly IPasswordHasher _passwordHasher;
-    private readonly ISystemUserRepository _repository;
-    private readonly SystemUserForgotPasswordValidation _systemUserForgotPasswordValidation;
+    private readonly IMediator _mediator;
 
-    public UcForgotPassword(ISystemUserRepository repository,
-        SystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
-        IPasswordHasher passwordHasher, IUnitOfWork uow)
-        : base(uow)
+    public UcForgotPassword(IMediator mediator)
     {
-        _repository = repository;
-        _systemUserForgotPasswordValidation = systemUserForgotPasswordValidation;
-        _passwordHasher = passwordHasher;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(SystemUser entity)
+    public async Task<ISingleResult<Entity>> Execute(ForgotPasswordCommand entity)
     {
-        var result = _systemUserForgotPasswordValidation.Execute(entity);
-        if (!result.Success) return result;
-
-        var obj = result.Data!;
-
-        HydrateValues(obj);
-
-        _repository.Update(obj);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new EditResult<SystemUser>();
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 
-    private void HydrateValues(SystemUser target)
-    {
-        var ruleForgotPassword = "123456";
-        target.Password = _passwordHasher.Hash(ruleForgotPassword);
-    }
 }

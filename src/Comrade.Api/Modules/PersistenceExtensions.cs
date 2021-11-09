@@ -1,5 +1,6 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Persistence.DataAccess;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Comrade.Api.Modules;
 
@@ -31,24 +32,36 @@ public static class PersistenceExtensions
             .GetAwaiter()
             .GetResult();
 
+        var injectInitialData = featureManager
+            .IsEnabledAsync(nameof(CustomFeature.InjectInitialData))
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
 
         if (isMsSqlServerEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetValue<string>("PersistenceModule:MsSqlDb")));
+                    configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection")));
         }
         else if (isPostgresSqlEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
                 options.UseNpgsql(
-                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDb")));
+                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDbConnection")));
         }
         else
         {
             services.AddDbContext<ComradeContext>(options =>
-                options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging());
-            ComradeMemoryContextFake.AddDataFakeContext(services);
+                options.UseInMemoryDatabase("test_database").EnableSensitiveDataLogging()
+                    .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
+
+            if (injectInitialData)
+            {
+                var context = services.BuildServiceProvider()
+                    .GetService<ComradeContext>();
+                ComradeMemoryContextFake.AddDataFakeContext(context);
+            }
         }
 
         return services;

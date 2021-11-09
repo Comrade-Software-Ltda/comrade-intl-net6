@@ -2,35 +2,21 @@
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Core.AirplaneCore.UseCases;
-using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class AirplaneInjectionService
 {
-    public static AirplaneCommand GetAirplaneCommand(ComradeContext context, IMapper mapper)
+    public static AirplaneCommand GetAirplaneCommand(ComradeContext context,
+        IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var airplaneRepository = new AirplaneRepository(context);
-
-        var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
-
-        var airplaneEditValidation =
-            new AirplaneEditValidation(airplaneRepository, airplaneValidateSameCode);
-        var airplaneDeleteValidation = new AirplaneDeleteValidation(airplaneRepository);
-        var airplaneCreateValidation =
-            new AirplaneCreateValidation(airplaneRepository, airplaneValidateSameCode);
-        var ucAirplaneCreate =
-            new UcAirplaneCreate(airplaneRepository, airplaneCreateValidation, uow);
         var ucAirplaneDelete =
-            new UcAirplaneDelete(airplaneRepository, airplaneDeleteValidation, uow);
-        var ucAirplaneEdit =
-            new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
+            new UcAirplaneDelete(mediator);
 
-        return new AirplaneCommand(ucAirplaneEdit, ucAirplaneCreate,
-            ucAirplaneDelete, mapper);
+        return new AirplaneCommand(ucAirplaneDelete, mediator);
     }
 
     public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)

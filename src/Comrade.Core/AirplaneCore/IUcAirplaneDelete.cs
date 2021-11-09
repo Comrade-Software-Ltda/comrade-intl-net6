@@ -1,9 +1,9 @@
 ﻿using Comrade.Core.Bases.Interfaces;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
 
 namespace Comrade.Core.AirplaneCore;
 
 public interface IUcAirplaneDelete
 {
-    Task<ISingleResult<Airplane>> Execute(int id);
+    Task<ISingleResult<Entity>> Execute(Guid id);
 }

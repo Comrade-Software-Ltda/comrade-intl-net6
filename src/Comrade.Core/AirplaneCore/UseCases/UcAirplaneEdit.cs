@@ -1,27 +1,21 @@
-﻿using Comrade.Core.AirplaneCore.Validations;
+﻿using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.Messages;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.AirplaneCore.UseCases;
 
 public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
 {
-    private readonly AirplaneEditValidation _airplaneEditValidation;
-    private readonly IAirplaneRepository _repository;
+    private readonly IMediator _mediator;
 
-    public UcAirplaneEdit(IAirplaneRepository repository,
-        AirplaneEditValidation airplaneEditValidation,
-        IUnitOfWork uow)
-        : base(uow)
+    public UcAirplaneEdit(IMediator mediator)
     {
-        _repository = repository;
-        _airplaneEditValidation = airplaneEditValidation;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<Airplane>> Execute(Airplane entity)
+    public async Task<ISingleResult<Entity>> Execute(AirplaneEditCommand entity)
     {
         var isValid = ValidateEntity(entity);
         if (!isValid.Success)
@@ -29,25 +23,6 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
             return isValid;
         }
 
-        var result = await _airplaneEditValidation.Execute(entity).ConfigureAwait(false);
-        if (!result.Success) return result;
-
-        var obj = result.Data!;
-
-        HydrateValues(obj, entity);
-
-        _repository.Update(obj);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new EditResult<Airplane>(true,
-            BusinessMessage.MSG02);
-    }
-
-    private static void HydrateValues(Airplane target, Airplane source)
-    {
-        target.Code = source.Code;
-        target.PassengerQuantity = source.PassengerQuantity;
-        target.Model = source.Model;
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

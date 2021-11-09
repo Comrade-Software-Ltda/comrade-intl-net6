@@ -2,10 +2,16 @@ using Comrade.Api.Modules;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
+using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
+using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
+using Comrade.Persistence.DataAccess;
+using FluentValidation;
+using HealthChecks.UI.Client;
+using MediatR;
 
 namespace Comrade.Api;
 
@@ -33,7 +39,6 @@ public sealed class Startup
             .AddFeatureFlags(Configuration)
             .AddSqlServer(Configuration)
             .AddEntityRepository()
-            .AddHealthChecks(Configuration)
             .AddAuthentication(Configuration)
             .AddVersioning()
             .AddSwagger()
@@ -45,10 +50,21 @@ public sealed class Startup
 
         services.AddAutoMapperSetup();
         services.AddLogging();
+        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
+        services.Configure<MongoDbContextSettings>(
+            Configuration.GetSection(nameof(MongoDbContextSettings)));
+
+        services.AddSingleton<IMongoDbContextSettings>(sp =>
+            sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+
+        services.AddScoped<IMongoDbContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddMediatR(typeof(Startup));
 
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddValidatorsFromAssemblyContaining<EntityDto>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();
     }
@@ -62,14 +78,17 @@ public sealed class Startup
         IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())
+        {
             app.UseDeveloperExceptionPage();
+        }
         else
+        {
             app.UseExceptionHandler("/api/V1/CustomError")
                 .UseHsts();
+        }
 
         app
             .UseProxy(Configuration)
-            .UseHealthChecks()
             .UseCustomCors()
             .UseCustomHttpMetrics()
             .UseRouting()
@@ -77,6 +96,15 @@ public sealed class Startup
             .UseAuthentication()
             .UseAuthorization()
             .UseSerilogRequestLogging()
-            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapControllers();
+            });
     }
 }

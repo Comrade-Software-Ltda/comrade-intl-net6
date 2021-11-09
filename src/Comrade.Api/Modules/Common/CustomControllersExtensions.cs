@@ -1,5 +1,3 @@
-using Comrade.Api.Modules.Common.FeatureFlags;
-
 namespace Comrade.Api.Modules.Common;
 
 /// <summary>
@@ -12,16 +10,6 @@ public static class CustomControllersExtensions
     /// </summary>
     public static IServiceCollection AddCustomControllers(this IServiceCollection services)
     {
-        var featureManager = services
-            .BuildServiceProvider()
-            .GetRequiredService<IFeatureManager>();
-
-        var isErrorFilterEnabled = featureManager
-            .IsEnabledAsync(nameof(CustomFeature.ErrorFilter))
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
-
         services
             .AddHttpContextAccessor()
             .AddMvc(options =>

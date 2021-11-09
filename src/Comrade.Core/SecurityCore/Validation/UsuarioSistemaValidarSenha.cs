@@ -1,26 +1,24 @@
 ﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
-using Comrade.Core.Bases.Validations;
 using Comrade.Core.SystemUserCore;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 
 namespace Comrade.Core.SecurityCore.Validation;
 
-public class SystemUserPasswordValidation : EntityValidation<SystemUser>
+public class SystemUserPasswordValidation
 {
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _systemUserRepository;
 
     public SystemUserPasswordValidation(ISystemUserRepository systemUserRepository,
         IPasswordHasher passwordHasher)
-        : base(systemUserRepository)
     {
         _systemUserRepository = systemUserRepository;
         _passwordHasher = passwordHasher;
     }
 
-    public ISingleResult<SystemUser> Execute(int key, string password)
+    public ISingleResult<SystemUser> Execute(Guid key, string password)
     {
         var usuSession = _systemUserRepository.GetById(key).Result;
         var keyValidation = usuSession != null;

@@ -1,6 +1,8 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Data;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using Comrade.Persistence.DataAccess;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Comrade.Persistence.Bases;
 
@@ -9,6 +11,7 @@ public class Repository<TEntity> : IRepository<TEntity>
 {
     private readonly ComradeContext _db;
     private readonly DbSet<TEntity> _dbSet;
+    private IDbContextTransaction? _currentTransaction;
     private bool _disposed;
 
     public Repository(ComradeContext context)
@@ -17,12 +20,51 @@ public class Repository<TEntity> : IRepository<TEntity>
         _dbSet = _db.Set<TEntity>();
     }
 
+    public async Task BeginTransactionAsync()
+    {
+        if (_currentTransaction != null)
+        {
+            return;
+        }
+
+        _currentTransaction = await _db.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
+            .ConfigureAwait(false);
+    }
+
+    public async Task CommitTransactionAsync()
+    {
+        try
+        {
+            await _db.SaveChangesAsync().ConfigureAwait(false);
+
+            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask).ConfigureAwait(false);
+        }
+        catch
+        {
+            RollbackTransaction();
+            throw;
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
+    }
+
+    public virtual async Task CommitChangesAsync()
+    {
+        await _db.SaveChangesAsync().ConfigureAwait(false);
+    }
+
     public virtual async Task Add(TEntity obj)
     {
         await _dbSet.AddAsync(obj).ConfigureAwait(false);
     }
 
-    public virtual async Task Add(IList<TEntity> obj)
+    public virtual async Task AddAll(IList<TEntity> obj)
     {
         await _dbSet.AddRangeAsync(obj).ConfigureAwait(false);
     }
@@ -32,12 +74,12 @@ public class Repository<TEntity> : IRepository<TEntity>
         _dbSet.Update(obj);
     }
 
-    public virtual void Update(IList<TEntity> obj)
+    public virtual void UpdateAll(IList<TEntity> obj)
     {
         _dbSet.UpdateRange(obj);
     }
 
-    public virtual void Remove(int id)
+    public virtual void Remove(Guid id)
     {
         var removedItem = _dbSet.Find(id);
         if (removedItem != null)
@@ -46,29 +88,29 @@ public class Repository<TEntity> : IRepository<TEntity>
         }
     }
 
-    public virtual void Remove(IList<int> id)
+    public virtual void RemoveAll(IList<Guid> id)
     {
         var remove = _dbSet.Where(x => id.Contains(x.Id));
         _dbSet.RemoveRange(remove);
     }
 
-    public virtual async Task<TEntity?> GetById(int id)
+    public virtual async Task<TEntity?> GetById(Guid id)
     {
         return await GetById(id, null, includes: null).ConfigureAwait(false);
     }
 
-    public virtual async Task<TEntity?> GetById(int id, params string[] includes)
+    public virtual async Task<TEntity?> GetById(Guid id, params string[] includes)
     {
         return await GetById(id, null, includes).ConfigureAwait(false);
     }
 
-    public virtual async Task<TEntity?> GetById(int id,
+    public virtual async Task<TEntity?> GetById(Guid id,
         Expression<Func<TEntity, TEntity>> projection)
     {
         return await GetById(id, projection, null).ConfigureAwait(false);
     }
 
-    public virtual async Task<TEntity?> GetById(int id,
+    public virtual async Task<TEntity?> GetById(Guid id,
         Expression<Func<TEntity, TEntity>>? projection,
         params string[]? includes)
     {
@@ -99,7 +141,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await query.FirstOrDefaultAsync().ConfigureAwait(false);
     }
 
-    public virtual async Task<bool> ValueExists(int id, string value)
+    public virtual async Task<bool> ValueExists(Guid id, string value)
     {
         var exists = await GetAll()
             .Where(p => p.Id != id
@@ -172,6 +214,22 @@ public class Repository<TEntity> : IRepository<TEntity>
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    public void RollbackTransaction()
+    {
+        try
+        {
+            _currentTransaction?.Rollback();
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
     }
 
     protected virtual void Dispose(bool disposing)

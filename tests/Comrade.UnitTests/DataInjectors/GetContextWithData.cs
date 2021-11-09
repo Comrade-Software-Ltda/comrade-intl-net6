@@ -10,7 +10,7 @@ public static class GetContextWithData
     {
         context.Airplanes.Add(new Airplane
         {
-            Id = 70,
+            Id = new Guid(),
             Code = "Test",
             Model = "Test",
             PassengerQuantity = 666,

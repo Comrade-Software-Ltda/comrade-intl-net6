@@ -1,42 +1,27 @@
-﻿using Comrade.Domain.Token;
+﻿using Comrade.Core.SecurityCore.Commands;
+using MediatR;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
 public class UcGenerateToken : IUcGenerateToken
 {
-    private readonly IConfiguration _configuration;
+    private readonly IMediator _mediator;
 
-    public UcGenerateToken(
-        IConfiguration configuration
-    )
+    public UcGenerateToken(IMediator mediator)
     {
-        _configuration = configuration;
+        _mediator = mediator;
     }
 
-    public string Execute(TokenUser tokenUser)
+    public async Task<string> Execute(GenerateTokenCommand entity)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var claims = new List<Claim>
+        try
         {
-            new("Key", tokenUser.Key),
-            new(ClaimTypes.Name, tokenUser.Name)
-        };
-
-        foreach (var role in tokenUser.Roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
+            return await _mediator.Send(entity).ConfigureAwait(false);
         }
-
-        var tokenDescriptor = new SecurityTokenDescriptor
+        catch (Exception e)
         {
-            Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = credentials
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

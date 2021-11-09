@@ -4,9 +4,9 @@ using Comrade.Application.Services.SystemUserServices.Dtos;
 
 namespace Comrade.Application.Services.SystemUserServices.Commands;
 
-public interface ISystemUserCommand : IService
+public interface ISystemUserCommand
 {
     Task<ISingleResultDto<EntityDto>> Create(SystemUserCreateDto dto);
     Task<ISingleResultDto<EntityDto>> Edit(SystemUserEditDto dto);
-    Task<ISingleResultDto<EntityDto>> Delete(int id);
+    Task<ISingleResultDto<EntityDto>> Delete(Guid id);
 }

@@ -1,36 +1,23 @@
-﻿using Comrade.Core.AirplaneCore.Validations;
+﻿using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.Messages;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.AirplaneCore.UseCases;
 
 public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
 {
-    private readonly AirplaneDeleteValidation _airplaneDeleteValidation;
-    private readonly IAirplaneRepository _repository;
+    private readonly IMediator _mediator;
 
-    public UcAirplaneDelete(IAirplaneRepository repository,
-        AirplaneDeleteValidation airplaneDeleteValidation,
-        IUnitOfWork uow)
-        : base(uow)
+    public UcAirplaneDelete(IMediator mediator)
     {
-        _repository = repository;
-        _airplaneDeleteValidation = airplaneDeleteValidation;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<Airplane>> Execute(int id)
+    public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
-        var validate = await _airplaneDeleteValidation.Execute(id).ConfigureAwait(false);
-        if (!validate.Success) return validate;
-
-        _repository.Remove(id);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new DeleteResult<Airplane>(true,
-            BusinessMessage.MSG03);
+        var entity = new AirplaneDeleteCommand { Id = id };
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

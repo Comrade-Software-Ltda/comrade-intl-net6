@@ -1,57 +1,28 @@
 ﻿using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
-using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public sealed class UcAuthenticationInjection
 {
-    public static UcUpdatePassword GetUcUpdatePassword(ComradeContext context)
+    public static UcUpdatePassword GetUcUpdatePassword(IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var systemUserCoreRepository = new SystemUserRepository(context);
-
-        var systemUserCoreEditValidation =
-            new SystemUserEditValidation(systemUserCoreRepository
-            );
-        var passwordHasher = new PasswordHasher(new HashingOptions());
-
-        return new UcUpdatePassword(systemUserCoreRepository,
-            systemUserCoreEditValidation, passwordHasher, uow);
+        return new UcUpdatePassword(mediator);
     }
 
-    public static UcForgotPassword GetUcForgotPassword(ComradeContext context)
+    public static UcForgotPassword GetUcForgotPassword(IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var systemUserCoreRepository = new SystemUserRepository(context);
-        var systemUserEditValidation = new SystemUserEditValidation(systemUserCoreRepository);
-        var systemUserForgotPasswordValidation =
-            new SystemUserForgotPasswordValidation(systemUserCoreRepository,
-                systemUserEditValidation
-            );
-        var passwordHasher = new PasswordHasher(new HashingOptions());
-
-        return new UcForgotPassword(systemUserCoreRepository,
-            systemUserForgotPasswordValidation,
-            passwordHasher, uow);
+        return new UcForgotPassword(mediator);
     }
 
-    public static UcValidateLogin GetUcValidateLogin(ComradeContext context)
+    public static UcValidateLogin GetUcValidateLogin(ComradeContext context, IMediator mediator)
     {
-        var myConfiguration = new Dictionary<string, string>
-        {
-            { "JWT:Key", "afsdkjasjflxswafsdklk434orqiwup3457u-34oewir4irroqwiffv48mfs" }
-        };
-
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(myConfiguration)
-            .Build();
-
         var systemUserCoreRepository = new SystemUserRepository(context);
-        var ucGenerateToken = new UcGenerateToken(configuration);
+        var ucGenerateToken = new UcGenerateToken(mediator);
 
         var passwordHasher = new PasswordHasher(new HashingOptions());
 

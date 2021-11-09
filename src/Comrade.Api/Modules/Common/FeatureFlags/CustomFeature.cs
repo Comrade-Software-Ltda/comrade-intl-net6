@@ -21,11 +21,6 @@ public enum CustomFeature
     Common,
 
     /// <summary>
-    ///     Filter errors out.
-    /// </summary>
-    ErrorFilter,
-
-    /// <summary>
     ///     HealthChecks.
     /// </summary>
     HealthChecks,
@@ -44,6 +39,12 @@ public enum CustomFeature
     ///     Use Postgres Sql Persistence.
     /// </summary>
     PostgresSql,
+
+
+    /// <summary>
+    ///     Inject Initial Data on memory Db.
+    /// </summary>
+    InjectInitialData,
 
 
     /// <summary>

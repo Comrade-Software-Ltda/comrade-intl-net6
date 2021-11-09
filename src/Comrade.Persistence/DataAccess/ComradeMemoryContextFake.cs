@@ -11,11 +11,8 @@ public static class ComradeMemoryContextFake
     /// <summary>
     ///     To reset memory database use -> context.Database.EnsureDeleted().
     /// </summary>
-    public static void AddDataFakeContext(IServiceCollection serviceCollection)
+    public static void AddDataFakeContext(ComradeContext? context)
     {
-        var context = serviceCollection.BuildServiceProvider()
-            .GetService<ComradeContext>();
-
         var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
 
         if (context != null && context.Airplanes.Any())
@@ -27,8 +24,11 @@ public static class ComradeMemoryContextFake
         {
             if (context != null && assembly is not null)
             {
-                var airplanes = JsonUtilities.GetListFromJson<Airplane>(assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
-                var systemUser = JsonUtilities.GetListFromJson<SystemUser>(assembly.GetManifestResourceStream($"{JsonPath}.system-user.json"));
+                var airplanes =
+                    JsonUtilities.GetListFromJson<Airplane>(
+                        assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
+                var systemUser = JsonUtilities.GetListFromJson<SystemUser>(
+                    assembly.GetManifestResourceStream($"{JsonPath}.system-user.json"));
 
                 context.Airplanes.AddRange(airplanes!);
                 context.SystemUsers.AddRange(systemUser!);

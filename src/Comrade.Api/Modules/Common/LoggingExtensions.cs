@@ -22,7 +22,7 @@ public static class LoggingExtensions
     public static void CreateLogSqlServer(LoggerProviderCollection providers,
         IConfigurationRoot configurationRoot)
     {
-        var connection = configurationRoot.GetValue<string>("ConnectionStrings:MsSqlDb");
+        var connection = configurationRoot.GetValue<string>("ConnectionStrings:MsSqlDbConnection");
 
         var columnOptions = new ColumnOptions
         {
@@ -40,7 +40,7 @@ public static class LoggingExtensions
                 new MSSqlServerSinkOptions
                 {
                     AutoCreateSqlTable = true,
-                    TableName = "LogAPIContagem"
+                    TableName = "log_auth_user_service"
                 }, columnOptions: columnOptions)
             .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
             .WriteTo.MongoDB("mongodb://localhost/local")

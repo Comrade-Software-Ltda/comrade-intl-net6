@@ -1,4 +1,4 @@
-using AutoMapper;
+using System.ComponentModel.DataAnnotations;
 using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
@@ -8,7 +8,6 @@ using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V1.AirplaneApi;
 
@@ -22,14 +21,12 @@ public class AirplaneController : ComradeController
     private readonly IAirplaneCommand _airplaneCommand;
     private readonly IAirplaneQuery _airplaneQuery;
     private readonly ILogger<AirplaneController> _logger;
-    private readonly IMapper _mapper;
 
     public AirplaneController(IAirplaneCommand airplaneCommand,
-        IAirplaneQuery airplaneQuery, IMapper mapper, ILogger<AirplaneController> logger)
+        IAirplaneQuery airplaneQuery, ILogger<AirplaneController> logger)
     {
         _airplaneCommand = airplaneCommand;
         _airplaneQuery = airplaneQuery;
-        _mapper = mapper;
         _logger = logger;
     }
 
@@ -39,14 +36,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            PaginationFilter? paginationFilter = null;
-            if (paginationQuery != null)
-            {
-                paginationFilter =
-                    _mapper.Map<PaginationQuery, PaginationFilter>(paginationQuery);
-            }
-
-            var result = await _airplaneQuery.GetAll(paginationFilter).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetAll(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -60,9 +50,9 @@ public class AirplaneController : ComradeController
     ///     Get an airplane details.
     /// </summary>
     /// <param name="airplaneId"></param>
-    [HttpGet("get-by-id/{airplaneId:int}")]
+    [HttpGet("get-by-id/{airplaneId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] int airplaneId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] Guid airplaneId)
     {
         try
         {
@@ -78,7 +68,7 @@ public class AirplaneController : ComradeController
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] AirplaneCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] AirplaneCreateDto dto)
     {
         try
         {
@@ -94,7 +84,7 @@ public class AirplaneController : ComradeController
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] AirplaneEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] AirplaneEditDto dto)
     {
         try
         {
@@ -108,9 +98,9 @@ public class AirplaneController : ComradeController
         }
     }
 
-    [HttpDelete("delete/{airplaneId:int}")]
+    [HttpDelete("delete/{airplaneId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] int airplaneId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] Guid airplaneId)
     {
         try
         {

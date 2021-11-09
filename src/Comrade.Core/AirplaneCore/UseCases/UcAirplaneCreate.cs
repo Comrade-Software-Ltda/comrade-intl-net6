@@ -1,28 +1,21 @@
-﻿using Comrade.Core.AirplaneCore.Validations;
+﻿using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.Messages;
-using Comrade.Domain.Extensions;
-using Comrade.Domain.Models;
+using Comrade.Domain.Bases;
+using MediatR;
 
 namespace Comrade.Core.AirplaneCore.UseCases;
 
 public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
 {
-    private readonly AirplaneCreateValidation _airplaneCreateValidation;
-    private readonly IAirplaneRepository _repository;
+    private readonly IMediator _mediator;
 
-    public UcAirplaneCreate(IAirplaneRepository repository,
-        AirplaneCreateValidation airplaneCreateValidation,
-        IUnitOfWork uow)
-        : base(uow)
+    public UcAirplaneCreate(IMediator mediator)
     {
-        _repository = repository;
-        _airplaneCreateValidation = airplaneCreateValidation;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<Airplane>> Execute(Airplane entity)
+    public async Task<ISingleResult<Entity>> Execute(AirplaneCreateCommand entity)
     {
         var isValid = ValidateEntity(entity);
         if (!isValid.Success)
@@ -30,14 +23,6 @@ public class UcAirplaneCreate : UseCase, IUcAirplaneCreate
             return isValid;
         }
 
-        var validate = await _airplaneCreateValidation.Execute(entity).ConfigureAwait(false);
-        if (!validate.Success) return validate;
-        entity.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
-        await _repository.Add(entity).ConfigureAwait(false);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new CreateResult<Airplane>(true,
-            BusinessMessage.MSG01);
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

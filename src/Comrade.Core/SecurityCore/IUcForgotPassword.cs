@@ -1,9 +1,10 @@
 ﻿using Comrade.Core.Bases.Interfaces;
-using Comrade.Domain.Models;
+using Comrade.Core.SecurityCore.Commands;
+using Comrade.Domain.Bases;
 
 namespace Comrade.Core.SecurityCore;
 
 public interface IUcForgotPassword
 {
-    Task<ISingleResult<SystemUser>> Execute(SystemUser entity);
+    Task<ISingleResult<Entity>> Execute(ForgotPasswordCommand entity);
 }

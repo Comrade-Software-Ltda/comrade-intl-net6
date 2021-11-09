@@ -1,25 +1,22 @@
 ﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
-using Comrade.Core.Bases.Results;
-using Comrade.Core.SystemUserCore.Validations;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
+using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
 public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
 {
-    private readonly ISystemUserRepository _repository;
-    private readonly SystemUserEditValidation _systemUserEditValidation;
+    private readonly IMediator _mediator;
 
-    public UcSystemUserEdit(ISystemUserRepository repository,
-        SystemUserEditValidation systemUserEditValidation, IUnitOfWork uow)
-        : base(uow)
+    public UcSystemUserEdit(IMediator mediator)
     {
-        _repository = repository;
-        _systemUserEditValidation = systemUserEditValidation;
+        _mediator = mediator;
     }
 
-    public async Task<ISingleResult<SystemUser>> Execute(SystemUser entity)
+    public async Task<ISingleResult<Entity>> Execute(SystemUserEditCommand entity)
     {
         var isValid = ValidateEntity(entity);
         if (!isValid.Success)
@@ -27,18 +24,7 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
             return isValid;
         }
 
-        var result = await _systemUserEditValidation.Execute(entity).ConfigureAwait(false);
-        if (!result.Success) return result;
-
-        var obj = result.Data!;
-
-        HydrateValues(obj, entity);
-
-        _repository.Update(obj);
-
-        _ = await Commit().ConfigureAwait(false);
-
-        return new EditResult<SystemUser>();
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 
     private static void HydrateValues(SystemUser target, SystemUser source)

@@ -24,7 +24,8 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:Swagger"] = "true",
                         ["FeatureManagement:Authentication"] = "true",
                         ["FeatureManagement:SQLServer"] = "false",
-                        ["FeatureManagement:PostgresSql"] = "false"
+                        ["FeatureManagement:PostgresSql"] = "false",
+                        ["FeatureManagement:InjectInitialData"] = "true"
                     });
             });
     }

@@ -6,10 +6,9 @@ public class AuthenticationDto : EntityDto
 {
     public AuthenticationDto()
     {
-        Key = "";
         Password = "";
     }
 
-    public string Key { get; set; }
+    public Guid Key { get; set; }
     public string Password { get; set; }
 }

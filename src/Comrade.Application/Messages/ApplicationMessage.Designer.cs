@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Comrade.Application.Messages; 
+namespace Comrade.Application.Messages {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Comrade.Application.Messages;
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ApplicationMessage {
@@ -70,11 +70,20 @@ namespace Comrade.Application.Messages;
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O campo {PropertyName} precisa ser maior que ou igual a zero.
+        ///   Looks up a localized string similar to O campo {PropertyName} precisa ser maior que zero.
         /// </summary>
-        public static string CAMPO_MAIOR_IGUAL_ZERO {
+        public static string CAMPO_MAIOR_QUE_ZERO {
             get {
-                return ResourceManager.GetString("CAMPO_MAIOR_IGUAL_ZERO", resourceCulture);
+                return ResourceManager.GetString("CAMPO_MAIOR_QUE_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo {PropertyName} precisa ser menor que zero.
+        /// </summary>
+        public static string CAMPO_MENOR_QUE_ZERO {
+            get {
+                return ResourceManager.GetString("CAMPO_MENOR_QUE_ZERO", resourceCulture);
             }
         }
         
@@ -114,3 +123,4 @@ namespace Comrade.Application.Messages;
             }
         }
     }
+}

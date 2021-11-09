@@ -8,25 +8,27 @@ using Comrade.Core.AirplaneCore;
 
 namespace Comrade.Application.Services.AirplaneServices.Queries;
 
-public class AirplaneQuery : Service, IAirplaneQuery
+public class AirplaneQuery : IAirplaneQuery
 {
+    private readonly IMapper _mapper;
     private readonly IAirplaneRepository _repository;
 
     public AirplaneQuery(IAirplaneRepository repository,
         IMapper mapper)
-        : base(mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     public async Task<IPageResultDto<AirplaneDto>> GetAll(
-        PaginationFilter? paginationFilter = null)
+        PaginationQuery? paginationQuery = null)
     {
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<AirplaneDto> list;
         if (paginationFilter == null)
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<AirplaneDto>(Mapper.ConfigurationProvider)
+                .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
                 .ToList()).ConfigureAwait(false);
 
             return new PageResultDto<AirplaneDto>(list);
@@ -36,16 +38,16 @@ public class AirplaneQuery : Service, IAirplaneQuery
 
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<AirplaneDto>(Mapper.ConfigurationProvider)
+            .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
     }
 
-    public async Task<ISingleResultDto<AirplaneDto>> GetById(int id)
+    public async Task<ISingleResultDto<AirplaneDto>> GetById(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
-        var dto = Mapper.Map<AirplaneDto>(entity);
+        var dto = _mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }
 }

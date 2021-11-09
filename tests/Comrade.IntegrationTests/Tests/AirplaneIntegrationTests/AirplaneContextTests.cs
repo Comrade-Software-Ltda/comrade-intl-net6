@@ -1,24 +1,26 @@
-﻿using Comrade.Persistence.DataAccess;
+﻿using System;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneContextTests
+public class AirplaneContextTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public AirplaneContextTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
+    }
+
     [Fact]
     public async Task Airplane_Context()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_Airplane_Context")
-            .EnableSensitiveDataLogging().Options;
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-        var repository = new AirplaneRepository(context);
-        var airplane = await repository.GetById(1);
+        var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
+        var repository = new AirplaneRepository(_fixture.SqlContextFixture);
+        var airplane = await repository.GetById(airplaneId);
         Assert.NotNull(airplane);
     }
 }

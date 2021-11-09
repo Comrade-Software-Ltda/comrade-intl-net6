@@ -1,35 +1,17 @@
 ﻿using Comrade.Core.AirplaneCore.UseCases;
-using Comrade.Core.AirplaneCore.Validations;
-using Comrade.Persistence.DataAccess;
-using Comrade.Persistence.Repositories;
+using MediatR;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public sealed class UcAirplaneInjection
 {
-    public static UcAirplaneCreate GetUcAirplaneCreate(ComradeContext context)
+    public static UcAirplaneCreate GetUcAirplaneCreate(IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var airplaneRepository = new AirplaneRepository(context);
-
-        var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
-
-        var airplaneCreateValidation =
-            new AirplaneCreateValidation(airplaneRepository, airplaneValidateSameCode);
-
-        return new UcAirplaneCreate(airplaneRepository, airplaneCreateValidation, uow);
+        return new UcAirplaneCreate(mediator);
     }
 
-    public static UcAirplaneEdit GetUcAirplaneEdit(ComradeContext context)
+    public static UcAirplaneEdit GetUcAirplaneEdit(IMediator mediator)
     {
-        var uow = new UnitOfWork(context);
-        var airplaneRepository = new AirplaneRepository(context);
-
-        var airplaneValidateSameCode = new AirplaneValidateSameCode(airplaneRepository);
-
-        var airplaneEditValidation =
-            new AirplaneEditValidation(airplaneRepository, airplaneValidateSameCode);
-
-        return new UcAirplaneEdit(airplaneRepository, airplaneEditValidation, uow);
+        return new UcAirplaneEdit(mediator);
     }
 }

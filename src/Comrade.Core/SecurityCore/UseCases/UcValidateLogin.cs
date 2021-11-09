@@ -1,6 +1,6 @@
 ﻿using Comrade.Core.Bases.Results;
+using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SecurityCore.Validation;
-using Comrade.Domain.Token;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
@@ -18,35 +18,33 @@ public class UcValidateLogin : IUcValidateLogin
         _generateToken = generateToken;
     }
 
-    public async Task<SecurityResult> Execute(string key, string password)
+    public async Task<SecurityResult> Execute(Guid key, string password)
     {
-        var success = int.TryParse(key, out var number);
-        if (success)
+        var result = await Task.Run(async () =>
         {
-            var result = await Task.Run(() =>
+            var resultPassword = _systemUserPasswordValidation.Execute(key, password);
+
+            if (resultPassword.Success)
             {
-                var resultPassword = _systemUserPasswordValidation.Execute(number, password);
+                var selectedUser = resultPassword.Data!;
 
+                var roles = new List<string> { "Role" };
 
-                if (resultPassword.Success)
+                var user = new GenerateTokenCommand()
                 {
-                    var selectedUser = resultPassword.Data!;
+                    Id = key,
+                    Name = selectedUser.Name,
+                    Token = "",
+                    Roles = roles
+                };
+                user.Token = await _generateToken.Execute(user).ConfigureAwait(false);
 
-                    var profile = new List<string> { "Role" };
+                return new SecurityResult(user);
+            }
 
-                    var user = new TokenUser(key, selectedUser.Name, "", profile);
+            return new SecurityResult(resultPassword.Code, resultPassword.Message);
+        }).ConfigureAwait(false);
 
-                    user.Token = _generateToken.Execute(user);
-
-                    return new SecurityResult(user);
-                }
-
-                return new SecurityResult(resultPassword.Code, resultPassword.Message);
-            }).ConfigureAwait(false);
-
-            return result;
-        }
-
-        return new SecurityResult(400, "Error");
+        return result;
     }
 }

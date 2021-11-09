@@ -2,7 +2,7 @@
 
 public interface IEntity
 {
-    int Id { get; }
-    int Key { get; }
+    Guid Id { get; }
+    Guid Key { get; }
     string Value { get; }
 }

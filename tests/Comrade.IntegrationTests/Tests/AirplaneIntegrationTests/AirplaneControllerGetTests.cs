@@ -1,32 +1,32 @@
-﻿using Comrade.Application.Bases;
+﻿using System;
+using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
-using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneControllerGetTests
+public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
 {
+    private readonly ServiceProviderFixture _fixture;
+
+    public AirplaneControllerGetTests(ServiceProviderFixture fixture)
+    {
+        _fixture = fixture;
+        InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
+    }
+
     [Fact]
     public async Task AirplaneController_Get()
     {
-        var options = new DbContextOptionsBuilder<ComradeContext>()
-            .UseInMemoryDatabase("test_database_AirplaneController_Get")
-            .EnableSensitiveDataLogging().Options;
+        var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
+        var airplaneController =
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.Mediator);
+        var result = await airplaneController.GetById(airplaneId);
 
-
-        var idAirplane = 1;
-
-        await using var context = new ComradeContext(options);
-        await context.Database.EnsureCreatedAsync();
-        InjectDataOnContextBase.InitializeDbForTests(context);
-
-        var airplaneController = AirplaneInjectionController.GetAirplaneController(context);
-        var result = await airplaneController.GetById(idAirplane);
-
-        if (result is OkObjectResult okResult)
+        if (result is ObjectResult okResult)
         {
             var actualResultValue = okResult.Value as SingleResultDto<AirplaneDto>;
             Assert.NotNull(actualResultValue);

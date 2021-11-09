@@ -2,6 +2,6 @@
 
 public interface ILookupDto
 {
-    int Key { get; set; }
+    Guid Key { get; set; }
     string Value { get; set; }
 }
