@@ -19,5 +19,4 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
     {
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
-
 }

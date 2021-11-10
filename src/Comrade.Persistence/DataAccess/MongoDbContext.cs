@@ -24,17 +24,12 @@ public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
     public void ReplaceOne<T>(T obj) where T : Entity
     {
         GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj,
-            new ReplaceOptions() { IsUpsert = true });
+            new ReplaceOptions { IsUpsert = true });
     }
 
     public void DeleteOne<T>(Guid id) where T : Entity
     {
         GetCollection<T>().DeleteOne(x => x.Id.Equals(id));
-    }
-
-    private IMongoCollection<T> GetCollection<T>()
-    {
-        return _mongoDatabase.GetCollection<T>(nameof(T));
     }
 
     public IQueryable<T> GetAll<T>() where T : Entity
@@ -49,5 +44,10 @@ public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
 
         var result = await GetCollection<T>().FindAsync<T>(eqFilter).ConfigureAwait(false);
         return await result.FirstOrDefaultAsync().ConfigureAwait(false);
+    }
+
+    private IMongoCollection<T> GetCollection<T>()
+    {
+        return _mongoDatabase.GetCollection<T>(nameof(T));
     }
 }

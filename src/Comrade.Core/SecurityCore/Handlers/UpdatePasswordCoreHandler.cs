@@ -1,4 +1,5 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SecurityCore.Commands;
@@ -8,17 +9,16 @@ using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SecurityCore.Handlers;
 
 public class
     UpdatePasswordCoreHandler : IRequestHandler<UpdatePasswordCommand, ISingleResult<Entity>>
 {
+    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _repository;
     private readonly SystemUserEditValidation _systemUserEditValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
 
     public UpdatePasswordCoreHandler(IPasswordHasher passwordHasher,
         ISystemUserRepository repository, SystemUserEditValidation systemUserEditValidation,
@@ -59,6 +59,7 @@ public class
 
         return new SingleResult<Entity>(request);
     }
+
     private void HydrateValues(SystemUser target, SystemUser source)
     {
         target.Password = _passwordHasher.Hash(source.Password);

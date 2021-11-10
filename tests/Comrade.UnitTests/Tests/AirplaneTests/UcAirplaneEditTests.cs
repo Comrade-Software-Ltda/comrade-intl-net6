@@ -1,3 +1,4 @@
+using System.Threading;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
 using Comrade.Core.AirplaneCore.Validations;
@@ -10,7 +11,6 @@ using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.TestDatas;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using System.Threading;
 using Xunit;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests;

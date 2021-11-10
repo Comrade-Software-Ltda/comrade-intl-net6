@@ -1,4 +1,5 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemUserCore.Commands;
@@ -6,7 +7,6 @@ using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SystemUserCore.Handlers;
 
