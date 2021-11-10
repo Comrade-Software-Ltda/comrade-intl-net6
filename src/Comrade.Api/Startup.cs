@@ -3,6 +3,7 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
+using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
@@ -59,6 +60,7 @@ public sealed class Startup
             sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
 
         services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
+        services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddMediatR(typeof(Startup));

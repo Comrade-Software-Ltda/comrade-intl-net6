@@ -1,5 +1,4 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Bases.Interfaces;
+﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using MongoDB.Driver;
@@ -38,8 +37,17 @@ public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
         return _mongoDatabase.GetCollection<T>(nameof(T));
     }
 
-    public IQueryable<T> GetAll<T>() where T : EntityDto
+    public IQueryable<T> GetAll<T>() where T : Entity
     {
         return GetCollection<T>().AsQueryable();
+    }
+
+    public async Task<T> GetById<T>(Guid id) where T : Entity?
+    {
+        var filter = Builders<T>.Filter;
+        var eqFilter = filter.Eq(x => x.Id, id);
+
+        var result = await GetCollection<T>().FindAsync<T>(eqFilter).ConfigureAwait(false);
+        return await result.FirstOrDefaultAsync().ConfigureAwait(false);
     }
 }
