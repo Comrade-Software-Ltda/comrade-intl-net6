@@ -21,7 +21,8 @@ public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
     public async Task Airplane_Claim()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
         var testObject = new AirplaneCreateDto

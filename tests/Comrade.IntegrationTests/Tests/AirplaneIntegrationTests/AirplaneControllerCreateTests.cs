@@ -26,7 +26,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
@@ -50,7 +51,8 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);

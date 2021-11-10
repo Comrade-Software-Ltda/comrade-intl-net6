@@ -22,7 +22,8 @@ public class AirplaneControllerDeleteTests : IClassFixture<ServiceProviderFixtur
         var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         _ = await airplaneController.Delete(airplaneId);
 

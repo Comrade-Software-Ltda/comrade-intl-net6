@@ -6,12 +6,14 @@ using Xunit.Abstractions;
 
 namespace Comrade.IntegrationTests.Tests.LookupIntegrationTests;
 
-public sealed class CommonControllerLookupSystemUserPredicateTests : IClassFixture<ServiceProviderFixture>
+public sealed class
+    CommonControllerLookupSystemUserPredicateTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
     private readonly ITestOutputHelper _output;
 
-    public CommonControllerLookupSystemUserPredicateTests(ITestOutputHelper output, ServiceProviderFixture fixture)
+    public CommonControllerLookupSystemUserPredicateTests(ITestOutputHelper output,
+        ServiceProviderFixture fixture)
     {
         _output = output;
         _fixture = fixture;

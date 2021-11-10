@@ -34,7 +34,8 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.Edit(testObject);
 
