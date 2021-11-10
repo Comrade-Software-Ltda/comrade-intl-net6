@@ -40,7 +40,7 @@ public static class GetServiceCollection
         services.AddAutoMapperSetup();
         services.AddLogging();
 
-        services.AddScoped<IMongoDbContext, MongoDbContext>();
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
 
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

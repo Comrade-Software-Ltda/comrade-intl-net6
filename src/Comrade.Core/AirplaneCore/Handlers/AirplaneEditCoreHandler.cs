@@ -15,10 +15,10 @@ public class
 {
     private readonly IAirplaneEditValidation _airplaneEditValidation;
     private readonly IAirplaneRepository _repository;
-    private readonly IMongoDbContext _mongoDbContext;
+    private readonly IMongoDbCommandContext _mongoDbContext;
 
     public AirplaneEditCoreHandler(IAirplaneEditValidation airplaneEditValidation,
-        IAirplaneRepository repository, IMongoDbContext mongoDbContext)
+        IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _airplaneEditValidation = airplaneEditValidation;
         _repository = repository;

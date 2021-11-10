@@ -2,7 +2,7 @@
 
 namespace Comrade.Core.Bases.Interfaces;
 
-public interface IMongoDbContext
+public interface IMongoDbCommandContext
 {
     void InsertOne<T>(T obj) where T : Entity;
 

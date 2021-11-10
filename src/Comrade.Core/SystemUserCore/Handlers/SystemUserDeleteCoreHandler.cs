@@ -13,12 +13,12 @@ namespace Comrade.Core.SystemUserCore.Handlers;
 public class
     SystemUserDeleteCoreHandler : IRequestHandler<SystemUserDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly IMongoDbContext _mongoDbContext;
+    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemUserRepository _repository;
     private readonly SystemUserDeleteValidation _systemUserDeleteValidation;
 
     public SystemUserDeleteCoreHandler(SystemUserDeleteValidation systemUserDeleteValidation,
-        ISystemUserRepository repository, IMongoDbContext mongoDbContext)
+        ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemUserDeleteValidation = systemUserDeleteValidation;
         _repository = repository;

@@ -33,7 +33,7 @@ public sealed class UcAirplaneEditTests
         var repository = new AirplaneRepository(context);
 
         var validation = new Mock<IAirplaneEditValidation>();
-        var mongo = new Mock<IMongoDbContext>();
+        var mongo = new Mock<IMongoDbCommandContext>();
 
         validation.Setup(s =>
                 s.Execute(It.IsAny<Airplane>(), It.IsAny<Airplane>()))

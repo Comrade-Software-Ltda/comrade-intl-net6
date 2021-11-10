@@ -1,11 +1,12 @@
 ﻿using Comrade.Application.Bases;
+using Comrade.Application.Bases.Interfaces;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using MongoDB.Driver;
 
 namespace Comrade.Persistence.DataAccess;
 
-public class MongoDbContext : IMongoDbContext
+public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
 {
     private readonly IMongoDatabase _mongoDatabase;
 
@@ -37,7 +38,7 @@ public class MongoDbContext : IMongoDbContext
         return _mongoDatabase.GetCollection<T>(nameof(T));
     }
 
-    public IQueryable<T> Get<T>() where T : EntityDto
+    public IQueryable<T> GetAll<T>() where T : EntityDto
     {
         return GetCollection<T>().AsQueryable();
     }

@@ -58,7 +58,7 @@ public sealed class Startup
         services.AddSingleton<IMongoDbContextSettings>(sp =>
             sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
 
-        services.AddScoped<IMongoDbContext, MongoDbContext>();
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddMediatR(typeof(Startup));

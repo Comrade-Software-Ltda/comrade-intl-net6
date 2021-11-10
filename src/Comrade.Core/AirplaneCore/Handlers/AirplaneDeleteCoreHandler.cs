@@ -14,11 +14,11 @@ public class
     AirplaneDeleteCoreHandler : IRequestHandler<AirplaneDeleteCommand, ISingleResult<Entity>>
 {
     private readonly AirplaneDeleteValidation _airplaneDeleteValidation;
-    private readonly IMongoDbContext _mongoDbContext;
+    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IAirplaneRepository _repository;
 
     public AirplaneDeleteCoreHandler(AirplaneDeleteValidation airplaneDeleteValidation,
-        IAirplaneRepository repository, IMongoDbContext mongoDbContext)
+        IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _airplaneDeleteValidation = airplaneDeleteValidation;
         _repository = repository;
