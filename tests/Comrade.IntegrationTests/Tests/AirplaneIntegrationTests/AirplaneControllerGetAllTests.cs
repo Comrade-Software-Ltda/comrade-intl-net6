@@ -20,7 +20,7 @@ public class AirplaneControllerGetAllTests : IClassFixture<ServiceProviderFixtur
     public async Task AirplaneController_GetAll()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.GetAll(null);
 

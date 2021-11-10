@@ -1,9 +1,9 @@
-﻿using System;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -34,7 +34,7 @@ public class AirplaneControllerEditErrorTests : IClassFixture<ServiceProviderFix
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.Edit(testObject);
 

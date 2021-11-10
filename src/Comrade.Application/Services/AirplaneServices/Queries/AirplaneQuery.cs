@@ -12,15 +12,15 @@ namespace Comrade.Application.Services.AirplaneServices.Queries;
 public class AirplaneQuery : IAirplaneQuery
 {
     private readonly IMapper _mapper;
-    private readonly IAirplaneRepository _repository;
     private readonly IMongoDbQueryContext _mongoDbQueryContext;
+    private readonly IAirplaneRepository _repository;
 
     public AirplaneQuery(IAirplaneRepository repository,
-        IMapper mapper, IMongoDbQueryContext mongoDbQueryContext)
+        IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
     {
         _repository = repository;
-        _mapper = mapper;
         _mongoDbQueryContext = mongoDbQueryContext;
+        _mapper = mapper;
     }
 
     public async Task<IPageResultDto<AirplaneDto>> GetAll(
@@ -45,12 +45,6 @@ public class AirplaneQuery : IAirplaneQuery
             .ToList()).ConfigureAwait(false);
 
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
-    }
-
-    public async Task<IPageResultDto<AirplaneDto>> GetAllMongo(
-        PaginationQuery? paginationQuery = null)
-    {
-        return null;
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdDefault(Guid id)

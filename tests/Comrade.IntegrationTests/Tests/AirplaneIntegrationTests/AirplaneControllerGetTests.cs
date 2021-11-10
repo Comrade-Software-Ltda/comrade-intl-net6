@@ -1,8 +1,8 @@
-﻿using System;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -22,7 +22,7 @@ public class AirplaneControllerGetTests : IClassFixture<ServiceProviderFixture>
     {
         var airplaneId = new Guid("063f44b8-df8b-4f96-889a-75b9d67c546f");
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await airplaneController.GetById(airplaneId);
 

@@ -9,6 +9,7 @@ namespace Comrade.Application.Services.SystemUserServices.Queries;
 public interface ISystemUserQuery
 {
     Task<IPageResultDto<SystemUserDto>> GetAll(PaginationQuery? paginationQuery = null);
-    Task<ISingleResultDto<SystemUserDto>> GetById(Guid id);
+    Task<ISingleResultDto<SystemUserDto>> GetByIdDefault(Guid id);
+    Task<ISingleResultDto<SystemUserDto>> GetByIdMongo(Guid id);
     Task<ListResultDto<LookupDto>> FindByName(string name);
 }

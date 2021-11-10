@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
@@ -7,6 +6,7 @@ using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Queries;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V2.SystemUserApi;
 
@@ -47,11 +47,11 @@ public class SystemUserController : ControllerBase
 
     [HttpGet("get-by-id/{systemUserId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemUserId)
+    public async Task<IActionResult> GetById([FromRoute][Required] Guid systemUserId)
     {
         try
         {
-            var result = await _systemUserQuery.GetById(systemUserId).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetByIdDefault(systemUserId).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -63,7 +63,7 @@ public class SystemUserController : ControllerBase
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody] [Required] SystemUserCreateDto dto)
+    public async Task<IActionResult> Create([FromBody][Required] SystemUserCreateDto dto)
     {
         try
         {
@@ -79,7 +79,7 @@ public class SystemUserController : ControllerBase
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody] [Required] SystemUserEditDto dto)
+    public async Task<IActionResult> Edit([FromBody][Required] SystemUserEditDto dto)
     {
         try
         {
@@ -95,7 +95,7 @@ public class SystemUserController : ControllerBase
 
     [HttpDelete("delete/{systemUserId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemUserId)
+    public async Task<IActionResult> Delete([FromRoute][Required] Guid systemUserId)
     {
         try
         {

@@ -56,7 +56,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneQuery.GetByIdMongo(airplaneId).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetByIdDefault(airplaneId).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

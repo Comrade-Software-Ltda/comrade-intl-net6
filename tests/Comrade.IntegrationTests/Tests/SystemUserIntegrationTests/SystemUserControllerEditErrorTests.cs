@@ -34,7 +34,7 @@ public class SystemUserControllerEditErrorTests : IClassFixture<ServiceProviderF
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
+            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 

@@ -1,7 +1,7 @@
-﻿using System;
-using Comrade.Persistence.Repositories;
+﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -23,7 +23,7 @@ public class SystemUserControllerDeleteTests : IClassFixture<ServiceProviderFixt
 
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
-                _fixture.Mediator);
+                _fixture.MongoDbContextFixture, _fixture.Mediator);
         _ = await systemUserController.Delete(systemUserId);
 
         var repository = new SystemUserRepository(_fixture.SqlContextFixture);
