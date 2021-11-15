@@ -30,7 +30,8 @@ namespace Comrade.IntegrationTests
 
             serviceCollection.AddSingleton<IConfiguration>(configuration);
 
-            var connString = configuration.GetValue<string>("MongoDbContextSettings:ConnectionString");
+            var connString =
+                configuration.GetValue<string>("MongoDbContextSettings:ConnectionString");
 
             serviceCollection.AddDbContext<ComradeContext>(options =>
                 options.UseInMemoryDatabase(dbName).EnableSensitiveDataLogging()

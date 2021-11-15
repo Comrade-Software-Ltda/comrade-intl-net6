@@ -1,13 +1,14 @@
+using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AuthenticationIntegrationTests;
 
-public sealed class AuthenticationControllerForgotPasswordTests : IClassFixture<ServiceProviderFixture>
+public sealed class
+    AuthenticationControllerForgotPasswordTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
 
@@ -27,7 +28,8 @@ public sealed class AuthenticationControllerForgotPasswordTests : IClassFixture<
         };
 
         var authenticationController =
-            AuthenticationInjectionController.GetAuthenticationController(_fixture.SqlContextFixture, _fixture.Mediator);
+            AuthenticationInjectionController.GetAuthenticationController(
+                _fixture.SqlContextFixture, _fixture.Mediator);
         var result = await authenticationController.ForgotPassword(testObject);
 
         if (result is ObjectResult okResult)

@@ -7,7 +7,8 @@ namespace Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 
 public class AuthenticationInjectionController
 {
-    public static AuthenticationController GetAuthenticationController(ComradeContext context, IMediator mediator)
+    public static AuthenticationController GetAuthenticationController(ComradeContext context,
+        IMediator mediator)
     {
         var mapper = MapperHelper.ConfigMapper();
 

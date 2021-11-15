@@ -1,7 +1,7 @@
-﻿using System;
-using Comrade.Persistence.Repositories;
+﻿using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -23,6 +23,7 @@ public class AirplaneControllerDeleteTests : IClassFixture<ServiceProviderFixtur
 
         var airplaneController =
             AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         _ = await airplaneController.Delete(airplaneId);
 

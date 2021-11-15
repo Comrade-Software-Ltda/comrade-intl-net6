@@ -1,9 +1,9 @@
-﻿using System;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
+using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -40,6 +40,7 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
 
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.Edit(testObject);
 

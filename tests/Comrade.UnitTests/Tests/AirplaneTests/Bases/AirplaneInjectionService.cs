@@ -19,10 +19,11 @@ public sealed class AirplaneInjectionService
         return new AirplaneCommand(ucAirplaneDelete, mediator);
     }
 
-    public static AirplaneQuery GetAirplaneQuery(ComradeContext context, IMapper mapper)
+    public static AirplaneQuery GetAirplaneQuery(ComradeContext context,
+        MongoDbContext mongoDbContextFixture, IMapper mapper)
     {
         var airplaneRepository = new AirplaneRepository(context);
 
-        return new AirplaneQuery(airplaneRepository, mapper);
+        return new AirplaneQuery(airplaneRepository, mongoDbContextFixture, mapper);
     }
 }

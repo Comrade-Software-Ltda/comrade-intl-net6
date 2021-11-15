@@ -4,6 +4,7 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
+using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
@@ -39,16 +40,18 @@ public static class GetServiceCollection
 
         services.AddAutoMapperSetup();
         services.AddLogging();
+        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
-        services.AddScoped<IMongoDbContext, MongoDbContext>();
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
 
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
+        services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
         services.AddMediatR(typeof(Startup));
+
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
-
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();
 

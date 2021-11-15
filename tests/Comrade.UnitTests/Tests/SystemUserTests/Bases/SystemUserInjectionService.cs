@@ -18,10 +18,11 @@ public sealed class SystemUserInjectionService
         return new SystemUserCommand(ucSystemUserDelete, mediator);
     }
 
-    public static SystemUserQuery GetSystemUserQuery(ComradeContext context, IMapper mapper)
+    public static SystemUserQuery GetSystemUserQuery(ComradeContext context,
+        MongoDbContext mongoDbContextFixture, IMapper mapper)
     {
         var systemUserRepository = new SystemUserRepository(context);
 
-        return new SystemUserQuery(systemUserRepository, mapper);
+        return new SystemUserQuery(systemUserRepository, mongoDbContextFixture, mapper);
     }
 }

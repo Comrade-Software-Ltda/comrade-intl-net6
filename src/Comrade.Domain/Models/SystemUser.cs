@@ -44,5 +44,4 @@ public class SystemUser : Entity
 
     [Column("syus_dt_register", TypeName = "varchar")]
     public DateTime? RegisterDate { get; set; }
-
 }

@@ -8,7 +8,8 @@ public abstract class Entity : IEntity
 {
     [BsonId]
     [BsonRepresentation(BsonType.String)]
-    [Key] public Guid Id { get; set; }
+    [Key]
+    public Guid Id { get; set; }
 
     public virtual Guid Key => Id;
 

@@ -1,4 +1,5 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SecurityCore.Commands;
@@ -8,22 +9,21 @@ using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SecurityCore.Handlers;
 
 public class
     ForgotPasswordCoreHandler : IRequestHandler<ForgotPasswordCommand, ISingleResult<Entity>>
 {
+    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _repository;
     private readonly SystemUserForgotPasswordValidation _systemUserForgotPasswordValidation;
-    private readonly IMongoDbContext _mongoDbContext;
 
     public ForgotPasswordCoreHandler(IPasswordHasher passwordHasher,
         ISystemUserRepository repository,
         SystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
-        IMongoDbContext mongoDbContext)
+        IMongoDbCommandContext mongoDbContext)
     {
         _passwordHasher = passwordHasher;
         _repository = repository;

@@ -5,18 +5,21 @@ using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Paginations;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Core.AirplaneCore;
+using Comrade.Domain.Models;
 
 namespace Comrade.Application.Services.AirplaneServices.Queries;
 
 public class AirplaneQuery : IAirplaneQuery
 {
     private readonly IMapper _mapper;
+    private readonly IMongoDbQueryContext _mongoDbQueryContext;
     private readonly IAirplaneRepository _repository;
 
     public AirplaneQuery(IAirplaneRepository repository,
-        IMapper mapper)
+        IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
     {
         _repository = repository;
+        _mongoDbQueryContext = mongoDbQueryContext;
         _mapper = mapper;
     }
 
@@ -44,9 +47,16 @@ public class AirplaneQuery : IAirplaneQuery
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
     }
 
-    public async Task<ISingleResultDto<AirplaneDto>> GetById(Guid id)
+    public async Task<ISingleResultDto<AirplaneDto>> GetByIdDefault(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
+        var dto = _mapper.Map<AirplaneDto>(entity);
+        return new SingleResultDto<AirplaneDto>(dto);
+    }
+
+    public async Task<ISingleResultDto<AirplaneDto>> GetByIdMongo(Guid id)
+    {
+        var entity = await _mongoDbQueryContext.GetById<Airplane?>(id).ConfigureAwait(false);
         var dto = _mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }

@@ -4,11 +4,13 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
+using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
 using Comrade.Persistence.Bases;
+using Comrade.Persistence.DataAccess;
 using FluentValidation;
 using MediatR;
 
@@ -26,7 +28,6 @@ public static class GetServiceProvider
 
         services
             .AddFeatureFlags(configuration)
-            .AddSqlServer(configuration)
             .AddEntityRepository()
             .AddAuthentication(configuration)
             .AddVersioning()
@@ -39,14 +40,18 @@ public static class GetServiceProvider
 
         services.AddAutoMapperSetup();
         services.AddLogging();
+        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
+
+        services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
+        services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
         services.AddMediatR(typeof(Startup));
+
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
-
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<HashingOptions>();
 

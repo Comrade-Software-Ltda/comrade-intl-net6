@@ -15,7 +15,7 @@ public static class GenerateFakeToken
             "Test"
         };
 
-        var user = new GenerateTokenCommand()
+        var user = new GenerateTokenCommand
         {
             Id = new Guid(),
             Name = "Test",

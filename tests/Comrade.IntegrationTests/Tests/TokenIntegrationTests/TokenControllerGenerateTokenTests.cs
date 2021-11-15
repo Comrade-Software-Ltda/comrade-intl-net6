@@ -1,8 +1,8 @@
+using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.TokenIntegrationTests;
@@ -26,7 +26,9 @@ public sealed class TokenControllerGenerateTokenTests : IClassFixture<ServicePro
             Password = "123456"
         };
 
-        var tokenController = TokenInjectionController.GetTokenController(_fixture.SqlContextFixture, _fixture.Mediator);
+        var tokenController =
+            TokenInjectionController.GetTokenController(_fixture.SqlContextFixture,
+                _fixture.Mediator);
         var result = await tokenController.GenerateToken(testObject);
 
         if (result is ObjectResult okResult)

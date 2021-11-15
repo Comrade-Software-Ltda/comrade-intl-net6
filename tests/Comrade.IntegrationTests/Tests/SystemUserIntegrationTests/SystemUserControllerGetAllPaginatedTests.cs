@@ -22,6 +22,7 @@ public class SystemUserControllerGetAllPaginatedTests : IClassFixture<ServicePro
     {
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await systemUserController.GetAll(paginationQuery);

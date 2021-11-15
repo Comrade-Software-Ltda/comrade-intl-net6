@@ -21,6 +21,7 @@ public class SystemUserControllerGetAllTests : IClassFixture<ServiceProviderFixt
     {
         var systemUserController =
             SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var result = await systemUserController.GetAll(null);
 

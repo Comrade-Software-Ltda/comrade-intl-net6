@@ -22,6 +22,7 @@ public class AirplaneControllerGetAllPaginatedTests : IClassFixture<ServiceProvi
     {
         var airplaneController =
             AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await airplaneController.GetAll(paginationQuery);

@@ -30,7 +30,7 @@ public class UcValidateLogin : IUcValidateLogin
 
                 var roles = new List<string> { "Role" };
 
-                var user = new GenerateTokenCommand()
+                var user = new GenerateTokenCommand
                 {
                     Id = key,
                     Name = selectedUser.Name,

@@ -1,4 +1,5 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemUserCore.Commands;
@@ -6,19 +7,18 @@ using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
     SystemUserEditCoreHandler : IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>
 {
-    private readonly IMongoDbContext _mongoDbContext;
+    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemUserRepository _repository;
     private readonly SystemUserEditValidation _systemUserEditValidation;
 
     public SystemUserEditCoreHandler(SystemUserEditValidation systemUserEditValidation,
-        ISystemUserRepository repository, IMongoDbContext mongoDbContext)
+        ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemUserEditValidation = systemUserEditValidation;
         _repository = repository;

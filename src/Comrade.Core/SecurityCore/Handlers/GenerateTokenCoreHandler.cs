@@ -1,6 +1,6 @@
-﻿using Comrade.Core.SecurityCore.Commands;
+﻿using System.Threading;
+using Comrade.Core.SecurityCore.Commands;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SecurityCore.Handlers;
 
