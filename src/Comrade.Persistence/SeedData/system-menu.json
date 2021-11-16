@@ -1,0 +1,26 @@
+[
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a6",
+    "father":  null,
+    "text": "Menu 1",
+    "description": "Menu 1 - Description",
+    "order": "1",
+    "route": "/"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "father": null,
+    "text": "Menu 2",
+    "description": "Menu 2 - Description",
+    "order": "2",
+    "route": "/route1"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
+    "father": null,
+    "text": "Menu 3",
+    "description": "Menu 3 - Description",
+    "order": "3",
+    "route": "/route3"
+  }
+]
