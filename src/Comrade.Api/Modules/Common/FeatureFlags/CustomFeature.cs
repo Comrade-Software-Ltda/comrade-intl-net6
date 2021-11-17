@@ -16,6 +16,11 @@ public enum CustomFeature
     SystemUser,
 
     /// <summary>
+    ///     Get SystemMenu.
+    /// </summary>
+    SystemMenu,
+
+    /// <summary>
     ///     Get Common.
     /// </summary>
     Common,
