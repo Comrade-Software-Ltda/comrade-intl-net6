@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
+using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
@@ -28,5 +29,6 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<AuthenticationDto, ForgotPasswordCommand>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
+        CreateMap<SystemMenuDto, SystemMenu>();
     }
 }
