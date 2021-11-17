@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comrade.Persistence.Migrations
 {
     [DbContext(typeof(ComradeContext))]
-    [Migration("20211116023012_InitialMigration")]
+    [Migration("20211116025103_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
