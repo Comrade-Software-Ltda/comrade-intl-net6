@@ -5,10 +5,10 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemMenuCore.Validations;
 
-public class SystemMenuDeleteValidation
+public class SystemMenuDeleteValidation : ISystemMenuDeleteValidation
 {
-    public ISingleResult<Entity> Execute(SystemMenu? recordExists)
+    public Task<ISingleResult<Entity>> Execute(SystemMenu entity)
     {
-        return new SingleResult<Entity>(recordExists);
+        return null;
     }
 }

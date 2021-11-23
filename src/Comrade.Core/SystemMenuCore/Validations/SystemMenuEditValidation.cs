@@ -7,22 +7,8 @@ namespace Comrade.Core.SystemMenuCore.Validations;
 
 public class SystemMenuEditValidation : ISystemMenuEditValidation
 {
-    private readonly SystemMenuValidateSameCode _systemMenuValidateSameCode;
-
-    public SystemMenuEditValidation(SystemMenuValidateSameCode systemMenuValidateSameCode)
+    public Task<ISingleResult<Entity>> Execute(SystemMenu entity, SystemMenu? recordExists)
     {
-        _systemMenuValidateSameCode = systemMenuValidateSameCode;
-    }
-
-    public async Task<ISingleResult<Entity>> Execute(SystemMenu entity, SystemMenu? recordExists)
-    {
-        var registerSameCode =
-            await _systemMenuValidateSameCode.Execute(entity).ConfigureAwait(false);
-        if (!registerSameCode.Success)
-        {
-            return registerSameCode;
-        }
-
-        return new SingleResult<Entity>(recordExists);
+        return null;
     }
 }
