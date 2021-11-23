@@ -4,6 +4,10 @@ using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Handlers;
 using Comrade.Application.Services.AirplaneServices.Queries;
 using Comrade.Application.Services.AuthenticationServices.Commands;
+using Comrade.Application.Services.SystemMenuServices.Commands;
+using Comrade.Application.Services.SystemMenuServices.Dtos;
+using Comrade.Application.Services.SystemMenuServices.Handlers;
+using Comrade.Application.Services.SystemMenuServices.Queries;
 using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Handlers;
@@ -19,6 +23,11 @@ using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SecurityCore.Handlers;
 using Comrade.Core.SecurityCore.UseCases;
 using Comrade.Core.SecurityCore.Validation;
+using Comrade.Core.SystemMenuCore;
+using Comrade.Core.SystemMenuCore.Commands;
+using Comrade.Core.SystemMenuCore.Handlers;
+using Comrade.Core.SystemMenuCore.UseCases;
+using Comrade.Core.SystemMenuCore.Validations;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Handlers;
@@ -142,6 +151,42 @@ public static class UseCasesExtensions
 
         #endregion
 
+        #region SystemMenu
+
+        // Application - Services
+        services.AddScoped<ISystemMenuCommand, SystemMenuCommand>();
+        services.AddScoped<ISystemMenuQuery, SystemMenuQuery>();
+
+        // Application - Handlers
+        services
+            .AddScoped<IRequestHandler<SystemMenuCreateDto, SingleResultDto<EntityDto>>,
+                SystemMenuCreateHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemMenuEditDto, SingleResultDto<EntityDto>>,
+                SystemMenuEditHandler>();
+
+        // Core - UseCases
+        services.AddScoped<IUcSystemMenuEdit, UcSystemMenuEdit>();
+        services.AddScoped<IUcSystemMenuCreate, UcSystemMenuCreate>();
+        services.AddScoped<IUcSystemMenuDelete, UcSystemMenuDelete>();
+
+        // Core - CoreHandlers
+        services
+            .AddScoped<IRequestHandler<SystemMenuCreateCommand, ISingleResult<Entity>>,
+                SystemMenuCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemMenuDeleteCommand, ISingleResult<Entity>>,
+                SystemMenuDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemMenuEditCommand, ISingleResult<Entity>>,
+                SystemMenuEditCoreHandler>();
+
+        // Core - Validations
+        services.AddScoped<ISystemMenuCreateValidation, SystemMenuCreateValidation>();
+        services.AddScoped<ISystemMenuEditValidation, SystemMenuEditValidation>();
+        services.AddScoped<ISystemMenuDeleteValidation, SystemMenuDeleteValidation>();
+
+        #endregion
         return services;
     }
 }
