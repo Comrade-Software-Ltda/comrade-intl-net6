@@ -97,9 +97,9 @@ public static class UseCasesExtensions
 
         // Core - Validations
         services.AddScoped<IAirplaneEditValidation, AirplaneEditValidation>();
-        services.AddScoped<AirplaneDeleteValidation>();
-        services.AddScoped<AirplaneCreateValidation>();
-        services.AddScoped<AirplaneValidateSameCode>();
+        services.AddScoped<IAirplaneDeleteValidation, AirplaneDeleteValidation>();
+        services.AddScoped<IAirplaneCreateValidation, AirplaneCreateValidation>();
+        services.AddScoped<IAirplaneCodeUniqueValidation, AirplaneCodeUniqueValidation>();
 
         #endregion
 
@@ -133,12 +133,14 @@ public static class UseCasesExtensions
             .AddScoped<IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>,
                 SystemUserEditCoreHandler>();
 
+
         // Core - Validations
-        services.AddScoped<SystemUserForgotPasswordValidation>();
-        services.AddScoped<SystemUserPasswordValidation>();
-        services.AddScoped<SystemUserEditValidation>();
-        services.AddScoped<SystemUserDeleteValidation>();
-        services.AddScoped<SystemUserCreateValidation>();
+        services
+            .AddScoped<ISystemUserForgotPasswordValidation, SystemUserForgotPasswordValidation>();
+        services.AddScoped<ISystemUserPasswordValidation, SystemUserPasswordValidation>();
+        services.AddScoped<ISystemUserEditValidation, SystemUserEditValidation>();
+        services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
+        services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
 
         #endregion
 

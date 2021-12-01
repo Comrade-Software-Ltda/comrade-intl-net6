@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Comrade.Core.AirplaneCore.Commands;
+﻿using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
@@ -7,17 +6,18 @@ using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 using MediatR;
+using System.Threading;
 
 namespace Comrade.Core.AirplaneCore.Handlers;
 
 public class
     AirplaneDeleteCoreHandler : IRequestHandler<AirplaneDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly AirplaneDeleteValidation _airplaneDeleteValidation;
+    private readonly IAirplaneDeleteValidation _airplaneDeleteValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IAirplaneRepository _repository;
 
-    public AirplaneDeleteCoreHandler(AirplaneDeleteValidation airplaneDeleteValidation,
+    public AirplaneDeleteCoreHandler(IAirplaneDeleteValidation airplaneDeleteValidation,
         IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _airplaneDeleteValidation = airplaneDeleteValidation;

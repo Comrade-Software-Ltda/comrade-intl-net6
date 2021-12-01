@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemUserCore.Commands;
@@ -7,6 +6,7 @@ using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 using MediatR;
+using System.Threading;
 
 namespace Comrade.Core.SystemUserCore.Handlers;
 
@@ -15,9 +15,9 @@ public class
 {
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserDeleteValidation _systemUserDeleteValidation;
+    private readonly ISystemUserDeleteValidation _systemUserDeleteValidation;
 
-    public SystemUserDeleteCoreHandler(SystemUserDeleteValidation systemUserDeleteValidation,
+    public SystemUserDeleteCoreHandler(ISystemUserDeleteValidation systemUserDeleteValidation,
         ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemUserDeleteValidation = systemUserDeleteValidation;

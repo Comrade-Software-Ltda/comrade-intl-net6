@@ -7,17 +7,17 @@ namespace Comrade.Core.AirplaneCore.Validations;
 
 public class AirplaneEditValidation : IAirplaneEditValidation
 {
-    private readonly AirplaneValidateSameCode _airplaneValidateSameCode;
+    private readonly IAirplaneCodeUniqueValidation _airplaneCodeUniqueValidation;
 
-    public AirplaneEditValidation(AirplaneValidateSameCode airplaneValidateSameCode)
+    public AirplaneEditValidation(IAirplaneCodeUniqueValidation airplaneCodeUniqueValidation)
     {
-        _airplaneValidateSameCode = airplaneValidateSameCode;
+        _airplaneCodeUniqueValidation = airplaneCodeUniqueValidation;
     }
 
     public async Task<ISingleResult<Entity>> Execute(Airplane entity, Airplane? recordExists)
     {
         var registerSameCode =
-            await _airplaneValidateSameCode.Execute(entity).ConfigureAwait(false);
+            await _airplaneCodeUniqueValidation.Execute(entity).ConfigureAwait(false);
         if (!registerSameCode.Success)
         {
             return registerSameCode;

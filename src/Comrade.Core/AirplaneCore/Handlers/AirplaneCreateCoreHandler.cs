@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Comrade.Core.AirplaneCore.Commands;
+﻿using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
@@ -7,17 +6,18 @@ using Comrade.Core.Messages;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using MediatR;
+using System.Threading;
 
 namespace Comrade.Core.AirplaneCore.Handlers;
 
 public class
     AirplaneCreateCoreHandler : IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>
 {
-    private readonly AirplaneCreateValidation _airplaneCreateValidation;
+    private readonly IAirplaneCreateValidation _airplaneCreateValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IAirplaneRepository _repository;
 
-    public AirplaneCreateCoreHandler(AirplaneCreateValidation airplaneCreateValidation,
+    public AirplaneCreateCoreHandler(IAirplaneCreateValidation airplaneCreateValidation,
         IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _airplaneCreateValidation = airplaneCreateValidation;

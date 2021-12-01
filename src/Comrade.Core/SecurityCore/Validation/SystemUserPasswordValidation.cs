@@ -6,7 +6,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SecurityCore.Validation;
 
-public class SystemUserPasswordValidation
+public class SystemUserPasswordValidation : ISystemUserPasswordValidation
 {
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _systemUserRepository;

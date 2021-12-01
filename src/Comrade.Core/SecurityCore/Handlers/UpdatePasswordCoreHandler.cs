@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SecurityCore.Commands;
@@ -9,6 +8,7 @@ using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 using MediatR;
+using System.Threading;
 
 namespace Comrade.Core.SecurityCore.Handlers;
 
@@ -18,10 +18,10 @@ public class
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserEditValidation _systemUserEditValidation;
+    private readonly ISystemUserEditValidation _systemUserEditValidation;
 
     public UpdatePasswordCoreHandler(IPasswordHasher passwordHasher,
-        ISystemUserRepository repository, SystemUserEditValidation systemUserEditValidation,
+        ISystemUserRepository repository, ISystemUserEditValidation systemUserEditValidation,
         IMongoDbCommandContext mongoDbContext)
     {
         _passwordHasher = passwordHasher;
