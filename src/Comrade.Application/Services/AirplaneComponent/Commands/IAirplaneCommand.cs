@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Services.AirplaneComponent.Dtos;
 
-namespace Comrade.Application.Services.AirplaneServices.Commands;
+namespace Comrade.Application.Services.AirplaneComponent.Commands;
 
 public interface IAirplaneCommand
 {

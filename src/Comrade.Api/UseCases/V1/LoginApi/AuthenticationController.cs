@@ -1,6 +1,6 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Services.AuthenticationServices.Commands;
-using Comrade.Application.Services.AuthenticationServices.Dtos;
+using Comrade.Application.Services.AuthenticationComponent.Commands;
+using Comrade.Application.Services.AuthenticationComponent.Dtos;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.UseCases.V1.LoginApi;

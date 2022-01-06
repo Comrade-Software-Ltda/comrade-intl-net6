@@ -28,7 +28,7 @@ public class UcValidateLogin : IUcValidateLogin
             {
                 var selectedUser = resultPassword.Data!;
 
-                var roles = new List<string> { "Role" };
+                var roles = new List<string> {"Role"};
 
                 var user = new GenerateTokenCommand
                 {

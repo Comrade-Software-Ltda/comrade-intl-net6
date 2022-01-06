@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Services.AirplaneComponent.Dtos;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Services.AirplaneServices.Handlers;
+namespace Comrade.Application.Services.AirplaneComponent.Handlers;
 
 public class
     AirplaneEditServiceHandler : IRequestHandler<AirplaneEditDto, SingleResultDto<EntityDto>>

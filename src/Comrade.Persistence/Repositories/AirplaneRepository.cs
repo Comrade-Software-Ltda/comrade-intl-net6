@@ -27,7 +27,7 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<Airplane>((int)EnumResponse.ErrorBusinessValidation,
+            ? new SingleResult<Airplane>((int) EnumResponse.ErrorBusinessValidation,
                 BusinessMessage.MSG08)
             : new SingleResult<Airplane>();
     }

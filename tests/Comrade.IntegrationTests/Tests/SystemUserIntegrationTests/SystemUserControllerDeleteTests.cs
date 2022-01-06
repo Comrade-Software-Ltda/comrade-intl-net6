@@ -1,7 +1,7 @@
-﻿using Comrade.Persistence.Repositories;
+﻿using System;
+using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;

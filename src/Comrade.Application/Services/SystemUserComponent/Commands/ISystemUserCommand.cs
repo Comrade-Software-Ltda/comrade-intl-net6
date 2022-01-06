@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 
-namespace Comrade.Application.Services.SystemUserServices.Commands;
+namespace Comrade.Application.Services.SystemUserComponent.Commands;
 
 public interface ISystemUserCommand
 {

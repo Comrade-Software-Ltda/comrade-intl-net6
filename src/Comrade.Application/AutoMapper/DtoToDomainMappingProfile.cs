@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Comrade.Application.Services.AirplaneServices.Dtos;
-using Comrade.Application.Services.AuthenticationServices.Dtos;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.AirplaneComponent.Dtos;
+using Comrade.Application.Services.AuthenticationComponent.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemUserCore.Commands;

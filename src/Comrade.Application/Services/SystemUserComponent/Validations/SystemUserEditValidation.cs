@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Services.SystemUserServices.Dtos;
+﻿using Comrade.Application.Services.SystemUserComponent.Dtos;
 
-namespace Comrade.Application.Services.SystemUserServices.Validations;
+namespace Comrade.Application.Services.SystemUserComponent.Validations;
 
 public class SystemUserEditValidation : SystemUserValidation<SystemUserEditDto>
 {
@@ -8,7 +8,6 @@ public class SystemUserEditValidation : SystemUserValidation<SystemUserEditDto>
     {
         ValidateName();
         ValidateEmail();
-        PasswordValidation();
         ValidateRegistration();
     }
 }

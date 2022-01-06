@@ -1,9 +1,9 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Messages;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using FluentValidation;
 
-namespace Comrade.Application.Services.SystemUserServices.Validations;
+namespace Comrade.Application.Services.SystemUserComponent.Validations;
 
 public class SystemUserValidation<TDto> : DtoValidation<TDto>
     where TDto : SystemUserDto
@@ -22,16 +22,6 @@ public class SystemUserValidation<TDto> : DtoValidation<TDto>
             .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Email");
     }
-
-    protected void PasswordValidation()
-    {
-        RuleFor(v => v.Password)
-            .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
-            .MinimumLength(4).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
-            .MaximumLength(127).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
-            .WithName("Password");
-    }
-
 
     protected void ValidateRegistration()
     {

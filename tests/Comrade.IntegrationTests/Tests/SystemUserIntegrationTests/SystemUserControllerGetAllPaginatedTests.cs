@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
 using Xunit;

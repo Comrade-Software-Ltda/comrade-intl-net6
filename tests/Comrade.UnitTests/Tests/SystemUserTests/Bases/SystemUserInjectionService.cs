@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Comrade.Application.Services.SystemUserServices.Commands;
-using Comrade.Application.Services.SystemUserServices.Queries;
+using Comrade.Application.Services.SystemUserComponent.Commands;
+using Comrade.Application.Services.SystemUserComponent.Queries;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;

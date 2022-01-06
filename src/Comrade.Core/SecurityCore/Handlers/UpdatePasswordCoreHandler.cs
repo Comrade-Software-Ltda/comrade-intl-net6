@@ -1,4 +1,5 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SecurityCore.Commands;
@@ -8,7 +9,6 @@ using Comrade.Domain.Bases;
 using Comrade.Domain.Extensions;
 using Comrade.Domain.Models;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SecurityCore.Handlers;
 

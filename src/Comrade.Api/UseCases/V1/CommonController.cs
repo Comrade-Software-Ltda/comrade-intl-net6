@@ -2,7 +2,7 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
-using Comrade.Application.Services.SystemUserServices.Queries;
+using Comrade.Application.Services.SystemUserComponent.Queries;
 using Comrade.Domain.Models;
 using Microsoft.AspNetCore.Http;
 

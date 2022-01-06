@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Comrade.Application.Bases;
 
-namespace Comrade.Application.Services.AirplaneServices.Dtos;
+namespace Comrade.Application.Services.AirplaneComponent.Dtos;
 
 public class AirplaneDto : EntityDto
 {

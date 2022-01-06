@@ -2,9 +2,9 @@
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 
-namespace Comrade.Application.Services.SystemUserServices.Queries;
+namespace Comrade.Application.Services.SystemUserComponent.Queries;
 
 public interface ISystemUserQuery
 {

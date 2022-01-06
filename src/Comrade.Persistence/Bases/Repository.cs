@@ -117,7 +117,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         var query = GetAll();
         if (projection != null) query = query.Select(projection);
 
-        if (includes is { Length: > 0 })
+        if (includes is {Length: > 0})
             query = includes.Aggregate(query, (current, include) => current.Include(include));
 
         query = query.Where(p => p.Id == id);
@@ -187,7 +187,7 @@ public class Repository<TEntity> : IRepository<TEntity>
     {
         return _dbSet
             .Take(100)
-            .Select(s => new Lookup { Key = s.Key, Value = s.Value });
+            .Select(s => new Lookup {Key = s.Key, Value = s.Value});
     }
 
     public IQueryable<Lookup> GetLookup(Expression<Func<TEntity, bool>> predicate)
@@ -196,7 +196,7 @@ public class Repository<TEntity> : IRepository<TEntity>
             .AsNoTracking()
             .Take(100)
             .Where(predicate)
-            .Select(s => new Lookup { Key = s.Key, Value = s.Value });
+            .Select(s => new Lookup {Key = s.Key, Value = s.Value});
     }
 
 

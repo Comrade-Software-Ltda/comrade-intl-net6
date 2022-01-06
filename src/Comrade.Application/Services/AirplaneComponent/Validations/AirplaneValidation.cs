@@ -1,9 +1,9 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Messages;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Services.AirplaneComponent.Dtos;
 using FluentValidation;
 
-namespace Comrade.Application.Services.AirplaneServices.Validations;
+namespace Comrade.Application.Services.AirplaneComponent.Validations;
 
 public class AirplaneValidation<TDto> : DtoValidation<TDto>
     where TDto : AirplaneDto

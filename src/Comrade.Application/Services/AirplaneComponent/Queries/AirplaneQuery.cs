@@ -3,11 +3,11 @@ using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Services.AirplaneComponent.Dtos;
 using Comrade.Core.AirplaneCore;
 using Comrade.Domain.Models;
 
-namespace Comrade.Application.Services.AirplaneServices.Queries;
+namespace Comrade.Application.Services.AirplaneComponent.Queries;
 
 public class AirplaneQuery : IAirplaneQuery
 {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.AuthenticationServices.Dtos;
+using Comrade.Application.Services.AuthenticationComponent.Dtos;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.Commands;
 
-namespace Comrade.Application.Services.AuthenticationServices.Commands;
+namespace Comrade.Application.Services.AuthenticationComponent.Commands;
 
 public class AuthenticationCommand : IAuthenticationCommand
 {

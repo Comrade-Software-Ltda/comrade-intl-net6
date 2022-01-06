@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Services.SystemUserServices.Handlers;
+namespace Comrade.Application.Services.SystemUserComponent.Handlers;
 
 public class
     SystemUserCreateHandler : IRequestHandler<SystemUserCreateDto, SingleResultDto<EntityDto>>

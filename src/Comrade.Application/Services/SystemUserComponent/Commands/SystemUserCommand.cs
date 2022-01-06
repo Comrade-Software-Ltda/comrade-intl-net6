@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Core.SystemUserCore;
 using MediatR;
 
-namespace Comrade.Application.Services.SystemUserServices.Commands;
+namespace Comrade.Application.Services.SystemUserComponent.Commands;
 
 public class SystemUserCommand : ISystemUserCommand
 {

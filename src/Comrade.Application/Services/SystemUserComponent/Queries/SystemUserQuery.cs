@@ -4,11 +4,11 @@ using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Core.SystemUserCore;
 using Comrade.Domain.Models;
 
-namespace Comrade.Application.Services.SystemUserServices.Queries;
+namespace Comrade.Application.Services.SystemUserComponent.Queries;
 
 public class SystemUserQuery : ISystemUserQuery
 {

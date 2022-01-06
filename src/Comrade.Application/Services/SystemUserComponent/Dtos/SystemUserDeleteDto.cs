@@ -1,4 +1,4 @@
-﻿namespace Comrade.Application.Services.SystemUserServices.Dtos;
+﻿namespace Comrade.Application.Services.SystemUserComponent.Dtos;
 
 public class SystemUserDeleteDto : SystemUserDto
 {
