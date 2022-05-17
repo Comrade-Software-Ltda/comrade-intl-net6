@@ -1,5 +1,5 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Xunit;

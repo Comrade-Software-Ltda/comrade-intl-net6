@@ -10,7 +10,7 @@ public class ListResultDto<T> : ResultDto, IListResultDto<T>
     public ListResultDto(List<T>? data)
     {
         Data = data;
-        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
+        Code = data == null ? (int) EnumResponse.NotFound : (int) EnumResponse.Ok;
         Success = data != null;
         Message = data == null
             ? BusinessMessage.MSG04

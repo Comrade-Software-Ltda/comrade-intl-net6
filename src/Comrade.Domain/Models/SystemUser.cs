@@ -34,7 +34,6 @@ public class SystemUser : Entity
 
     [Column("syus_pw_password", TypeName = "varchar")]
     [MaxLength(1023)]
-    [Required(ErrorMessage = "Password is required")]
     public string Password { get; set; } // varchar(1023), not null
 
     [Column("syus_tx_registration", TypeName = "varchar")]

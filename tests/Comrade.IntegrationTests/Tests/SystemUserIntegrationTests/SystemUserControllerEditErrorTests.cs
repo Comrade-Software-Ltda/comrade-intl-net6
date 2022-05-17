@@ -1,9 +1,9 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+﻿using System;
+using Comrade.Application.Bases;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;

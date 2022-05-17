@@ -4,26 +4,25 @@ using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Domain.Bases;
 using MediatR;
 
-namespace Comrade.Core.SystemUserCore.UseCases
+namespace Comrade.Core.SystemUserCore.UseCases;
+
+public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
 {
-    public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
+    private readonly IMediator _mediator;
+
+    public UcSystemUserCreate(IMediator mediator)
     {
-        private readonly IMediator _mediator;
+        _mediator = mediator;
+    }
 
-        public UcSystemUserCreate(IMediator mediator)
+    public async Task<ISingleResult<Entity>> Execute(SystemUserCreateCommand entity)
+    {
+        var isValid = ValidateEntity(entity);
+        if (!isValid.Success)
         {
-            _mediator = mediator;
+            return isValid;
         }
 
-        public async Task<ISingleResult<Entity>> Execute(SystemUserCreateCommand entity)
-        {
-            var isValid = ValidateEntity(entity);
-            if (!isValid.Success)
-            {
-                return isValid;
-            }
-
-            return await _mediator.Send(entity).ConfigureAwait(false);
-        }
+        return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

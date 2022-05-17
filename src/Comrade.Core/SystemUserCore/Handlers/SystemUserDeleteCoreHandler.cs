@@ -15,9 +15,9 @@ public class
 {
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserDeleteValidation _systemUserDeleteValidation;
+    private readonly ISystemUserDeleteValidation _systemUserDeleteValidation;
 
-    public SystemUserDeleteCoreHandler(SystemUserDeleteValidation systemUserDeleteValidation,
+    public SystemUserDeleteCoreHandler(ISystemUserDeleteValidation systemUserDeleteValidation,
         ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemUserDeleteValidation = systemUserDeleteValidation;

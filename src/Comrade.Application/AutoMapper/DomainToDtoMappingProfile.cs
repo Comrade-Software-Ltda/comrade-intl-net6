@@ -1,10 +1,16 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AuthenticationComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
 using Comrade.Application.Lookups;
+<<<<<<< HEAD
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Dtos;
+=======
+>>>>>>> origin/feature/20
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 

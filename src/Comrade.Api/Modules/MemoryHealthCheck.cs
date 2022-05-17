@@ -22,10 +22,10 @@ public class MemoryHealthCheck : IHealthCheck
         var allocated = GC.GetTotalMemory(false);
         var data = new Dictionary<string, object>
         {
-            { "AllocatedBytes", allocated },
-            { "Gen0Collections", GC.CollectionCount(0) },
-            { "Gen1Collections", GC.CollectionCount(1) },
-            { "Gen2Collections", GC.CollectionCount(2) }
+            {"AllocatedBytes", allocated},
+            {"Gen0Collections", GC.CollectionCount(0)},
+            {"Gen1Collections", GC.CollectionCount(1)},
+            {"Gen2Collections", GC.CollectionCount(2)}
         };
         var status = allocated < options.Threshold
             ? HealthStatus.Healthy

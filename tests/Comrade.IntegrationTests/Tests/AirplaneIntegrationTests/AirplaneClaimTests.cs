@@ -1,8 +1,8 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+﻿using System.Security.Claims;
+using Comrade.Application.Bases;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
@@ -45,7 +45,7 @@ public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
 
         airplaneController.ControllerContext = new ControllerContext
         {
-            HttpContext = new DefaultHttpContext { User = claimsPrincipal }
+            HttpContext = new DefaultHttpContext {User = claimsPrincipal}
         };
 
         var result = await airplaneController.Create(testObject);

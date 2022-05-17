@@ -18,10 +18,10 @@ public class
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserEditValidation _systemUserEditValidation;
+    private readonly ISystemUserEditValidation _systemUserEditValidation;
 
     public UpdatePasswordCoreHandler(IPasswordHasher passwordHasher,
-        ISystemUserRepository repository, SystemUserEditValidation systemUserEditValidation,
+        ISystemUserRepository repository, ISystemUserEditValidation systemUserEditValidation,
         IMongoDbCommandContext mongoDbContext)
     {
         _passwordHasher = passwordHasher;

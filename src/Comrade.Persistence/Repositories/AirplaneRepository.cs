@@ -20,14 +20,14 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
                    throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<ISingleResult<Airplane>> ValidateSameCode(Guid id, string code)
+    public async Task<ISingleResult<Airplane>> CodeUniqueValidation(Guid id, string code)
     {
         var exists = await _context.Airplanes
             .Where(p => p.Id != id && code.Equals(p.Code, StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<Airplane>((int)EnumResponse.ErrorBusinessValidation,
+            ? new SingleResult<Airplane>((int) EnumResponse.ErrorBusinessValidation,
                 BusinessMessage.MSG08)
             : new SingleResult<Airplane>();
     }

@@ -21,9 +21,9 @@ public static class Program
         BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
         BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
 
-        var hostBuilder = CreateHostBuilder(args).Build();
         try
         {
+            var hostBuilder = CreateHostBuilder(args).Build();
             Log.Information("Starting up");
             hostBuilder.Run();
         }

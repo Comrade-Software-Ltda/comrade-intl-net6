@@ -17,7 +17,7 @@ public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
 
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
-        var entity = new AirplaneDeleteCommand { Id = id };
+        var entity = new AirplaneDeleteCommand {Id = id};
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

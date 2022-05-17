@@ -15,9 +15,9 @@ public class
 {
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserEditValidation _systemUserEditValidation;
+    private readonly ISystemUserEditValidation _systemUserEditValidation;
 
-    public SystemUserEditCoreHandler(SystemUserEditValidation systemUserEditValidation,
+    public SystemUserEditCoreHandler(ISystemUserEditValidation systemUserEditValidation,
         ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemUserEditValidation = systemUserEditValidation;

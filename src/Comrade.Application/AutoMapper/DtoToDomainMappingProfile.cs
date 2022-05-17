@@ -1,8 +1,14 @@
 ﻿using AutoMapper;
+<<<<<<< HEAD
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AuthenticationServices.Dtos;
 using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Dtos;
+=======
+using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AuthenticationComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
+>>>>>>> origin/feature/20
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemMenuCore.Commands;

@@ -18,11 +18,11 @@ public class
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ISystemUserRepository _repository;
-    private readonly SystemUserForgotPasswordValidation _systemUserForgotPasswordValidation;
+    private readonly ISystemUserForgotPasswordValidation _systemUserForgotPasswordValidation;
 
     public ForgotPasswordCoreHandler(IPasswordHasher passwordHasher,
         ISystemUserRepository repository,
-        SystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
+        ISystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
         IMongoDbCommandContext mongoDbContext)
     {
         _passwordHasher = passwordHasher;

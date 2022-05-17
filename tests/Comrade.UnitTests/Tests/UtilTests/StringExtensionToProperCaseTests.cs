@@ -1,20 +1,19 @@
 ﻿using Comrade.Application.Extensions;
 using Xunit;
 
-namespace Comrade.UnitTests.Tests.UtilTests
+namespace Comrade.UnitTests.Tests.UtilTests;
+
+public class StringExtensionToProperCaseTests
 {
-    public class StringExtensionToProperCaseTests
+    [Fact]
+    public void StringExtension_ToProperCase()
     {
-        [Fact]
-        public void StringExtension_ToProperCase()
-        {
-            var testObject = "Last in Line";
-            var goal = "Last In Line";
+        var testObject = "Last in Line";
+        var goal = "Last In Line";
 
-            var result = testObject.ToProperCase();
+        var result = testObject.ToProperCase();
 
-            Assert.NotEmpty(result);
-            Assert.Equal(goal, result);
-        }
+        Assert.NotEmpty(result);
+        Assert.Equal(goal, result);
     }
 }

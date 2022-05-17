@@ -1,4 +1,5 @@
 using Comrade.Application.Bases;
+<<<<<<< HEAD
 using Comrade.Application.Services.AirplaneServices.Commands;
 using Comrade.Application.Services.AirplaneServices.Dtos;
 using Comrade.Application.Services.AirplaneServices.Handlers;
@@ -12,6 +13,17 @@ using Comrade.Application.Services.SystemUserServices.Commands;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Handlers;
 using Comrade.Application.Services.SystemUserServices.Queries;
+=======
+using Comrade.Application.Components.AirplaneComponent.Commands;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Handlers;
+using Comrade.Application.Components.AirplaneComponent.Queries;
+using Comrade.Application.Components.AuthenticationComponent.Commands;
+using Comrade.Application.Components.SystemUserComponent.Commands;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Handlers;
+using Comrade.Application.Components.SystemUserComponent.Queries;
+>>>>>>> origin/feature/20
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
@@ -106,9 +118,9 @@ public static class UseCasesExtensions
 
         // Core - Validations
         services.AddScoped<IAirplaneEditValidation, AirplaneEditValidation>();
-        services.AddScoped<AirplaneDeleteValidation>();
-        services.AddScoped<AirplaneCreateValidation>();
-        services.AddScoped<AirplaneValidateSameCode>();
+        services.AddScoped<IAirplaneDeleteValidation, AirplaneDeleteValidation>();
+        services.AddScoped<IAirplaneCreateValidation, AirplaneCreateValidation>();
+        services.AddScoped<IAirplaneCodeUniqueValidation, AirplaneCodeUniqueValidation>();
 
         #endregion
 
@@ -142,12 +154,14 @@ public static class UseCasesExtensions
             .AddScoped<IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>,
                 SystemUserEditCoreHandler>();
 
+
         // Core - Validations
-        services.AddScoped<SystemUserForgotPasswordValidation>();
-        services.AddScoped<SystemUserPasswordValidation>();
-        services.AddScoped<SystemUserEditValidation>();
-        services.AddScoped<SystemUserDeleteValidation>();
-        services.AddScoped<SystemUserCreateValidation>();
+        services
+            .AddScoped<ISystemUserForgotPasswordValidation, SystemUserForgotPasswordValidation>();
+        services.AddScoped<ISystemUserPasswordValidation, SystemUserPasswordValidation>();
+        services.AddScoped<ISystemUserEditValidation, SystemUserEditValidation>();
+        services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
+        services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
 
         #endregion
 

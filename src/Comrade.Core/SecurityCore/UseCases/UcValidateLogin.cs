@@ -7,11 +7,11 @@ namespace Comrade.Core.SecurityCore.UseCases;
 public class UcValidateLogin : IUcValidateLogin
 {
     private readonly IUcGenerateToken _generateToken;
-    private readonly SystemUserPasswordValidation _systemUserPasswordValidation;
+    private readonly ISystemUserPasswordValidation _systemUserPasswordValidation;
 
 
     public UcValidateLogin(
-        SystemUserPasswordValidation systemUserPasswordValidation,
+        ISystemUserPasswordValidation systemUserPasswordValidation,
         IUcGenerateToken generateToken)
     {
         _systemUserPasswordValidation = systemUserPasswordValidation;
@@ -28,7 +28,7 @@ public class UcValidateLogin : IUcValidateLogin
             {
                 var selectedUser = resultPassword.Data!;
 
-                var roles = new List<string> { "Role" };
+                var roles = new List<string> {"Role"};
 
                 var user = new GenerateTokenCommand
                 {
