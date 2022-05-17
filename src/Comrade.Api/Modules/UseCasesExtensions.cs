@@ -185,8 +185,10 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemMenuCreateValidation, SystemMenuCreateValidation>();
         services.AddScoped<ISystemMenuEditValidation, SystemMenuEditValidation>();
         services.AddScoped<ISystemMenuDeleteValidation, SystemMenuDeleteValidation>();
+        services.AddScoped<SystemMenuValidateSameCode>();
 
         #endregion
+
         return services;
     }
 }

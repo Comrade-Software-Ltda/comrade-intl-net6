@@ -1,12 +1,12 @@
 ﻿using System.Threading;
-using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
+using Comrade.Core.SystemMenuCore.Commands;
+using Comrade.Core.SystemMenuCore.Validations;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 using MediatR;
-using Comrade.Core.SystemMenuCore.Validations;
 
 namespace Comrade.Core.SystemMenuCore.Handlers;
 
@@ -36,7 +36,7 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = _systemMenuDeleteValidation.Execute(recordExists);
+        var validate = await _systemMenuDeleteValidation.Execute(recordExists).ConfigureAwait(false);
         if (!validate.Success)
         {
             return validate;

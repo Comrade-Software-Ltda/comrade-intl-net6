@@ -1,4 +1,5 @@
-﻿using Comrade.Api.Bases;
+﻿using System.ComponentModel.DataAnnotations;
+using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
@@ -7,7 +8,6 @@ using Comrade.Application.Services.SystemMenuServices.Commands;
 using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Application.Services.SystemMenuServices.Queries;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
 
 namespace Comrade.Api.UseCases.V1.SystemMenuApi;
 
@@ -52,7 +52,7 @@ public class SystemMenuController : ComradeController
     /// <param name="systemMenuId"></param>
     [HttpGet("get-by-id/{systemMenuId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] Guid systemMenuId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemMenuId)
     {
         try
         {
@@ -68,7 +68,7 @@ public class SystemMenuController : ComradeController
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] SystemMenuCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] SystemMenuCreateDto dto)
     {
         try
         {
@@ -84,7 +84,7 @@ public class SystemMenuController : ComradeController
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] SystemMenuEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] SystemMenuEditDto dto)
     {
         try
         {
@@ -100,7 +100,7 @@ public class SystemMenuController : ComradeController
 
     [HttpDelete("delete/{systemMenuId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] Guid systemMenuId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemMenuId)
     {
         try
         {

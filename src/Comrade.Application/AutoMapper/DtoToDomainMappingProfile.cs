@@ -5,6 +5,7 @@ using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Application.Services.SystemUserServices.Dtos;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
+using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Domain.Models;
 
@@ -30,5 +31,7 @@ public class DtoToDomainMappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
         CreateMap<SystemMenuDto, SystemMenu>();
+        CreateMap<SystemMenuCreateDto, SystemMenuCreateCommand>();
+        CreateMap<SystemMenuEditDto, SystemMenuEditCommand>();
     }
 }

@@ -7,8 +7,23 @@ namespace Comrade.Core.SystemMenuCore.Validations;
 
 public class SystemMenuCreateValidation : ISystemMenuCreateValidation
 {
-    public Task<ISingleResult<Entity>> Execute(SystemMenu entity)
+    private readonly SystemMenuValidateSameCode _systemMenuValidateSameCode;
+
+    public SystemMenuCreateValidation(ISystemMenuRepository repository,
+        SystemMenuValidateSameCode systemMenuValidateSameCode)
     {
-        return null;
+        _systemMenuValidateSameCode = systemMenuValidateSameCode;
+    }
+
+    public async Task<ISingleResult<Entity>> Execute(SystemMenu entity)
+    {
+        var registerSameCode =
+            await _systemMenuValidateSameCode.Execute(entity).ConfigureAwait(false);
+        if (!registerSameCode.Success)
+        {
+            return registerSameCode;
+        }
+
+        return new SingleResult<Entity>(entity);
     }
 }
