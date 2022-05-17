@@ -1,4 +1,4 @@
-﻿using Comrade.Api.UseCases.V1.AirplaneApi;
+﻿using Comrade.Api.Controllers.V1.AirplaneApi;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;

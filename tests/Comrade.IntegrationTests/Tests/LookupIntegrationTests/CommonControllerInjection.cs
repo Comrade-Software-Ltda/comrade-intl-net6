@@ -1,5 +1,5 @@
 ﻿using System;
-using Comrade.Api.UseCases.V1;
+using Comrade.Api.Controllers.V1;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;

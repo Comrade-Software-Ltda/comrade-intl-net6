@@ -1,6 +1,6 @@
 ﻿using System;
 using Comrade.Application.Bases;
-using Comrade.Application.Services.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Comrade.Application.Services.AuthenticationComponent.Commands;
+using Comrade.Application.Components.AuthenticationComponent.Commands;
 using Comrade.Persistence.DataAccess;
 using MediatR;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Comrade.Application.Services.AirplaneComponent.Commands;
-using Comrade.Application.Services.AirplaneComponent.Queries;
+using Comrade.Application.Components.AirplaneComponent.Commands;
+using Comrade.Application.Components.AirplaneComponent.Queries;
 using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;

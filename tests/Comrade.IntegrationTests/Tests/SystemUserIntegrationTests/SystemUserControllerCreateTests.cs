@@ -1,5 +1,5 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Services.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
 using Xunit;
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
+using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AuthenticationComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Dtos;
 using Comrade.Application.Lookups;
-using Comrade.Application.Services.AirplaneComponent.Dtos;
-using Comrade.Application.Services.AuthenticationComponent.Dtos;
-using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
