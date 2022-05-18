@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AuthenticationComponent.Dtos;
+using Comrade.Application.Components.AuthenticationComponent.Contracts;
 
 namespace Comrade.Application.Components.AuthenticationComponent.Commands;
 

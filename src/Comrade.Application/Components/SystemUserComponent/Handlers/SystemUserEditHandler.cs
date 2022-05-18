@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Commands;
 using MediatR;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AuthenticationComponent.Dtos;
+using Comrade.Application.Components.AuthenticationComponent.Contracts;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.Commands;
 

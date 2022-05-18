@@ -1,4 +1,4 @@
-﻿using Comrade.Application.Components.SystemUserComponent.Dtos;
+﻿using Comrade.Application.Components.SystemUserComponent.Contracts;
 
 namespace Comrade.Application.Components.SystemUserComponent.Validations;
 
