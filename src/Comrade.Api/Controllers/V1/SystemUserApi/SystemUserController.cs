@@ -3,7 +3,7 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemUserComponent.Commands;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;

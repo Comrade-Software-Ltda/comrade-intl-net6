@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using MediatR;

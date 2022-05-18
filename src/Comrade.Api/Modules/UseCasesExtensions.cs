@@ -1,11 +1,11 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Components.AirplaneComponent.Commands;
-using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AirplaneComponent.Handlers;
 using Comrade.Application.Components.AirplaneComponent.Queries;
 using Comrade.Application.Components.AuthenticationComponent.Commands;
 using Comrade.Application.Components.SystemUserComponent.Commands;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Handlers;
 using Comrade.Application.Components.SystemUserComponent.Queries;
 using Comrade.Core.AirplaneCore;

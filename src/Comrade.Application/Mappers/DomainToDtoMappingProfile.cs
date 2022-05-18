@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Dtos;
-using Comrade.Application.Components.AuthenticationComponent.Dtos;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
-namespace Comrade.Application.AutoMapper;
+namespace Comrade.Application.Mappers;
 
 public class DomainToDtoMappingProfile : Profile
 {

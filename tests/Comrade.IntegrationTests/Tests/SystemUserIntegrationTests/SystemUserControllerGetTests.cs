@@ -1,6 +1,6 @@
 ﻿using System;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
 using Xunit;

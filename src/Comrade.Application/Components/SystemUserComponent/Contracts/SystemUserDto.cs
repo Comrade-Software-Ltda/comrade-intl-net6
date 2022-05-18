@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.SystemUserComponent.Dtos;
+namespace Comrade.Application.Components.SystemUserComponent.Contracts;
 
 public class SystemUserDto : EntityDto
 {

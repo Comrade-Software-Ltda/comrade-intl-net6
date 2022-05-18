@@ -2,7 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AirplaneComponent.Dtos;
+using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Paginations;
 using Comrade.Core.AirplaneCore;
 using Comrade.Domain.Models;

@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemUserComponent.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
 

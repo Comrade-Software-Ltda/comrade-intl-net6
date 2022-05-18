@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Comrade.Persistence.Migrations
 {
-    public partial class StartDatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,7 @@ namespace Comrade.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "syus_usuario_sistema",
+                name: "syus_system_user",
                 columns: table => new
                 {
                     syus_uuid_system_user = table.Column<Guid>(type: "uuid", nullable: false),
@@ -48,13 +48,13 @@ namespace Comrade.Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_un_syus_tx_email",
-                table: "syus_usuario_sistema",
+                table: "syus_system_user",
                 column: "syus_tx_email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_un_syus_tx_registration",
-                table: "syus_usuario_sistema",
+                table: "syus_system_user",
                 column: "syus_tx_registration",
                 unique: true);
         }
@@ -65,7 +65,7 @@ namespace Comrade.Persistence.Migrations
                 name: "airp_airplane");
 
             migrationBuilder.DropTable(
-                name: "syus_usuario_sistema");
+                name: "syus_system_user");
         }
     }
 }

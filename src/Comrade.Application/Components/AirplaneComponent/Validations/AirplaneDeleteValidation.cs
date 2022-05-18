@@ -1,4 +1,4 @@
-﻿using Comrade.Application.Components.AirplaneComponent.Dtos;
+﻿using Comrade.Application.Components.AirplaneComponent.Contracts;
 
 namespace Comrade.Application.Components.AirplaneComponent.Validations;
 

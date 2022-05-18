@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Comrade.Application.Paginations;
 
-namespace Comrade.Application.AutoMapper;
+namespace Comrade.Application.Mappers;
 
 public static class AutoMapperConfig
 {
