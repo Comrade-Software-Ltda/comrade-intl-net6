@@ -12,11 +12,11 @@ namespace Comrade.Core.SystemMenuCore.Handlers;
 public class
     SystemMenuCreateCoreHandler : IRequestHandler<SystemMenuCreateCommand, ISingleResult<Entity>>
 {
-    private readonly SystemMenuCreateValidation _systemMenuCreateValidation;
+    private readonly ISystemMenuCreateValidation _systemMenuCreateValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemMenuRepository _repository;
 
-    public SystemMenuCreateCoreHandler(SystemMenuCreateValidation systemMenuCreateValidation,
+    public SystemMenuCreateCoreHandler(ISystemMenuCreateValidation systemMenuCreateValidation,
         ISystemMenuRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _systemMenuCreateValidation = systemMenuCreateValidation;

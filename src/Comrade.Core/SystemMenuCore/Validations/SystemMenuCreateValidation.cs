@@ -7,10 +7,10 @@ namespace Comrade.Core.SystemMenuCore.Validations;
 
 public class SystemMenuCreateValidation : ISystemMenuCreateValidation
 {
-    private readonly SystemMenuValidateSameCode _systemMenuValidateSameCode;
+    private readonly ISystemMenuUniqueValidation _systemMenuValidateSameCode;
 
     public SystemMenuCreateValidation(ISystemMenuRepository repository,
-        SystemMenuValidateSameCode systemMenuValidateSameCode)
+        ISystemMenuUniqueValidation systemMenuValidateSameCode)
     {
         _systemMenuValidateSameCode = systemMenuValidateSameCode;
     }

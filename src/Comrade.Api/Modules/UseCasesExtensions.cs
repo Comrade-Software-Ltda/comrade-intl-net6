@@ -186,8 +186,8 @@ public static class UseCasesExtensions
         // Core - Validations
         services.AddScoped<ISystemMenuCreateValidation, SystemMenuCreateValidation>();
         services.AddScoped<ISystemMenuEditValidation, SystemMenuEditValidation>();
-        services.AddScoped<ISystemMenuDeleteValidation, SystemMenuDeleteValidation>();
-        services.AddScoped<SystemMenuValidateSameCode>();
+        services.AddScoped<SystemMenuDeleteValidation>();
+        services.AddScoped<ISystemMenuUniqueValidation, SystemMenuUniqueValidation>();
 
         #endregion
 

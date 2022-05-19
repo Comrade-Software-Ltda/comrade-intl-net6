@@ -20,10 +20,10 @@ public class SystemMenuRepository : Repository<SystemMenu>, ISystemMenuRepositor
                    throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<ISingleResult<SystemMenu>> ValidateSameCode(Guid id, string text)
+    public async Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid id, string text)
     {
         var exists = await _context.SystemMenus
-            .Where(p => p.Id != id && text.Equals(p.Text, StringComparison.Ordinal))
+            .Where(p => text.Equals(p.Text))
             .AnyAsync().ConfigureAwait(false);
 
         return exists

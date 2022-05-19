@@ -5,5 +5,5 @@ namespace Comrade.Core.SystemMenuCore;
 
 public interface ISystemMenuRepository : IRepository<SystemMenu>
 {
-    Task<ISingleResult<SystemMenu>> ValidateSameCode(Guid id, string code);
+    Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid id, string code);
 }

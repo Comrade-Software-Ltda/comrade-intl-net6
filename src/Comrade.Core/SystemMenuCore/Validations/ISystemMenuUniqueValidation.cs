@@ -4,10 +4,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemMenuCore.Validations;
 
-public class SystemMenuDeleteValidation
+public interface ISystemMenuUniqueValidation
 {
-    public Task<ISingleResult<Entity>> Execute(SystemMenu entity)
-    {
-        return null;
-    }
+    Task<ISingleResult<Entity>> Execute(SystemMenu entity);
 }
