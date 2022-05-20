@@ -2,12 +2,12 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
+using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Core.SystemMenuCore;
 using Comrade.Domain.Models;
 
-namespace Comrade.Application.Services.SystemMenuServices.Queries;
+namespace Comrade.Application.Components.SystemMenuComponent.Queries;
 
 public class SystemMenuQuery : ISystemMenuQuery
 {

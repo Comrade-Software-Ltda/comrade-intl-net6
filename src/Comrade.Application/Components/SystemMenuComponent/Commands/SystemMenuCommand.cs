@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.SystemMenuServices.Dtos;
+using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Core.SystemMenuCore;
 using MediatR;
 
-namespace Comrade.Application.Services.SystemMenuServices.Commands;
+namespace Comrade.Application.Components.SystemMenuComponent.Commands;
 
 public class SystemMenuCommand : ISystemMenuCommand
 {

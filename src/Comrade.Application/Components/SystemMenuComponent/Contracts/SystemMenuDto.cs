@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Comrade.Application.Bases;
 
-namespace Comrade.Application.Services.SystemMenuServices.Dtos;
+namespace Comrade.Application.Components.SystemMenuComponent.Contracts;
 
 public class SystemMenuDto : EntityDto
 {
@@ -9,6 +9,7 @@ public class SystemMenuDto : EntityDto
 
     [Required(ErrorMessage = "Text is required")]
     public string? Text { get; set; }
+
     public string? Description { get; set; }
     public int? Order { get; set; }
     public string? Route { get; set; }

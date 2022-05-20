@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
-using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemMenuCore.Commands;
@@ -33,5 +33,6 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<SystemMenuDto, SystemMenu>();
         CreateMap<SystemMenuCreateDto, SystemMenuCreateCommand>();
         CreateMap<SystemMenuEditDto, SystemMenuEditCommand>();
+        CreateMap<SystemMenuDeleteDto, SystemMenuDeleteCommand>();
     }
 }

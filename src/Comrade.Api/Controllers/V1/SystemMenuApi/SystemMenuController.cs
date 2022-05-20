@@ -3,10 +3,10 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
+using Comrade.Application.Components.SystemMenuComponent.Commands;
+using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenuComponent.Queries;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemMenuServices.Commands;
-using Comrade.Application.Services.SystemMenuServices.Dtos;
-using Comrade.Application.Services.SystemMenuServices.Queries;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.UseCases.V1.SystemMenuApi;

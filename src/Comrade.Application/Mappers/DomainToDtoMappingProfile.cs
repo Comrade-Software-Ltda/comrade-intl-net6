@@ -2,9 +2,9 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Lookups;
-using Comrade.Application.Services.SystemMenuServices.Dtos;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 

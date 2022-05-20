@@ -68,7 +68,9 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnName("syme_uuid_system_menu");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
                     b.Property<int?>("Order")
@@ -76,12 +78,15 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnName("syme_nm_order");
 
                     b.Property<string>("Route")
-                        .HasColumnType("varchar")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_route");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("varchar")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
                         .HasColumnName("syme_tx_text");
 
                     b.Property<Guid?>("syme_uuid_father")
