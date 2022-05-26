@@ -19,11 +19,11 @@ public class SystemMenuCreateValidation : ISystemMenuCreateValidation
     {
         var registerSameCode =
             await _systemMenuValidateSameCode.Execute(entity).ConfigureAwait(false);
-        if (!registerSameCode.Success)
+        if (registerSameCode.Success)
         {
-            return registerSameCode;
+            return new SingleResult<Entity>(entity);
         }
 
-        return new SingleResult<Entity>(entity);
+        return registerSameCode;
     }
 }

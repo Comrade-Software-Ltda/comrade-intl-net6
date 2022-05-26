@@ -5,6 +5,7 @@ using Comrade.Core.Messages;
 using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemMenuCore.Validations;
 using Comrade.Domain.Bases;
+using Comrade.Domain.Models;
 using MediatR;
 
 namespace Comrade.Core.SystemMenuCore.Handlers;
@@ -36,6 +37,8 @@ public class
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
+
+        if (request.Father != null) request.Father.Childrens = new List<SystemMenu>();
 
         _mongoDbContext.InsertOne(request);
 

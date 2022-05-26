@@ -36,20 +36,20 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = await _systemMenuDeleteValidation.Execute(recordExists).ConfigureAwait(false);
+        var validate = _systemMenuDeleteValidation.Execute(recordExists);
         if (!validate.Success)
         {
             return validate;
         }
 
-        var systemMenuId = recordExists.Id;
-        _repository.Remove(systemMenuId);
+        var airplaneId = recordExists.Id;
+        _repository.Remove(airplaneId);
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Remove(systemMenuId);
+        _repository.Remove(airplaneId);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
-        _mongoDbContext.DeleteOne<SystemMenu>(systemMenuId);
+        _mongoDbContext.DeleteOne<Airplane>(airplaneId);
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 
 namespace Comrade.Application.Components.SystemMenuComponent.Contracts;
 
 public class SystemMenuDto : EntityDto
 {
-    public SystemMenuDto? Father { get; set; }
-
-    [Required(ErrorMessage = "Text is required")]
+    public Guid? FatherId { get; set; }
     public string? Text { get; set; }
-
     public string? Description { get; set; }
     public int? Order { get; set; }
     public string? Route { get; set; }
