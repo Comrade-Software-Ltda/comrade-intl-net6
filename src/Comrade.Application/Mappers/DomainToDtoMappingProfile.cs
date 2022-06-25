@@ -22,5 +22,7 @@ public class DomainToDtoMappingProfile : Profile
             .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
         CreateMap<SystemMenu, SystemMenuDto>();
+        CreateMap<SystemMenu, SystemMenuSimpleDto>();
+
     }
 }

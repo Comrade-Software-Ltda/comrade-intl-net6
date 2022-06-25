@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Comrade.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,8 +32,7 @@ namespace Comrade.Persistence.Migrations
                     syme_uuid_father = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     syme_tx_text = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     syme_tx_description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
-                    syme_nm_order = table.Column<int>(type: "int", nullable: true),
-                    syme_tx_route = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                    syme_tx_route = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,7 +41,8 @@ namespace Comrade.Persistence.Migrations
                         name: "FK_syme_system_menu_syme_system_menu_syme_uuid_father",
                         column: x => x.syme_uuid_father,
                         principalTable: "syme_system_menu",
-                        principalColumn: "syme_uuid_system_menu");
+                        principalColumn: "syme_uuid_system_menu",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

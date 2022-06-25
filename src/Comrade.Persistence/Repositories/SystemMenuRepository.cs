@@ -23,12 +23,18 @@ public class SystemMenuRepository : Repository<SystemMenu>, ISystemMenuRepositor
     public async Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid id, string text)
     {
         var exists = await _context.SystemMenus
-            .Where(p => text.Equals(p.Text))
+            .Where(p => text.Equals(p.Text, StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
 
         return exists
             ? new SingleResult<SystemMenu>((int) EnumResponse.ErrorBusinessValidation,
                 BusinessMessage.MSG08)
             : new SingleResult<SystemMenu>();
+    }
+
+    public IQueryable<SystemMenu> GetAllFathers()
+    {
+        return _context.SystemMenus
+            .Where(sm => sm.FatherId == null);
     }
 }

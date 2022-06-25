@@ -23,14 +23,38 @@ public class SystemMenuQuery : ISystemMenuQuery
         _mapper = mapper;
     }
 
-    public async Task<IPageResultDto<SystemMenuDto>> GetAll(
+    public async Task<IPageResultDto<SystemMenuSimpleDto>> GetAll(
+        PaginationQuery? paginationQuery = null)
+    {
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        List<SystemMenuSimpleDto> list;
+        if (paginationFilter == null)
+        {
+            list = await Task.Run(() => _repository.GetAllAsNoTracking()
+                .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
+                .ToList()).ConfigureAwait(false);
+
+            return new PageResultDto<SystemMenuSimpleDto>(list);
+        }
+
+        var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+            .Take(paginationFilter.PageSize)
+            .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
+            .ToList()).ConfigureAwait(false);
+
+        return new PageResultDto<SystemMenuSimpleDto>(paginationFilter, list);
+    }
+
+    public async Task<IPageResultDto<SystemMenuDto>> GetAllFathers(
         PaginationQuery? paginationQuery = null)
     {
         var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemMenuDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
+            list = await Task.Run(() => _repository.GetAllFathers()
                 .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
                 .ToList()).ConfigureAwait(false);
 
@@ -39,14 +63,14 @@ public class SystemMenuQuery : ISystemMenuQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => _repository.GetAllFathers().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 
         return new PageResultDto<SystemMenuDto>(paginationFilter, list);
     }
-
+    
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdDefault(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);

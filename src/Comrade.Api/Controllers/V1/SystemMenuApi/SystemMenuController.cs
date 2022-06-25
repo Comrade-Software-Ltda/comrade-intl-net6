@@ -9,7 +9,7 @@ using Comrade.Application.Components.SystemMenuComponent.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
-namespace Comrade.Api.UseCases.V1.SystemMenuApi;
+namespace Comrade.Api.Controllers.V1.SystemMenuApi;
 
 // [Authorize]
 [FeatureGate(CustomFeature.SystemMenu)]
@@ -29,6 +29,22 @@ public class SystemMenuController : ComradeController
         _systemMenuQuery = systemMenuQuery;
         _logger = logger;
     }
+    
+    [HttpGet("get-all-fathers")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
+    public async Task<IActionResult> GetAllFathers([FromQuery] PaginationQuery? paginationQuery)
+    {
+        try
+        {
+            var result = await _systemMenuQuery.GetAllFathers(paginationQuery).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
 
     [HttpGet("get-all")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
@@ -45,11 +61,7 @@ public class SystemMenuController : ComradeController
                 new SingleResultDto<EntityDto>(e));
         }
     }
-
-    /// <summary>
-    ///     Get an systemMenu details.
-    /// </summary>
-    /// <param name="systemMenuId"></param>
+    
     [HttpGet("get-by-id/{systemMenuId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
     public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemMenuId)

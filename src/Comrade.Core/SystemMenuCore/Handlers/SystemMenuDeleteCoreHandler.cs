@@ -14,15 +14,13 @@ public class
     SystemMenuDeleteCoreHandler : IRequestHandler<SystemMenuDeleteCommand, ISingleResult<Entity>>
 {
     private readonly SystemMenuDeleteValidation _systemMenuDeleteValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemMenuRepository _repository;
 
     public SystemMenuDeleteCoreHandler(SystemMenuDeleteValidation systemMenuDeleteValidation,
-        ISystemMenuRepository repository, IMongoDbCommandContext mongoDbContext)
+        ISystemMenuRepository repository)
     {
         _systemMenuDeleteValidation = systemMenuDeleteValidation;
         _repository = repository;
-        _mongoDbContext = mongoDbContext;
     }
 
     public async Task<ISingleResult<Entity>> Handle(SystemMenuDeleteCommand request,
@@ -42,14 +40,15 @@ public class
             return validate;
         }
 
-        var airplaneId = recordExists.Id;
-        _repository.Remove(airplaneId);
+        var systemMenuId = recordExists.Id;
+        var childrensIds = recordExists.Childrens?
+            .Select(submenu => submenu.Id)
+            .ToList();
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Remove(airplaneId);
+        _repository.Remove(systemMenuId);
+        _repository.RemoveAll(childrensIds);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
-
-        _mongoDbContext.DeleteOne<Airplane>(airplaneId);
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

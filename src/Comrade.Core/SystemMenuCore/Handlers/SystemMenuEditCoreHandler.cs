@@ -61,7 +61,6 @@ public class
     {
         target.Description = source.Description;
         target.Father = source.Father;
-        target.Order = source.Order;
         target.Route = source.Route;
         target.Text = source.Text;
     }

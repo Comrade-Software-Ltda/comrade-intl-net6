@@ -14,7 +14,7 @@ public interface IRepository<TEntity> : IDisposable
     void Update(TEntity obj);
     void UpdateAll(IList<TEntity> obj);
     void Remove(Guid id);
-    void RemoveAll(IList<Guid> id);
+    void RemoveAll(IList<Guid>? ids);
     Task<TEntity?> GetById(Guid id);
     Task<TEntity?> GetById(Guid id, params string[] includes);
     Task<TEntity?> GetById(Guid id, Expression<Func<TEntity, TEntity>> projection);

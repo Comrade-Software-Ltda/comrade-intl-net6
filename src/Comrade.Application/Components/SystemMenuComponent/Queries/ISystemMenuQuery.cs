@@ -6,7 +6,7 @@ namespace Comrade.Application.Components.SystemMenuComponent.Queries;
 
 public interface ISystemMenuQuery
 {
-    Task<IPageResultDto<SystemMenuDto>> GetAll(PaginationQuery? paginationQuery = null);
+    Task<IPageResultDto<SystemMenuSimpleDto>> GetAll(PaginationQuery? paginationQuery = null);
+    Task<IPageResultDto<SystemMenuDto>> GetAllFathers(PaginationQuery? paginationQuery = null);
     Task<ISingleResultDto<SystemMenuDto>> GetByIdDefault(Guid id);
-    Task<ISingleResultDto<SystemMenuDto>> GetByIdMongo(Guid id);
 }

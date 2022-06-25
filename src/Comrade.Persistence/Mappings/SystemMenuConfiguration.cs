@@ -12,6 +12,6 @@ public class SystemMenuConfiguration : IEntityTypeConfiguration<SystemMenu>
             .WithMany(x => x.Childrens)
             .HasForeignKey(x => x.FatherId)
             .IsRequired(false)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

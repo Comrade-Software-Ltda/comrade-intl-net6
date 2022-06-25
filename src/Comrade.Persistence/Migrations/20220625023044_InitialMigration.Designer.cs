@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comrade.Persistence.Migrations
 {
     [DbContext(typeof(ComradeContext))]
-    [Migration("20220519142152_Initial")]
-    partial class Initial
+    [Migration("20220625023044_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,12 +75,11 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
-                    b.Property<int?>("Order")
-                        .HasColumnType("int")
-                        .HasColumnName("syme_nm_order");
+                    b.Property<Guid?>("FatherId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("syme_uuid_father");
 
                     b.Property<string>("Route")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_route");
@@ -91,13 +90,10 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(30)")
                         .HasColumnName("syme_tx_text");
 
-                    b.Property<Guid?>("syme_uuid_father")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id")
                         .HasName("pk_syme_system_menu");
 
-                    b.HasIndex("syme_uuid_father");
+                    b.HasIndex("FatherId");
 
                     b.ToTable("syme_system_menu");
                 });
@@ -154,10 +150,16 @@ namespace Comrade.Persistence.Migrations
             modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
                 {
                     b.HasOne("Comrade.Domain.Models.SystemMenu", "Father")
-                        .WithMany()
-                        .HasForeignKey("syme_uuid_father");
+                        .WithMany("Childrens")
+                        .HasForeignKey("FatherId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Father");
+                });
+
+            modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
+                {
+                    b.Navigation("Childrens");
                 });
 #pragma warning restore 612, 618
         }

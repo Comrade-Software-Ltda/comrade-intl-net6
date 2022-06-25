@@ -31,6 +31,7 @@ public class DtoToDomainMappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
         CreateMap<SystemMenuDto, SystemMenu>();
+        CreateMap<SystemMenuSimpleDto, SystemMenu>();
         CreateMap<SystemMenuCreateDto, SystemMenuCreateCommand>();
         CreateMap<SystemMenuEditDto, SystemMenuEditCommand>();
         CreateMap<SystemMenuDeleteDto, SystemMenuDeleteCommand>();
