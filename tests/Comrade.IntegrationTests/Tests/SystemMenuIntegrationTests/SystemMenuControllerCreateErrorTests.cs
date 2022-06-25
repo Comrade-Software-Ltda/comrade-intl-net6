@@ -15,17 +15,11 @@ public sealed class SystemMenuControllerCreateErrorTests : IClassFixture<Service
     }
 
     [Fact]
-    public async Task SystemMenuController_Create_Error()
+    public async Task SystemMenuController_Create_WithoutText_Error()
     {
-        var testObject1 = new SystemMenuCreateDto
+        var testObject = new SystemMenuCreateDto
         {
-            Text = "Teste",
-            Route = "/"
-        };
-        var testObject2 = new SystemMenuCreateDto
-        {
-            Description = "Descrição do teste",
-            Route = "/"
+            Description = "Descrição do teste"
         };
 
         var systemMenuController =
@@ -33,21 +27,58 @@ public sealed class SystemMenuControllerCreateErrorTests : IClassFixture<Service
                 _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
-        var result1 = await systemMenuController.Create(testObject1);
-        var result2 = await systemMenuController.Create(testObject2);
+        var result = await systemMenuController.Create(testObject);
 
-        if (result1 is ObjectResult okResult1)
+        if (result is ObjectResult okResult)
         {
-            var actualResultValue = okResult1.Value as SingleResultDto<EntityDto>;
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+    }
 
-        if (result2 is ObjectResult okResult2)
+    [Fact]
+    public async Task SystemMenuController_Create_WithoutDescription_Error()
+    {
+        var testObject = new SystemMenuCreateDto
         {
-            var actualResultValue = okResult2.Value as SingleResultDto<EntityDto>;
+            Text = "Teste"
+        };
+
+        var systemMenuController =
+            SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
+                _fixture.Mediator);
+
+        var result = await systemMenuController.Create(testObject);
+
+        if (result is ObjectResult okResult)
+        {
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
+        }
+    }
+
+
+    [Fact]
+    public async Task SystemMenuController_Create_CountMessagesValidations_Error()
+    {
+        var testObject = new SystemMenuCreateDto();
+
+        var systemMenuController =
+            SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
+                _fixture.MongoDbContextFixture,
+                _fixture.Mediator);
+
+        var result = await systemMenuController.Create(testObject);
+
+        if (result is ObjectResult okResult)
+        {
+            var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
+            Assert.NotNull(actualResultValue);
+            Assert.Equal(409, actualResultValue?.Code);
+            Assert.Equal(2, actualResultValue?.Messages?.Count);
         }
     }
 }

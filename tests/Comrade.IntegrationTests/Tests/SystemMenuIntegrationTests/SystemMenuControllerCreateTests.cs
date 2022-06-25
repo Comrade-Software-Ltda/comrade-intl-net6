@@ -47,8 +47,7 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
         {
             Text = "Teste",
             Description = "Descrição do menu",
-            Route = "/",
-            Order = 1
+            Route = "/"
         };
 
         var systemMenuController =

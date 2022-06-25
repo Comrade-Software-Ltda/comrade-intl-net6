@@ -21,7 +21,6 @@ public sealed class SystemMenuControllerEditErrorTests : IClassFixture<ServicePr
         var systemMenuId = Guid.NewGuid();
         const string systemMenuText = "Main Teste Edit";
         const string systemMenuDescription = "Description Main Teste Edit";
-        const int systemMenuOrder = 1;
         const string systemMenuRoute = "/teste";
 
         var testObject = new SystemMenuEditDto
@@ -29,7 +28,6 @@ public sealed class SystemMenuControllerEditErrorTests : IClassFixture<ServicePr
             Id = systemMenuId,
             Text = systemMenuText,
             Description = systemMenuDescription,
-            Order = systemMenuOrder,
             Route = systemMenuRoute
         };
 

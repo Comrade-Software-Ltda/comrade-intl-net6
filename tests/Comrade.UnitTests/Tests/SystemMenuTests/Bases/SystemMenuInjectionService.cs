@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Comrade.UnitTests.Tests.SystemMenuTests.Bases;
 
-public sealed class SystemMenuInjectionService
+public static class SystemMenuInjectionService
 {
     public static SystemMenuCommand GetSystemMenuCommand(ComradeContext context,
         IMediator mediator)

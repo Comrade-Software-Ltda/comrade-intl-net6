@@ -4,7 +4,7 @@ using Comrade.Application.Paginations;
 
 namespace Comrade.UnitTests.Helpers;
 
-public class MapperHelper
+public static class MapperHelper
 {
     public static IMapper ConfigMapper()
     {

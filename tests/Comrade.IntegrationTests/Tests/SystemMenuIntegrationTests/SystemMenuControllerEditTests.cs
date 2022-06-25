@@ -25,7 +25,6 @@ public sealed class SystemMenuControllerEditTests : IClassFixture<ServiceProvide
         var systemMenuId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a6");
         const string systemMenuText = "Main Teste Edit";
         const string systemMenuDescription = "Description Main Teste Edit";
-        const int systemMenuOrder = 1;
         const string systemMenuRoute = "/teste";
 
         var testObject = new SystemMenuEditDto
@@ -33,7 +32,6 @@ public sealed class SystemMenuControllerEditTests : IClassFixture<ServiceProvide
             Id = systemMenuId,
             Text = systemMenuText,
             Description = systemMenuDescription,
-            Order = systemMenuOrder,
             Route = systemMenuRoute
         };
 
@@ -53,9 +51,9 @@ public sealed class SystemMenuControllerEditTests : IClassFixture<ServiceProvide
 
         var repository = new SystemMenuRepository(_fixture.SqlContextFixture);
         var systemMenu = await repository.GetById(systemMenuId);
-        Assert.Equal(systemMenuOrder, systemMenu!.Order);
-        Assert.Equal(systemMenuRoute, systemMenu.Route);
-        Assert.Equal(systemMenuText, systemMenu.Text);
-        Assert.Equal(systemMenuDescription, systemMenu.Description);
+        Assert.NotNull(systemMenu);
+        Assert.Equal(systemMenuRoute, systemMenu?.Route);
+        Assert.Equal(systemMenuText, systemMenu?.Text);
+        Assert.Equal(systemMenuDescription, systemMenu?.Description);
     }
 }

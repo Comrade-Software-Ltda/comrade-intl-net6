@@ -1,4 +1,4 @@
-﻿using Comrade.Api.UseCases.V1.SystemMenuApi;
+﻿using Comrade.Api.Controllers.V1.SystemMenuApi;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;
