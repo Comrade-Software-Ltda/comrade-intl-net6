@@ -4,16 +4,16 @@
 Altere o arquivo appsettings.Development.json em Comrade.Api de acordo com o seu ambiente:	
 - MsSqlServer (true | false): Ativar acesso ao banco MsSqlServer
 - PostgresSql (true | false): Ativar acesso ao banco PostgresSql
-- InjectInitialData (true | false): Inserir dados básicos no banco
+- InjectInitialData (true | false): Inserir dados bï¿½sicos no banco
 
 ## Migrations
 ### Criando base local
-Com o appsettings.Development.json no projeto Comrade.Api devidamente configurado. Para subir sua base localmente você deve seguir os seguintes passos:
+Com o appsettings.Development.json no projeto Comrade.Api devidamente configurado. Para subir sua base localmente vocï¿½ deve seguir os seguintes passos:
 - No NuGet Package Manager selecionando o projeto Comrade.Persistence. E execute o comando:
   ```
   Update-Database
   ```
-- Caso ocorra algum erro referente a tipos de colunas durante a operação anterior:
+- Caso ocorra algum erro referente a tipos de colunas durante a operaï¿½ï¿½o anterior:
   - Apague todos os arquivos da pasta Migrations no projeto Comrade.Persistence
   - No NuGet Package Manager selecionando o projeto Comrade.Persistence. E execute o comando:
     ```
