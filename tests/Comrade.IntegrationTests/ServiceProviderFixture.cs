@@ -1,11 +1,12 @@
-﻿using Comrade.Persistence.DataAccess;
+﻿using System;
+using Comrade.Application.Notifications.Email;
+using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
 
 namespace Comrade.IntegrationTests
 {
@@ -42,18 +43,24 @@ namespace Comrade.IntegrationTests
             serviceCollection.AddSingleton<IMongoDbContextSettings>(x =>
                 x.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
 
-            var sp = serviceCollection.BuildServiceProvider();
-            Sp = sp;
-            Mediator = sp.GetRequiredService<IMediator>();
-            SqlContextFixture = sp.GetService<ComradeContext>()!;
-            var mongoDbContextSettings = new MongoDbContextSettings
-            {
-                ConnectionString = connString,
-                DatabaseName = dbName
-            };
-            MongoDbContextFixtureSettings = mongoDbContextSettings;
-            MongoDbContextFixture = new MongoDbContext(mongoDbContextSettings);
-        }
+            serviceCollection.Configure<MailKitSettings>(
+                configuration.GetSection(nameof(MailKitSettings)));
+
+            serviceCollection.AddSingleton<IMailKitSettings>(sp =>
+                sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
+
+        var sp = serviceCollection.BuildServiceProvider();
+        Sp = sp;
+        Mediator = sp.GetRequiredService<IMediator>();
+        SqlContextFixture = sp.GetService<ComradeContext>()!;
+        var mongoDbContextSettings = new MongoDbContextSettings
+        {
+            ConnectionString = connString,
+            DatabaseName = dbName
+        };
+        MongoDbContextFixtureSettings = mongoDbContextSettings;
+        MongoDbContextFixture = new MongoDbContext(mongoDbContextSettings);
+    }
 
         public IServiceProvider Sp { get; }
         public IMediator Mediator { get; }

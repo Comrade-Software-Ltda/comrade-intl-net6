@@ -106,6 +106,15 @@ namespace Comrade.Application.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notificação - Mosele Software Consulting.
+        /// </summary>
+        public static string NOTIFICATION_DEFAULT_NAME {
+            get {
+                return ResourceManager.GetString("NOTIFICATION_DEFAULT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O campo {PropertyName} precisa ter {MaxLength} caracteres..
         /// </summary>
         public static string TAMANHO_ESPECIFICO_CAMPO {

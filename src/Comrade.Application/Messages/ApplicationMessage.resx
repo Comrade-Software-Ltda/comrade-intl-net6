@@ -132,6 +132,9 @@
   <data name="MENSAGEM_ERRO_VALIDACAO" xml:space="preserve">
     <value>Ocorreu um erro ao tentar validar os campos enviados, verifque os dados e tente novamente.</value>
   </data>
+  <data name="NOTIFICATION_DEFAULT_NAME" xml:space="preserve">
+    <value>Notificação - Mosele Software Consulting</value>
+  </data>
   <data name="TAMANHO_ESPECIFICO_CAMPO" xml:space="preserve">
     <value>O campo {PropertyName} precisa ter {MaxLength} caracteres.</value>
   </data>
