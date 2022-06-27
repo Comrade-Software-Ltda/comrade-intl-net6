@@ -2,7 +2,7 @@
 
 public class SaveJsonObjectToFile<TEntity>
 {
-    public void Excute(List<TEntity> result, string name)
+    public void Execute(List<TEntity> result, string name)
     {
         var oto = JsonSerializer.Serialize(result);
         var path = @"c:\temp\" + name + ".json";
