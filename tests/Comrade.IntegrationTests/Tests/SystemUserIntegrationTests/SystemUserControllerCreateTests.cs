@@ -1,5 +1,5 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
 using Xunit;
 
@@ -22,7 +22,6 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         {
             Name = "111",
             Email = "777@testObject",
-            Password = "123456",
             Registration = "123"
         };
 
@@ -48,7 +47,6 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         var testObject = new SystemUserCreateDto
         {
             Email = "777@testObject",
-            Password = "123456",
             Registration = "123"
         };
 

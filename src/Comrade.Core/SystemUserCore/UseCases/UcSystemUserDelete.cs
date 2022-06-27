@@ -17,7 +17,7 @@ public class UcSystemUserDelete : UseCase, IUcSystemUserDelete
 
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
-        var entity = new SystemUserDeleteCommand { Id = id };
+        var entity = new SystemUserDeleteCommand {Id = id};
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

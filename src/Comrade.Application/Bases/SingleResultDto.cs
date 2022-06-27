@@ -12,7 +12,7 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
 {
     public SingleResultDto(TDto? data)
     {
-        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
+        Code = data == null ? (int) EnumResponse.NotFound : (int) EnumResponse.Ok;
         Success = data != null;
         Message = data == null
             ? BusinessMessage.MSG04
@@ -30,7 +30,7 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
 
     public SingleResultDto(Exception ex)
     {
-        Code = (int)EnumResponse.InternalServerError;
+        Code = (int) EnumResponse.InternalServerError;
         Success = false;
         Message = ex.Message;
         ExceptionMessage = ex.Message;
@@ -45,7 +45,7 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
 
     public SingleResultDto(List<ValidationFailure> failures)
     {
-        Code = (int)EnumResponse.ErrorBusinessValidation;
+        Code = (int) EnumResponse.ErrorBusinessValidation;
         Success = false;
         Messages = failures.Select(x => x.ErrorMessage).ToList();
     }

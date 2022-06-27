@@ -13,11 +13,11 @@ namespace Comrade.Core.AirplaneCore.Handlers;
 public class
     AirplaneCreateCoreHandler : IRequestHandler<AirplaneCreateCommand, ISingleResult<Entity>>
 {
-    private readonly AirplaneCreateValidation _airplaneCreateValidation;
+    private readonly IAirplaneCreateValidation _airplaneCreateValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly IAirplaneRepository _repository;
 
-    public AirplaneCreateCoreHandler(AirplaneCreateValidation airplaneCreateValidation,
+    public AirplaneCreateCoreHandler(IAirplaneCreateValidation airplaneCreateValidation,
         IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
     {
         _airplaneCreateValidation = airplaneCreateValidation;

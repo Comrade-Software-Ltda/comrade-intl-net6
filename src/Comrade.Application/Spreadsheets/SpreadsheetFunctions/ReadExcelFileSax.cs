@@ -31,7 +31,7 @@ public static class ReadExcelFileSax
                         {
                             if (reader.ElementType == typeof(Cell))
                             {
-                                var cell = (Cell)reader.LoadCurrentElement()!;
+                                var cell = (Cell) reader.LoadCurrentElement()!;
 
                                 string? cellValue;
 

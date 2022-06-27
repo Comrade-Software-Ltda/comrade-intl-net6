@@ -5,7 +5,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemUserCore.Validations;
 
-public class SystemUserDeleteValidation
+public class SystemUserDeleteValidation : ISystemUserDeleteValidation
 {
     public ISingleResult<Entity> Execute(SystemUser? recordExists)
     {

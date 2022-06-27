@@ -17,7 +17,7 @@ namespace Comrade.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0-rc.2.21480.5")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -105,7 +105,7 @@ namespace Comrade.Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_un_syus_tx_registration");
 
-                    b.ToTable("syus_usuario_sistema");
+                    b.ToTable("syus_system_user");
                 });
 #pragma warning restore 612, 618
         }

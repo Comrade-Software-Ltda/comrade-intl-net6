@@ -1,4 +1,4 @@
-﻿using Comrade.Application.Services.AuthenticationServices.Dtos;
+﻿using Comrade.Application.Components.AuthenticationComponent.Contracts;
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.TestDatas;
 

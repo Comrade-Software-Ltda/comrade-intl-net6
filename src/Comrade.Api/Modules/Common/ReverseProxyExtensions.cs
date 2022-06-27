@@ -37,7 +37,7 @@ public static class ReverseProxyExtensions
             });
 
         app.UseForwardedHeaders(new ForwardedHeadersOptions
-            { ForwardedHeaders = ForwardedHeaders.All });
+            {ForwardedHeaders = ForwardedHeaders.All});
 
         return app;
     }

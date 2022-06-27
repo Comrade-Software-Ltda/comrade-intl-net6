@@ -1,8 +1,8 @@
-﻿using Comrade.Api.UseCases.V1;
+﻿using System;
+using Comrade.Api.Controllers.V1;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using System;
 
 namespace Comrade.IntegrationTests.Tests.LookupIntegrationTests;
 

@@ -11,7 +11,7 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
     public PageResultDto(List<T>? data)
     {
         Data = data;
-        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
+        Code = data == null ? (int) EnumResponse.NotFound : (int) EnumResponse.Ok;
         Success = data != null;
         Message = data == null
             ? BusinessMessage.MSG04
@@ -25,7 +25,7 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
         PageSize = pagination.PageNumber >= 1 ? pagination.PageSize : null;
         NextPage = pagination.PageNumber + 1;
         PreviousPage = pagination.PageNumber > 1 ? pagination.PageNumber - 1 : null;
-        Code = (int)EnumResponse.Ok;
+        Code = (int) EnumResponse.Ok;
         Success = true;
         Message = data == null
             ? BusinessMessage.MSG04

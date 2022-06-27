@@ -5,7 +5,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemUserCore.Validations;
 
-public class SystemUserCreateValidation
+public class SystemUserCreateValidation : ISystemUserCreateValidation
 {
     public ISingleResult<Entity> Execute(SystemUser entity)
     {

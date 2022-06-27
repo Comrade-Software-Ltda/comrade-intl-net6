@@ -24,7 +24,7 @@ public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
     public void ReplaceOne<T>(T obj) where T : Entity
     {
         GetCollection<T>().ReplaceOne(x => x.Id.Equals(obj.Id), obj,
-            new ReplaceOptions { IsUpsert = true });
+            new ReplaceOptions {IsUpsert = true});
     }
 
     public void DeleteOne<T>(Guid id) where T : Entity
