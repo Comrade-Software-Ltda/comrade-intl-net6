@@ -1,9 +1,9 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Services.SystemUserServices.Dtos;
+﻿using System;
+using Comrade.Application.Bases;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
@@ -23,7 +23,6 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
     {
         var changeName = "new name";
         var changeEmail = "novo@email.com";
-        var changePassword = "NovaPassword";
         var changeRegistration = "NovaRegistration";
 
         var systemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5");
@@ -33,7 +32,6 @@ public class SystemUserControllerEditTests : IClassFixture<ServiceProviderFixtur
             Id = systemUserId,
             Name = changeName,
             Email = changeEmail,
-            Password = changePassword,
             Registration = changeRegistration
         };
 

@@ -23,7 +23,7 @@ public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepositor
         var result = _context.SystemUsers
             .Where(x => x.Name.Contains(name)).Take(30)
             .OrderBy(x => x.Name)
-            .Select(s => new Lookup { Key = s.Id, Value = s.Name });
+            .Select(s => new Lookup {Key = s.Id, Value = s.Name});
 
         return result;
     }

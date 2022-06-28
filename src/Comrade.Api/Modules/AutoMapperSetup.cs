@@ -1,4 +1,4 @@
-﻿using Comrade.Application.AutoMapper;
+﻿using Comrade.Application.Mappers;
 
 namespace Comrade.Api.Modules;
 

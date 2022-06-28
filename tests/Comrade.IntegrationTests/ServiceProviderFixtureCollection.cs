@@ -1,9 +1,8 @@
 ﻿using Xunit;
 
-namespace Comrade.IntegrationTests
+namespace Comrade.IntegrationTests;
+
+[CollectionDefinition(nameof(ServiceProviderFixture))]
+public class ServiceProviderFixtureCollection : ICollectionFixture<ServiceProviderFixture>
 {
-    [CollectionDefinition(nameof(ServiceProviderFixture))]
-    public class ServiceProviderFixtureCollection : ICollectionFixture<ServiceProviderFixture>
-    {
-    }
 }

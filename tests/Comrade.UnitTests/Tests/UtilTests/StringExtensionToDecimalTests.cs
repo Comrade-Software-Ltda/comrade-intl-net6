@@ -1,19 +1,18 @@
 ﻿using Comrade.Application.Extensions;
 using Xunit;
 
-namespace Comrade.UnitTests.Tests.UtilTests
+namespace Comrade.UnitTests.Tests.UtilTests;
+
+public class StringExtensionToDecimalTests
 {
-    public class StringExtensionToDecimalTests
+    [Fact]
+    public void StringExtension_ToDecimal()
     {
-        [Fact]
-        public void StringExtension_ToDecimal()
-        {
-            var testObject = "420.55";
-            var goal = new decimal(420.55);
+        var testObject = "420.55";
+        var goal = new decimal(420.55);
 
-            var result = testObject.ToDecimal();
+        var result = testObject.ToDecimal();
 
-            Assert.Equal(goal, result);
-        }
+        Assert.Equal(goal, result);
     }
 }

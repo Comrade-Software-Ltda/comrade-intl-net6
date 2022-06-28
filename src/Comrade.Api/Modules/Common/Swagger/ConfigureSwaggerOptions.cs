@@ -46,7 +46,7 @@ public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOption
             Title = "Clean Architecture Comrade",
             Version = description.ApiVersion.ToString(),
             Description = "",
-            Contact = new OpenApiContact { Name = "name aqui", Email = "email@aqui" },
+            Contact = new OpenApiContact {Name = "name aqui", Email = "email@aqui"},
             TermsOfService = new Uri(UriString),
             License = new OpenApiLicense
             {

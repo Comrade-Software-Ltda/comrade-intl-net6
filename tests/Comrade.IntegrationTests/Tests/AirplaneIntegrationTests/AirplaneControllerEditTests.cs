@@ -1,9 +1,9 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Services.AirplaneServices.Dtos;
+﻿using System;
+using Comrade.Application.Bases;
+using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
-using System;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;

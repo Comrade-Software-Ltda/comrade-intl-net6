@@ -5,7 +5,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.AirplaneCore.Validations;
 
-public class AirplaneDeleteValidation
+public class AirplaneDeleteValidation : IAirplaneDeleteValidation
 {
     public ISingleResult<Entity> Execute(Airplane? recordExists)
     {

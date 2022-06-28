@@ -37,8 +37,8 @@ public sealed class
 
                 foreach (var argumentValue in arguments)
                 {
-                    var typedArgument = (CustomAttributeTypedArgument)argumentValue!;
-                    var typedArgumentValue = (CustomFeature)(int)typedArgument.Value!;
+                    var typedArgument = (CustomAttributeTypedArgument) argumentValue!;
+                    var typedArgumentValue = (CustomFeature) (int) typedArgument.Value!;
                     var isFeatureEnabled = _featureManager
                         .IsEnabledAsync(typedArgumentValue.ToString())
                         .ConfigureAwait(false)

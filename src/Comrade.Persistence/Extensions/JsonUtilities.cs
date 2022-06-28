@@ -37,7 +37,7 @@ public static class JsonUtilities
             {
                 ContractResolver = new DefaultContractResolver
                 {
-                    NamingStrategy = new SnakeCaseNamingStrategy { ProcessDictionaryKeys = true }
+                    NamingStrategy = new SnakeCaseNamingStrategy {ProcessDictionaryKeys = true}
                 },
                 Formatting = Formatting.Indented
             };

@@ -5,11 +5,11 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemUserCore.Validations;
 
-public class SystemUserForgotPasswordValidation
+public class SystemUserForgotPasswordValidation : ISystemUserForgotPasswordValidation
 {
-    private readonly SystemUserEditValidation _systemUserEditValidation;
+    private readonly ISystemUserEditValidation _systemUserEditValidation;
 
-    public SystemUserForgotPasswordValidation(SystemUserEditValidation systemUserEditValidation)
+    public SystemUserForgotPasswordValidation(ISystemUserEditValidation systemUserEditValidation)
     {
         _systemUserEditValidation = systemUserEditValidation;
     }
