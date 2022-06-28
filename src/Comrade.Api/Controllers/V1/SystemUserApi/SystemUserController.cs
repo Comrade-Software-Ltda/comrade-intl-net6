@@ -93,7 +93,7 @@ public class SystemUserController : ControllerBase
         }
     }
 
-    [HttpDelete("delete/{systemUserId:int}")]
+    [HttpDelete("delete/{systemUserId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
     public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemUserId)
     {
