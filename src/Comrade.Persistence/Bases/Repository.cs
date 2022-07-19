@@ -88,9 +88,9 @@ public class Repository<TEntity> : IRepository<TEntity>
         }
     }
 
-    public virtual void RemoveAll(IList<Guid> id)
+    public virtual void RemoveAll(IList<Guid>? ids)
     {
-        var remove = _dbSet.Where(x => id.Contains(x.Id));
+        var remove = _dbSet.Where(x => ids != null && ids.Contains(x.Id));
         _dbSet.RemoveRange(remove);
     }
 

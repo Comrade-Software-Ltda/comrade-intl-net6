@@ -9,7 +9,7 @@ using MongoDB.Driver;
 
 namespace Comrade.IntegrationTests;
 
-public class ServiceProviderFixture : IDisposable
+public sealed class ServiceProviderFixture : IDisposable
 {
     public ServiceProviderFixture()
     {

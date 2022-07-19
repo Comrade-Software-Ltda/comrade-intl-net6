@@ -3,8 +3,8 @@ using System;
 using Comrade.Persistence.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,27 +18,27 @@ namespace Comrade.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Comrade.Domain.Models.Airplane", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("airp_uuid_airplane");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("airp_tx_code");
 
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("airp_tx_model");
 
                     b.Property<int>("PassengerQuantity")
@@ -47,7 +47,7 @@ namespace Comrade.Persistence.Migrations
 
                     b.Property<string>("RegisterDate")
                         .IsRequired()
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(48)")
                         .HasColumnName("airp_dt_register");
 
                     b.HasKey("Id")
@@ -60,38 +60,74 @@ namespace Comrade.Persistence.Migrations
                     b.ToTable("airp_airplane");
                 });
 
+            modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("syme_uuid_system_menu");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("syme_tx_description");
+
+                    b.Property<Guid?>("FatherId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("syme_uuid_father");
+
+                    b.Property<string>("Route")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("syme_tx_route");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("syme_tx_text");
+
+                    b.HasKey("Id")
+                        .HasName("pk_syme_system_menu");
+
+                    b.HasIndex("FatherId");
+
+                    b.ToTable("syme_system_menu");
+                });
+
             modelBuilder.Entity("Comrade.Domain.Models.SystemUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("syus_uuid_system_user");
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("syus_tx_email");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("syus_tx_name");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(1023)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(1023)")
                         .HasColumnName("syus_pw_password");
 
                     b.Property<string>("RegisterDate")
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(48)")
                         .HasColumnName("syus_dt_register");
 
                     b.Property<string>("Registration")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("syus_tx_registration");
 
                     b.HasKey("Id")
@@ -99,13 +135,29 @@ namespace Comrade.Persistence.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique()
-                        .HasDatabaseName("ix_un_syus_tx_email");
+                        .HasDatabaseName("ix_un_syus_tx_email")
+                        .HasFilter("[syus_tx_email] IS NOT NULL");
 
                     b.HasIndex("Registration")
                         .IsUnique()
                         .HasDatabaseName("ix_un_syus_tx_registration");
 
                     b.ToTable("syus_system_user");
+                });
+
+            modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
+                {
+                    b.HasOne("Comrade.Domain.Models.SystemMenu", "Father")
+                        .WithMany("Childrens")
+                        .HasForeignKey("FatherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Father");
+                });
+
+            modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
+                {
+                    b.Navigation("Childrens");
                 });
 #pragma warning restore 612, 618
         }
