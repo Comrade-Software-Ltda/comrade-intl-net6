@@ -5,6 +5,8 @@ using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Lookups;
+using Comrade.Application.Notifications;
+using Comrade.Application.Notifications.Email;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
@@ -58,6 +60,12 @@ public sealed class Startup
 
         services.AddSingleton<IMongoDbContextSettings>(sp =>
             sp.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+
+        services.Configure<MailKitSettings>(
+            Configuration.GetSection(nameof(MailKitSettings)));
+
+        services.AddSingleton<IMailKitSettings>(sp =>
+            sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
 
         services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();

@@ -1,4 +1,5 @@
 ﻿using System;
+using Comrade.Application.Notifications.Email;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
 using MediatR;
@@ -41,6 +42,12 @@ public sealed class ServiceProviderFixture : IDisposable
             configuration.GetSection(nameof(MongoDbContextSettings)));
         serviceCollection.AddSingleton<IMongoDbContextSettings>(x =>
             x.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
+
+            serviceCollection.Configure<MailKitSettings>(
+                configuration.GetSection(nameof(MailKitSettings)));
+
+            serviceCollection.AddSingleton<IMailKitSettings>(sp =>
+                sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
 
         var sp = serviceCollection.BuildServiceProvider();
         Sp = sp;
