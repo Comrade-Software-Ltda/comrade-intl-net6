@@ -1,4 +1,5 @@
 using Comrade.Core.AirplaneCore;
+using Comrade.Core.AlticciCore;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemMenuCore;
 using Comrade.Core.SystemUserCore;
@@ -22,6 +23,7 @@ public static class EntityRepositoryExtensions
         services.AddScoped<IAirplaneRepository, AirplaneRepository>();
         services.AddScoped<ISystemUserRepository, SystemUserRepository>();
         services.AddScoped<ISystemMenuRepository, SystemMenuRepository>();
+        services.AddScoped<IAlticciRepository, AlticciRepository>();
 
         return services;
     }

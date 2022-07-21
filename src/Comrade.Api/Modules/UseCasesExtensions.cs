@@ -3,6 +3,7 @@ using Comrade.Application.Components.AirplaneComponent.Commands;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AirplaneComponent.Handlers;
 using Comrade.Application.Components.AirplaneComponent.Queries;
+using Comrade.Application.Components.AlticciComponent.Queries;
 using Comrade.Application.Components.AuthenticationComponent.Commands;
 using Comrade.Application.Components.SystemMenuComponent.Commands;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
@@ -188,7 +189,14 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemMenuEditValidation, SystemMenuEditValidation>();
         services.AddScoped<SystemMenuDeleteValidation>();
         services.AddScoped<ISystemMenuUniqueValidation, SystemMenuUniqueValidation>();
+        
+        #endregion
 
+        #region Alticci
+
+        // Application - Services
+        services.AddScoped<IAlticciQuery, AlticciQuery>();
+       
         #endregion
 
         return services;
