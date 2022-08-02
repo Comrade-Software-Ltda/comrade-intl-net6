@@ -1,5 +1,4 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Caches;
+﻿using Comrade.Application.Caches;
 
 namespace Comrade.Application.Components.AlticciComponent.Queries;
 
@@ -12,17 +11,41 @@ public class AlticciQuery : IAlticciQuery
         _CacheService = CacheService;
     }
 
-    public AlticciDto CalculaAlticci(int n)
+    private int? GetCacheAlticci(int n)
     {
-        var result = _CacheService.GetCache<AlticciDto>(n.ToString(CultureInfo.CurrentCulture));
-        if (result is null || result is not AlticciDto)
+        return _CacheService.GetCache<int?>(n.ToString(CultureInfo.CurrentCulture));
+    }
+
+    private int SetCacheAlticci(int n, int valor)
+    {
+        return _CacheService.SetCache(n.ToString(CultureInfo.CurrentCulture), valor);
+    }
+
+    private int GetCacheIfExistElseSetCache(int n, int valor)
+    {
+        int result;
+        int? cache = GetCacheAlticci(n);
+        if (cache is null)
         {
-            result = _CacheService.SetCache(n.ToString(CultureInfo.CurrentCulture), new AlticciDto(n, CalculaAlticciFunc(n)));
+            result = SetCacheAlticci(n, valor);
+        }
+        else
+        {
+            result = (int)cache;
         }
         return result;
     }
 
-    private int? CalculaAlticciFunc(int n)
+    public int CalculaAlticci(int n)
+    {
+        if (n < 0)
+        {
+            return 0;
+        }
+        return GetCacheIfExistElseSetCache(n, CalculaAlticciFunc(n));
+    }
+
+    private int CalculaAlticciFunc(int n)
     {
         if (n <= 0)
         {
@@ -32,11 +55,6 @@ public class AlticciQuery : IAlticciQuery
         {
             return 1;
         }
-        var result = _CacheService.GetCache<AlticciDto>(n.ToString(CultureInfo.CurrentCulture));
-        if (result is null || result is not AlticciDto)
-        {
-            return CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2);
-        }
-        return result.AlticciAn;
+        return GetCacheIfExistElseSetCache(n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
     }
 }

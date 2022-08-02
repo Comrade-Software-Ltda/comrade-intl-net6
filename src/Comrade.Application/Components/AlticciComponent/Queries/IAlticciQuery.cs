@@ -1,8 +1,6 @@
-﻿using Comrade.Application.Bases;
-
-namespace Comrade.Application.Components.AlticciComponent.Queries;
+﻿namespace Comrade.Application.Components.AlticciComponent.Queries;
 
 public interface IAlticciQuery
 {
-    AlticciDto CalculaAlticci(int n);
+    int CalculaAlticci(int n);
 }
