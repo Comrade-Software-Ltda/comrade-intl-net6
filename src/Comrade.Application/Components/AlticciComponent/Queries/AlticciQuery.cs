@@ -1,31 +1,23 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Core.AlticciCore;
-using Comrade.Domain.Models;
+using Comrade.Application.Caches;
 
 namespace Comrade.Application.Components.AlticciComponent.Queries;
 
 public class AlticciQuery : IAlticciQuery
 {
-    private readonly IAlticciRepository _repository;
+    private readonly IRedisCacheService _CacheService;
 
-    public AlticciQuery(IAlticciRepository repository)
+    public AlticciQuery(IRedisCacheService CacheService)
     {
-        _repository = repository;
+        _CacheService = CacheService;
     }
 
     public AlticciDto CalculaAlticci(int n)
     {
-        AlticciDto result;
-        Alticci entity = _repository.GetFromCacheIfExist(n);
-        if (entity == null)
+        var result = _CacheService.GetCache<AlticciDto>(n.ToString(CultureInfo.CurrentCulture));
+        if (result is null || result is not AlticciDto)
         {
-            result = new AlticciDto(n, CalculaAlticciFunc(n));
-            entity = new Alticci   (n, result.AlticciAn);
-            _repository.AddCache(entity);
-        }
-        else
-        {
-            result = new AlticciDto(n, entity.AlticciAn);
+            result = _CacheService.SetCache(n.ToString(CultureInfo.CurrentCulture), new AlticciDto(n, CalculaAlticciFunc(n)));
         }
         return result;
     }
@@ -40,11 +32,11 @@ public class AlticciQuery : IAlticciQuery
         {
             return 1;
         }
-        Alticci entity = _repository.GetFromCacheIfExist(n);
-        if (entity != null)
+        var result = _CacheService.GetCache<AlticciDto>(n.ToString(CultureInfo.CurrentCulture));
+        if (result is null || result is not AlticciDto)
         {
-            return entity.AlticciAn;
+            return CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2);
         }
-        return CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2);
+        return result.AlticciAn;
     }
 }

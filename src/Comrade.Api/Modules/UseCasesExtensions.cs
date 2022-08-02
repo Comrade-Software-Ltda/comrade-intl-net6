@@ -1,4 +1,5 @@
 using Comrade.Application.Bases;
+using Comrade.Application.Caches;
 using Comrade.Application.Components.AirplaneComponent.Commands;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AirplaneComponent.Handlers;
@@ -196,7 +197,8 @@ public static class UseCasesExtensions
 
         // Application - Services
         services.AddScoped<IAlticciQuery, AlticciQuery>();
-       
+        services.AddScoped<IRedisCacheService, RedisCacheService>();
+
         #endregion
 
         return services;
