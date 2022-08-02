@@ -54,7 +54,8 @@ public sealed class Startup
         services.AddSingleton<IRedisCacheService, RedisCacheService>();
         services.AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = $"{Configuration.GetValue<string>("RedisCache:localhost")}:{Configuration.GetValue<int>("RedisCache:6379")}";
+            options.InstanceName = "Sistema";
+            options.Configuration = "localhost:6379";
         });
         services.AddAutoMapperSetup();
         services.AddLogging();
