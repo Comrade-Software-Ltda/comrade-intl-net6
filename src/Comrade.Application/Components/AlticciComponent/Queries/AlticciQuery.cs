@@ -11,36 +11,36 @@ public class AlticciQuery : IAlticciQuery
         _CacheService = CacheService;
     }
 
-    private int? GetCacheAlticci(int n)
+    private long? GetCacheAlticci(long n)
     {
-        return _CacheService.GetCache<int?>(n.ToString(CultureInfo.CurrentCulture));
+        return _CacheService.GetCache<long?>(n.ToString(CultureInfo.CurrentCulture));
     }
 
-    private int SetCacheAlticci(int n, int valor)
+    private long SetCacheAlticci(long n, long valor)
     {
         return _CacheService.SetCache(n.ToString(CultureInfo.CurrentCulture), valor);
     }
 
-    public int CalculaAlticci(int n)
+    public long CalculaAlticci(long n)
     {
         if (n < 0)
         {
             return 0;
         }
-        int result;
-        int? cache = GetCacheAlticci(n);
+        long result;
+        long? cache = GetCacheAlticci(n);
         if (cache is null)
         {
             result = SetCacheAlticci(n, CalculaAlticciFunc(n));
         }
         else
         {
-            result = (int)cache;
+            result = (long)cache;
         }
         return result;
     }
 
-    private int CalculaAlticciFunc(int n)
+    private long CalculaAlticciFunc(long n)
     {
         if (n <= 0)
         {
@@ -50,15 +50,15 @@ public class AlticciQuery : IAlticciQuery
         {
             return 1;
         }
-        int result;
-        int? cache = GetCacheAlticci(n);
+        long result;
+        long? cache = GetCacheAlticci(n);
         if (cache is null)
         {
             result = SetCacheAlticci(n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
         }
         else
         {
-            result = (int)cache;
+            result = (long)cache;
         }
         return result;
     }

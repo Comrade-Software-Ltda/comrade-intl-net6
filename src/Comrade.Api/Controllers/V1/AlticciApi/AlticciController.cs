@@ -20,9 +20,9 @@ public class AlticciController : ControllerBase
         _alticciQuery = alticciQuery;
     }
 
-    [HttpGet("alticci/{n:int}")]
+    [HttpGet("alticci/{n:long}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Get))]
-    public IActionResult CalcAlticci([FromRoute][Required] int n)
+    public IActionResult CalcAlticci([FromRoute][Required] long n)
     {
         var result = new AlticciDto(n, _alticciQuery.CalculaAlticci(n));
         return StatusCode(StatusCodes.Status200OK, result);

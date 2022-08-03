@@ -2,5 +2,5 @@
 
 public interface IAlticciQuery
 {
-    int CalculaAlticci(int n);
+    long CalculaAlticci(long n);
 }
