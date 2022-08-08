@@ -6,6 +6,7 @@ namespace Comrade.IntegrationTests.Tests.FunctionIntegrationTests;
 public class FunctionControllerAlticciTest : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
+
     public FunctionControllerAlticciTest(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
@@ -20,7 +21,7 @@ public class FunctionControllerAlticciTest : IClassFixture<ServiceProviderFixtur
         {
             var actualResultValue = okResult.Value;
             Assert.NotNull(actualResultValue);
-            Assert.Equal("9", actualResultValue);
+            Assert.Equal((long)9, actualResultValue);
         }
     }
 }

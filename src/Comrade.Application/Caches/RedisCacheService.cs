@@ -32,4 +32,9 @@ public sealed class RedisCacheService : IRedisCacheService
         _cache.SetString(key, JsonSerializer.Serialize(value), timeOut);
         return value;
     }
+
+    public void removeCache(string key)
+    {
+        _cache.Remove(key);
+    }
 }

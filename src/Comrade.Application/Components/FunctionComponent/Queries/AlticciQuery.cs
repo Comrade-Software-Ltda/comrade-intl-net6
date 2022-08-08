@@ -22,7 +22,7 @@ public class AlticciQuery : IAlticciQuery
     {
         if (n < 0)
         {
-            return 0;
+            return -1;
         }
         return CalculaAlticciFunc(n);
     }
