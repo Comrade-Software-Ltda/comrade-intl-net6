@@ -21,7 +21,7 @@ public class FunctionController : ControllerBase
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Get))]
     public IActionResult Alticci([FromRoute][Required] long n)
     {
-        var result = "Alticci(" + n + ") = " + _alticciQuery.CalculaAlticci(n);
+        var result = _alticciQuery.CalculaAlticci(n);
         return StatusCode(StatusCodes.Status200OK, result);
     }
 }

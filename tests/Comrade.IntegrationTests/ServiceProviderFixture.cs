@@ -1,5 +1,5 @@
 ﻿using System;
-//using Comrade.Application.Caches;
+using Comrade.Application.Caches;
 using Comrade.Application.Notifications.Email;
 using Comrade.Persistence.DataAccess;
 using Comrade.UnitTests.Helpers;
@@ -50,9 +50,17 @@ public sealed class ServiceProviderFixture : IDisposable
             serviceCollection.AddSingleton<IMailKitSettings>(sp =>
                 sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
 
+            serviceCollection.AddSingleton<IRedisCacheService, RedisCacheService>();
+            serviceCollection.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "TesteSistema";
+                options.Configuration = "localhost:6379";
+            });
+
         var sp = serviceCollection.BuildServiceProvider();
         Sp = sp;
         Mediator = sp.GetRequiredService<IMediator>();
+        RedisCacheService = sp.GetRequiredService<IRedisCacheService>();
         SqlContextFixture = sp.GetService<ComradeContext>()!;
         var mongoDbContextSettings = new MongoDbContextSettings
         {
@@ -61,17 +69,11 @@ public sealed class ServiceProviderFixture : IDisposable
         };
         MongoDbContextFixtureSettings = mongoDbContextSettings;
         MongoDbContextFixture = new MongoDbContext(mongoDbContextSettings);
-
-        //serviceCollection.AddSingleton<IRedisCacheService, RedisCacheService>();
-        serviceCollection.AddStackExchangeRedisCache(options =>
-        {
-            options.InstanceName = "TesteSistema";
-            options.Configuration = "localhost:6379";
-        });
     }
 
     public IServiceProvider Sp { get; }
     public IMediator Mediator { get; }
+    public IRedisCacheService RedisCacheService { get; }
     public ComradeContext SqlContextFixture { get; }
     public MongoDbContextSettings MongoDbContextFixtureSettings { get; }
     public MongoDbContext MongoDbContextFixture { get; }

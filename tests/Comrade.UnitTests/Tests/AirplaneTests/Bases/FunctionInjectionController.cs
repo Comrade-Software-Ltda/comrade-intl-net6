@@ -5,7 +5,7 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public class FunctionInjectionController
 {
-    public static FunctionController GetFunctionController(RedisCacheService cache)
+    public static FunctionController GetFunctionController(IRedisCacheService cache)
     {
         var functionQuery = FunctionInjectionService.GetFunctionQuery(cache);
         return new FunctionController(functionQuery);
