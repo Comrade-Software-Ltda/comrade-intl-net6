@@ -33,7 +33,7 @@ public sealed class RedisCacheService : IRedisCacheService
         return value;
     }
 
-    public void removeCache(string key)
+    public void RemoveCache(string key)
     {
         _cache.Remove(key);
     }

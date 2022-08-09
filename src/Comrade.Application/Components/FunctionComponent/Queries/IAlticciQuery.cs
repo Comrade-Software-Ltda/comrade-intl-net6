@@ -1,4 +1,4 @@
-﻿namespace Comrade.Application.Components.AlticciComponent.Queries;
+﻿namespace Comrade.Application.Components.FunctionComponent.Queries;
 
 public interface IAlticciQuery
 {

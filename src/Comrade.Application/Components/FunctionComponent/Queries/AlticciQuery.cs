@@ -1,21 +1,15 @@
-﻿using Comrade.Application.Caches;
+﻿using Comrade.Application.Caches.FunctionCache;
 
-namespace Comrade.Application.Components.AlticciComponent.Queries;
+namespace Comrade.Application.Components.FunctionComponent.Queries;
 
 public class AlticciQuery : IAlticciQuery
 {
-    private readonly IRedisCacheService _CacheService;
+    private readonly IRedisCacheFunctionService _cacheService;
+    private readonly string _nameFunction = "Alticci";
 
-    public AlticciQuery(IRedisCacheService CacheService) => _CacheService = CacheService;
-
-    private long? GetCacheAlticci(long n)
+    public AlticciQuery(IRedisCacheFunctionService cacheService)
     {
-        return _CacheService.GetCache<long?>("Alticci" + n.ToString(CultureInfo.CurrentCulture));
-    }
-
-    private long SetCacheAlticci(long n, long valor)
-    {
-        return _CacheService.SetCache("Alticci" + n.ToString(CultureInfo.CurrentCulture), valor);
+        _cacheService = cacheService;
     }
 
     public long CalculaAlticci(long n)
@@ -30,20 +24,20 @@ public class AlticciQuery : IAlticciQuery
     private long CalculaAlticciFunc(long n)
     {
         long result;
-        long? cache = GetCacheAlticci(n);
+        long? cache = _cacheService.GetCacheFunction(_nameFunction, n);
         if (cache is null)
         {
             if (n <= 0)
             {
-                result = SetCacheAlticci(0, 0);
+                result = _cacheService.SetCacheFunction(_nameFunction, 0, 0);
             }
             else if (n == 1 || n == 2)
             {
-                result = SetCacheAlticci(n, 1);
+                result = _cacheService.SetCacheFunction(_nameFunction, n, 1);
             }
             else
             {
-                result = SetCacheAlticci(n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
+                result = _cacheService.SetCacheFunction(_nameFunction, n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
             }
         }
         else

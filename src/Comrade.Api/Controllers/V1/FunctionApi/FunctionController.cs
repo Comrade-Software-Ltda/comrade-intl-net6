@@ -1,9 +1,9 @@
-﻿using Comrade.Api.Modules.Common;
-using Comrade.Application.Components.AlticciComponent.Queries;
+﻿using System.ComponentModel.DataAnnotations;
+using Comrade.Api.Modules.Common;
+using Comrade.Application.Components.FunctionComponent.Queries;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
 
-namespace Comrade.Api.Controllers.V1.AlticciApi;
+namespace Comrade.Api.Controllers.V1.FunctionApi;
 
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]

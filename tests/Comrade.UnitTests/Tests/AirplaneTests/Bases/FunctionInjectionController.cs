@@ -1,13 +1,12 @@
-﻿using Comrade.Api.Controllers.V1.AlticciApi;
-using Comrade.Application.Caches;
+﻿using Comrade.Api.Controllers.V1.FunctionApi;
+using Comrade.Application.Caches.FunctionCache;
 
 namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public class FunctionInjectionController
 {
-    public static FunctionController GetFunctionController(IRedisCacheService cache)
+    public static FunctionController GetFunctionController(IRedisCacheFunctionService cache)
     {
-        var functionQuery = FunctionInjectionService.GetFunctionQuery(cache);
-        return new FunctionController(functionQuery);
+        return new FunctionController(FunctionInjectionService.GetFunctionQuery(cache));
     }
 }

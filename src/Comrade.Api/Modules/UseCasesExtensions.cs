@@ -1,11 +1,12 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Caches;
+using Comrade.Application.Caches.FunctionCache;
 using Comrade.Application.Components.AirplaneComponent.Commands;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.Application.Components.AirplaneComponent.Handlers;
 using Comrade.Application.Components.AirplaneComponent.Queries;
-using Comrade.Application.Components.AlticciComponent.Queries;
 using Comrade.Application.Components.AuthenticationComponent.Commands;
+using Comrade.Application.Components.FunctionComponent.Queries;
 using Comrade.Application.Components.SystemMenuComponent.Commands;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemMenuComponent.Handlers;
@@ -198,6 +199,7 @@ public static class UseCasesExtensions
         // Application - Services
         services.AddScoped<IAlticciQuery, AlticciQuery>();
         services.AddScoped<IRedisCacheService, RedisCacheService>();
+        services.AddScoped<IRedisCacheFunctionService, RedisCacheFunctionService>();
 
         #endregion
 
