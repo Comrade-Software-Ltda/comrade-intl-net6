@@ -1,5 +1,7 @@
+using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Domain.Models;
 using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.Tests.SystemMenuTests.Bases;
 using Xunit;
@@ -14,7 +16,6 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
     {
         _fixture = fixture;
     }
-
 
     [Fact]
     public async Task SystemMenuController_Create()
@@ -41,21 +42,29 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
     }
 
     [Fact]
-    public async Task SystemMenuController_CreateFull()
+    public async Task SystemMenuController_CreateMenuWithSubMenu()
     {
-        var testObject = new SystemMenuCreateDto
+        var menu = new SystemMenuCreateDto
         {
             Text = "Teste",
             Description = "Descrição do menu",
-            Route = "/"
+            Route = "/",
+            Submenus = new List<SystemMenuCreateDto>()
         };
 
+        var subMenu = new SystemMenuCreateDto
+        {
+            Text = "Teste 2",
+            Description = "Descrição do menu 2",
+            Route = "/menu2"
+        };
+        menu.Submenus.Add(subMenu);
         var systemMenuController =
             SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
                 _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
-        var result = await systemMenuController.Create(testObject);
+        var result = await systemMenuController.Create(menu);
 
         if (result is ObjectResult okResult)
         {
@@ -66,37 +75,28 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
     }
 
     [Fact]
-    public async Task SystemMenuController_CreateWithFather()
+    public async Task SystemMenuController_CreateSubMenu()
     {
         var repository = new SystemMenuRepository(_fixture.SqlContextFixture);
-        var pai = new SystemMenuCreateDto
+        var menu = new SystemMenu
         {
-            Text = "Pai",
+            Id = Guid.NewGuid(),
+            Text = "Menu",
             Description = "Descrição do menu"
         };
-        var filho = new SystemMenuCreateDto
+        var subMenu = new SystemMenuCreateDto
         {
-            Text = "Filho",
-            Description = "Descrição do menu"
+            Text = "Submenu",
+            Description = "Descrição do submenu"
         };
         var systemMenuController =
             SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
                 _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
-        var resultPai = await systemMenuController.Create(pai);
-
-        if (resultPai is ObjectResult okResultPai)
-        {
-            var actualResultPai = okResultPai.Value as SingleResultDto<EntityDto>;
-            Assert.NotNull(actualResultPai);
-            Assert.Equal(201, actualResultPai?.Code);
-        }
-
-        var systemMenuPai = repository.GetAll().First();
-        filho.FatherId = systemMenuPai.Id;
-
-        var resultFilho = await systemMenuController.Create(filho);
+        _fixture.SqlContextFixture.SystemMenus.Add(menu);
+        subMenu.MenuId = menu.Id;
+        var resultFilho = await systemMenuController.Create(subMenu);
 
         if (resultFilho is ObjectResult okResultFilho)
         {
@@ -104,8 +104,9 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
             Assert.NotNull(actualResultFilho);
             Assert.Equal(201, actualResultFilho?.Code);
         }
-
-        var systemMenuFilho = repository.GetAll().FirstOrDefault(menu => menu.FatherId == systemMenuPai.Id);
-        Assert.NotNull(systemMenuFilho);
+        var subMenus = repository.GetAll()
+            .Where(x => x.MenuId == menu.Id);
+        Assert.NotNull(subMenus);
+        Assert.Equal(1, subMenus.Count());
     }
 }

@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerGetAllFathersTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerGetAllMenusTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
 
-    public SystemMenuControllerGetAllFathersTests(ServiceProviderFixture fixture)
+    public SystemMenuControllerGetAllMenusTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
         InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
@@ -28,7 +28,7 @@ public sealed class SystemMenuControllerGetAllFathersTests : IClassFixture<Servi
                 _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
-        var result = await systemMenuController.GetAllFathers(paginationQuery);
+        var result = await systemMenuController.GetAllMenus(paginationQuery);
 
         if (result is ObjectResult okResult)
         {
@@ -38,10 +38,10 @@ public sealed class SystemMenuControllerGetAllFathersTests : IClassFixture<Servi
             Assert.NotNull(actualResultValue?.Data);
             Assert.Equal(3, actualResultValue?.Data?.Count);
 
-            var oneFather = actualResultValue?.Data?
+            var oneMenu = actualResultValue?.Data?
                 .FirstOrDefault(dto => dto.Id.Equals(Guid.Parse("6adf10d0-1b83-46f2-91eb-0c64f1c638a8")));
 
-            Assert.Equal(2, oneFather?.Childrens?.Count);
+            Assert.Equal(2, oneMenu?.Submenus?.Count);
         }
     }
 }
