@@ -1,4 +1,6 @@
-﻿namespace Comrade.Application.Caches.FunctionCache;
+﻿using Comrade.Domain.Enums;
+
+namespace Comrade.Application.Caches.FunctionCache;
 
 public class RedisCacheFunctionService : IRedisCacheFunctionService
 {
@@ -9,22 +11,22 @@ public class RedisCacheFunctionService : IRedisCacheFunctionService
         _cacheService = cacheService;
     }
 
-    public long? GetCacheFunction(string nameFunction, long n)
+    public long? GetCacheFunction(EnumFunction nameFunction, long n)
     {
         return _cacheService.GetCache<long?>(nameFunction + n.ToString(CultureInfo.CurrentCulture));
     }
 
-    public long SetCacheFunction(string nameFunction, long n, long valor)
+    public long SetCacheFunction(EnumFunction nameFunction, long n, long valor)
     {
         return _cacheService.SetCache(nameFunction + n.ToString(CultureInfo.CurrentCulture), valor);
     }
 
-    public void RemoveCacheFunction(string nameFunction, long n)
+    public void RemoveCacheFunction(EnumFunction nameFunction, long n)
     {
         _cacheService.RemoveCache(nameFunction + n.ToString(CultureInfo.CurrentCulture));
     }
 
-    public void RemoveAllCacheBelowOrEqualFunction(string nameFunction, long threshold)
+    public void RemoveAllCacheBelowOrEqualFunction(EnumFunction nameFunction, long threshold)
     {
         var i = threshold;
         for (; i >= 0; i--)

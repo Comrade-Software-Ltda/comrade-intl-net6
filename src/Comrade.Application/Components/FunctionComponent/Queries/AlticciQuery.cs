@@ -1,48 +1,55 @@
-﻿using Comrade.Application.Caches.FunctionCache;
+﻿using Comrade.Application.Bases;
+using Comrade.Application.Caches.FunctionCache;
+using Comrade.Domain.Enums;
 
 namespace Comrade.Application.Components.FunctionComponent.Queries;
 
 public class AlticciQuery : IAlticciQuery
 {
     private readonly IRedisCacheFunctionService _cacheService;
-    private readonly string _nameFunction = "Alticci";
+    private const EnumFunction NameFunction = EnumFunction.Alticci;
+    private FunctionReturnDto? _functionReturnDto;
 
     public AlticciQuery(IRedisCacheFunctionService cacheService)
     {
         _cacheService = cacheService;
     }
 
-    public long CalculaAlticci(long n)
+    public FunctionReturnDto? CalculaAlticci(long n)
     {
         if (n < 0)
         {
-            return -1;
+            return null;
         }
-        return CalculaAlticciFunc(n);
+        _functionReturnDto = new FunctionReturnDto(n);
+        _functionReturnDto.ResultDto.Fn = CalculaAlticciFunc(n);
+        return _functionReturnDto;
     }
 
     private long CalculaAlticciFunc(long n)
     {
         long result;
-        long? cache = _cacheService.GetCacheFunction(_nameFunction, n);
+        var cache = _cacheService.GetCacheFunction(NameFunction, n);
         if (cache is null)
         {
             if (n <= 0)
             {
-                result = _cacheService.SetCacheFunction(_nameFunction, 0, 0);
+                result = _cacheService.SetCacheFunction(NameFunction, 0, 0);
             }
-            else if (n == 1 || n == 2)
+            else if (n is 1 or 2)
             {
-                result = _cacheService.SetCacheFunction(_nameFunction, n, 1);
+                result = _cacheService.SetCacheFunction(NameFunction, n, 1);
             }
             else
             {
-                result = _cacheService.SetCacheFunction(_nameFunction, n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
+                result = _cacheService.SetCacheFunction(NameFunction, n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
             }
+            _functionReturnDto.DoCache.Add(new FunctionDto(n, result)); // For tests only
         }
         else
         {
             result = (long)cache;
+            _functionReturnDto.UseCache.Add(new FunctionDto(n,result)); // For tests only
         }
         return result;
     }

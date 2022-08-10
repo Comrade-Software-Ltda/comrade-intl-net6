@@ -1,6 +1,8 @@
-﻿namespace Comrade.Application.Components.FunctionComponent.Queries;
+﻿using Comrade.Application.Bases;
+
+namespace Comrade.Application.Components.FunctionComponent.Queries;
 
 public interface IAlticciQuery
 {
-    long CalculaAlticci(long n);
+    FunctionReturnDto? CalculaAlticci(long n);
 }
