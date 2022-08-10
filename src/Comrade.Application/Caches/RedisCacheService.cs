@@ -15,11 +15,7 @@ public sealed class RedisCacheService : IRedisCacheService
     public T? GetCache<T>(string key)
     {
         var value = _cache.GetString(key);
-        if (value != null)
-        {
-            return JsonSerializer.Deserialize<T>(value);
-        }
-        return default;
+        return value is not null ? JsonSerializer.Deserialize<T>(value) : default;
     }
 
     public T SetCache<T>(string key, T value)

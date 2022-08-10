@@ -21,6 +21,7 @@ public class AlticciQuery : IAlticciQuery
         {
             return null;
         }
+        // ReSharper disable once UseObjectOrCollectionInitializer
         _functionReturnDto = new FunctionReturnDto(n);
         _functionReturnDto.ResultDto.Fn = CalculaAlticciFunc(n);
         return _functionReturnDto;
@@ -32,6 +33,7 @@ public class AlticciQuery : IAlticciQuery
         var cache = _cacheService.GetCacheFunction(NameFunction, n);
         if (cache is null)
         {
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (n <= 0)
             {
                 result = _cacheService.SetCacheFunction(NameFunction, 0, 0);
@@ -44,12 +46,12 @@ public class AlticciQuery : IAlticciQuery
             {
                 result = _cacheService.SetCacheFunction(NameFunction, n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
             }
-            _functionReturnDto.DoCache.Add(new FunctionDto(n, result)); // For tests only
+            _functionReturnDto?.DoCache.Add(new FunctionDto(n, result)); // For tests only
         }
         else
         {
             result = (long)cache;
-            _functionReturnDto.UseCache.Add(new FunctionDto(n,result)); // For tests only
+            _functionReturnDto?.UseCache.Add(new FunctionDto(n,result)); // For tests only
         }
         return result;
     }

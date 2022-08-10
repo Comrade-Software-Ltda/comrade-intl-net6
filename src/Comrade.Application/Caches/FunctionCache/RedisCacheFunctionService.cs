@@ -13,17 +13,17 @@ public class RedisCacheFunctionService : IRedisCacheFunctionService
 
     public long? GetCacheFunction(EnumFunction nameFunction, long n)
     {
-        return _cacheService.GetCache<long?>(nameFunction + n.ToString(CultureInfo.CurrentCulture));
+        return _cacheService.GetCache<long?>(FormatCacheKey(nameFunction, n));
     }
 
     public long SetCacheFunction(EnumFunction nameFunction, long n, long valor)
     {
-        return _cacheService.SetCache(nameFunction + n.ToString(CultureInfo.CurrentCulture), valor);
+        return _cacheService.SetCache(FormatCacheKey(nameFunction, n), valor);
     }
 
     public void RemoveCacheFunction(EnumFunction nameFunction, long n)
     {
-        _cacheService.RemoveCache(nameFunction + n.ToString(CultureInfo.CurrentCulture));
+        _cacheService.RemoveCache(FormatCacheKey(nameFunction, n));
     }
 
     public void RemoveAllCacheBelowOrEqualFunction(EnumFunction nameFunction, long threshold)
@@ -33,5 +33,10 @@ public class RedisCacheFunctionService : IRedisCacheFunctionService
         {
             RemoveCacheFunction(nameFunction, i);
         }
+    }
+
+    private static string FormatCacheKey(EnumFunction nameFunction, long n)
+    {
+        return nameFunction + n.ToString(CultureInfo.CurrentCulture);
     }
 }
