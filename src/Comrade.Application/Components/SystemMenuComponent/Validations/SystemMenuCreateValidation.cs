@@ -1,13 +1,25 @@
 ﻿using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Messages;
+using FluentValidation;
 
 namespace Comrade.Application.Components.SystemMenuComponent.Validations;
 
-public class SystemMenuCreateValidation : SystemMenuValidation<SystemMenuCreateDto>
+public class SystemMenuCreateValidation : AbstractValidator<SystemMenuCreateDto>
 {
     public SystemMenuCreateValidation()
     {
-        ValidateText();
-        ValidateDescription();
-        ValidateRoute();
+        RuleFor(v => v.Text)
+            .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
+            .MaximumLength(30).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
+            .WithName("Text");
+
+        RuleFor(v => v.Description)
+            .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
+            .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
+            .WithName("Description");
+
+        RuleFor(v => v.Route)
+            .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
+            .WithName("Route");
     }
 }
