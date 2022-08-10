@@ -19,7 +19,7 @@ namespace Comrade.Core.Messages {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class BusinessMessage {
@@ -147,6 +147,15 @@ namespace Comrade.Core.Messages {
         public static string MSG09 {
             get {
                 return ResourceManager.GetString("MSG09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Já existe um menu cadastrado com esse nome..
+        /// </summary>
+        public static string MSG20 {
+            get {
+                return ResourceManager.GetString("MSG20", resourceCulture);
             }
         }
     }
