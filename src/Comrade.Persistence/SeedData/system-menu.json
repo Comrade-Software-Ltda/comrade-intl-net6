@@ -1,35 +1,35 @@
 [
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a6",
-    "fatherId": null,
+    "menuId": null,
     "text": "Menu 1",
     "description": "Menu 1 - Description",
     "route": "/menu-1"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
-    "fatherId": null,
+    "menuId": null,
     "text": "Menu 2",
     "description": "Menu 2 - Description",
     "route": "/menu-2"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
-    "fatherId": null,
+    "menuId": null,
     "text": "Menu 3",
     "description": "Menu 3 - Description",
     "route": "/menu-3"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a9",
-    "fatherId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
     "text": "SubMenu 3.1",
     "description": "SubMenu 3.1 - Description",
     "route": "/menu-3-1"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638b1",
-    "fatherId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
     "text": "SubMenu 3.2",
     "description": "SubMenu 3.2 - Description",
     "route": "/menu-3-2"

@@ -20,21 +20,31 @@ public class SystemMenuRepository : Repository<SystemMenu>, ISystemMenuRepositor
                    throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid id, string text)
+    public async Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid? menuId, string text)
     {
         var exists = await _context.SystemMenus
-            .Where(p => text.Equals(p.Text, StringComparison.Ordinal))
+            .Where(p => (menuId != null ? menuId.Equals(p.MenuId) : p.MenuId == null) && text == p.Text)
             .AnyAsync().ConfigureAwait(false);
 
         return exists
             ? new SingleResult<SystemMenu>((int) EnumResponse.ErrorBusinessValidation,
-                BusinessMessage.MSG08)
+                BusinessMessage.MSG20)
             : new SingleResult<SystemMenu>();
     }
-
-    public IQueryable<SystemMenu> GetAllFathers()
+    
+    public IQueryable<SystemMenu> GetAllMenus()
     {
         return _context.SystemMenus
-            .Where(sm => sm.FatherId == null);
+            .Where(sm => sm.MenuId == null);
+    }
+    public override void Remove(Guid id)
+    {
+        var subMenus = _context.SystemMenus
+            .Where(menu => menu.MenuId == id)
+            .Select(menu => menu.Id)
+            .ToList();
+
+        base.RemoveAll(subMenus);
+        base.Remove(id);
     }
 }

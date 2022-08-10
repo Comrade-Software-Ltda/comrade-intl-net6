@@ -8,10 +8,10 @@ public class SystemMenuConfiguration : IEntityTypeConfiguration<SystemMenu>
     {
         builder.Property(b => b.Id).HasColumnName("syme_uuid_system_menu").IsRequired();
         builder.HasKey(c => c.Id).HasName("pk_syme_system_menu");
-        builder.HasOne(x => x.Father)
-            .WithMany(x => x.Childrens)
-            .HasForeignKey(x => x.FatherId)
-            .IsRequired(false)
+
+        builder.HasMany(x => x.Submenus)
+            .WithOne( x => x.Menu)
+            .HasForeignKey(x => x.MenuId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }
