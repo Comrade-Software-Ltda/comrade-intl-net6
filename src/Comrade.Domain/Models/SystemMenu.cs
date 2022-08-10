@@ -5,10 +5,10 @@ namespace Comrade.Domain.Models;
 [Table("syme_system_menu")]
 public class SystemMenu : Entity
 {
-    [Column("syme_uuid_father")]
-    public Guid? FatherId { get; set; }
-    public virtual SystemMenu? Father { get; set; }
-    public virtual List<SystemMenu>? Childrens { get; set; }
+    [Column("syme_uuid_menu")]
+    public Guid? MenuId { get; set; }
+    public virtual SystemMenu? Menu { get; set; }
+    public virtual List<SystemMenu>? Submenus { get; set; }
 
     [Column("syme_tx_text", TypeName = "varchar")]
     [MaxLength(30)]
