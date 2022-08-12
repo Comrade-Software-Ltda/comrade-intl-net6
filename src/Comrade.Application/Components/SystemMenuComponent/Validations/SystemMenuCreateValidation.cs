@@ -19,7 +19,10 @@ public class SystemMenuCreateValidation : AbstractValidator<SystemMenuCreateDto>
             .WithName("Description");
 
         RuleFor(v => v.Route)
-            .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
+            .Must(s => Uri.TryCreate(s, UriKind.RelativeOrAbsolute, out _))
+            .WithMessage(ApplicationMessage.URL_INVALIDA)
+            .MaximumLength(255)
+            .WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Route");
     }
 }

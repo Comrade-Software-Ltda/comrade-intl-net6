@@ -2,6 +2,7 @@
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemMenuCore;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
 using Comrade.Domain.Models;
 using Comrade.Persistence.Bases;
@@ -20,16 +21,16 @@ public class SystemMenuRepository : Repository<SystemMenu>, ISystemMenuRepositor
                    throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<ISingleResult<SystemMenu>> CodeUniqueValidation(Guid? menuId, string text)
+    public async Task<ISingleResult<Entity>> CodeUniqueValidation(Guid? menuId, string text)
     {
         var exists = await _context.SystemMenus
-            .Where(p => (menuId != null ? menuId.Equals(p.MenuId) : p.MenuId == null) && text == p.Text)
+            .Where(p => p.MenuId == menuId && p.Text == text)
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<SystemMenu>((int) EnumResponse.ErrorBusinessValidation,
+            ? new SingleResult<Entity>((int) EnumResponse.ErrorBusinessValidation,
                 BusinessMessage.MSG20)
-            : new SingleResult<SystemMenu>();
+            : new SingleResult<Entity>();
     }
     
     public IQueryable<SystemMenu> GetAllMenus()
