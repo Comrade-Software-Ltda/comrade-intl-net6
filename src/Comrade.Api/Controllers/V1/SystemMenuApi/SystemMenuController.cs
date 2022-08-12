@@ -30,13 +30,13 @@ public class SystemMenuController : ComradeController
         _logger = logger;
     }
     
-    [HttpGet("get-all-fathers")]
+    [HttpGet("get-all-menus")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
-    public async Task<IActionResult> GetAllFathers([FromQuery] PaginationQuery? paginationQuery)
+    public async Task<IActionResult> GetAllMenus([FromQuery] PaginationQuery? paginationQuery)
     {
         try
         {
-            var result = await _systemMenuQuery.GetAllFathers(paginationQuery).ConfigureAwait(false);
+            var result = await _systemMenuQuery.GetAllMenus(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

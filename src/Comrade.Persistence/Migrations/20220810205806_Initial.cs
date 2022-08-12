@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Comrade.Persistence.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace Comrade.Persistence.Migrations
                 columns: table => new
                 {
                     syme_uuid_system_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    syme_uuid_father = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    syme_uuid_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     syme_tx_text = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     syme_tx_description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
                     syme_tx_route = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
@@ -38,11 +38,11 @@ namespace Comrade.Persistence.Migrations
                 {
                     table.PrimaryKey("pk_syme_system_menu", x => x.syme_uuid_system_menu);
                     table.ForeignKey(
-                        name: "FK_syme_system_menu_syme_system_menu_syme_uuid_father",
-                        column: x => x.syme_uuid_father,
+                        name: "FK_syme_system_menu_syme_system_menu_syme_uuid_menu",
+                        column: x => x.syme_uuid_menu,
                         principalTable: "syme_system_menu",
                         principalColumn: "syme_uuid_system_menu",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,9 +68,9 @@ namespace Comrade.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_syme_system_menu_syme_uuid_father",
+                name: "IX_syme_system_menu_syme_uuid_menu",
                 table: "syme_system_menu",
-                column: "syme_uuid_father");
+                column: "syme_uuid_menu");
 
             migrationBuilder.CreateIndex(
                 name: "ix_un_syus_tx_email",

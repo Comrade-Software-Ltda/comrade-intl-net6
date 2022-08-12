@@ -38,11 +38,16 @@ public class
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
-        if (request.Father != null) request.Father.Childrens = new List<SystemMenu>();
-
-        _mongoDbContext.InsertOne(request);
+        SaveInMongo(request);
 
         return new CreateResult<Entity>(true,
             BusinessMessage.MSG01);
+    }
+
+    private void SaveInMongo(SystemMenuCreateCommand request)
+    {
+        if (request.Menu != null) request.Menu.Submenus = new List<SystemMenu>();
+        if (request.Submenus != null && request.Submenus.Any()) request.Submenus.ForEach(x => { x.Menu = null; });
+        _mongoDbContext.InsertOne(request);
     }
 }

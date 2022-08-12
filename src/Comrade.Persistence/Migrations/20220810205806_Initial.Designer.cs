@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comrade.Persistence.Migrations
 {
     [DbContext(typeof(ComradeContext))]
-    [Migration("20220625023044_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220810205806_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,9 +75,9 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
-                    b.Property<Guid?>("FatherId")
+                    b.Property<Guid?>("MenuId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("syme_uuid_father");
+                        .HasColumnName("syme_uuid_menu");
 
                     b.Property<string>("Route")
                         .HasMaxLength(255)
@@ -93,7 +93,7 @@ namespace Comrade.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_syme_system_menu");
 
-                    b.HasIndex("FatherId");
+                    b.HasIndex("MenuId");
 
                     b.ToTable("syme_system_menu");
                 });
@@ -149,17 +149,17 @@ namespace Comrade.Persistence.Migrations
 
             modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
                 {
-                    b.HasOne("Comrade.Domain.Models.SystemMenu", "Father")
-                        .WithMany("Childrens")
-                        .HasForeignKey("FatherId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Comrade.Domain.Models.SystemMenu", "Menu")
+                        .WithMany("Submenus")
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Father");
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
                 {
-                    b.Navigation("Childrens");
+                    b.Navigation("Submenus");
                 });
 #pragma warning restore 612, 618
         }

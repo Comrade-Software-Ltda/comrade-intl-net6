@@ -138,6 +138,9 @@
   <data name="TAMANHO_ESPECIFICO_CAMPO" xml:space="preserve">
     <value>O campo {PropertyName} precisa ter {MaxLength} caracteres.</value>
   </data>
+  <data name="URL_INVALIDA" xml:space="preserve">
+    <value>A url informada é inválida.</value>
+  </data>
   <data name="TAMANHO_INTERVALO_CAMPO" xml:space="preserve">
     <value>O campo {PropertyName} precisa ter no mínimo {MinLength} e no máximo {MaxLength} caracteres.</value>
   </data>
