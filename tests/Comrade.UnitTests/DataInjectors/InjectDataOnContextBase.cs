@@ -22,6 +22,10 @@ public static class InjectDataOnContextBase
                 var airplanes = JsonUtilities.GetListFromJson<Airplane>(airplaneJson);
                 db.Airplanes.AddRange(airplanes!);
 
+                var systemMenuJson = assembly.GetManifestResourceStream($"{JsonPath}.system-menu.json");
+                var systemMenus = JsonUtilities.GetListFromJson<SystemMenu>(systemMenuJson);
+                db.SystemMenus.AddRange(systemMenus!);
+
                 var systemUserJson =
                     assembly.GetManifestResourceStream($"{JsonPath}.system-user.json");
                 var systemUsers = JsonUtilities.GetListFromJson<SystemUser>(systemUserJson);
