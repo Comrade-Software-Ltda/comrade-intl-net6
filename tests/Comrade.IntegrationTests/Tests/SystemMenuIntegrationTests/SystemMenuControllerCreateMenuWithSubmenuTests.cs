@@ -5,31 +5,39 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerCreateMenuWithSubmenuTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
 
-    public SystemMenuControllerCreateTests(ServiceProviderFixture fixture)
+    public SystemMenuControllerCreateMenuWithSubmenuTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
     }
-
+    
     [Fact]
-    public async Task SystemMenuController_Create()
+    public async Task SystemMenuController_CreateMenuWithSubmenu()
     {
-        var testObject = new SystemMenuCreateDto
+        var menu = new SystemMenuCreateDto
         {
             Text = "Teste",
             Description = "Descrição do menu",
             Route = "",
+            Submenus = new List<SystemMenuCreateDto>()
         };
 
+        var subMenu = new SystemMenuCreateDto
+        {
+            Text = "Teste 2",
+            Description = "Descrição do menu 2",
+            Route = "",
+        };
+        menu.Submenus.Add(subMenu);
         var systemMenuController =
             SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
                 _fixture.MongoDbContextFixture,
                 _fixture.Mediator);
 
-        var result = await systemMenuController.Create(testObject);
+        var result = await systemMenuController.Create(menu);
 
         if (result is ObjectResult okResult)
         {

@@ -1,12 +1,11 @@
-﻿using System.Threading;
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemMenuCore.Validations;
 using Comrade.Domain.Bases;
-using Comrade.Domain.Models;
 using MediatR;
+using System.Threading;
 
 namespace Comrade.Core.SystemMenuCore.Handlers;
 
@@ -41,13 +40,9 @@ public class
         }
 
         var systemMenuId = recordExists.Id;
-        var childrensIds = recordExists.Childrens?
-            .Select(submenu => submenu.Id)
-            .ToList();
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
         _repository.Remove(systemMenuId);
-        _repository.RemoveAll(childrensIds);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
         return new DeleteResult<Entity>(true,

@@ -6,18 +6,18 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerDeleteFatherTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerDeleteMenuTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
 
-    public SystemMenuControllerDeleteFatherTests(ServiceProviderFixture fixture)
+    public SystemMenuControllerDeleteMenuTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;
         InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
     
     [Fact]
-    public async Task SystemMenuController_ExistentFather_Delete()
+    public async Task SystemMenuController_ExistentMenu_Delete()
     {
         var systemMenuId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8");
 

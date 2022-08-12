@@ -19,7 +19,7 @@ public sealed class SystemMenuControllerDeleteErrorTests : IClassFixture<Service
     [Fact]
     public async Task SystemMenuController_NotExistent_Delete()
     {
-        var systemMenuId = new Guid("6adf10d0-1b83-46f2-0000-000000000000");
+        var systemMenuId = Guid.NewGuid();
 
         var systemMenuController =
             SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
