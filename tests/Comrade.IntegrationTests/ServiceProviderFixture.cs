@@ -25,7 +25,7 @@ public sealed class ServiceProviderFixture : IDisposable
                 {
                     ["MongoDbContextSettings:ConnectionString"] = "mongodb://localhost/local",
                     ["MongoDbContextSettings:DatabaseName"] = dbName
-                })
+                }!)
             .Build();
 
 
@@ -55,7 +55,7 @@ public sealed class ServiceProviderFixture : IDisposable
         SqlContextFixture = sp.GetService<ComradeContext>()!;
         var mongoDbContextSettings = new MongoDbContextSettings
         {
-            ConnectionString = connString,
+            ConnectionString = connString!,
             DatabaseName = dbName
         };
         MongoDbContextFixtureSettings = mongoDbContextSettings;
