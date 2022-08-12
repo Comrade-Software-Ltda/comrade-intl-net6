@@ -4,8 +4,8 @@ using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Api.Modules.Common.Swagger;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
+using Comrade.Application.Caches;
 using Comrade.Application.Lookups;
-using Comrade.Application.Notifications;
 using Comrade.Application.Notifications.Email;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
@@ -51,6 +51,12 @@ public sealed class Startup
             .AddProxy()
             .AddCustomDataProtection();
 
+        services.AddSingleton<IRedisCacheService, RedisCacheService>();
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.InstanceName = "Sistema";
+            options.Configuration = "localhost:6379";
+        });
         services.AddAutoMapperSetup();
         services.AddLogging();
         services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
