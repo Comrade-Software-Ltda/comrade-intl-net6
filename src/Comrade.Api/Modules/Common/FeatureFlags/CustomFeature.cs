@@ -21,6 +21,11 @@ public enum CustomFeature
     SystemMenu,
 
     /// <summary>
+    ///     Get SystemRole.
+    /// </summary>
+    SystemRole,
+
+    /// <summary>
     ///     Get Common.
     /// </summary>
     Common,
