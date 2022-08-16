@@ -16,7 +16,7 @@ public class ComradeContext : DbContext
     public DbSet<Airplane> Airplanes { get; set; }
     public DbSet<SystemUser> SystemUsers { get; set; }
     public DbSet<SystemMenu> SystemMenus { get; set; }
-
+    public DbSet<SystemRole> SystemRole { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,5 +26,6 @@ public class ComradeContext : DbContext
         modelBuilder.ApplyConfiguration(new AirplaneConfiguration());
         modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
         modelBuilder.ApplyConfiguration(new SystemMenuConfiguration());
+        modelBuilder.ApplyConfiguration(new SystemRoleConfiguration());
     }
 }
