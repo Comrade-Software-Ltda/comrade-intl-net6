@@ -11,6 +11,10 @@ using Comrade.Application.Components.SystemMenuComponent.Commands;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemMenuComponent.Handlers;
 using Comrade.Application.Components.SystemMenuComponent.Queries;
+using Comrade.Application.Components.SystemRoleComponent.Commands;
+using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRoleComponent.Handlers;
+using Comrade.Application.Components.SystemRoleComponent.Queries;
 using Comrade.Application.Components.SystemUserComponent.Commands;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Handlers;
@@ -31,6 +35,11 @@ using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemMenuCore.Handlers;
 using Comrade.Core.SystemMenuCore.UseCases;
 using Comrade.Core.SystemMenuCore.Validations;
+using Comrade.Core.SystemRoleCore;
+using Comrade.Core.SystemRoleCore.Commands;
+using Comrade.Core.SystemRoleCore.Handlers;
+using Comrade.Core.SystemRoleCore.UseCases;
+using Comrade.Core.SystemRoleCore.Validations;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Handlers;
@@ -153,6 +162,33 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemUserEditValidation, SystemUserEditValidation>();
         services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
         services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
+
+        #endregion
+
+        #region SystemRole
+
+        // Application - Services
+        services.AddScoped<ISystemRoleCommand, SystemRoleCommand>();
+        services.AddScoped<ISystemRoleQuery,   SystemRoleQuery>();
+
+        // Application - Handlers
+        services.AddScoped<IRequestHandler<SystemRoleCreateDto, SingleResultDto<EntityDto>>, SystemRoleCreateHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleEditDto,   SingleResultDto<EntityDto>>, SystemRoleEditHandler>();
+
+        // Core - UseCases
+        services.AddScoped<IUcSystemRoleEdit,   UcSystemRoleEdit>();
+        services.AddScoped<IUcSystemRoleCreate, UcSystemRoleCreate>();
+        services.AddScoped<IUcSystemRoleDelete, UcSystemRoleDelete>();
+
+        // Core - CoreHandlers
+        services.AddScoped<IRequestHandler<SystemRoleCreateCommand, ISingleResult<Entity>>, SystemRoleCreateCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleDeleteCommand, ISingleResult<Entity>>, SystemRoleDeleteCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleEditCommand,   ISingleResult<Entity>>, SystemRoleEditCoreHandler>();
+        
+        // Core - Validations
+        services.AddScoped<ISystemRoleEditValidation,   SystemRoleEditValidation>();
+        services.AddScoped<ISystemRoleDeleteValidation, SystemRoleDeleteValidation>();
+        services.AddScoped<ISystemRoleCreateValidation, SystemRoleCreateValidation>();
 
         #endregion
 

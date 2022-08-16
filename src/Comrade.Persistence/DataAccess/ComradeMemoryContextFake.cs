@@ -24,17 +24,19 @@ public static class ComradeMemoryContextFake
         {
             if (context != null && assembly is not null)
             {
-                var airplanes =
-                    JsonUtilities.GetListFromJson<Airplane>(
-                        assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
+                var airplanes = JsonUtilities.GetListFromJson<Airplane>(
+                    assembly.GetManifestResourceStream($"{JsonPath}.airplane.json"));
                 var systemUser = JsonUtilities.GetListFromJson<SystemUser>(
                     assembly.GetManifestResourceStream($"{JsonPath}.system-user.json"));
                 var systemMenu = JsonUtilities.GetListFromJson<SystemMenu>(
                     assembly.GetManifestResourceStream($"{JsonPath}.system-menu.json"));
+                var systemRole = JsonUtilities.GetListFromJson<SystemRole>(
+                    assembly.GetManifestResourceStream($"{JsonPath}.system-role.json"));
 
                 context.Airplanes.AddRange(airplanes!);
                 context.SystemUsers.AddRange(systemUser!);
                 context.SystemMenus.AddRange(systemMenu!);
+                context.SystemRole.AddRange(systemRole!);
 
                 if (context.Airplanes.Any())
                 {
