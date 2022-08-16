@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -61,6 +60,18 @@ namespace Comrade.Persistence.Migrations
                     table.PrimaryKey("pk_syus_system_user", x => x.syus_uuid_system_user);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "syro_system_role",
+                columns: table => new
+                {
+                    syro_uuid_system_role = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    syro_tx_name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_syro_system_role", x => x.syro_uuid_system_role);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_un_airp_tx_code",
                 table: "airp_airplane",
@@ -84,6 +95,12 @@ namespace Comrade.Persistence.Migrations
                 table: "syus_system_user",
                 column: "syus_tx_registration",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_syme_system_role_syme_uuid_father",
+                table: "syro_system_role",
+                column: "syro_uuid_system_role",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -96,6 +113,9 @@ namespace Comrade.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "syus_system_user");
+
+            migrationBuilder.DropTable(
+                name: "syro_system_role");
         }
     }
 }
