@@ -13,9 +13,7 @@ public static class InjectDataOnContextBase
         try
         {
             db.Database.EnsureDeleted();
-
             var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
-
             if (assembly is not null)
             {
                 var airplaneJson = assembly.GetManifestResourceStream($"{JsonPath}.airplane.json");
@@ -26,13 +24,11 @@ public static class InjectDataOnContextBase
                 var systemMenus = JsonUtilities.GetListFromJson<SystemMenu>(systemMenuJson);
                 db.SystemMenus.AddRange(systemMenus!);
 
-                var systemUserJson =
-                    assembly.GetManifestResourceStream($"{JsonPath}.system-user.json");
+                var systemUserJson = assembly.GetManifestResourceStream($"{JsonPath}.system-user.json");
                 var systemUsers = JsonUtilities.GetListFromJson<SystemUser>(systemUserJson);
                 db.SystemUsers.AddRange(systemUsers!);
 
-                var systemRoleJson =
-                    assembly.GetManifestResourceStream($"{JsonPath}.system-role.json");
+                var systemRoleJson = assembly.GetManifestResourceStream($"{JsonPath}.system-role.json");
                 var systemRoles = JsonUtilities.GetListFromJson<SystemRole>(systemRoleJson);
                 db.SystemRole.AddRange(systemRoles!);
             }
