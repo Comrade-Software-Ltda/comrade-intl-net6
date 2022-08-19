@@ -21,7 +21,7 @@ public class SystemRoleComponentTests : IClassFixture<CustomWebApplicationFactor
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var actualResponse = await client
-            .GetAsync("/api/v1/api/v1.0/SystemRole/get-all")
+            .GetAsync("/api/v1/system-role/get-all")
             .ConfigureAwait(false);
 
         var actualResponseString = await actualResponse.Content
