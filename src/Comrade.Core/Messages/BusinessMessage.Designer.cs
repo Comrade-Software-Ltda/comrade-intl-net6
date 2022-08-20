@@ -151,6 +151,15 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registro já exists com mesmo nome, por favor informe outro nome..
+        /// </summary>
+        public static string MSG10 {
+            get {
+                return ResourceManager.GetString("MSG10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Já existe um menu cadastrado com esse nome..
         /// </summary>
         public static string MSG20 {
