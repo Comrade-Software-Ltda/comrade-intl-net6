@@ -6,5 +6,5 @@ namespace Comrade.Core.SystemRoleCore.Validations;
 
 public interface ISystemRoleCreateValidation
 {
-    ISingleResult<Entity> Execute(SystemRole entity);
+    Task<ISingleResult<Entity>> Execute(SystemRole entity);
 }

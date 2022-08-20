@@ -4,7 +4,7 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemRoleCore.Validations;
 
-public interface ISystemRoleEditValidation
+public interface ISystemRoleNameUniqueValidation
 {
-    Task<ISingleResult<Entity>> Execute(SystemRole entity, SystemRole? recordExists);
+    Task<ISingleResult<Entity>> Execute(SystemRole entity);
 }
