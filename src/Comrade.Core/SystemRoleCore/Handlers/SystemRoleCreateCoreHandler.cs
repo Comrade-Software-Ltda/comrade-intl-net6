@@ -24,10 +24,10 @@ public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateComma
 
     public async Task<ISingleResult<Entity>> Handle(SystemRoleCreateCommand request, CancellationToken cancellationToken)
     {
-        var validate = _createValidation.Execute(request);
-        if (!validate.Success)
+        var result = await _createValidation.Execute(request).ConfigureAwait(false);
+        if (!result.Success)
         {
-            return validate;
+            return result;
         }
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.BeginTransactionAsync().ConfigureAwait(false);

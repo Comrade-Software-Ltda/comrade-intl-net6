@@ -7,8 +7,16 @@ namespace Comrade.Core.SystemRoleCore.Validations;
 
 public class SystemRoleEditValidation : ISystemRoleEditValidation
 {
-    public ISingleResult<Entity> Execute(SystemRole entity, SystemRole? recordExists)
+    private readonly ISystemRoleNameUniqueValidation _systemRoleNameUniqueValidation;
+
+    public SystemRoleEditValidation(ISystemRoleNameUniqueValidation systemRoleNameUniqueValidation)
     {
-        return new SingleResult<Entity>(recordExists);
+        _systemRoleNameUniqueValidation = systemRoleNameUniqueValidation;
+    }
+
+    public async Task<ISingleResult<Entity>> Execute(SystemRole entity, SystemRole? recordExists)
+    {
+        var register = await _systemRoleNameUniqueValidation.Execute(entity).ConfigureAwait(false);
+        return register.Success ? new SingleResult<Entity>(recordExists) : register;
     }
 }
