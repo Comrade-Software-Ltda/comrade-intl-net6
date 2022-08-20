@@ -144,6 +144,9 @@
   <data name="MSG09" xml:space="preserve">
     <value>Code do cargo invalido.</value>
   </data>
+  <data name="MSG10" xml:space="preserve">
+    <value>Registro já exists com mesmo nome, por favor informe outro nome.</value>
+  </data>
   <data name="MSG20" xml:space="preserve">
     <value>Já existe um menu cadastrado com esse nome.</value>
   </data>

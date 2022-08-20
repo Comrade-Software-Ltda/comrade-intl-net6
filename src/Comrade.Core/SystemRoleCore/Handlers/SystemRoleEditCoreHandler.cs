@@ -30,7 +30,7 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
-        var result = _editValidation.Execute(request, recordExists);
+        var result = await _editValidation.Execute(request, recordExists).ConfigureAwait(false);
         if (!result.Success)
         {
             return result;
