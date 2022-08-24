@@ -21,7 +21,7 @@ public class SystemRoleControllerEditTests : IClassFixture<ServiceProviderFixtur
     [Fact]
     public async Task SystemRoleController_Edit()
     {
-        var changeName = "new name";
+        var changeName = "NEW NAME";
         var id = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6");
         var testObject = new SystemRoleEditDto
         {
