@@ -29,10 +29,18 @@ public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateComma
         {
             return result;
         }
+        HydrateValues(request);
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
+    }
+
+    private static void HydrateValues(SystemRoleCreateCommand target)
+    {
+#pragma warning disable CA1304 // Specify CultureInfo
+        target.Name = target.Name.ToUpper().Trim();
+#pragma warning restore CA1304 // Specify CultureInfo
     }
 }
