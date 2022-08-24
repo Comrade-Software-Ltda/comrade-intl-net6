@@ -50,6 +50,8 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
 
     private static void HydrateValues(SystemRole target, SystemRole source)
     {
-        target.Name = source.Name;
+#pragma warning disable CA1304 // Specify CultureInfo
+        target.Name = source.Name.ToUpper().Trim();
+#pragma warning restore CA1304 // Specify CultureInfo
     }
 }
