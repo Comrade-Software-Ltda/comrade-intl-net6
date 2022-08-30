@@ -3,6 +3,7 @@ using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemMenuCore;
 using Comrade.Core.SystemRoleCore;
 using Comrade.Core.SystemUserCore;
+using Comrade.Core.SystemUserSystemRoleCore;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 
@@ -23,7 +24,7 @@ public static class EntityRepositoryExtensions
         services.AddScoped<ISystemUserRepository, SystemUserRepository>();
         services.AddScoped<ISystemMenuRepository, SystemMenuRepository>();
         services.AddScoped<ISystemRoleRepository, SystemRoleRepository>();
-
+        services.AddScoped<ISystemUserSystemRoleRepository, SystemUserSystemRoleRepository>();
         return services;
     }
 }
