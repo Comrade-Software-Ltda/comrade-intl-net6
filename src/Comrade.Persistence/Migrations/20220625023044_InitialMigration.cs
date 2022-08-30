@@ -72,6 +72,31 @@ namespace Comrade.Persistence.Migrations
                     table.PrimaryKey("pk_syro_system_role", x => x.syro_uuid_system_role);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "syus_system_user_syro_system_role",
+                columns: table => new
+                {
+                    syus_uuid_system_user_syro_system_role = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    syus_uuid_system_user = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    syro_uuid_system_role = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_syus_system_user_syro_system_role", x => x.syus_uuid_system_user_syro_system_role);
+                    table.ForeignKey(
+                        name: "FK_syus_system_user_syro_system_role",
+                        column: x => x.syus_uuid_system_user,
+                        principalTable: "syus_system_user",
+                        principalColumn: "syus_uuid_system_user",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_syro_uuid_system_role",
+                        column: x => x.syro_uuid_system_role,
+                        principalTable: "syro_system_role",
+                        principalColumn: "syro_uuid_system_role",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_un_airp_tx_code",
                 table: "airp_airplane",
@@ -101,6 +126,12 @@ namespace Comrade.Persistence.Migrations
                 table: "syro_system_role",
                 column: "syro_uuid_system_role",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_syus_uuid_system_user_syro_system_role",
+                table: "syus_system_user_syro_system_role",
+                column: "syus_uuid_system_user_syro_system_role",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -116,6 +147,9 @@ namespace Comrade.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "syro_system_role");
+
+            migrationBuilder.DropTable(
+                name: "syus_system_user_syro_system_role");
         }
     }
 }

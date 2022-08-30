@@ -16,6 +16,7 @@
 		<None Remove="SeedData\airplane.json" />
 		<None Remove="SeedData\system-user.json" />
 		<None Remove="SeedData\system-role.json" />
+		<None Remove="SeedData\system-user-system-role.json" />
 		<None Remove="SeedData\system-menu.json" />
 	</ItemGroup>
 
@@ -33,6 +34,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="SeedData\system-role.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-user-system-role.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</EmbeddedResource>
 	</ItemGroup>

@@ -4,11 +4,13 @@ using Comrade.Application.Components.AuthenticationComponent.Contracts;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUserSystemRoleComponent.Contracts;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemRoleCore.Commands;
 using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Core.SystemUserSystemRoleCore.Commands;
 using Comrade.Domain.Models;
 
 namespace Comrade.Application.Mappers;
@@ -40,5 +42,8 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<SystemMenuCreateDto, SystemMenuCreateCommand>();
         CreateMap<SystemMenuEditDto, SystemMenuEditCommand>();
         CreateMap<SystemMenuDeleteDto, SystemMenuDeleteCommand>();
+        CreateMap<SystemUserSystemRoleDto, SystemUserSystemRole>();
+        CreateMap<SystemUserSystemRoleCreateDto, SystemUserSystemRoleCreateCommand>();
+        CreateMap<SystemUserSystemRoleEditDto, SystemUserSystemRoleEditCommand>();
     }
 }

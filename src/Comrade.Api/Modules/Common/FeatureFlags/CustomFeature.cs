@@ -26,6 +26,11 @@ public enum CustomFeature
     SystemRole,
 
     /// <summary>
+    ///     Get SystemUserSystemRole.
+    /// </summary>
+    SystemUserSystemRole,
+
+    /// <summary>
     ///     Get Common.
     /// </summary>
     Common,
