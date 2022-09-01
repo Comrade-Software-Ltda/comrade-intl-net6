@@ -20,6 +20,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:Airplane"] = "true",
                         ["FeatureManagement:SystemUser"] = "true",
                         ["FeatureManagement:SystemRole"] = "true",
+                        ["FeatureManagement:SystemUserSystemRole"] = "true",
                         ["FeatureManagement:SystemMenu"] = "true",
                         ["FeatureManagement:Common"] = "true",
                         ["FeatureManagement:HealthChecks"] = "false",
