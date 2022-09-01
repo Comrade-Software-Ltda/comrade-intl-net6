@@ -21,6 +21,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:SystemUser"] = "true",
                         ["FeatureManagement:SystemRole"] = "true",
                         ["FeatureManagement:SystemPermission"] = "true",
+                        ["FeatureManagement:SystemUserSystemRole"] = "true",
                         ["FeatureManagement:SystemMenu"] = "true",
                         ["FeatureManagement:Common"] = "true",
                         ["FeatureManagement:HealthChecks"] = "false",
