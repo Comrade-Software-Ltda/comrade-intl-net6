@@ -147,6 +147,9 @@
   <data name="MSG10" xml:space="preserve">
     <value>Registro já exists com mesmo nome, por favor informe outro nome.</value>
   </data>
+  <data name="MSG11" xml:space="preserve">
+    <value>Registro já exists com a mesma tag, por favor informe outra tag.</value>
+  </data>
   <data name="LKUP2001" xml:space="preserve">
     <value>Não atingiu o número minimo de caracteres.</value>
   </data>

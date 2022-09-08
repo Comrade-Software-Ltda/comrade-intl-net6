@@ -158,5 +158,14 @@ namespace Comrade.Core.Messages {
                 return ResourceManager.GetString("MSG10", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro já exists com a mesma tag, por favor informe outra tag..
+        /// </summary>
+        public static string MSG11 {
+            get {
+                return ResourceManager.GetString("MSG11", resourceCulture);
+            }
+        }
     }
 }
