@@ -5,7 +5,7 @@ using Comrade.Application.Components.AuthenticationComponent.Contracts;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemPermissionComponent.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
@@ -26,6 +26,6 @@ public class DomainToDtoMappingProfile : Profile
         CreateMap<SystemRole, SystemRoleDto>();
         CreateMap<SystemMenu, SystemMenuDto>();
         CreateMap<SystemMenu, SystemMenuSimpleDto>();
-        CreateMap<SystemUserSystemRole, SystemUserSystemRoleDto>();
+        CreateMap<SystemPermission, SystemPermissionDto>();
     }
 }
