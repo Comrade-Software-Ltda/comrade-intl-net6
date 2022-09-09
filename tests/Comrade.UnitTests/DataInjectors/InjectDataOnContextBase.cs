@@ -32,6 +32,10 @@ public static class InjectDataOnContextBase
                 db.SystemUsers.AddRange(systemUsers!);
             }
 
+                var systemPermissionJson = assembly.GetManifestResourceStream($"{JsonPath}.system-permission.json");
+                var systemPermissions = JsonUtilities.GetListFromJson<SystemPermission>(systemPermissionJson);
+                db.SystemPermission.AddRange(systemPermissions!);
+            }
             db.SaveChanges();
         }
         catch (Exception e)
