@@ -17,7 +17,7 @@ public class SystemPermissionValidation<TDto> : DtoValidation<TDto> where TDto :
 
     protected void ValidateTag()
     {
-        RuleFor(v => v.Name)
+        RuleFor(v => v.Tag)
             .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
             .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Tag");
