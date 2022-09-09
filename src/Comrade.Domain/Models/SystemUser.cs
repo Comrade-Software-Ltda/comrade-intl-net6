@@ -10,6 +10,7 @@ public class SystemUser : Entity
         Name = "";
         Password = "";
         Registration = "";
+        SystemRoles = new HashSet<SystemRole>();
     }
 
     public SystemUser(Guid id, string name, string email, string password, string registration,
@@ -21,6 +22,7 @@ public class SystemUser : Entity
         Password = password;
         Registration = registration;
         RegisterDate = registerDate;
+        SystemRoles = new HashSet<SystemRole>();
     }
 
     [Column("syus_tx_name", TypeName = "varchar")]
@@ -43,4 +45,6 @@ public class SystemUser : Entity
 
     [Column("syus_dt_register", TypeName = "varchar")]
     public DateTime? RegisterDate { get; set; }
+
+    public virtual ICollection<SystemRole> SystemRoles { get; set; }
 }
