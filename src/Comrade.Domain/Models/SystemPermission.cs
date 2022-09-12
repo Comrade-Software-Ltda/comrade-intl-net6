@@ -10,6 +10,7 @@ public class SystemPermission : Entity
         Name = "";
         Tag = "";
         SystemUsers = new HashSet<SystemUser>();
+        SystemRoles = new HashSet<SystemRole>();
     }
 
     public SystemPermission(string name, string tag)
@@ -17,6 +18,7 @@ public class SystemPermission : Entity
         Name = name;
         Tag = tag;
         SystemUsers = new HashSet<SystemUser>();
+        SystemRoles = new HashSet<SystemRole>();
     }
 
     [Column("sype_tx_name", TypeName = "varchar")]
@@ -30,4 +32,6 @@ public class SystemPermission : Entity
     public string Tag { get; set; } // varchar(255), not null
 
     public virtual ICollection<SystemUser> SystemUsers { get; set; }
+
+    public virtual ICollection<SystemRole> SystemRoles { get; set; }
 }

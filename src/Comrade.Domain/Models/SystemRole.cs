@@ -9,12 +9,14 @@ public class SystemRole : Entity
     {
         Name = "";
         SystemUsers = new HashSet<SystemUser>();
+        SystemPermissions = new HashSet<SystemPermission>();
     }
 
     public SystemRole(string name)
     {
         Name = name;
         SystemUsers = new HashSet<SystemUser>();
+        SystemPermissions = new HashSet<SystemPermission>();
     }
     
     [Column("syro_tx_name", TypeName = "varchar")]
@@ -23,5 +25,6 @@ public class SystemRole : Entity
     public string Name { get; set; } // varchar(255), not null
 
     public virtual ICollection<SystemUser> SystemUsers { get; set; }
-}
 
+    public virtual ICollection<SystemPermission> SystemPermissions { get; set; }
+}
