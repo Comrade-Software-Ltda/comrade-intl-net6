@@ -4,6 +4,7 @@ using Comrade.Persistence.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comrade.Persistence.Migrations
 {
     [DbContext(typeof(ComradeContext))]
-    partial class ComradeContextModelSnapshot : ModelSnapshot
+    [Migration("20220912214350_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +75,9 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
-                    b.Property<Guid?>("MenuId")
+                    b.Property<Guid?>("FatherId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("syme_uuid_menu");
+                        .HasColumnName("syme_uuid_father");
 
                     b.Property<string>("Route")
                         .HasMaxLength(255)
@@ -91,7 +93,7 @@ namespace Comrade.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("pk_syme_system_menu");
 
-                    b.HasIndex("MenuId");
+                    b.HasIndex("FatherId");
 
                     b.ToTable("syme_system_menu");
                 });
@@ -236,12 +238,12 @@ namespace Comrade.Persistence.Migrations
 
             modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
                 {
-                    b.HasOne("Comrade.Domain.Models.SystemMenu", "Menu")
-                        .WithMany("Submenus")
-                        .HasForeignKey("MenuId")
+                    b.HasOne("Comrade.Domain.Models.SystemMenu", "Father")
+                        .WithMany("Childrens")
+                        .HasForeignKey("FatherId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Menu");
+                    b.Navigation("Father");
                 });
 
             modelBuilder.Entity("SystemPermissionSystemRole", b =>
@@ -291,7 +293,7 @@ namespace Comrade.Persistence.Migrations
 
             modelBuilder.Entity("Comrade.Domain.Models.SystemMenu", b =>
                 {
-                    b.Navigation("Submenus");
+                    b.Navigation("Childrens");
                 });
 #pragma warning restore 612, 618
         }
