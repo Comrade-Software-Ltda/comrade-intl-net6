@@ -1,17 +1,22 @@
+using System.Text.Json;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.AirplaneComponent.Contracts;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
 public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
+    private readonly ITestOutputHelper _output;
 
-    public AirplaneControllerCreateTests(ServiceProviderFixture fixture)
+
+    public AirplaneControllerCreateTests(ServiceProviderFixture fixture, ITestOutputHelper output)
     {
         _fixture = fixture;
+        _output = output;
     }
 
 
@@ -24,6 +29,11 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
             Model = "585",
             PassengerQuantity = 456
         };
+
+        var oto = JsonSerializer.Serialize(testObject);
+
+        _output.WriteLine(oto);
+        _output.WriteLine(testObject.ToString());
 
         var airplaneController =
             AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
