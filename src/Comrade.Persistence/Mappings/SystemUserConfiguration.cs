@@ -12,5 +12,9 @@ public class SystemUserConfiguration : IEntityTypeConfiguration<SystemUser>
         builder.HasIndex(c => c.Email).HasDatabaseName("ix_un_syus_tx_email").IsUnique();
         builder.HasIndex(c => c.Registration).HasDatabaseName("ix_un_syus_tx_registration")
             .IsUnique();
+
+        builder.HasMany(x => x.SystemPermissions)
+            .WithMany(x => x.SystemUsers)
+            .UsingEntity(j => j.ToTable("syus_system_user_sype_system_permission"));
     }
 }
