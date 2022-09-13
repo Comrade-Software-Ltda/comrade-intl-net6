@@ -7,14 +7,14 @@ public class BotMovementTests
     [Fact]
     public void BotCanReachDestiny()
     {
-        var result = BotMovement.IsAchievable(1, 1, 104, 61);
+        var result = BotMovementStack.IsAchievable(1, 1, 104, 61);
         Assert.True(result);
     }
 
     [Fact]
     public void BotCantReachDestiny()
     {
-        var result = BotMovement.IsAchievable(1, 1, 50, 20);
+        var result = BotMovementStack.IsAchievable(1, 1, 50, 20);
         Assert.False(result);
     }
 }
