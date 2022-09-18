@@ -5,8 +5,9 @@ namespace Comrade.Persistence.DataAccess;
 
 public class ComradeContext : DbContext
 {
+
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
-    public ComradeContext(DbContextOptions<ComradeContext> options)
+    public ComradeContext(DbContextOptions options)
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         : base(options)
     {
