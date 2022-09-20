@@ -1,5 +1,6 @@
 using Comrade.Domain.Models;
 using Comrade.Persistence.Extensions;
+using Microsoft.Extensions.Configuration;
 
 namespace Comrade.Persistence.DataAccess;
 

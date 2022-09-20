@@ -25,6 +25,7 @@ public class Airplane : Entity
     [Required(ErrorMessage = "Code is required")]
     public string Code { get; set; }
 
+
     [Column("airp_tx_model", TypeName = "varchar")]
     [MaxLength(255)]
     [Required(ErrorMessage = "Model is required")]
