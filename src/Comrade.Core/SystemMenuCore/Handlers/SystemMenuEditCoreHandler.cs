@@ -62,6 +62,6 @@ public class
         target.Description = source.Description;
         target.Menu = source.Menu;
         target.Route = source.Route;
-        target.Text = source.Text;
+        target.Title = source.Title;
     }
 }

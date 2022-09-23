@@ -8,9 +8,9 @@ namespace Comrade.Application.Components.SystemMenuComponent.Validations;
 public class SystemMenuValidation<TDto> : DtoValidation<TDto>
     where TDto : SystemMenuDto
 {
-    protected void ValidateText()
+    protected void ValidateTitle()
     {
-        RuleFor(v => v.Text)
+        RuleFor(v => v.Title)
             .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
             .MaximumLength(30).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Text");

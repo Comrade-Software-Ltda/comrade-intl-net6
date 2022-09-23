@@ -13,7 +13,11 @@ public class SystemMenu : Entity
     [Column("syme_tx_text", TypeName = "varchar")]
     [MaxLength(30)]
     [Required(ErrorMessage = "Text is required")]
-    public string? Text { get; set; }
+    public string? Title { get; set; }
+
+    [Column("syme_tx_icon", TypeName = "varchar")]
+    [MaxLength(30)]
+    public string? Icon { get; set; }
 
     [Column("syme_tx_description", TypeName = "varchar")]
     [MaxLength(255)]

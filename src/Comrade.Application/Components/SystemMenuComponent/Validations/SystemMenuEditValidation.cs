@@ -6,7 +6,7 @@ public class SystemMenuEditValidation : SystemMenuValidation<SystemMenuEditDto>
 {
     public SystemMenuEditValidation()
     {
-        ValidateText();
+        ValidateTitle();
         ValidateDescription();
         ValidateRoute();
     }

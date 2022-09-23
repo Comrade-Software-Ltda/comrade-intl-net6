@@ -19,14 +19,14 @@ public sealed class SystemMenuControllerEditErrorTests : IClassFixture<ServicePr
     public async Task SystemMenuController_Edit_Error()
     {
         var systemMenuId = Guid.NewGuid();
-        const string systemMenuText = "Main Teste Edit";
+        const string systemMenuTitle = "Main Teste Edit";
         const string systemMenuDescription = "Description Main Teste Edit";
         const string systemMenuRoute = "/teste";
 
         var testObject = new SystemMenuEditDto
         {
             Id = systemMenuId,
-            Text = systemMenuText,
+            Title = systemMenuTitle,
             Description = systemMenuDescription,
             Route = systemMenuRoute
         };
