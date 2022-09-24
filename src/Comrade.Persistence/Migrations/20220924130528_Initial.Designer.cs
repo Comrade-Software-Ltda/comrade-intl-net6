@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comrade.Persistence.Migrations
 {
     [DbContext(typeof(ComradeContext))]
-    [Migration("20220810205806_Initial")]
+    [Migration("20220924130528_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,11 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
+                    b.Property<string>("Icon")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("syme_tx_icon");
+
                     b.Property<Guid?>("MenuId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("syme_uuid_menu");
@@ -84,7 +89,7 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_route");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)")

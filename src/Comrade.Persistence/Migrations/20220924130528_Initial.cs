@@ -31,6 +31,7 @@ namespace Comrade.Persistence.Migrations
                     syme_uuid_system_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     syme_uuid_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     syme_tx_text = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    syme_tx_icon = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
                     syme_tx_description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
                     syme_tx_route = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                 },
