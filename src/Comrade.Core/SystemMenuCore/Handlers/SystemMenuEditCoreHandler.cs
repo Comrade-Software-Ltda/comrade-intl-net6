@@ -63,6 +63,6 @@ public class
         target.Menu = source.Menu;
         target.Route = source.Route;
         target.Title = source.Title;
-        target.Icon = source.Icon;
+        target.Icon = source.Icon?.Trim().ToLower(CultureInfo.CurrentCulture);
     }
 }
