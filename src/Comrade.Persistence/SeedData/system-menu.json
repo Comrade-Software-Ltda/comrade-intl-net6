@@ -16,6 +16,7 @@
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
     "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
     "title": "Profile",
+    "icon": "card",
     "description": "Profile - Description",
     "route": "/profile"
   },
