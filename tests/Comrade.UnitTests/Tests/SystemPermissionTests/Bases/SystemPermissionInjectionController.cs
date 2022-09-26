@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Comrade.UnitTests.Tests.SystemPermissionTests.Bases;
 
-public class SystemPermissionInjectionController
+public static class SystemPermissionInjectionController
 {
     public static SystemPermissionController GetSystemPermissionController(ComradeContext context, MongoDbContext mongoDbContextFixture, IMediator mediator)
     {

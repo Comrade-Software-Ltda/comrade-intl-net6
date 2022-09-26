@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Comrade.UnitTests.Tests.SystemRoleTests.Bases;
 
-public class SystemRoleInjectionController
+public static class SystemRoleInjectionController
 {
     public static SystemRoleController GetSystemRoleController(ComradeContext context, MongoDbContext mongoDbContextFixture, IMediator mediator)
     {

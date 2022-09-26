@@ -30,11 +30,11 @@ public static class InjectDataOnContextBase
 
                 var systemRoleJson = assembly.GetManifestResourceStream($"{JsonPath}.system-role.json");
                 var systemRoles = JsonUtilities.GetListFromJson<SystemRole>(systemRoleJson);
-                db.SystemRole.AddRange(systemRoles!);
+                db.SystemRoles.AddRange(systemRoles!);
 
                 var systemPermissionJson = assembly.GetManifestResourceStream($"{JsonPath}.system-permission.json");
                 var systemPermissions = JsonUtilities.GetListFromJson<SystemPermission>(systemPermissionJson);
-                db.SystemPermission.AddRange(systemPermissions!);
+                db.SystemPermissions.AddRange(systemPermissions!);
             }
             db.SaveChanges();
         }

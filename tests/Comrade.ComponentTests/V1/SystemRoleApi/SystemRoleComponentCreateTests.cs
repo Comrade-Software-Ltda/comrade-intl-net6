@@ -18,7 +18,7 @@ public class SystemRoleComponentCreateTests : IClassFixture<CustomWebApplication
         var token = await GenerateFakeToken.Execute(fixture.Mediator);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(new SystemRole("ROLE")), Encoding.UTF8);
+        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(new SystemRole() { Name = "ROLE", Tag = "TAG" }), Encoding.UTF8);
         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
         var actualResponse = await client.PostAsync("/api/v1/system-role/create", httpContent).ConfigureAwait(false);
