@@ -41,7 +41,9 @@ public static class PersistenceExtensions
         if (isMsSqlServerEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
-                options.UseSqlServer(
+                options
+                    .EnableSensitiveDataLogging()
+                    .UseSqlServer(
                     configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection")));
         }
         else if (isPostgresSqlEnabled)

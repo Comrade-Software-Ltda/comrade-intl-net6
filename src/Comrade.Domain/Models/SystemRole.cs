@@ -8,23 +8,21 @@ public class SystemRole : Entity
     public SystemRole()
     {
         Name = "";
-        SystemUsers = new HashSet<SystemUser>();
-        SystemPermissions = new HashSet<SystemPermission>();
-    }
-
-    public SystemRole(string name)
-    {
-        Name = name;
-        SystemUsers = new HashSet<SystemUser>();
-        SystemPermissions = new HashSet<SystemPermission>();
+        Tag = "";
     }
     
     [Column("syro_tx_name", TypeName = "varchar")]
     [MaxLength(255)]
-    [Required(ErrorMessage = "NOME ROLE is required")]
-    public string Name { get; set; } // varchar(255), not null
+    [Required(ErrorMessage = "Name is required")]
+    public string Name { get; set; }
 
+    [Column("syro_tx_tag", TypeName = "varchar")]
+    [MaxLength(255)]
+    [Required(ErrorMessage = "Tag is required")]
+    public string Tag { get; set; }
+    
     public virtual ICollection<SystemUser> SystemUsers { get; set; }
-
+    public virtual ICollection<SystemUserSystemRole> SystemUserRoles { get; set; }
     public virtual ICollection<SystemPermission> SystemPermissions { get; set; }
+    public virtual ICollection<SystemRoleSystemPermission> SystemRolePermissions { get; set; }
 }

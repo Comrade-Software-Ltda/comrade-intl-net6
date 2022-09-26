@@ -22,7 +22,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
     public IQueryable<Lookup>? FindByName(string name)
     {
 #pragma warning disable CA1304 // Specify CultureInfo
-        var result = _context.SystemRole
+        var result = _context.SystemRoles
             .Where(x => x.Name.ToUpper().Trim().Contains(name.ToUpper().Trim())).Take(30)
             .OrderBy(x => x.Name.ToUpper().Trim())
             .Select(s => new Lookup { Key = s.Id, Value = s.Name.ToUpper().Trim() });
@@ -33,7 +33,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
     public async Task<ISingleResult<SystemRole>> NameUniqueValidation(string name)
     {
 #pragma warning disable CA1304 // Specify CultureInfo
-        var exists = await _context.SystemRole
+        var exists = await _context.SystemRoles
             .Where(p => name.ToUpper().Trim()
                 .Equals(p.Name.ToUpper().Trim(), StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);

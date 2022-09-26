@@ -9,29 +9,20 @@ public class SystemPermission : Entity
     {
         Name = "";
         Tag = "";
-        SystemUsers = new HashSet<SystemUser>();
-        SystemRoles = new HashSet<SystemRole>();
-    }
-
-    public SystemPermission(string name, string tag)
-    {
-        Name = name;
-        Tag = tag;
-        SystemUsers = new HashSet<SystemUser>();
-        SystemRoles = new HashSet<SystemRole>();
     }
 
     [Column("sype_tx_name", TypeName = "varchar")]
     [MaxLength(255)]
-    [Required(ErrorMessage = "NOME permission is required")]
-    public string Name { get; set; } // varchar(255), not null
+    [Required(ErrorMessage = "Name is required")]
+    public string Name { get; set; }
 
     [Column("sype_tx_tag", TypeName = "varchar")]
     [MaxLength(255)]
-    [Required(ErrorMessage = "TAG permission is required")]
-    public string Tag { get; set; } // varchar(255), not null
+    [Required(ErrorMessage = "Tag is required")]
+    public string Tag { get; set; }
 
     public virtual ICollection<SystemUser> SystemUsers { get; set; }
-
+    public virtual ICollection<SystemUserSystemPermission> SystemUserPermissions { get; set; }
     public virtual ICollection<SystemRole> SystemRoles { get; set; }
+    public virtual ICollection<SystemRoleSystemPermission> SystemRolePermissions { get; set; }
 }

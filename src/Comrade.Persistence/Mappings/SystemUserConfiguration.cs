@@ -1,10 +1,12 @@
 using Comrade.Domain.Models;
+using Comrade.Persistence.Bases;
+using Comrade.Persistence.Extensions;
 
 namespace Comrade.Persistence.Mappings;
 
-public class SystemUserConfiguration : IEntityTypeConfiguration<SystemUser>
+public class SystemUserConfiguration : BaseMappingConfiguration<SystemUser>
 {
-    public void Configure(EntityTypeBuilder<SystemUser> builder)
+    public override void Configure(EntityTypeBuilder<SystemUser> builder)
     {
         builder.Property(b => b.Id).HasColumnName("syus_uuid_system_user").IsRequired();
         builder.HasKey(c => c.Id).HasName("pk_syus_system_user");
@@ -13,8 +15,6 @@ public class SystemUserConfiguration : IEntityTypeConfiguration<SystemUser>
         builder.HasIndex(c => c.Registration).HasDatabaseName("ix_un_syus_tx_registration")
             .IsUnique();
 
-        builder.HasMany(x => x.SystemPermissions)
-            .WithMany(x => x.SystemUsers)
-            .UsingEntity(j => j.ToTable("syus_system_user_sype_system_permission"));
+        builder.InsertSeedData($"{SeedJsonBasePath}.system-user.json");
     }
 }
