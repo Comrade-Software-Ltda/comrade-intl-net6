@@ -8,17 +8,6 @@ namespace Comrade.Api.Modules.Common.Swagger;
 /// </summary>
 public static class SwaggerExtensions
 {
-    private static string XmlCommentsFilePath
-    {
-        get
-        {
-            var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
-            return Path.Combine(basePath, fileName);
-        }
-    }
-
-
     /// <summary>
     ///     Add Swagger Configuration dependencies.
     /// </summary>
@@ -41,7 +30,6 @@ public static class SwaggerExtensions
                 .AddSwaggerGen(
                     c =>
                     {
-                        c.IncludeXmlComments(XmlCommentsFilePath);
                         c.AddSecurityDefinition("Bearer",
                             new OpenApiSecurityScheme
                             {

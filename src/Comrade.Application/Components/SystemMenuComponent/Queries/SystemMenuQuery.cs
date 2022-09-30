@@ -47,14 +47,14 @@ public class SystemMenuQuery : ISystemMenuQuery
         return new PageResultDto<SystemMenuSimpleDto>(paginationFilter, list);
     }
 
-    public async Task<IPageResultDto<SystemMenuDto>> GetAllFathers(
+    public async Task<IPageResultDto<SystemMenuDto>> GetAllMenus(
         PaginationQuery? paginationQuery = null)
     {
         var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemMenuDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllFathers()
+            list = await Task.Run(() => _repository.GetAllMenus()
                 .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
                 .ToList()).ConfigureAwait(false);
 
@@ -63,7 +63,7 @@ public class SystemMenuQuery : ISystemMenuQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllFathers().Skip(skip)
+        list = await Task.Run(() => _repository.GetAllMenus().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);

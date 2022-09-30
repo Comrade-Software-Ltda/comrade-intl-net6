@@ -131,5 +131,14 @@ namespace Comrade.Application.Messages {
                 return ResourceManager.GetString("TAMANHO_INTERVALO_CAMPO", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A url informada é inválida..
+        /// </summary>
+        public static string URL_INVALIDA {
+            get {
+                return ResourceManager.GetString("URL_INVALIDA", resourceCulture);
+            }
+        }
     }
 }
