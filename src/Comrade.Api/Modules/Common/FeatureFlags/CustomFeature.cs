@@ -11,14 +11,9 @@ public enum CustomFeature
     Airplane,
 
     /// <summary>
-    ///     Get SystemUser.
+    ///     Get SystemPermission.
     /// </summary>
-    SystemUser,
-
-    /// <summary>
-    ///     Get SystemMenu.
-    /// </summary>
-    SystemMenu,
+    SystemPermission,
 
     /// <summary>
     ///     Get SystemRole.
@@ -26,9 +21,29 @@ public enum CustomFeature
     SystemRole,
 
     /// <summary>
-    ///     Get SystemPermission.
+    ///     Get SystemRoleSystemPermission.
     /// </summary>
-    SystemPermission,
+    SystemRoleSystemPermission,
+
+    /// <summary>
+    ///     Get SystemUser.
+    /// </summary>
+    SystemUser,
+
+    /// <summary>
+    ///     Get SystemUserSystemRole.
+    /// </summary>
+    SystemUserSystemRole,
+
+    /// <summary>
+    ///     Get SystemUserSystemPermission.
+    /// </summary>
+    SystemUserSystemPermission,
+
+    /// <summary>
+    ///     Get SystemMenu.
+    /// </summary>
+    SystemMenu,
 
     /// <summary>
     ///     Get Common.

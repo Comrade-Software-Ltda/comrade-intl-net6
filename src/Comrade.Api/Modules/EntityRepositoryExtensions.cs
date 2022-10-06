@@ -4,6 +4,7 @@ using Comrade.Core.SystemMenuCore;
 using Comrade.Core.SystemRoleCore;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemPermissionCore;
+using Comrade.Core.SystemUserSystemPermissionCore;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 
@@ -21,10 +22,10 @@ public static class EntityRepositoryExtensions
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IAirplaneRepository,   AirplaneRepository>();
+        services.AddScoped<ISystemPermissionRepository, SystemPermissionRepository>();
+        services.AddScoped<ISystemRoleRepository, SystemRoleRepository>();
         services.AddScoped<ISystemUserRepository, SystemUserRepository>();
         services.AddScoped<ISystemMenuRepository, SystemMenuRepository>();
-        services.AddScoped<ISystemRoleRepository, SystemRoleRepository>();
-        services.AddScoped<ISystemPermissionRepository, SystemPermissionRepository>();
         return services;
     }
 }
