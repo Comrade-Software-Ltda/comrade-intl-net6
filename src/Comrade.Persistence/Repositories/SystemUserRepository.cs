@@ -27,4 +27,24 @@ public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepositor
 
         return result;
     }
+    
+    public async Task<SystemUser?> GetByIdIncludePermissions(Guid id)
+    {
+        return await _context.SystemUsers
+            .Where(x => x.Id == id)
+            .Include(x => x.SystemUserPermissions)
+            .Include(x=> x.SystemPermissions)
+            .FirstOrDefaultAsync()
+            .ConfigureAwait(false);
+    }
+
+    public async Task<SystemUser?> GetByIdIncludeRoles(Guid id)
+    {
+        return await _context.SystemUsers
+            .Where(x => x.Id == id)
+            .Include(x => x.SystemUserRoles)
+            .Include(x => x.SystemRoles)
+            .FirstOrDefaultAsync()
+            .ConfigureAwait(false);
+    }
 }
