@@ -46,6 +46,7 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<SystemMenuDto, SystemMenu>();
         CreateMap<SystemMenuSimpleDto, SystemMenu>();
         CreateMap<SystemMenuCreateDto, SystemMenuCreateCommand>();
+        CreateMap<SystemMenuCreateDto, SystemMenu>();
         CreateMap<SystemMenuEditDto, SystemMenuEditCommand>();
         CreateMap<SystemMenuDeleteDto, SystemMenuDeleteCommand>();
         CreateMap<SystemPermissionDto, SystemPermission>();

@@ -41,16 +41,14 @@ public static class PersistenceExtensions
         if (isMsSqlServerEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
-                options
-                    .EnableSensitiveDataLogging()
-                    .UseSqlServer(
-                    configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection")));
+                options.UseSqlServer(
+                    configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection")!));
         }
         else if (isPostgresSqlEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
                 options.UseNpgsql(
-                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDbConnection")));
+                    configuration.GetValue<string>("PersistenceModule:PostgresSqlDbConnection")!));
         }
         else
         {

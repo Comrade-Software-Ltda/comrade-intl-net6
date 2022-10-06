@@ -29,7 +29,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:SQLServer"] = "false",
                         ["FeatureManagement:PostgresSql"] = "false",
                         ["FeatureManagement:InjectInitialData"] = "true"
-                    });
+                    }!);
             });
     }
 }

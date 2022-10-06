@@ -167,5 +167,14 @@ namespace Comrade.Core.Messages {
                 return ResourceManager.GetString("MSG11", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Já existe um menu cadastrado com esse nome..
+        /// </summary>
+        public static string MSG20 {
+            get {
+                return ResourceManager.GetString("MSG20", resourceCulture);
+            }
+        }
     }
 }

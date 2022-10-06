@@ -43,7 +43,7 @@ public static class AuthenticationExtensions
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey =
                             new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(configuration["jwt:key"])),
+                                Encoding.UTF8.GetBytes(configuration["jwt:key"]!)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
