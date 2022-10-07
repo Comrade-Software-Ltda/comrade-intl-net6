@@ -23,14 +23,6 @@ using Comrade.Application.Components.SystemPermissionComponent.Commands;
 using Comrade.Application.Components.SystemPermissionComponent.Contracts;
 using Comrade.Application.Components.SystemPermissionComponent.Handlers;
 using Comrade.Application.Components.SystemPermissionComponent.Queries;
-using Comrade.Application.Components.SystemUserSystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemUserSystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemUserSystemPermissionComponent.Handlers;
-using Comrade.Application.Components.SystemUserSystemPermissionComponent.Queries;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Contracts;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Handlers;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
@@ -247,14 +239,9 @@ public static class UseCasesExtensions
         #endregion
 
         #region SystemUserSystemPermission
-
-
-        // Application - Services
-        services.AddScoped<ISystemUserSystemPermissionCommand, SystemUserSystemPermissionCommand>();
-        services.AddScoped<ISystemUserSystemPermissionQuery, SystemUserSystemPermissionQuery>();
-
+        
         // Application - Handlers
-        services.AddScoped<IRequestHandler<SystemUserSystemPermissionManageDto, SingleResultDto<EntityDto>>, SystemUserSystemPermissionManageHandler>();
+        services.AddScoped<IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>, SystemUserManagePermissionsHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemUserSystemPermissionManage, UcSystemUserSystemPermissionManage>();
@@ -267,14 +254,9 @@ public static class UseCasesExtensions
         #endregion
 
         #region SystemUserSystemRole
-
-
-        // Application - Services
-        services.AddScoped<ISystemUserSystemRoleCommand, SystemUserSystemRoleCommand>();
-        services.AddScoped<ISystemUserSystemRoleQuery, SystemUserSystemRoleQuery>();
-
+        
         // Application - Handlers
-        services.AddScoped<IRequestHandler<SystemUserSystemRoleManageDto, SingleResultDto<EntityDto>>, SystemUserSystemRoleManageHandler>();
+        services.AddScoped<IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>, SystemUserManageRolesHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemUserSystemRoleManage, UcSystemUserSystemRoleManage>();

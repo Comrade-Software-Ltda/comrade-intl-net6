@@ -6,8 +6,6 @@ using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemUserSystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
@@ -22,8 +20,8 @@ public class DomainToDtoMappingProfile : Profile
         CreateMap<Lookup, LookupDto>();
         CreateMap<Airplane, AirplaneDto>();
         CreateMap<SystemUser, SystemUserDto>();
-        CreateMap<SystemUser, SystemUserSystemPermissionDto>();
-        CreateMap<SystemUser, SystemUserSystemRoleDto>();
+        CreateMap<SystemUser, SystemUserWithPermissionsDto>();
+        CreateMap<SystemUser, SystemUserWithRolesDto>();
         CreateMap<SystemUser, AuthenticationDto>()
             .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));

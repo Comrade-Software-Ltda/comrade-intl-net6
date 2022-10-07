@@ -71,4 +71,54 @@ public class SystemUserQuery : ISystemUserQuery
         var dto = _mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
+
+    public async Task<IPageResultDto<SystemUserWithPermissionsDto>> GetAllWithPermissions(
+        PaginationQuery? paginationQuery = null)
+    {
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+
+        List<SystemUserWithPermissionsDto> list;
+        if (paginationFilter == null)
+        {
+            list = await Task.Run(() => _repository.GetAllAsNoTracking()
+                .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
+                .ToList()).ConfigureAwait(false);
+
+            return new PageResultDto<SystemUserWithPermissionsDto>(list);
+        }
+
+        var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+            .Take(paginationFilter.PageSize)
+            .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
+            .ToList()).ConfigureAwait(false);
+
+        return new PageResultDto<SystemUserWithPermissionsDto>(paginationFilter, list);
+    }
+
+    public async Task<IPageResultDto<SystemUserWithRolesDto>> GetAllWithRoles(
+        PaginationQuery? paginationQuery = null)
+    {
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+
+        List<SystemUserWithRolesDto> list;
+        if (paginationFilter == null)
+        {
+            list = await Task.Run(() => _repository.GetAllAsNoTracking()
+                .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
+                .ToList()).ConfigureAwait(false);
+
+            return new PageResultDto<SystemUserWithRolesDto>(list);
+        }
+
+        var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+            .Take(paginationFilter.PageSize)
+            .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
+            .ToList()).ConfigureAwait(false);
+
+        return new PageResultDto<SystemUserWithRolesDto>(paginationFilter, list);
+    }
 }

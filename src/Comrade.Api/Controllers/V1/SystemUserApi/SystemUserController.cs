@@ -108,4 +108,69 @@ public class SystemUserController : ControllerBase
                 new SingleResultDto<EntityDto>(e));
         }
     }
+
+    [HttpGet("get-all-with-permissions")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
+    public async Task<IActionResult> GetAllWithPermissions([FromQuery] PaginationQuery? paginationQuery)
+    {
+        try
+        {
+            var result = await _systemUserQuery.GetAllWithPermissions(paginationQuery).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
+
+    [HttpPut("manage-permissions")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
+    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemUserManagePermissionsDto dto)
+    {
+        try
+        {
+            var result = await _systemUserCommand.ManagePermissions(dto).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
+    [HttpGet("get-all-with-roles")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
+    public async Task<IActionResult> GetAllWithRoles([FromQuery] PaginationQuery? paginationQuery)
+    {
+        try
+        {
+            var result = await _systemUserQuery.GetAllWithRoles(paginationQuery).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
+    [HttpPut("manage")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
+    public async Task<IActionResult> ManageRoles([FromBody][Required] SystemUserManageRolesDto dto)
+    {
+        try
+        {
+            var result = await _systemUserCommand.ManageRoles(dto).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
 }

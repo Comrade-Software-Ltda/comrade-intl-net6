@@ -4,7 +4,6 @@ using Comrade.Core.SystemMenuCore;
 using Comrade.Core.SystemRoleCore;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemPermissionCore;
-using Comrade.Core.SystemUserSystemPermissionCore;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;
 

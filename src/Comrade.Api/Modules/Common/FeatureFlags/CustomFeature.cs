@@ -29,17 +29,7 @@ public enum CustomFeature
     ///     Get SystemUser.
     /// </summary>
     SystemUser,
-
-    /// <summary>
-    ///     Get SystemUserSystemRole.
-    /// </summary>
-    SystemUserSystemRole,
-
-    /// <summary>
-    ///     Get SystemUserSystemPermission.
-    /// </summary>
-    SystemUserSystemPermission,
-
+    
     /// <summary>
     ///     Get SystemMenu.
     /// </summary>

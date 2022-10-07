@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserSystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Core.SystemUserSystemRoleCore.Commands;
 using Comrade.Core.SystemUserSystemRoleCore.UseCases;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemUserSystemRoleComponent.Handlers;
+namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
-public class SystemUserSystemRoleManageHandler : IRequestHandler<SystemUserSystemRoleManageDto, SingleResultDto<EntityDto>>
+public class SystemUserManageRolesHandler : IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>
 {
     private readonly IUcSystemUserSystemRoleManage _manageSystemUserSystemRole;
     private readonly IMapper _mapper;
 
-    public SystemUserSystemRoleManageHandler(IMapper mapper, IUcSystemUserSystemRoleManage manageSystemUserSystemRole)
+    public SystemUserManageRolesHandler(IMapper mapper, IUcSystemUserSystemRoleManage manageSystemUserSystemRole)
     {
         _mapper = mapper;
         _manageSystemUserSystemRole = manageSystemUserSystemRole;
     }
 
-    public async Task<SingleResultDto<EntityDto>> Handle(SystemUserSystemRoleManageDto request,
+    public async Task<SingleResultDto<EntityDto>> Handle(SystemUserManageRolesDto request,
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemUserSystemRoleManageCommand>(request);
