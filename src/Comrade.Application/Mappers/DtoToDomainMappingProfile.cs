@@ -11,8 +11,6 @@ using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemRoleCore.Commands;
 using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemPermissionCore.Commands;
-using Comrade.Core.SystemUserSystemPermissionCore.Commands;
-using Comrade.Core.SystemUserSystemRoleCore.Commands;
 using Comrade.Domain.Models;
 
 namespace Comrade.Application.Mappers;
@@ -27,8 +25,8 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<SystemUserDto, SystemUser>();
         CreateMap<SystemUserDto, SystemUserCreateCommand>();
         CreateMap<SystemUserDto, SystemUserEditCommand>();
-        CreateMap<SystemUserManagePermissionsDto, SystemUserSystemPermissionManageCommand>();
-        CreateMap<SystemUserManageRolesDto, SystemUserSystemRoleManageCommand>();
+        CreateMap<SystemUserManagePermissionsDto, SystemUserManagePermissionsCommand>();
+        CreateMap<SystemUserManageRolesDto, SystemUserManageRolesCommand>();
         CreateMap<SystemRoleDto, SystemRole>();
         CreateMap<SystemRoleCreateDto, SystemRoleCreateCommand>();
         CreateMap<SystemRoleEditDto, SystemRoleEditCommand>();

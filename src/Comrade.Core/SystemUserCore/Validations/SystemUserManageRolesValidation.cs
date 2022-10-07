@@ -3,9 +3,9 @@ using Comrade.Core.Bases.Results;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
-namespace Comrade.Core.SystemUserSystemRoleCore.Validations;
+namespace Comrade.Core.SystemUserCore.Validations;
 
-public class SystemUserSystemRoleManageValidation : ISystemUserSystemRoleManageValidation
+public class SystemUserManageRolesValidation : ISystemUserManageRolesValidation
 {
     public ISingleResult<Entity> Execute(SystemUser entity)
     {

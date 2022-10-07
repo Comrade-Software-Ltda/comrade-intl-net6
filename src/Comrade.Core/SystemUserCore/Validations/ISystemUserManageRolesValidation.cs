@@ -2,9 +2,9 @@
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
-namespace Comrade.Core.SystemUserSystemPermissionCore.Validations;
+namespace Comrade.Core.SystemUserCore.Validations;
 
-public interface ISystemUserSystemPermissionManageValidation
+public interface ISystemUserManageRolesValidation
 {
     ISingleResult<Entity> Execute(SystemUser entity);
 }

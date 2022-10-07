@@ -54,14 +54,6 @@ using Comrade.Core.SystemPermissionCore.Commands;
 using Comrade.Core.SystemPermissionCore.Handlers;
 using Comrade.Core.SystemPermissionCore.UseCases;
 using Comrade.Core.SystemPermissionCore.Validations;
-using Comrade.Core.SystemUserSystemPermissionCore.Commands;
-using Comrade.Core.SystemUserSystemPermissionCore.Handlers;
-using Comrade.Core.SystemUserSystemPermissionCore.UseCases;
-using Comrade.Core.SystemUserSystemPermissionCore.Validations;
-using Comrade.Core.SystemUserSystemRoleCore.Commands;
-using Comrade.Core.SystemUserSystemRoleCore.Handlers;
-using Comrade.Core.SystemUserSystemRoleCore.UseCases;
-using Comrade.Core.SystemUserSystemRoleCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 
@@ -210,11 +202,21 @@ public static class UseCasesExtensions
         services
             .AddScoped<IRequestHandler<SystemUserEditDto, SingleResultDto<EntityDto>>,
                 SystemUserEditHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>,
+                SystemUserManagePermissionsHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>,
+                SystemUserManageRolesHandler>();
+
+
 
         // Core - UseCases
         services.AddScoped<IUcSystemUserEdit, UcSystemUserEdit>();
         services.AddScoped<IUcSystemUserCreate, UcSystemUserCreate>();
         services.AddScoped<IUcSystemUserDelete, UcSystemUserDelete>();
+        services.AddScoped<IUcSystemUserManagePermissions, UcSystemUserManagePermissions>();
+        services.AddScoped<IUcSystemUserManageRoles, UcSystemUserManageRoles>();
 
         // Core - CoreHandlers
         services
@@ -226,6 +228,12 @@ public static class UseCasesExtensions
         services
             .AddScoped<IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>,
                 SystemUserEditCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserManagePermissionsCommand, ISingleResult<Entity>>,
+                SystemUserManagePermissionsCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemUserManageRolesCommand, ISingleResult<Entity>>,
+                SystemUserManageRolesCoreHandler>();
 
 
         // Core - Validations
@@ -235,37 +243,9 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemUserEditValidation, SystemUserEditValidation>();
         services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
         services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
+        services.AddScoped<ISystemUserManagePermissionsValidation, SystemUserManagePermissionsValidation>();
+        services.AddScoped<ISystemUserManageRolesValidation, SystemUserManageRolesValidation>();
 
-        #endregion
-
-        #region SystemUserSystemPermission
-        
-        // Application - Handlers
-        services.AddScoped<IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>, SystemUserManagePermissionsHandler>();
-
-        // Core - UseCases
-        services.AddScoped<IUcSystemUserSystemPermissionManage, UcSystemUserSystemPermissionManage>();
-
-        // Core - CoreHandlers
-        services.AddScoped<IRequestHandler<SystemUserSystemPermissionManageCommand, ISingleResult<Entity>>, SystemUserSystemPermissionManageCoreHandler>();
-
-        // Core - Validations
-        services.AddScoped<ISystemUserSystemPermissionManageValidation, SystemUserSystemPermissionManageValidation>();
-        #endregion
-
-        #region SystemUserSystemRole
-        
-        // Application - Handlers
-        services.AddScoped<IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>, SystemUserManageRolesHandler>();
-
-        // Core - UseCases
-        services.AddScoped<IUcSystemUserSystemRoleManage, UcSystemUserSystemRoleManage>();
-
-        // Core - CoreHandlers
-        services.AddScoped<IRequestHandler<SystemUserSystemRoleManageCommand, ISingleResult<Entity>>, SystemUserSystemRoleManageCoreHandler>();
-
-        // Core - Validations
-        services.AddScoped<ISystemUserSystemRoleManageValidation, SystemUserSystemRoleManageValidation>();
         #endregion
 
         #region SystemMenu

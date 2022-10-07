@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
-using Comrade.Core.SystemUserSystemPermissionCore.Commands;
-using Comrade.Core.SystemUserSystemPermissionCore.UseCases;
+using Comrade.Core.SystemUserCore;
+using Comrade.Core.SystemUserCore.Commands;
 using MediatR;
 
 namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
 public class SystemUserManagePermissionsHandler : IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemUserSystemPermissionManage _manageSystemUserSystemPermission;
+    private readonly IUcSystemUserManagePermissions _ucSystemUserManagePermissions;
     private readonly IMapper _mapper;
 
-    public SystemUserManagePermissionsHandler(IMapper mapper, IUcSystemUserSystemPermissionManage manageSystemUserSystemPermission)
+    public SystemUserManagePermissionsHandler(IMapper mapper, IUcSystemUserManagePermissions ucSystemUserManagePermissions)
     {
         _mapper = mapper;
-        _manageSystemUserSystemPermission = manageSystemUserSystemPermission;
+        _ucSystemUserManagePermissions = ucSystemUserManagePermissions;
     }
 
     public async Task<SingleResultDto<EntityDto>> Handle(SystemUserManagePermissionsDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemUserSystemPermissionManageCommand>(request);
-        var result = await _manageSystemUserSystemPermission.Execute(mappedObject).ConfigureAwait(false);
+        var mappedObject = _mapper.Map<SystemUserManagePermissionsCommand>(request);
+        var result = await _ucSystemUserManagePermissions.Execute(mappedObject).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);
     }
 }

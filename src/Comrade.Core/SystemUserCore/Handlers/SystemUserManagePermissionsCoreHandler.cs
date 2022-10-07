@@ -3,34 +3,33 @@ using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemPermissionCore;
-using Comrade.Core.SystemUserCore;
-using Comrade.Core.SystemUserSystemPermissionCore.Commands;
-using Comrade.Core.SystemUserSystemPermissionCore.Validations;
+using Comrade.Core.SystemUserCore.Commands;
+using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 
-namespace Comrade.Core.SystemUserSystemPermissionCore.Handlers;
+namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    SystemUserSystemPermissionManageCoreHandler : IRequestHandler<SystemUserSystemPermissionManageCommand, ISingleResult<Entity>>
+    SystemUserManagePermissionsCoreHandler : IRequestHandler<SystemUserManagePermissionsCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemUserSystemPermissionManageValidation _validation;
+    private readonly ISystemUserManagePermissionsValidation _validation;
     private readonly ISystemUserRepository _systemUserRepository;
     private readonly ISystemPermissionRepository _systemPermissionRepository;
-    public SystemUserSystemPermissionManageCoreHandler(ISystemUserRepository systemUserRepository,
-        ISystemPermissionRepository systemPermissionRepository, ISystemUserSystemPermissionManageValidation validation)
+    public SystemUserManagePermissionsCoreHandler(ISystemUserRepository systemUserRepository,
+        ISystemPermissionRepository systemPermissionRepository, ISystemUserManagePermissionsValidation validation)
     {
         _systemUserRepository = systemUserRepository;
         _systemPermissionRepository = systemPermissionRepository;
         _validation = validation;
     }
 
-    public async Task<ISingleResult<Entity>> Handle(SystemUserSystemPermissionManageCommand request,
+    public async Task<ISingleResult<Entity>> Handle(SystemUserManagePermissionsCommand request,
         CancellationToken cancellationToken)
     {
         var user = await _systemUserRepository.GetByIdIncludePermissions(request.Id).ConfigureAwait(false);
         var permissions = _systemPermissionRepository.GetAll()
-            .Where(permission => request.Permissions.Contains(permission.Id)).ToList();
+            .Where(permission => request.SystemPermissionIds.Contains(permission.Id)).ToList();
 
         if (user == null)
             return new DeleteResult<Entity>(false,
