@@ -17,7 +17,7 @@ namespace Comrade.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -147,7 +147,7 @@ namespace Comrade.Persistence.Migrations
                         {
                             Id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a9"),
                             Description = "SubMenu 3.1 - Description",
-                            FatherId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8"),
+                            MenuId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8"),
                             Route = "/menu-3-1",
                             Text = "SubMenu 3.1"
                         },
@@ -155,7 +155,7 @@ namespace Comrade.Persistence.Migrations
                         {
                             Id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638b1"),
                             Description = "SubMenu 3.2 - Description",
-                            FatherId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8"),
+                            MenuId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8"),
                             Route = "/menu-3-2",
                             Text = "SubMenu 3.2"
                         });
@@ -277,43 +277,43 @@ namespace Comrade.Persistence.Migrations
                         {
                             SystemRoleId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),
-                            Id = new Guid("ddf3f0e3-8209-49fd-b641-a8781af1a523")
+                            Id = new Guid("7bca96d5-374c-4baf-9004-15d78c0dcaba")
                         },
                         new
                         {
                             SystemRoleId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"),
-                            Id = new Guid("fa07f979-63a3-45dc-b9f3-11b53b398e9d")
+                            Id = new Guid("d91a3f44-94b0-4e79-a658-49183b065f22")
                         },
                         new
                         {
                             SystemRoleId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"),
-                            Id = new Guid("7f3f6bae-3baf-4539-bfa8-195c5a058295")
+                            Id = new Guid("29611eda-a1e5-44b9-acad-626c541a974f")
                         },
                         new
                         {
                             SystemRoleId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a4"),
-                            Id = new Guid("d7d32693-6442-4dcb-bd1b-86967ba405e3")
+                            Id = new Guid("e92e13d3-d621-42e0-8009-f4775f016ca1")
                         },
                         new
                         {
                             SystemRoleId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),
-                            Id = new Guid("adfeda37-00a2-4ea6-a8ea-16dd2d84cd43")
+                            Id = new Guid("fc699c66-4d75-48e1-be68-486adb647b29")
                         },
                         new
                         {
                             SystemRoleId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"),
-                            Id = new Guid("30e25264-fd3b-4d84-8585-3a8dc061e2f5")
+                            Id = new Guid("eefde252-afea-4a34-8e8f-114ac2338ee4")
                         },
                         new
                         {
                             SystemRoleId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"),
-                            Id = new Guid("00606a20-ef7a-42fc-9f2a-5d049fbf4df6")
+                            Id = new Guid("d0190452-0eb9-435d-bc00-a5b93fdc4a99")
                         });
                 });
 
@@ -430,7 +430,7 @@ namespace Comrade.Persistence.Migrations
                         {
                             SystemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"),
                             SystemPermissionId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),
-                            Id = new Guid("36419689-974a-45e3-8dc4-a22f6b9ad06b")
+                            Id = new Guid("2696e920-2f78-4246-9d4a-bd27fcf28f83")
                         });
                 });
 
@@ -460,13 +460,13 @@ namespace Comrade.Persistence.Migrations
                         {
                             SystemUserId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"),
                             SystemRoleId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                            Id = new Guid("b0f419f6-bdb1-4c93-bf8c-948c0b759227")
+                            Id = new Guid("445ffed0-7447-4a98-aeb1-6fd0e172dd3c")
                         },
                         new
                         {
                             SystemUserId = new Guid("4d4c2560-f7f2-4bcf-83aa-f832b17ed47f"),
                             SystemRoleId = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"),
-                            Id = new Guid("a46983fc-3a5e-4544-b40a-bb7c7f6032cb")
+                            Id = new Guid("45561571-ec69-4923-9677-2bd2b63847d2")
                         });
                 });
 

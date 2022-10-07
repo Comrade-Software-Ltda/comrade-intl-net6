@@ -29,7 +29,7 @@ namespace Comrade.Persistence.Migrations
                 columns: table => new
                 {
                     syme_uuid_system_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    syme_uuid_father = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    syme_uuid_menu = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     syme_tx_text = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     syme_tx_description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
                     syme_tx_route = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
@@ -38,8 +38,8 @@ namespace Comrade.Persistence.Migrations
                 {
                     table.PrimaryKey("pk_syme_system_menu", x => x.syme_uuid_system_menu);
                     table.ForeignKey(
-                        name: "FK_syme_system_menu_syme_system_menu_syme_uuid_father",
-                        column: x => x.syme_uuid_father,
+                        name: "FK_syme_system_menu_syme_system_menu_syme_uuid_menu",
+                        column: x => x.syme_uuid_menu,
                         principalTable: "syme_system_menu",
                         principalColumn: "syme_uuid_system_menu",
                         onDelete: ReferentialAction.Restrict);
@@ -174,7 +174,7 @@ namespace Comrade.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "syme_system_menu",
-                columns: new[] { "syme_uuid_system_menu", "syme_tx_description", "syme_uuid_father", "syme_tx_route", "syme_tx_text" },
+                columns: new[] { "syme_uuid_system_menu", "syme_tx_description", "syme_uuid_menu", "syme_tx_route", "syme_tx_text" },
                 values: new object[,]
                 {
                     { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a6"), "Menu 1 - Description", null, "/menu-1", "Menu 1" },
@@ -215,7 +215,7 @@ namespace Comrade.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "syme_system_menu",
-                columns: new[] { "syme_uuid_system_menu", "syme_tx_description", "syme_uuid_father", "syme_tx_route", "syme_tx_text" },
+                columns: new[] { "syme_uuid_system_menu", "syme_tx_description", "syme_uuid_menu", "syme_tx_route", "syme_tx_text" },
                 values: new object[,]
                 {
                     { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a9"), "SubMenu 3.1 - Description", new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a8"), "/menu-3-1", "SubMenu 3.1" },
@@ -227,27 +227,27 @@ namespace Comrade.Persistence.Migrations
                 columns: new[] { "fk_uuid_system_permission", "fk_uuid_system_role", "pk_uuid_syro_system_role_sype_system_permission" },
                 values: new object[,]
                 {
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("ddf3f0e3-8209-49fd-b641-a8781af1a523") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("fa07f979-63a3-45dc-b9f3-11b53b398e9d") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("7f3f6bae-3baf-4539-bfa8-195c5a058295") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a4"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("d7d32693-6442-4dcb-bd1b-86967ba405e3") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("adfeda37-00a2-4ea6-a8ea-16dd2d84cd43") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("30e25264-fd3b-4d84-8585-3a8dc061e2f5") },
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("00606a20-ef7a-42fc-9f2a-5d049fbf4df6") }
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("7bca96d5-374c-4baf-9004-15d78c0dcaba") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("d91a3f44-94b0-4e79-a658-49183b065f22") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("29611eda-a1e5-44b9-acad-626c541a974f") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a4"), new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("e92e13d3-d621-42e0-8009-f4775f016ca1") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("fc699c66-4d75-48e1-be68-486adb647b29") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a2"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("eefde252-afea-4a34-8e8f-114ac2338ee4") },
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a3"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("d0190452-0eb9-435d-bc00-a5b93fdc4a99") }
                 });
 
             migrationBuilder.InsertData(
                 table: "syus_system_user_sype_system_permission",
                 columns: new[] { "fk_uuid_system_permission", "fk_uuid_system_user", "pk_uuid_syus_system_user_sype_system_permission" },
-                values: new object[] { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), new Guid("36419689-974a-45e3-8dc4-a22f6b9ad06b") });
+                values: new object[] { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), new Guid("2696e920-2f78-4246-9d4a-bd27fcf28f83") });
 
             migrationBuilder.InsertData(
                 table: "syus_system_user_syro_system_role",
                 columns: new[] { "fk_uuid_system_role", "fk_uuid_system_user", "pk_uuid_syus_system_user_syro_system_role" },
                 values: new object[,]
                 {
-                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("4d4c2560-f7f2-4bcf-83aa-f832b17ed47f"), new Guid("a46983fc-3a5e-4544-b40a-bb7c7f6032cb") },
-                    { new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), new Guid("b0f419f6-bdb1-4c93-bf8c-948c0b759227") }
+                    { new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a7"), new Guid("4d4c2560-f7f2-4bcf-83aa-f832b17ed47f"), new Guid("45561571-ec69-4923-9677-2bd2b63847d2") },
+                    { new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"), new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a5"), new Guid("445ffed0-7447-4a98-aeb1-6fd0e172dd3c") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -257,9 +257,9 @@ namespace Comrade.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_syme_system_menu_syme_uuid_father",
+                name: "IX_syme_system_menu_syme_uuid_menu",
                 table: "syme_system_menu",
-                column: "syme_uuid_father");
+                column: "syme_uuid_menu");
 
             migrationBuilder.CreateIndex(
                 name: "IX_syro_system_role_sype_system_permission_fk_uuid_system_permission",
