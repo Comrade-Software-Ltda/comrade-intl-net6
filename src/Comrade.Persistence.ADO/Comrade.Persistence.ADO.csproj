@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Comrade.Persistence\Comrade.Persistence.csproj" />
+    <ProjectReference Include="..\Comrade.Persistence\Comrade.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

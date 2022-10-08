@@ -2,13 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
-using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
-using Comrade.Application.Paginations;
 using Comrade.Persistence.ADO;
-using Comrade.Persistence.DataAccess;
-using IdentityModel.OidcClient;
-using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.TenantSelectorApi;
 

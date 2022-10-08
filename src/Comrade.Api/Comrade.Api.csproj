@@ -63,8 +63,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Comrade.Persistence.ADO\Comrade.Persistence.ADO.csproj" />
 	  <ProjectReference Include="..\comrade.Application\Comrade.Application.csproj" />
+	  <ProjectReference Include="..\Comrade.Persistence.ADO\Comrade.Persistence.ADO.csproj" />
 	  <ProjectReference Include="..\Comrade.Persistence\Comrade.Persistence.csproj" />
 	</ItemGroup>
 

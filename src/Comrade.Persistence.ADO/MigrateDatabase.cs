@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Comrade.Persistence.DataAccess;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Context;
-using Comrade.Persistence.DataAccess;
-using Microsoft.Extensions.Configuration;
 using ILogger = Serilog.ILogger;
 
 namespace Comrade.Persistence.ADO;
