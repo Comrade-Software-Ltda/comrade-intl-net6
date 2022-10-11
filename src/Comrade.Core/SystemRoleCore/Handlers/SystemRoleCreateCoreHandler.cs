@@ -39,8 +39,6 @@ public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateComma
 
     private static void HydrateValues(SystemRoleCreateCommand target)
     {
-#pragma warning disable CA1304 // Specify CultureInfo
-        target.Name = target.Name.ToUpper().Trim();
-#pragma warning restore CA1304 // Specify CultureInfo
+        target.Name = target.Name.ToUpper(CultureInfo.CurrentCulture).Trim();
     }
 }

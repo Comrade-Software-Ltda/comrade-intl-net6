@@ -47,9 +47,7 @@ public class SystemPermissionEditCoreHandler : IRequestHandler<SystemPermissionE
 
     private static void HydrateValues(SystemPermission target, SystemPermission source)
     {
-#pragma warning disable CA1304 // Specify CultureInfo
-        target.Name = source.Name.ToUpper().Trim();
-        target.Tag  = source.Tag.ToUpper().Trim();
-#pragma warning restore CA1304 // Specify CultureInfo
+        target.Name = source.Name.ToUpper(CultureInfo.CurrentCulture).Trim();
+        target.Tag  = source.Tag.ToUpper(CultureInfo.CurrentCulture).Trim();
     }
 }

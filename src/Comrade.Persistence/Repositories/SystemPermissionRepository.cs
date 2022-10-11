@@ -20,12 +20,10 @@ public class SystemPermissionRepository : Repository<SystemPermission>, ISystemP
 
     public async Task<ISingleResult<SystemPermission>> TagUniqueValidation(string tag)
     {
-#pragma warning disable CA1304 // Specify CultureInfo
         var exists = await _context.SystemPermissions
             .Where(p => tag.ToUpper().Trim()
                 .Equals(p.Tag.ToUpper().Trim(), StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
-#pragma warning restore CA1304 // Specify CultureInfo
         return exists
             ? new SingleResult<SystemPermission>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemPermission>();

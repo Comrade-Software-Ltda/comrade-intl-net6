@@ -17,8 +17,9 @@ public class SystemPermissionTagUniqueValidation : ISystemPermissionTagUniqueVal
     public async Task<ISingleResult<Entity>> Execute(SystemPermission entity)
     {
         var result = await _repository.TagUniqueValidation(entity.Tag).ConfigureAwait(false);
-#pragma warning disable CS8604 // Possible null reference argument.
-        return result.Success ? new SingleResult<Entity>(entity) : new SingleResult<Entity>(result.Code, result.Message);
-#pragma warning restore CS8604 // Possible null reference argument.
+
+        return result.Success
+            ? new SingleResult<Entity>(entity)
+            : new SingleResult<Entity>(result.Code, result.Message);
     }
 }

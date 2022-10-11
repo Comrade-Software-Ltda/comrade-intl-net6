@@ -17,8 +17,8 @@ public class SystemRoleNameUniqueValidation : ISystemRoleNameUniqueValidation
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity)
     {
         var result = await _repository.NameUniqueValidation(entity.Name).ConfigureAwait(false);
-#pragma warning disable CS8604 // Possible null reference argument.
-        return result.Success ? new SingleResult<Entity>(entity) : new SingleResult<Entity>(result.Code, result.Message);
-#pragma warning restore CS8604 // Possible null reference argument.
+        return result.Success
+            ? new SingleResult<Entity>(entity)
+            : new SingleResult<Entity>(result.Code, result.Message);
     }
 }

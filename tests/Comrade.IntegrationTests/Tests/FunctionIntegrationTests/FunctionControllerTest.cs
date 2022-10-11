@@ -36,7 +36,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
         const long n = 10;
         _redisCacheFunctionService.RemoveAllCacheBelowOrEqualFunction(EnumFunction.Alticci, n);
         var result = functionController.Alticci(n);
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
+
         if (result is ObjectResult okResult)
         {
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
@@ -70,7 +70,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
              * DO_CACHE =  {(1,1),(2,1),(4,2),(0,0),(3,1),(5,2),(7,4),(6,3),(8,5),(10,9)}
              * USE_CACHE = {(2,1),(1,1),(5,2),(3,1),(4,2)}
              */
-            var doCache = actualResultValue.DoCache;
+            var doCache = actualResultValue?.DoCache;
             Assert.NotNull(doCache);
             Assert.Equal(10, doCache.Count);
             Assert.True(doCache[0].N == 1  && doCache[0].Fn == 1);
@@ -84,7 +84,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             Assert.True(doCache[8].N == 8  && doCache[8].Fn == 5);
             Assert.True(doCache[9].N == 10 && doCache[9].Fn == 9);
 
-            var useCache = actualResultValue.UseCache;
+            var useCache = actualResultValue?.UseCache;
             Assert.NotNull(useCache);
             Assert.Equal(5, useCache.Count);
             Assert.True(useCache[0].N == 2 && useCache[0].Fn == 1);
@@ -94,7 +94,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             Assert.True(useCache[4].N == 4 && useCache[4].Fn == 2);
         }
         result = functionController.Alticci(n - 1);
-        // ReSharper disable once InvertIf
+
         if (result is ObjectResult okResult2)
         {
             Assert.Equal(StatusCodes.Status200OK, okResult2.StatusCode);
@@ -121,6 +121,5 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             Assert.True(useCache[0].N == 6 && useCache[0].Fn == 3);
             Assert.True(useCache[1].N == 7 && useCache[1].Fn == 4);
         }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
     }
 }
