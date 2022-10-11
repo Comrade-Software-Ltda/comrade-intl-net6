@@ -1,37 +1,60 @@
 [
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a6",
-    "menuId": null,
-    "text": "Menu 1",
-    "description": "Menu 1 - Description",
-    "route": "/menu-1"
+    "title": "Home",
+    "icon": "home",
+    "description": "Home - Description",
+    "route": "/home"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
-    "menuId": null,
-    "text": "Menu 2",
-    "description": "Menu 2 - Description",
-    "route": "/menu-2"
+    "title": "Examples",
+    "icon": "folder",
+    "description": "Examples - Description"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
-    "menuId": null,
-    "text": "Menu 3",
-    "description": "Menu 3 - Description",
-    "route": "/menu-3"
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "title": "Profile",
+    "icon": "card",
+    "description": "Profile - Description",
+    "route": "/profile"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a9",
-    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
-    "text": "SubMenu 3.1",
-    "description": "SubMenu 3.1 - Description",
-    "route": "/menu-3-1"
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "title": "Task",
+    "description": "Task - Description",
+    "route": "/task"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638b0",
+    "title": "Configuration",
+    "icon": "preferences",
+    "description": "Configuration - Description"
   },
   {
     "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638b1",
-    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a8",
-    "text": "SubMenu 3.2",
-    "description": "SubMenu 3.2 - Description",
-    "route": "/menu-3-2"
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638b0",
+    "title": "Airplane",
+    "icon": "airplane",
+    "description": "Airplane - Description",
+    "route": "/airplane"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638b2",
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638b0",
+    "title": "System User",
+    "icon": "user",
+    "description": "System User - Description",
+    "route": "/system-user"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638b3",
+    "menuId": "6adf10d0-1b83-46f2-91eb-0c64f1c638b0",
+    "title": "System Menu",
+    "icon": "hierarchy",
+    "description": "System Menu - Description",
+    "route": "/system-menu"
   }
 ]

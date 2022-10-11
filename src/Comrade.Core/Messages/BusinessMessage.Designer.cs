@@ -151,7 +151,7 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Já existe um menu cadastrado com esse nome..
+        ///   Looks up a localized string similar to Já existe um menu cadastrado com essa rota..
         /// </summary>
         public static string MSG20 {
             get {

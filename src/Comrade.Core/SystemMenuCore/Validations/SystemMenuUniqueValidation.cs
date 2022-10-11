@@ -17,14 +17,9 @@ public class SystemMenuUniqueValidation : ISystemMenuUniqueValidation
     public async Task<ISingleResult<Entity>> Execute(SystemMenu entity)
     {
         var registerSameCode =
-            await _repository.CodeUniqueValidation(entity.MenuId, entity.Text!)
+            await _repository.UniqueValidation(entity)
                 .ConfigureAwait(false);
 
-        if (registerSameCode.Success)
-        {
-            return new SingleResult<Entity>(entity);
-        }
-
-        return registerSameCode;
+        return !registerSameCode.Success ? registerSameCode : new SingleResult<Entity>(entity);
     }
 }

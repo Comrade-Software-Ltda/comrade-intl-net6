@@ -19,7 +19,7 @@ public sealed class SystemMenuControllerCreateTests : IClassFixture<ServiceProvi
     {
         var testObject = new SystemMenuCreateDto
         {
-            Text = "Teste",
+            Title = "Teste",
             Description = "Descrição do menu",
             Route = "",
         };

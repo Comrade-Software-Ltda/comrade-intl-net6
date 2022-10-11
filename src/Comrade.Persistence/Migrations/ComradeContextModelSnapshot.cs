@@ -73,6 +73,11 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_description");
 
+                    b.Property<string>("Icon")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("syme_tx_icon");
+
                     b.Property<Guid?>("MenuId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("syme_uuid_menu");
@@ -82,7 +87,7 @@ namespace Comrade.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("syme_tx_route");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)")
