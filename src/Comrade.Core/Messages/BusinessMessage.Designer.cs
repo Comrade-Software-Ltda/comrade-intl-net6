@@ -160,7 +160,7 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registro já exists com a mesma tag, por favor informe outra tag..
+        ///   Looks up a localized string similar to Registro já existe com a mesma tag, por favor informe outra tag..
         /// </summary>
         public static string MSG11 {
             get {

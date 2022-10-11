@@ -21,13 +21,15 @@ public sealed class SystemMenuControllerCreateDuplicatedMenuErrorTests : IClassF
     {
         var menu1 = new SystemMenu
         {
-            Text = "Menu",
+            Title = "Menu",
+            Icon = "home",
             Description = "Descrição do menu",
             Route = ""
         };
         var menu2 = new SystemMenuCreateDto
         {
-            Text = "Menu",
+            Title = "Menu",
+            Icon = "home",
             Description = "Descrição do menu",
             Route = ""
         };

@@ -151,7 +151,7 @@
     <value>Registro já exists com a mesma tag, por favor informe outra tag.</value>
   </data>
   <data name="MSG20" xml:space="preserve">
-    <value>Já existe um menu cadastrado com esse nome.</value>
+    <value>Já existe um menu cadastrado com essa rota.</value>
   </data>
   <data name="LKUP2001" xml:space="preserve">
     <value>Não atingiu o número minimo de caracteres.</value>
