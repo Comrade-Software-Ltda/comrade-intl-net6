@@ -6,7 +6,6 @@ using Comrade.Persistence.ADO;
 
 namespace Comrade.Api.Controllers.V1.TenantSelectorApi;
 
-// [Authorize]
 [FeatureGate(CustomFeature.TenantSelector)]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
