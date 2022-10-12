@@ -39,7 +39,7 @@ public class MigrateDatabase
     private static async Task MigrateTenantDatabase(MigratorTenantInfo tenant)
     {
         using var logContext = LogContext.PushProperty("TenantName", $"({tenant.Name}) ");
-        DbContextOptions dbContextOptions = CreateDefaultDbContextOptions(tenant.ConnectionString);
+        var dbContextOptions = CreateDefaultDbContextOptions(tenant.ConnectionString);
         try
         {
             using var context = new ComradeContext(dbContextOptions);

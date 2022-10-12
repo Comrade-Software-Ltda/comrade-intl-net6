@@ -5,7 +5,7 @@ namespace Comrade.Persistence.DataAccess;
 
 public class ComradeContext : DbContext
 {
-    public ComradeContext(DbContextOptions<ComradeContext> options)
+    public ComradeContext(DbContextOptions options)
         : base(options)
     {
     }
