@@ -1,0 +1,22 @@
+﻿[
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a1",
+    "name": "CREATE",
+    "tag": "CREATE"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a2",
+    "name": "READ",
+    "tag": "READ"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a3",
+    "name": "UPDATE",
+    "tag": "UPDATE"
+  },
+  {
+    "id": "6adf10d0-1b83-46f2-91eb-0c64f1c638a4",
+    "name": "DELETE",
+    "tag": "DELETE"
+  }
+]

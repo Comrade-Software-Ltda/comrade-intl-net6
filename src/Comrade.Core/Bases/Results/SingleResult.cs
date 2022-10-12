@@ -22,11 +22,11 @@ public class SingleResult<TEntity> : ISingleResult<TEntity>
     }
 
 
-    public SingleResult(int code, string message)
+    public SingleResult(int code, string? message)
     {
         Code = code;
         Success = false;
-        Message = message;
+        Message = message ?? string.Empty;
     }
 
     public SingleResult(TEntity? data)

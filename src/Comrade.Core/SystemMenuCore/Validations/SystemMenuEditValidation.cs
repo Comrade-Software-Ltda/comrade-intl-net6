@@ -20,11 +20,6 @@ public class SystemMenuEditValidation : ISystemMenuEditValidation
         var registerSameCode =
             await _systemMenuValidateSameCode.Execute(entity).ConfigureAwait(false);
 
-        if (registerSameCode.Success)
-        {
-            return new SingleResult<Entity>(entity);
-        }
-
-        return registerSameCode;
+        return registerSameCode.Success ? new SingleResult<Entity>(entity) : registerSameCode;
     }
 }

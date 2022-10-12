@@ -6,6 +6,6 @@ namespace Comrade.Core.SystemMenuCore;
 
 public interface ISystemMenuRepository : IRepository<SystemMenu>
 {
-    Task<ISingleResult<Entity>> CodeUniqueValidation(Guid? menuId, string text);
+    Task<ISingleResult<Entity>> UniqueValidation(SystemMenu entity);
     IQueryable<SystemMenu> GetAllMenus();
 }

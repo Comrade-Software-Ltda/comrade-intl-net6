@@ -17,6 +17,12 @@ public static class GetContextWithData
             RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia()
         });
 
+        context.SystemRoles.Add(new SystemRole
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test"
+        });
+
         context.SaveChanges();
 
         return context;

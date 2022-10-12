@@ -8,7 +8,7 @@ public class SystemMenuCreateValidation : AbstractValidator<SystemMenuCreateDto>
 {
     public SystemMenuCreateValidation()
     {
-        RuleFor(v => v.Text)
+        RuleFor(v => v.Title)
             .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
             .MaximumLength(30).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Text");
