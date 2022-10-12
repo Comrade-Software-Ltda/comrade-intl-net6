@@ -43,4 +43,9 @@ public class SystemUser : Entity
 
     [Column("syus_dt_register", TypeName = "varchar")]
     public DateTime? RegisterDate { get; set; }
+
+    public virtual ICollection<SystemRole> SystemRoles { get; set; }
+    public virtual ICollection<SystemUserSystemRole> SystemUserRoles { get; set; }
+    public virtual ICollection<SystemPermission> SystemPermissions { get; set; }
+    public virtual ICollection<SystemUserSystemPermission> SystemUserPermissions { get; set; }
 }

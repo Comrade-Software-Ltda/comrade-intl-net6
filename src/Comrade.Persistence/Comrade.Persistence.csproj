@@ -14,7 +14,12 @@
 	<ItemGroup>
 		<None Remove="SeedData\Sheets\basicSheet.xlsx" />
 		<None Remove="SeedData\airplane.json" />
+		<None Remove="SeedData\system-permission.json" />
+		<None Remove="SeedData\system-role-permission.json" />
+		<None Remove="SeedData\system-user-permission.json" />
+		<None Remove="SeedData\system-user-role.json" />
 		<None Remove="SeedData\system-user.json" />
+		<None Remove="SeedData\system-role.json" />
 		<None Remove="SeedData\system-menu.json" />
 	</ItemGroup>
 
@@ -28,7 +33,22 @@
 		<EmbeddedResource Include="SeedData\system-menu.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-role-permission.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-user-permission.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-user-role.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
 		<EmbeddedResource Include="SeedData\system-user.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-role.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="SeedData\system-permission.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</EmbeddedResource>
 	</ItemGroup>

@@ -7,4 +7,6 @@ namespace Comrade.Core.SystemUserCore;
 public interface ISystemUserRepository : IRepository<SystemUser>
 {
     IQueryable<Lookup>? FindByName(string name);
+    Task<SystemUser?> GetByIdIncludePermissions(Guid id);
+    Task<SystemUser?> GetByIdIncludeRoles(Guid id);
 }

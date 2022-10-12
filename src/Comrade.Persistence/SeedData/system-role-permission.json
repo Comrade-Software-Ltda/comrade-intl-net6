@@ -1,0 +1,30 @@
+﻿[
+  {
+    "systemRoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a1"
+  },
+  {
+    "systemRoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a2"
+  },
+  {
+    "systemRoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a3"
+  },
+  {
+    "systemRoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a4"
+  },
+  {
+    "systemRoleId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a1"
+  },
+  {
+    "systemRoleId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a2"
+  },
+  {
+    "systemRoleId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a7",
+    "systemPermissionId": "6adf10d0-1b83-46f2-91eb-0c64f1c638a3"
+  }
+]
