@@ -26,6 +26,11 @@ public enum CustomFeature
     SystemRoleSystemPermission,
 
     /// <summary>
+    ///     Get Alticci.
+    /// </summary>
+    Alticci,
+
+    /// <summary>
     ///     Get SystemUser.
     /// </summary>
     SystemUser,
@@ -33,7 +38,12 @@ public enum CustomFeature
     /// <summary>
     ///     Get SystemMenu.
     /// </summary>
-    SystemMenu,
+    SystemMenu,   
+    
+    /// <summary>
+    ///     Get TenantSelector.
+    /// </summary>
+    TenantSelector,
 
     /// <summary>
     ///     Get Common.

@@ -33,11 +33,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -45,16 +45,16 @@
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
 		<PackageReference Include="Microsoft.FeatureManagement" Version="2.5.1" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.5.1" />
 		<PackageReference Include="MongoDB.Bson" Version="2.17.1" />
 		<PackageReference Include="MongoDB.Driver" Version="2.17.1" />
-		<PackageReference Include="Serilog" Version="2.11.0" />
+		<PackageReference Include="Serilog" Version="2.12.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
-		<PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
-		<PackageReference Include="Serilog.Sinks.MongoDB" Version="5.1.5" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+		<PackageReference Include="Serilog.Sinks.MongoDB" Version="5.2.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -64,6 +64,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\comrade.Application\Comrade.Application.csproj" />
+	  <ProjectReference Include="..\Comrade.Persistence.ADO\Comrade.Persistence.ADO.csproj" />
 	  <ProjectReference Include="..\Comrade.Persistence\Comrade.Persistence.csproj" />
 	</ItemGroup>
 

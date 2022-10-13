@@ -10,6 +10,7 @@ using Comrade.Application.Notifications.Email;
 using Comrade.Application.PipelineBehaviors;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Extensions;
+using Comrade.Persistence.ADO;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
 using FluentValidation;
@@ -72,6 +73,10 @@ public sealed class Startup
 
         services.AddSingleton<IMailKitSettings>(sp =>
             sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
+
+        services.AddScoped<GetAllDatabases>();
+        services.AddScoped<MigrateDatabase>();
+        services.AddScoped<CreateDatabase>();
 
         services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
