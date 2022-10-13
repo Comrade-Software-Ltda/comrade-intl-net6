@@ -20,7 +20,8 @@ public class SystemRoleControllerGetAllPaginatedTests : IClassFixture<ServicePro
     [Fact]
     public async Task SystemRoleController_GetAll_Paginated()
     {
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await controller.GetAll(paginationQuery);
         if (result is ObjectResult okResult)

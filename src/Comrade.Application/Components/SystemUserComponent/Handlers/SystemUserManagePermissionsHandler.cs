@@ -7,12 +7,14 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
-public class SystemUserManagePermissionsHandler : IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>
+public class
+    SystemUserManagePermissionsHandler : IRequestHandler<SystemUserManagePermissionsDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemUserManagePermissions _ucSystemUserManagePermissions;
     private readonly IMapper _mapper;
+    private readonly IUcSystemUserManagePermissions _ucSystemUserManagePermissions;
 
-    public SystemUserManagePermissionsHandler(IMapper mapper, IUcSystemUserManagePermissions ucSystemUserManagePermissions)
+    public SystemUserManagePermissionsHandler(IMapper mapper,
+        IUcSystemUserManagePermissions ucSystemUserManagePermissions)
     {
         _mapper = mapper;
         _ucSystemUserManagePermissions = ucSystemUserManagePermissions;

@@ -20,7 +20,8 @@ public class SystemPermissionControllerGetAllPaginatedTests : IClassFixture<Serv
     [Fact]
     public async Task SystemPermissionController_GetAll_Paginated()
     {
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var paginationQuery = new PaginationQuery();
         var result = await controller.GetAll(paginationQuery);
         if (result is ObjectResult okResult)

@@ -33,7 +33,7 @@ public class SystemUserCommand : ISystemUserCommand
         var result = await _deleteSystemUser.Execute(id).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);
     }
-    
+
     public async Task<ISingleResultDto<EntityDto>> ManagePermissions(SystemUserManagePermissionsDto dto)
     {
         return await _mediator.Send(dto).ConfigureAwait(false);

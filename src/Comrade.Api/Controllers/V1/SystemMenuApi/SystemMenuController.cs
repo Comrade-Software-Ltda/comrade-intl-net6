@@ -18,9 +18,9 @@ namespace Comrade.Api.Controllers.V1.SystemMenuApi;
 [ApiController]
 public class SystemMenuController : ComradeController
 {
+    private readonly ILogger<SystemMenuController> _logger;
     private readonly ISystemMenuCommand _systemMenuCommand;
     private readonly ISystemMenuQuery _systemMenuQuery;
-    private readonly ILogger<SystemMenuController> _logger;
 
     public SystemMenuController(ISystemMenuCommand systemMenuCommand,
         ISystemMenuQuery systemMenuQuery, ILogger<SystemMenuController> logger)
@@ -29,7 +29,7 @@ public class SystemMenuController : ComradeController
         _systemMenuQuery = systemMenuQuery;
         _logger = logger;
     }
-    
+
     [HttpGet("get-all-menus")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAllMenus([FromQuery] PaginationQuery? paginationQuery)
@@ -61,7 +61,7 @@ public class SystemMenuController : ComradeController
                 new SingleResultDto<EntityDto>(e));
         }
     }
-    
+
     [HttpGet("get-by-id/{systemMenuId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
     public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemMenuId)

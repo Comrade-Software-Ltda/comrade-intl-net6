@@ -12,11 +12,12 @@ namespace Comrade.Core.SystemRoleCore.Handlers;
 
 public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, ISingleResult<Entity>>
 {
+    private readonly ISystemRoleEditValidation _editValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemRoleRepository _repository;
-    private readonly ISystemRoleEditValidation _editValidation;
 
-    public SystemRoleEditCoreHandler(ISystemRoleEditValidation editValidation, ISystemRoleRepository repository, IMongoDbCommandContext mongoDbContext)
+    public SystemRoleEditCoreHandler(ISystemRoleEditValidation editValidation, ISystemRoleRepository repository,
+        IMongoDbCommandContext mongoDbContext)
     {
         _editValidation = editValidation;
         _repository = repository;
@@ -30,11 +31,13 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
+
         var result = await _editValidation.Execute(request, recordExists).ConfigureAwait(false);
         if (!result.Success)
         {
             return result;
         }
+
         var obj = recordExists;
         HydrateValues(obj, request);
         _repository.Update(obj);

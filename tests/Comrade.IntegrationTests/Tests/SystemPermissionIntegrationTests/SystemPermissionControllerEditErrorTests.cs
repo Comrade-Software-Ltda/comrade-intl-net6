@@ -24,11 +24,12 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
         var id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1");
         var testObject = new SystemPermissionEditDto
         {
-            Id   = id,
+            Id = id,
             Name = null,
-            Tag  = "ACEN"
+            Tag = "ACEN"
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult okResult)
         {
@@ -36,6 +37,7 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+
         var repository = new SystemPermissionRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
         Assert.NotNull(user!.Name);
@@ -47,11 +49,12 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
         var id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1");
         var testObject = new SystemPermissionEditDto
         {
-            Id   = id,
+            Id = id,
             Name = "ACESSO NOVO",
-            Tag  = null
+            Tag = null
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult okResult)
         {
@@ -59,6 +62,7 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+
         var repository = new SystemPermissionRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
         Assert.NotNull(user!.Tag);
@@ -72,11 +76,12 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
         const string changeTag = "  ace  ";
         var testObject = new SystemPermissionEditDto
         {
-            Id   = id,
+            Id = id,
             Name = changeName,
-            Tag  = changeTag
+            Tag = changeTag
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult okResult)
         {
@@ -84,9 +89,10 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+
         var repository = new SystemPermissionRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
         Assert.NotEqual(changeName, user!.Name);
-        Assert.NotEqual(changeTag,  user!.Tag);
+        Assert.NotEqual(changeTag, user!.Tag);
     }
 }

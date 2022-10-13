@@ -21,13 +21,14 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
     public async Task SystemPermissionController_Create()
     {
         const string name = "ACESSO NOVO";
-        const string tag  = "ACEN";
+        const string tag = "ACEN";
         var testObject = new SystemPermissionCreateDto
         {
             Name = name,
-            Tag  = tag
+            Tag = tag
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {
@@ -42,9 +43,10 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
     {
         var testObject = new SystemPermissionCreateDto
         {
-            Tag  = "ACEN"
+            Tag = "ACEN"
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {
@@ -61,7 +63,8 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
         {
             Name = "ACESSO NOVO"
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {
@@ -77,9 +80,10 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
         var testObject = new SystemPermissionCreateDto
         {
             Name = "ACESSO",
-            Tag  = "  ace  "
+            Tag = "  ace  "
         };
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {

@@ -12,8 +12,10 @@ public interface ISystemUserQuery
     Task<ISingleResultDto<SystemUserDto>> GetByIdDefault(Guid id);
     Task<ISingleResultDto<SystemUserDto>> GetByIdMongo(Guid id);
     Task<ListResultDto<LookupDto>> FindByName(string name);
+
     Task<IPageResultDto<SystemUserWithPermissionsDto>> GetAllWithPermissions(
         PaginationQuery? paginationQuery = null);
+
     Task<IPageResultDto<SystemUserWithRolesDto>> GetAllWithRoles(
         PaginationQuery? paginationQuery = null);
 }

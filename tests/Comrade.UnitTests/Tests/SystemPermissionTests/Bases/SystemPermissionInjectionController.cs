@@ -7,11 +7,12 @@ namespace Comrade.UnitTests.Tests.SystemPermissionTests.Bases;
 
 public static class SystemPermissionInjectionController
 {
-    public static SystemPermissionController GetSystemPermissionController(ComradeContext context, MongoDbContext mongoDbContextFixture, IMediator mediator)
+    public static SystemPermissionController GetSystemPermissionController(ComradeContext context,
+        MongoDbContext mongoDbContextFixture, IMediator mediator)
     {
-        var mapper  = MapperHelper.ConfigMapper();
+        var mapper = MapperHelper.ConfigMapper();
         var command = SystemPermissionInjectionService.GetSystemPermissionCommand(context, mediator);
-        var query   = SystemPermissionInjectionService.GetSystemPermissionQuery(context, mongoDbContextFixture, mapper);
+        var query = SystemPermissionInjectionService.GetSystemPermissionQuery(context, mongoDbContextFixture, mapper);
         return new SystemPermissionController(command, query);
     }
 }

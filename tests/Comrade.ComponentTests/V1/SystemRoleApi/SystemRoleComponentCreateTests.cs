@@ -18,7 +18,8 @@ public class SystemRoleComponentCreateTests : IClassFixture<CustomWebApplication
         var token = await GenerateFakeToken.Execute(fixture.Mediator);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(new SystemRole() { Name = "ROLE", Tag = "TAG" }), Encoding.UTF8);
+        HttpContent httpContent =
+            new StringContent(JsonConvert.SerializeObject(new SystemRole {Name = "ROLE", Tag = "TAG"}), Encoding.UTF8);
         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
         var actualResponse = await client.PostAsync("/api/v1/system-role/create", httpContent).ConfigureAwait(false);
@@ -27,7 +28,7 @@ public class SystemRoleComponentCreateTests : IClassFixture<CustomWebApplication
         Assert.Equal(HttpStatusCode.Created, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
-        using JsonTextReader reader = new(stringReader) { DateParseHandling = DateParseHandling.None };
+        using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
 
         Assert.Equal(BusinessMessage.MSG01, jsonResponse["message"]);

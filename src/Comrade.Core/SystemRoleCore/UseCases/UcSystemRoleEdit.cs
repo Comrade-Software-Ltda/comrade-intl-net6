@@ -23,6 +23,7 @@ public class UcSystemRoleEdit : UseCase, IUcSystemRoleEdit
         {
             return isValid;
         }
+
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
 

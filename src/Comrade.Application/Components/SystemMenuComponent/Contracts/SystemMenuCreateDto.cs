@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Comrade.Application.Bases;
+﻿using Comrade.Application.Bases;
 using MediatR;
 
 namespace Comrade.Application.Components.SystemMenuComponent.Contracts;

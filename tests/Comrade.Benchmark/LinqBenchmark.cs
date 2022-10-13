@@ -6,26 +6,30 @@ public class LinqBenchmark
 {
     private const int capacity = 1000;
     private const int slice = 500;
-    private int[] numbers = new int[capacity];
+    private readonly int[] numbers = new int[capacity];
 
     [GlobalSetup]
     public void Setup()
     {
-        for (int i = 0; i < capacity; i++)
+        for (var i = 0; i < capacity; i++)
         {
             numbers[i] = i;
         }
     }
 
     [Benchmark]
-    public int LinqWhereAndFirst() =>
-        numbers.Where(x => x > slice).First();
+    public int LinqWhereAndFirst()
+    {
+        return numbers.Where(x => x > slice).First();
+    }
 
     [Benchmark]
-    public int LinqFirst() =>
-        numbers.First(x => x > slice);
+    public int LinqFirst()
+    {
+        return numbers.First(x => x > slice);
+    }
 
-    [Benchmark(Baseline=true)]
+    [Benchmark(Baseline = true)]
     public int NoLinq()
     {
         for (var i = 0; i < numbers.Length; i++)
@@ -38,6 +42,4 @@ public class LinqBenchmark
 
         throw new InvalidOperationException();
     }
-
-
 }

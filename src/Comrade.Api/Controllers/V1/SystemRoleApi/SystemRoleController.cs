@@ -4,8 +4,8 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemRoleComponent.Queries;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRoleComponent.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
@@ -18,12 +18,12 @@ namespace Comrade.Api.Controllers.V1.SystemRoleApi;
 public class SystemRoleController : ComradeController
 {
     private readonly ISystemRoleCommand _command;
-    private readonly ISystemRoleQuery   _query;
+    private readonly ISystemRoleQuery _query;
 
     public SystemRoleController(ISystemRoleCommand command, ISystemRoleQuery query)
     {
         _command = command;
-        _query   = query;
+        _query = query;
     }
 
 
@@ -38,14 +38,14 @@ public class SystemRoleController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
 
     [HttpGet("get-by-id/{systemRoleId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] Guid systemRoleId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemRoleId)
     {
         try
         {
@@ -54,13 +54,13 @@ public class SystemRoleController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] SystemRoleCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] SystemRoleCreateDto dto)
     {
         try
         {
@@ -69,13 +69,13 @@ public class SystemRoleController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] SystemRoleEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] SystemRoleEditDto dto)
     {
         try
         {
@@ -84,13 +84,13 @@ public class SystemRoleController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpDelete("delete/{systemRoleId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] Guid systemRoleId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemRoleId)
     {
         try
         {
@@ -99,7 +99,7 @@ public class SystemRoleController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 }

@@ -18,7 +18,8 @@ public class SystemRoleCreateHandler : IRequestHandler<SystemRoleCreateDto, Sing
         _createUc = createUc;
     }
 
-    public async Task<SingleResultDto<EntityDto>> Handle(SystemRoleCreateDto request, CancellationToken cancellationToken)
+    public async Task<SingleResultDto<EntityDto>> Handle(SystemRoleCreateDto request,
+        CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemRoleCreateCommand>(request);
         var result = await _createUc.Execute(mappedObject).ConfigureAwait(false);

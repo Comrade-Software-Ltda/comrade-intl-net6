@@ -15,7 +15,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
     {
         _redisCacheFunctionService = fixture.RedisCacheFunctionService;
     }
-    
+
     [Fact]
     public void FunctionController_Alticci_NegativeNumbers()
     {
@@ -73,15 +73,15 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             var doCache = actualResultValue?.DoCache;
             Assert.NotNull(doCache);
             Assert.Equal(10, doCache.Count);
-            Assert.True(doCache[0].N == 1  && doCache[0].Fn == 1);
-            Assert.True(doCache[1].N == 2  && doCache[1].Fn == 1);
-            Assert.True(doCache[2].N == 4  && doCache[2].Fn == 2);
-            Assert.True(doCache[3].N == 0  && doCache[3].Fn == 0);
-            Assert.True(doCache[4].N == 3  && doCache[4].Fn == 1);
-            Assert.True(doCache[5].N == 5  && doCache[5].Fn == 2);
-            Assert.True(doCache[6].N == 7  && doCache[6].Fn == 4);
-            Assert.True(doCache[7].N == 6  && doCache[7].Fn == 3);
-            Assert.True(doCache[8].N == 8  && doCache[8].Fn == 5);
+            Assert.True(doCache[0].N == 1 && doCache[0].Fn == 1);
+            Assert.True(doCache[1].N == 2 && doCache[1].Fn == 1);
+            Assert.True(doCache[2].N == 4 && doCache[2].Fn == 2);
+            Assert.True(doCache[3].N == 0 && doCache[3].Fn == 0);
+            Assert.True(doCache[4].N == 3 && doCache[4].Fn == 1);
+            Assert.True(doCache[5].N == 5 && doCache[5].Fn == 2);
+            Assert.True(doCache[6].N == 7 && doCache[6].Fn == 4);
+            Assert.True(doCache[7].N == 6 && doCache[7].Fn == 3);
+            Assert.True(doCache[8].N == 8 && doCache[8].Fn == 5);
             Assert.True(doCache[9].N == 10 && doCache[9].Fn == 9);
 
             var useCache = actualResultValue?.UseCache;
@@ -93,6 +93,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             Assert.True(useCache[3].N == 3 && useCache[3].Fn == 1);
             Assert.True(useCache[4].N == 4 && useCache[4].Fn == 2);
         }
+
         result = functionController.Alticci(n - 1);
 
         if (result is ObjectResult okResult2)
@@ -114,7 +115,7 @@ public class FunctionControllerTest : IClassFixture<ServiceProviderFixture>
             Assert.NotNull(doCache);
             Assert.Single(doCache);
             Assert.True(doCache[0].N == 9 && doCache[0].Fn == 7);
-            
+
             var useCache = actualResultValue.UseCache;
             Assert.NotNull(useCache);
             Assert.Equal(2, useCache.Count);

@@ -33,7 +33,7 @@ public class SystemRoleComponentEditTests : IClassFixture<CustomWebApplicationFa
         Assert.Equal(HttpStatusCode.NoContent, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
-        using JsonTextReader reader = new(stringReader) { DateParseHandling = DateParseHandling.None };
+        using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
 
         Assert.Equal(BusinessMessage.MSG02, jsonResponse["message"]);

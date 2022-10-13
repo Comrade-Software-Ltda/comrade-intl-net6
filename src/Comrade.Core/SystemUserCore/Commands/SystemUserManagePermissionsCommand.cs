@@ -10,6 +10,6 @@ public class SystemUserManagePermissionsCommand : Entity, IRequest<ISingleResult
     {
         SystemPermissionIds = systemPermissionIds;
     }
-    public ICollection<Guid> SystemPermissionIds { get; set; }
 
+    public ICollection<Guid> SystemPermissionIds { get; set; }
 }

@@ -20,9 +20,9 @@ public class SystemPermissionComponentEditTests : IClassFixture<CustomWebApplica
 
         var systemPermission = new SystemPermission
         {
-            Id   = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),
+            Id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),
             Name = "ACESSO NOVO",
-            Tag  = "ACEN"
+            Tag = "ACEN"
         };
         HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(systemPermission), Encoding.UTF8);
         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -33,7 +33,7 @@ public class SystemPermissionComponentEditTests : IClassFixture<CustomWebApplica
         Assert.Equal(HttpStatusCode.NoContent, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
-        using JsonTextReader reader = new(stringReader) { DateParseHandling = DateParseHandling.None };
+        using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
 
         Assert.Equal(BusinessMessage.MSG02, jsonResponse["message"]);

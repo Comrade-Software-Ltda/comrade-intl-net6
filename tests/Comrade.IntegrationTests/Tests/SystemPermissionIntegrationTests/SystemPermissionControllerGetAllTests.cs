@@ -19,7 +19,8 @@ public class SystemPermissionControllerGetAllTests : IClassFixture<ServiceProvid
     [Fact]
     public async Task SystemPermissionController_GetAll()
     {
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.GetAll(null);
         if (result is ObjectResult okResult)
         {

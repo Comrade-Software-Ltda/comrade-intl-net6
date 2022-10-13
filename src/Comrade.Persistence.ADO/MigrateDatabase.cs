@@ -11,6 +11,11 @@ namespace Comrade.Persistence.ADO;
 
 public class MigrateDatabase
 {
+    private static readonly ILogger Logger = Log.Logger = new LoggerConfiguration()
+        .Enrich.FromLogContext()
+        .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+
     private readonly GetAllDatabases _getAllDatabases;
 
     public MigrateDatabase(GetAllDatabases getAllDatabases)
@@ -20,9 +25,9 @@ public class MigrateDatabase
 
     public async Task Execute()
     {
-        List<MigratorTenantInfo> tenants = GetConfiguredTenants();
+        var tenants = GetConfiguredTenants();
 
-        IEnumerable<Task> tasks = tenants.Select(t => MigrateTenantDatabase(t));
+        var tasks = tenants.Select(t => MigrateTenantDatabase(t));
         try
         {
             Logger.Information("Starting parallel execution of pending migrations...");
@@ -52,23 +57,19 @@ public class MigrateDatabase
         }
     }
 
-    private static DbContextOptions CreateDefaultDbContextOptions(string connectionString) => 
-        new DbContextOptionsBuilder()
-            .LogTo(action: Logger.Information, filter: MigrationInfoLogFilter(), options: DbContextLoggerOptions.None)
+    private static DbContextOptions CreateDefaultDbContextOptions(string connectionString)
+    {
+        return new DbContextOptionsBuilder()
+            .LogTo(Logger.Information, MigrationInfoLogFilter(), DbContextLoggerOptions.None)
             .UseSqlServer(connectionString)
             .Options;
-
-
-    static readonly ILogger Logger = Log.Logger = new LoggerConfiguration()
-        .Enrich.FromLogContext()
-        .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
-        .CreateLogger();
+    }
 
     private List<MigratorTenantInfo> GetConfiguredTenants()
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appSettings.json", optional: false);
+            .AddJsonFile("appSettings.json", false);
 
         IConfiguration config = builder.Build();
 
@@ -76,9 +77,10 @@ public class MigrateDatabase
         var teste = _getAllDatabases.Execute();
 
         var oto = new List<MigratorTenantInfo>();
-        oto.Add(new MigratorTenantInfo()
+        oto.Add(new MigratorTenantInfo
         {
-            ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=" + "qweprimeiro" + ";Trusted_Connection=True;MultipleActiveResultSets=true",
+            ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=" + "qweprimeiro" +
+                               ";Trusted_Connection=True;MultipleActiveResultSets=true",
             Name = "qweprimeiro"
         });
 
@@ -86,20 +88,21 @@ public class MigrateDatabase
     }
 
 
-    private static Func<EventId, LogLevel, bool> MigrationInfoLogFilter() => (eventId, level) =>
-        level > LogLevel.Information ||
-        (level == LogLevel.Information &&
-         new[]
-         {
-             RelationalEventId.MigrationApplying,
-             RelationalEventId.MigrationAttributeMissingWarning,
-             RelationalEventId.MigrationGeneratingDownScript,
-             RelationalEventId.MigrationGeneratingUpScript,
-             RelationalEventId.MigrationReverting,
-             RelationalEventId.MigrationsNotApplied,
-             RelationalEventId.MigrationsNotFound,
-             RelationalEventId.MigrateUsingConnection
-         }.Contains(eventId));
-
+    private static Func<EventId, LogLevel, bool> MigrationInfoLogFilter()
+    {
+        return (eventId, level) =>
+            level > LogLevel.Information ||
+            (level == LogLevel.Information &&
+             new[]
+             {
+                 RelationalEventId.MigrationApplying,
+                 RelationalEventId.MigrationAttributeMissingWarning,
+                 RelationalEventId.MigrationGeneratingDownScript,
+                 RelationalEventId.MigrationGeneratingUpScript,
+                 RelationalEventId.MigrationReverting,
+                 RelationalEventId.MigrationsNotApplied,
+                 RelationalEventId.MigrationsNotFound,
+                 RelationalEventId.MigrateUsingConnection
+             }.Contains(eventId));
+    }
 }
-

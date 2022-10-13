@@ -27,7 +27,7 @@ public class SystemMenuValidation<TDto> : DtoValidation<TDto>
     protected void ValidateRoute()
     {
         RuleFor(v => v.Route)
-            .Must(s => Uri.TryCreate(s,UriKind.RelativeOrAbsolute,out _))
+            .Must(s => Uri.TryCreate(s, UriKind.RelativeOrAbsolute, out _))
             .WithMessage(ApplicationMessage.URL_INVALIDA)
             .MaximumLength(255)
             .WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)

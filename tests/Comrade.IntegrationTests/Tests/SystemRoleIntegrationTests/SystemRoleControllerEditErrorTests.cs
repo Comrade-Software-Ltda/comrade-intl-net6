@@ -27,7 +27,8 @@ public class SystemRoleControllerEditErrorTests : IClassFixture<ServiceProviderF
             Id = id,
             Name = null
         };
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult okResult)
         {
@@ -35,6 +36,7 @@ public class SystemRoleControllerEditErrorTests : IClassFixture<ServiceProviderF
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+
         var repository = new SystemRoleRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
         Assert.NotNull(user!.Name);
@@ -50,7 +52,8 @@ public class SystemRoleControllerEditErrorTests : IClassFixture<ServiceProviderF
             Id = id,
             Name = changeName
         };
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult okResult)
         {
@@ -58,6 +61,7 @@ public class SystemRoleControllerEditErrorTests : IClassFixture<ServiceProviderF
             Assert.NotNull(actualResultValue);
             Assert.Equal(409, actualResultValue?.Code);
         }
+
         var repository = new SystemRoleRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
         Assert.NotEqual(changeName, user!.Name);

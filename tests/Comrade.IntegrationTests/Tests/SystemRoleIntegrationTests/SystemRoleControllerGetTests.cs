@@ -21,7 +21,8 @@ public class SystemRoleControllerGetTests : IClassFixture<ServiceProviderFixture
     public async Task SystemRoleController_Get()
     {
         var id = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6");
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.GetById(id);
         if (result is ObjectResult okResult)
         {

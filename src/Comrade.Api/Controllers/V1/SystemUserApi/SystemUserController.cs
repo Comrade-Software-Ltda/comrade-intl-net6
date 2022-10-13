@@ -128,7 +128,7 @@ public class SystemUserController : ControllerBase
 
     [HttpPut("manage-permissions")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemUserManagePermissionsDto dto)
+    public async Task<IActionResult> ManagePermissions([FromBody] [Required] SystemUserManagePermissionsDto dto)
     {
         try
         {
@@ -160,7 +160,7 @@ public class SystemUserController : ControllerBase
 
     [HttpPut("manage")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> ManageRoles([FromBody][Required] SystemUserManageRolesDto dto)
+    public async Task<IActionResult> ManageRoles([FromBody] [Required] SystemUserManageRolesDto dto)
     {
         try
         {

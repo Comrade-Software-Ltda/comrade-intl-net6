@@ -12,9 +12,9 @@ namespace Comrade.Api.Controllers.V1.TenantSelectorApi;
 [ApiController]
 public class TenantSelectorController : ComradeController
 {
-    private readonly ILogger<TenantSelectorController> _logger;
-    private readonly GetAllDatabases _getAllDatabases;
     private readonly CreateDatabase _createDatabase;
+    private readonly GetAllDatabases _getAllDatabases;
+    private readonly ILogger<TenantSelectorController> _logger;
     private readonly MigrateDatabase _migrateDatabase;
 
     public TenantSelectorController(ILogger<TenantSelectorController> logger, GetAllDatabases getAllDatabases,
@@ -38,7 +38,7 @@ public class TenantSelectorController : ComradeController
 
     [HttpPost("create-database")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
-    public IActionResult CreateDatabase([FromBody][Required] string databaseName)
+    public IActionResult CreateDatabase([FromBody] [Required] string databaseName)
     {
         _createDatabase.Execute(databaseName);
         return StatusCode(201, null);
@@ -46,7 +46,7 @@ public class TenantSelectorController : ComradeController
 
     [HttpPost("migrate-database")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
-    public async Task<IActionResult> MigrateDatabase([FromBody][Required] string databaseName)
+    public async Task<IActionResult> MigrateDatabase([FromBody] [Required] string databaseName)
     {
         await _migrateDatabase.Execute();
         return StatusCode(201, null);

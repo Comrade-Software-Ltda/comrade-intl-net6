@@ -1,13 +1,13 @@
 ﻿using Comrade.Application.Components.SystemPermissionComponent.Contracts;
 
-namespace Comrade.Application.Components.SystemUserComponent.Contracts
+namespace Comrade.Application.Components.SystemUserComponent.Contracts;
+
+public class SystemUserWithPermissionsDto : SystemUserDto
 {
-    public class SystemUserWithPermissionsDto : SystemUserDto
+    public SystemUserWithPermissionsDto(ICollection<SystemPermissionDto> systemPermissions)
     {
-        public SystemUserWithPermissionsDto(ICollection<SystemPermissionDto> systemPermissions)
-        {
-            SystemPermissions = systemPermissions;
-        }
-        public ICollection<SystemPermissionDto> SystemPermissions { get; set; }
+        SystemPermissions = systemPermissions;
     }
+
+    public ICollection<SystemPermissionDto> SystemPermissions { get; set; }
 }

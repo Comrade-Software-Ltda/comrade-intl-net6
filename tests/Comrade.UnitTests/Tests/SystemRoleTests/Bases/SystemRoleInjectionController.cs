@@ -7,11 +7,12 @@ namespace Comrade.UnitTests.Tests.SystemRoleTests.Bases;
 
 public static class SystemRoleInjectionController
 {
-    public static SystemRoleController GetSystemRoleController(ComradeContext context, MongoDbContext mongoDbContextFixture, IMediator mediator)
+    public static SystemRoleController GetSystemRoleController(ComradeContext context,
+        MongoDbContext mongoDbContextFixture, IMediator mediator)
     {
-        var mapper  = MapperHelper.ConfigMapper();
+        var mapper = MapperHelper.ConfigMapper();
         var command = SystemRoleInjectionService.GetSystemRoleCommand(context, mediator);
-        var query   = SystemRoleInjectionService.GetSystemRoleQuery(context, mongoDbContextFixture, mapper);
+        var query = SystemRoleInjectionService.GetSystemRoleQuery(context, mongoDbContextFixture, mapper);
         return new SystemRoleController(command, query);
     }
 }

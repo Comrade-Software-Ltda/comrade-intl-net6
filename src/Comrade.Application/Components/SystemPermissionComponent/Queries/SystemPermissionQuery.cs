@@ -15,7 +15,8 @@ public class SystemPermissionQuery : ISystemPermissionQuery
     private readonly IMongoDbQueryContext _mongoDbQueryContext;
     private readonly ISystemPermissionRepository _repository;
 
-    public SystemPermissionQuery(ISystemPermissionRepository repository, IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
+    public SystemPermissionQuery(ISystemPermissionRepository repository, IMongoDbQueryContext mongoDbQueryContext,
+        IMapper mapper)
     {
         _repository = repository;
         _mongoDbQueryContext = mongoDbQueryContext;
@@ -33,6 +34,7 @@ public class SystemPermissionQuery : ISystemPermissionQuery
                 .ToList()).ConfigureAwait(false);
             return new PageResultDto<SystemPermissionDto>(list);
         }
+
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
@@ -40,7 +42,7 @@ public class SystemPermissionQuery : ISystemPermissionQuery
             .ToList()).ConfigureAwait(false);
         return new PageResultDto<SystemPermissionDto>(paginationFilter, list);
     }
-    
+
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdDefault(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);
