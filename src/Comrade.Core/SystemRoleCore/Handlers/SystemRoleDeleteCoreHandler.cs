@@ -12,29 +12,33 @@ namespace Comrade.Core.SystemRoleCore.Handlers;
 
 public class SystemRoleDeleteCoreHandler : IRequestHandler<SystemRoleDeleteCommand, ISingleResult<Entity>>
 {
+    private readonly ISystemRoleDeleteValidation _deleteValidation;
     private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemRoleRepository _repository;
-    private readonly ISystemRoleDeleteValidation _deleteValidation;
 
-    public SystemRoleDeleteCoreHandler(ISystemRoleDeleteValidation deleteValidation, ISystemRoleRepository repository, IMongoDbCommandContext mongoDbContext)
+    public SystemRoleDeleteCoreHandler(ISystemRoleDeleteValidation deleteValidation, ISystemRoleRepository repository,
+        IMongoDbCommandContext mongoDbContext)
     {
         _deleteValidation = deleteValidation;
         _repository = repository;
         _mongoDbContext = mongoDbContext;
     }
 
-    public async Task<ISingleResult<Entity>> Handle(SystemRoleDeleteCommand request, CancellationToken cancellationToken)
+    public async Task<ISingleResult<Entity>> Handle(SystemRoleDeleteCommand request,
+        CancellationToken cancellationToken)
     {
         var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
         if (recordExists is null)
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
+
         var validate = _deleteValidation.Execute(recordExists);
         if (!validate.Success)
         {
             return validate;
         }
+
         var id = recordExists.Id;
         _repository.Remove(id);
 

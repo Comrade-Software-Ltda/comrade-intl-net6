@@ -34,12 +34,12 @@ public enum CustomFeature
     ///     Get SystemUser.
     /// </summary>
     SystemUser,
-    
+
     /// <summary>
     ///     Get SystemMenu.
     /// </summary>
-    SystemMenu,   
-    
+    SystemMenu,
+
     /// <summary>
     ///     Get TenantSelector.
     /// </summary>

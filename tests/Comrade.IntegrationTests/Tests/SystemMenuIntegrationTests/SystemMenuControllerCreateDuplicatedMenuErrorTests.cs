@@ -15,7 +15,7 @@ public sealed class SystemMenuControllerCreateDuplicatedMenuErrorTests : IClassF
     {
         _fixture = fixture;
     }
-    
+
     [Fact]
     public async Task SystemMenuController_CreateDuplicatedMenu_Error()
     {

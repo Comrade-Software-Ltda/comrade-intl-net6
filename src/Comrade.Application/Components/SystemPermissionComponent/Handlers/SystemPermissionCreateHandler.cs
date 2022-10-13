@@ -18,7 +18,8 @@ public class SystemPermissionCreateHandler : IRequestHandler<SystemPermissionCre
         _createUc = createUc;
     }
 
-    public async Task<SingleResultDto<EntityDto>> Handle(SystemPermissionCreateDto request, CancellationToken cancellationToken)
+    public async Task<SingleResultDto<EntityDto>> Handle(SystemPermissionCreateDto request,
+        CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemPermissionCreateCommand>(request);
         var result = await _createUc.Execute(mappedObject).ConfigureAwait(false);

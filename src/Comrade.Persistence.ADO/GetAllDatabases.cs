@@ -8,10 +8,11 @@ public class GetAllDatabases
     public List<DbOto> Execute()
     {
         var tes = new List<DbOto>();
-        using(var con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Trusted_Connection=True;MultipleActiveResultSets=true"))
+        using (var con = new SqlConnection(
+                   "Server=(localdb)\\mssqllocaldb;Trusted_Connection=True;MultipleActiveResultSets=true"))
         {
             con.Open();
-            DataTable databases = con.GetSchema("Databases");
+            var databases = con.GetSchema("Databases");
             foreach (DataRow database in databases.Rows)
             {
                 var oto = new DbOto();
@@ -25,4 +26,3 @@ public class GetAllDatabases
         return tes;
     }
 }
-

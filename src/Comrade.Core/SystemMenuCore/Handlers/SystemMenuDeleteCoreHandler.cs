@@ -1,19 +1,19 @@
-﻿using Comrade.Core.Bases.Interfaces;
+﻿using System.Threading;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
 using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemMenuCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
-using System.Threading;
 
 namespace Comrade.Core.SystemMenuCore.Handlers;
 
 public class
     SystemMenuDeleteCoreHandler : IRequestHandler<SystemMenuDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly SystemMenuDeleteValidation _systemMenuDeleteValidation;
     private readonly ISystemMenuRepository _repository;
+    private readonly SystemMenuDeleteValidation _systemMenuDeleteValidation;
 
     public SystemMenuDeleteCoreHandler(SystemMenuDeleteValidation systemMenuDeleteValidation,
         ISystemMenuRepository repository)

@@ -21,7 +21,8 @@ public class SystemPermissionControllerGetTests : IClassFixture<ServiceProviderF
     public async Task SystemPermissionController_Get()
     {
         var id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1");
-        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.GetById(id);
         if (result is ObjectResult okResult)
         {

@@ -7,6 +7,7 @@ namespace Comrade.IntegrationTests.Tests.NotificationTests;
 public sealed class EmailServiceTests : IClassFixture<ServiceProviderFixture>
 {
     private readonly ServiceProviderFixture _fixture;
+
     public EmailServiceTests(ServiceProviderFixture fixture)
     {
         _fixture = fixture;

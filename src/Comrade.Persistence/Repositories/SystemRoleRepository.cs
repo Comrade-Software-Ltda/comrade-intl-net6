@@ -24,7 +24,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
         var result = _context.SystemRoles
             .Where(x => x.Name.ToUpper().Trim().Contains(name.ToUpper().Trim())).Take(30)
             .OrderBy(x => x.Name.ToUpper().Trim())
-            .Select(s => new Lookup { Key = s.Id, Value = s.Name.ToUpper().Trim() });
+            .Select(s => new Lookup {Key = s.Id, Value = s.Name.ToUpper().Trim()});
         return result;
     }
 
@@ -35,7 +35,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
                 .Equals(p.Name.ToUpper().Trim(), StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
         return exists
-            ? new SingleResult<SystemRole>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
+            ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
             : new SingleResult<SystemRole>();
     }
 }

@@ -36,6 +36,7 @@ public static class InjectDataOnContextBase
                 var systemPermissions = JsonUtilities.GetListFromJson<SystemPermission>(systemPermissionJson);
                 db.SystemPermissions.AddRange(systemPermissions!);
             }
+
             db.SaveChanges();
         }
         catch (Exception e)

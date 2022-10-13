@@ -16,7 +16,8 @@ public sealed class SystemPermissionInjectionService
         return new SystemPermissionCommand(ucDelete, mediator);
     }
 
-    public static SystemPermissionQuery GetSystemPermissionQuery(ComradeContext context, MongoDbContext mongoDbContextFixture, IMapper mapper)
+    public static SystemPermissionQuery GetSystemPermissionQuery(ComradeContext context,
+        MongoDbContext mongoDbContextFixture, IMapper mapper)
     {
         var repository = new SystemPermissionRepository(context);
         return new SystemPermissionQuery(repository, mongoDbContextFixture, mapper);

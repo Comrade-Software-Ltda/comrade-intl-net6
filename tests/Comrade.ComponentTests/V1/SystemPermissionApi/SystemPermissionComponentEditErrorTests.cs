@@ -33,7 +33,7 @@ public class SystemPermissionComponentEditErrorTests : IClassFixture<CustomWebAp
         Assert.Equal(HttpStatusCode.Conflict, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
-        using JsonTextReader reader = new(stringReader) { DateParseHandling = DateParseHandling.None };
+        using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
 
         Assert.Equal(BusinessMessage.MSG11, jsonResponse["message"]);

@@ -34,6 +34,7 @@ public class SystemRoleQuery : ISystemRoleQuery
                 .ToList()).ConfigureAwait(false);
             return new PageResultDto<SystemRoleDto>(list);
         }
+
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)

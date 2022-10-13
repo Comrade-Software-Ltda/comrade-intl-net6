@@ -12,7 +12,7 @@ public class SystemMenuConfiguration : BaseMappingConfiguration<SystemMenu>
         builder.HasKey(c => c.Id).HasName("pk_syme_system_menu");
 
         builder.HasMany(x => x.Submenus)
-            .WithOne( x => x.Menu)
+            .WithOne(x => x.Menu)
             .HasForeignKey(x => x.MenuId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.InsertSeedData($"{SeedJsonBasePath}.system-menu.json");

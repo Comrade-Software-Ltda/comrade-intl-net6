@@ -25,7 +25,7 @@ public class SystemPermissionRepository : Repository<SystemPermission>, ISystemP
                 .Equals(p.Tag.ToUpper().Trim(), StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
         return exists
-            ? new SingleResult<SystemPermission>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
+            ? new SingleResult<SystemPermission>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemPermission>();
     }
 }

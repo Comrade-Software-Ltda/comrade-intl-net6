@@ -45,11 +45,11 @@ public sealed class ServiceProviderFixture : IDisposable
         serviceCollection.AddSingleton<IMongoDbContextSettings>(x =>
             x.GetRequiredService<IOptions<MongoDbContextSettings>>().Value);
 
-            serviceCollection.Configure<MailKitSettings>(
-                configuration.GetSection(nameof(MailKitSettings)));
+        serviceCollection.Configure<MailKitSettings>(
+            configuration.GetSection(nameof(MailKitSettings)));
 
-            serviceCollection.AddSingleton<IMailKitSettings>(sp =>
-                sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
+        serviceCollection.AddSingleton<IMailKitSettings>(sp =>
+            sp.GetRequiredService<IOptions<MailKitSettings>>().Value);
 
         serviceCollection.AddSingleton<IRedisCacheService, RedisCacheService>();
         serviceCollection.AddSingleton<IRedisCacheFunctionService, RedisCacheFunctionService>();

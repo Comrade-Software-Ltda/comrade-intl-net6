@@ -5,5 +5,5 @@ namespace Comrade.Application.Components.SystemPermissionComponent.Contracts;
 public class SystemPermissionDto : EntityDto
 {
     public string? Name { get; set; }
-    public string? Tag  { get; set; }
+    public string? Tag { get; set; }
 }

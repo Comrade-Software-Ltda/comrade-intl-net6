@@ -5,8 +5,8 @@ namespace Comrade.Domain.Models;
 [Table("syme_system_menu")]
 public class SystemMenu : Entity
 {
-    [Column("syme_uuid_menu")]
-    public Guid? MenuId { get; set; }
+    [Column("syme_uuid_menu")] public Guid? MenuId { get; set; }
+
     public virtual SystemMenu? Menu { get; set; }
     public virtual List<SystemMenu>? Submenus { get; set; }
 

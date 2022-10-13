@@ -12,5 +12,4 @@ public class SystemUserManageRolesCommand : Entity, IRequest<ISingleResult<Entit
     }
 
     public ICollection<Guid> Roles { get; set; }
-
 }

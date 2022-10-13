@@ -19,7 +19,8 @@ public class SystemRoleControllerGetAllTests : IClassFixture<ServiceProviderFixt
     [Fact]
     public async Task SystemRoleController_GetAll()
     {
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.GetAll(null);
         if (result is ObjectResult okResult)
         {

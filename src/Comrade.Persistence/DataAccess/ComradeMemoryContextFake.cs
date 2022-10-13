@@ -1,6 +1,5 @@
 using Comrade.Domain.Models;
 using Comrade.Persistence.Extensions;
-using Microsoft.Extensions.Configuration;
 
 namespace Comrade.Persistence.DataAccess;
 
@@ -15,7 +14,7 @@ public static class ComradeMemoryContextFake
     public static void AddDataFakeContext(ComradeContext? context)
     {
         var assembly = Assembly.GetAssembly(typeof(JsonUtilities));
-        
+
         if (context == null || assembly is null) return;
         if (context.Airplanes.Any()) return;
 

@@ -29,7 +29,7 @@ public class SystemUserRoleConfiguration : BaseMappingConfiguration<SystemUser>
         builder.HasKey(c => c.Id).HasName("pk_syus_system_user_syro_system_role");
 
         builder
-            .HasKey(t => new { t.SystemUserId, t.SystemRoleId })
+            .HasKey(t => new {t.SystemUserId, t.SystemRoleId})
             .HasName("rl_syus_system_user_syro_system_role");
 
         builder.InsertSeedData($"{SeedJsonBasePath}.system-user-role.json");

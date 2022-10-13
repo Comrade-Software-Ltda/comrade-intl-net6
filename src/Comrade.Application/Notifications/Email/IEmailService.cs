@@ -1,7 +1,6 @@
-﻿namespace Comrade.Application.Notifications.Email
+﻿namespace Comrade.Application.Notifications.Email;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        void Send(string toEmail, string subject, string html);
-    }
+    void Send(string toEmail, string subject, string html);
 }

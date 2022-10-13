@@ -4,8 +4,8 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
 using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermissionComponent.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
@@ -23,7 +23,7 @@ public class SystemPermissionController : ComradeController
     public SystemPermissionController(ISystemPermissionCommand command, ISystemPermissionQuery query)
     {
         _command = command;
-        _query   = query;
+        _query = query;
     }
 
     [HttpGet("get-all")]
@@ -37,14 +37,14 @@ public class SystemPermissionController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
 
     [HttpGet("get-by-id/{systemPermissionId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] Guid systemPermissionId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemPermissionId)
     {
         try
         {
@@ -53,13 +53,13 @@ public class SystemPermissionController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] SystemPermissionCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] SystemPermissionCreateDto dto)
     {
         try
         {
@@ -68,13 +68,13 @@ public class SystemPermissionController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] SystemPermissionEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] SystemPermissionEditDto dto)
     {
         try
         {
@@ -83,13 +83,13 @@ public class SystemPermissionController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 
     [HttpDelete("delete/{systemPermissionId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] Guid systemPermissionId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemPermissionId)
     {
         try
         {
@@ -98,7 +98,7 @@ public class SystemPermissionController : ComradeController
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError,new SingleResultDto<EntityDto>(e));
+            return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
 }

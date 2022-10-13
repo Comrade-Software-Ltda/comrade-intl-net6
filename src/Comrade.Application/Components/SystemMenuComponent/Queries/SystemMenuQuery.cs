@@ -70,7 +70,7 @@ public class SystemMenuQuery : ISystemMenuQuery
 
         return new PageResultDto<SystemMenuDto>(paginationFilter, list);
     }
-    
+
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdDefault(Guid id)
     {
         var entity = await _repository.GetById(id).ConfigureAwait(false);

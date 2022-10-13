@@ -18,7 +18,8 @@ public class SystemPermissionEditHandler : IRequestHandler<SystemPermissionEditD
         _editUc = editUc;
     }
 
-    public async Task<SingleResultDto<EntityDto>> Handle(SystemPermissionEditDto request, CancellationToken cancellationToken)
+    public async Task<SingleResultDto<EntityDto>> Handle(SystemPermissionEditDto request,
+        CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemPermissionEditCommand>(request);
         var result = await _editUc.Execute(mappedObject).ConfigureAwait(false);

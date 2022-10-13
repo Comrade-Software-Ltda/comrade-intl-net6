@@ -13,9 +13,10 @@ namespace Comrade.Core.SystemUserCore.Handlers;
 public class
     SystemUserManageRolesCoreHandler : IRequestHandler<SystemUserManageRolesCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemUserManageRolesValidation _validation;
-    private readonly ISystemUserRepository _systemUserRepository;
     private readonly ISystemRoleRepository _systemRoleRepository;
+    private readonly ISystemUserRepository _systemUserRepository;
+    private readonly ISystemUserManageRolesValidation _validation;
+
     public SystemUserManageRolesCoreHandler(ISystemUserManageRolesValidation validation,
         ISystemUserRepository systemUserRepository, ISystemRoleRepository systemRoleRepository)
     {

@@ -16,7 +16,8 @@ public sealed class SystemRoleInjectionService
         return new SystemRoleCommand(ucDelete, mediator);
     }
 
-    public static SystemRoleQuery GetSystemRoleQuery(ComradeContext context, MongoDbContext mongoDbContextFixture, IMapper mapper)
+    public static SystemRoleQuery GetSystemRoleQuery(ComradeContext context, MongoDbContext mongoDbContextFixture,
+        IMapper mapper)
     {
         var repository = new SystemRoleRepository(context);
         return new SystemRoleQuery(repository, mongoDbContextFixture, mapper);

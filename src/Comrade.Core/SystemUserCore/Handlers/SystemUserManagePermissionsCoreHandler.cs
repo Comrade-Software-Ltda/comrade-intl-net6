@@ -13,9 +13,10 @@ namespace Comrade.Core.SystemUserCore.Handlers;
 public class
     SystemUserManagePermissionsCoreHandler : IRequestHandler<SystemUserManagePermissionsCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemUserManagePermissionsValidation _validation;
-    private readonly ISystemUserRepository _systemUserRepository;
     private readonly ISystemPermissionRepository _systemPermissionRepository;
+    private readonly ISystemUserRepository _systemUserRepository;
+    private readonly ISystemUserManagePermissionsValidation _validation;
+
     public SystemUserManagePermissionsCoreHandler(ISystemUserRepository systemUserRepository,
         ISystemPermissionRepository systemPermissionRepository, ISystemUserManagePermissionsValidation validation)
     {
@@ -43,7 +44,7 @@ public class
         }
 
         user.SystemPermissions = permissions;
-        
+
         await _systemUserRepository.BeginTransactionAsync().ConfigureAwait(false);
         _systemUserRepository.Update(user);
         await _systemUserRepository.CommitTransactionAsync().ConfigureAwait(false);

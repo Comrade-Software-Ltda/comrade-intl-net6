@@ -13,7 +13,7 @@ internal class SystemPermissionCreateTestData : IEnumerable<object[]>
             new SystemPermissionCreateCommand
             {
                 Name = "ACESSO NOVO",
-                Tag  = "ACEN"
+                Tag = "ACEN"
             }
         };
         yield return new object[]
@@ -22,7 +22,7 @@ internal class SystemPermissionCreateTestData : IEnumerable<object[]>
             new SystemPermissionCreateCommand
             {
                 Name = "ACESSO",
-                Tag  = "  ace  "
+                Tag = "  ace  "
             }
         };
     }

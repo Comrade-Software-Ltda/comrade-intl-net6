@@ -24,7 +24,8 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
         {
             Name = "ROLE"
         };
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {
@@ -37,7 +38,8 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
     [Fact]
     public async Task SystemRoleController_Create_NullName_Error()
     {
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(new SystemRoleCreateDto());
         if (result is ObjectResult okResult)
         {
@@ -54,7 +56,8 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
         {
             Name = " aDm "
         };
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Create(testObject);
         if (result is ObjectResult okResult)
         {

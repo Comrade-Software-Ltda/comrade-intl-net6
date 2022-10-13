@@ -1,6 +1,6 @@
-﻿using Comrade.Core.SystemMenuCore.Commands;
-using Comrade.Core.Bases;
+﻿using Comrade.Core.Bases;
 using Comrade.Core.Bases.Interfaces;
+using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Domain.Bases;
 using MediatR;
 

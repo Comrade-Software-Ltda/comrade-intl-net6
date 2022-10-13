@@ -8,14 +8,14 @@ public class SystemUserPermissionConfiguration : BaseMappingConfiguration<System
 {
     public override void Configure(EntityTypeBuilder<SystemUser> builder)
     {
-
         builder
             .HasMany(p => p.SystemPermissions)
             .WithMany(p => p.SystemUsers)
             .UsingEntity<SystemUserSystemPermission>(BuildSystemUserSystemPermissionRelationship);
     }
 
-    private static void BuildSystemUserSystemPermissionRelationship(EntityTypeBuilder<SystemUserSystemPermission> builder)
+    private static void BuildSystemUserSystemPermissionRelationship(
+        EntityTypeBuilder<SystemUserSystemPermission> builder)
     {
         builder
             .HasOne(pt => pt.SystemPermission)
@@ -29,9 +29,8 @@ public class SystemUserPermissionConfiguration : BaseMappingConfiguration<System
         builder.HasKey(c => c.Id).HasName("pk_syus_system_user_sype_system_permission");
 
         builder
-            .HasKey(t => new { t.SystemUserId, t.SystemPermissionId })
+            .HasKey(t => new {t.SystemUserId, t.SystemPermissionId})
             .HasName("rl_syus_system_user_sype_system_permission");
         builder.InsertSeedData($"{SeedJsonBasePath}.system-user-permission.json");
     }
-
 }

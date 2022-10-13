@@ -15,7 +15,7 @@ public sealed class SystemMenuControllerDeleteMenuTests : IClassFixture<ServiceP
         _fixture = fixture;
         InjectDataOnContextBase.InitializeDbForTests(_fixture.SqlContextFixture);
     }
-    
+
     [Fact]
     public async Task SystemMenuController_ExistentMenu_Delete()
     {

@@ -22,6 +22,7 @@ public class UcSystemPermissionEdit : UseCase, IUcSystemPermissionEdit
         {
             return isValid;
         }
+
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

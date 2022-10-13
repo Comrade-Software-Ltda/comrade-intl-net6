@@ -13,7 +13,9 @@ public class SystemRolePermissionConfiguration : BaseMappingConfiguration<System
             .WithMany(p => p.SystemRoles)
             .UsingEntity<SystemRoleSystemPermission>(BuildSystemRoleSystemPermissionRelationship);
     }
-    private static void BuildSystemRoleSystemPermissionRelationship(EntityTypeBuilder<SystemRoleSystemPermission> builder)
+
+    private static void BuildSystemRoleSystemPermissionRelationship(
+        EntityTypeBuilder<SystemRoleSystemPermission> builder)
     {
         builder
             .HasOne(pt => pt.SystemPermission)
@@ -27,7 +29,7 @@ public class SystemRolePermissionConfiguration : BaseMappingConfiguration<System
         builder.Property(b => b.Id).HasColumnName("pk_uuid_syro_system_role_sype_system_permission").IsRequired();
         builder.HasKey(c => c.Id).HasName("pk_syro_system_role_sype_system_permission");
 
-        builder.HasKey(t => new { t.SystemRoleId, t.SystemPermissionId })
+        builder.HasKey(t => new {t.SystemRoleId, t.SystemPermissionId})
             .HasName("rl_syro_system_role_sype_system_permission");
 
         builder.InsertSeedData($"{SeedJsonBasePath}.system-role-permission.json");

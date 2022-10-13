@@ -1,8 +1,4 @@
-﻿using System.Data;
-using Microsoft.Data.SqlClient;
-
-namespace Comrade.Persistence.ADO;
-
+﻿namespace Comrade.Persistence.ADO;
 
 public class DbOto
 {

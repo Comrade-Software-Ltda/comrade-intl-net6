@@ -28,7 +28,8 @@ public class SystemRoleControllerEditTests : IClassFixture<ServiceProviderFixtur
             Id = id,
             Name = changeName
         };
-        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture, _fixture.MongoDbContextFixture, _fixture.Mediator);
+        var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
+            _fixture.MongoDbContextFixture, _fixture.Mediator);
         var result = await controller.Edit(testObject);
         if (result is ObjectResult objectResult)
         {
@@ -36,6 +37,7 @@ public class SystemRoleControllerEditTests : IClassFixture<ServiceProviderFixtur
             Assert.NotNull(actualResultValue);
             Assert.Equal(204, actualResultValue?.Code);
         }
+
         var repository = new SystemRoleRepository(_fixture.SqlContextFixture);
         var systemRole = await repository.GetById(id);
         Assert.Equal(changeName, systemRole!.Name);

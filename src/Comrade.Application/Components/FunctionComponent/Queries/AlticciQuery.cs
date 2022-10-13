@@ -6,8 +6,8 @@ namespace Comrade.Application.Components.FunctionComponent.Queries;
 
 public class AlticciQuery : IAlticciQuery
 {
-    private readonly IRedisCacheFunctionService _cacheService;
     private const EnumFunction NameFunction = EnumFunction.Alticci;
+    private readonly IRedisCacheFunctionService _cacheService;
     private FunctionReturnDto? _functionReturnDto;
 
     public AlticciQuery(IRedisCacheFunctionService cacheService)
@@ -21,6 +21,7 @@ public class AlticciQuery : IAlticciQuery
         {
             return null;
         }
+
         // ReSharper disable once UseObjectOrCollectionInitializer
         _functionReturnDto = new FunctionReturnDto(n);
         _functionReturnDto.ResultDto.Fn = CalculaAlticciFunc(n);
@@ -44,15 +45,18 @@ public class AlticciQuery : IAlticciQuery
             }
             else
             {
-                result = _cacheService.SetCacheFunction(NameFunction, n, CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
+                result = _cacheService.SetCacheFunction(NameFunction, n,
+                    CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
             }
+
             _functionReturnDto?.DoCache.Add(new FunctionDto(n, result)); // For tests only
         }
         else
         {
-            result = (long)cache;
-            _functionReturnDto?.UseCache.Add(new FunctionDto(n,result)); // For tests only
+            result = (long) cache;
+            _functionReturnDto?.UseCache.Add(new FunctionDto(n, result)); // For tests only
         }
+
         return result;
     }
 }

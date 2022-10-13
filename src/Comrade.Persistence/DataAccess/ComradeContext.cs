@@ -9,7 +9,7 @@ public class ComradeContext : DbContext
         : base(options)
     {
     }
-    
+
     public DbSet<Airplane> Airplanes { get; set; }
     public DbSet<SystemPermission> SystemPermissions { get; set; }
     public DbSet<SystemRole> SystemRoles { get; set; }

@@ -11,6 +11,10 @@ using Comrade.Application.Components.SystemMenuComponent.Commands;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Components.SystemMenuComponent.Handlers;
 using Comrade.Application.Components.SystemMenuComponent.Queries;
+using Comrade.Application.Components.SystemPermissionComponent.Commands;
+using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermissionComponent.Handlers;
+using Comrade.Application.Components.SystemPermissionComponent.Queries;
 using Comrade.Application.Components.SystemRoleComponent.Commands;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
 using Comrade.Application.Components.SystemRoleComponent.Handlers;
@@ -19,10 +23,6 @@ using Comrade.Application.Components.SystemUserComponent.Commands;
 using Comrade.Application.Components.SystemUserComponent.Contracts;
 using Comrade.Application.Components.SystemUserComponent.Handlers;
 using Comrade.Application.Components.SystemUserComponent.Queries;
-using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemPermissionComponent.Handlers;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
@@ -39,6 +39,11 @@ using Comrade.Core.SystemMenuCore.Commands;
 using Comrade.Core.SystemMenuCore.Handlers;
 using Comrade.Core.SystemMenuCore.UseCases;
 using Comrade.Core.SystemMenuCore.Validations;
+using Comrade.Core.SystemPermissionCore;
+using Comrade.Core.SystemPermissionCore.Commands;
+using Comrade.Core.SystemPermissionCore.Handlers;
+using Comrade.Core.SystemPermissionCore.UseCases;
+using Comrade.Core.SystemPermissionCore.Validations;
 using Comrade.Core.SystemRoleCore;
 using Comrade.Core.SystemRoleCore.Commands;
 using Comrade.Core.SystemRoleCore.Handlers;
@@ -49,11 +54,6 @@ using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Handlers;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Core.SystemPermissionCore;
-using Comrade.Core.SystemPermissionCore.Commands;
-using Comrade.Core.SystemPermissionCore.Handlers;
-using Comrade.Core.SystemPermissionCore.UseCases;
-using Comrade.Core.SystemPermissionCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 
@@ -149,8 +149,10 @@ public static class UseCasesExtensions
         services.AddScoped<IUcSystemRoleDelete, UcSystemRoleDelete>();
 
         // Core - CoreHandlers
-        services.AddScoped<IRequestHandler<SystemRoleCreateCommand, ISingleResult<Entity>>, SystemRoleCreateCoreHandler>();
-        services.AddScoped<IRequestHandler<SystemRoleDeleteCommand, ISingleResult<Entity>>, SystemRoleDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemRoleCreateCommand, ISingleResult<Entity>>, SystemRoleCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemRoleDeleteCommand, ISingleResult<Entity>>, SystemRoleDeleteCoreHandler>();
         services.AddScoped<IRequestHandler<SystemRoleEditCommand, ISingleResult<Entity>>, SystemRoleEditCoreHandler>();
 
         // Core - Validations
@@ -168,8 +170,12 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemPermissionQuery, SystemPermissionQuery>();
 
         // Application - Handlers
-        services.AddScoped<IRequestHandler<SystemPermissionCreateDto, SingleResultDto<EntityDto>>, SystemPermissionCreateHandler>();
-        services.AddScoped<IRequestHandler<SystemPermissionEditDto, SingleResultDto<EntityDto>>, SystemPermissionEditHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemPermissionCreateDto, SingleResultDto<EntityDto>>,
+                SystemPermissionCreateHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemPermissionEditDto, SingleResultDto<EntityDto>>,
+                SystemPermissionEditHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemPermissionEdit, UcSystemPermissionEdit>();
@@ -177,9 +183,15 @@ public static class UseCasesExtensions
         services.AddScoped<IUcSystemPermissionDelete, UcSystemPermissionDelete>();
 
         // Core - CoreHandlers
-        services.AddScoped<IRequestHandler<SystemPermissionCreateCommand, ISingleResult<Entity>>, SystemPermissionCreateCoreHandler>();
-        services.AddScoped<IRequestHandler<SystemPermissionDeleteCommand, ISingleResult<Entity>>, SystemPermissionDeleteCoreHandler>();
-        services.AddScoped<IRequestHandler<SystemPermissionEditCommand, ISingleResult<Entity>>, SystemPermissionEditCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemPermissionCreateCommand, ISingleResult<Entity>>,
+                SystemPermissionCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemPermissionDeleteCommand, ISingleResult<Entity>>,
+                SystemPermissionDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<SystemPermissionEditCommand, ISingleResult<Entity>>,
+                SystemPermissionEditCoreHandler>();
 
         // Core - Validations
         services.AddScoped<ISystemPermissionEditValidation, SystemPermissionEditValidation>();
@@ -208,7 +220,6 @@ public static class UseCasesExtensions
         services
             .AddScoped<IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>,
                 SystemUserManageRolesHandler>();
-
 
 
         // Core - UseCases
@@ -283,7 +294,7 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemMenuEditValidation, SystemMenuEditValidation>();
         services.AddScoped<SystemMenuDeleteValidation>();
         services.AddScoped<ISystemMenuUniqueValidation, SystemMenuUniqueValidation>();
-        
+
         #endregion
 
         #region Alticci

@@ -5,8 +5,8 @@ public class FunctionReturnDto : Dto
     public FunctionReturnDto(long n = -1, long fn = -1)
     {
         ResultDto = new FunctionDto(n, fn);
-        DoCache   = new List<FunctionDto>();
-        UseCache  = new List<FunctionDto>();
+        DoCache = new List<FunctionDto>();
+        UseCache = new List<FunctionDto>();
     }
 
     public FunctionDto ResultDto { get; set; }

@@ -7,7 +7,10 @@ namespace Comrade.UnitTests.Tests.AirplaneTests.Bases;
 
 public class AirplaneInjectionController
 {
-    protected AirplaneInjectionController(){}
+    protected AirplaneInjectionController()
+    {
+    }
+
     public static AirplaneController GetAirplaneController(ComradeContext context,
         MongoDbContext mongoDbContextFixture, IMediator mediator)
     {

@@ -9,8 +9,8 @@ namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
 public class SystemUserManageRolesHandler : IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemUserManageRoles _ucSystemUserManageRoles;
     private readonly IMapper _mapper;
+    private readonly IUcSystemUserManageRoles _ucSystemUserManageRoles;
 
     public SystemUserManageRolesHandler(IMapper mapper, IUcSystemUserManageRoles ucSystemUserManageRoles)
     {
