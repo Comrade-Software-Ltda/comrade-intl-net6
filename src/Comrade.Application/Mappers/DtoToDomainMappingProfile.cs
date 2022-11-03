@@ -30,6 +30,7 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<SystemRoleDto, SystemRole>();
         CreateMap<SystemRoleCreateDto, SystemRoleCreateCommand>();
         CreateMap<SystemRoleEditDto, SystemRoleEditCommand>();
+        CreateMap<SystemRoleManagePermissionsDto, SystemRoleManagePermissionsCommand>();
         CreateMap<AuthenticationDto, SystemUser>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));

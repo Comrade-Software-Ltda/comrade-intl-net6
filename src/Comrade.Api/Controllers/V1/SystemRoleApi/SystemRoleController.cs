@@ -105,7 +105,7 @@ public class SystemRoleController : ComradeController
 
     [HttpGet("get-all-with-permissions")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
-    public async Task<IActionResult> GetAllWithRoles([FromQuery] PaginationQuery? paginationQuery)
+    public async Task<IActionResult> GetAllWithPermissions([FromQuery] PaginationQuery? paginationQuery)
     {
         try
         {
@@ -121,7 +121,7 @@ public class SystemRoleController : ComradeController
 
     [HttpPut("manage-permissions")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> ManageRoles([FromBody][Required] SystemRoleManagePermissionsDto dto)
+    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemRoleManagePermissionsDto dto)
     {
         try
         {

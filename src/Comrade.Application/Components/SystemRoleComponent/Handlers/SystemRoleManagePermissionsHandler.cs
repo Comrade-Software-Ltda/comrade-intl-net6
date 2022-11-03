@@ -10,20 +10,20 @@ namespace Comrade.Application.Components.SystemRoleComponent.Handlers;
 public class SystemRoleManagePermissionsHandler : IRequestHandler<SystemRoleManagePermissionsDto,
     SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemRoleEdit _editUc;
+    private readonly IUcSystemRoleManagePermissions _ucSystemRoleManagePermissions;
     private readonly IMapper _mapper;
 
-    public SystemRoleManagePermissionsHandler(IMapper mapper, IUcSystemRoleEdit editUc)
+    public SystemRoleManagePermissionsHandler(IMapper mapper, IUcSystemRoleManagePermissions ucSystemRoleManagePermissions)
     {
         _mapper = mapper;
-        _editUc = editUc;
+        _ucSystemRoleManagePermissions = ucSystemRoleManagePermissions;
     }
 
     public async Task<SingleResultDto<EntityDto>> Handle(SystemRoleManagePermissionsDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemRoleEditCommand>(request);
-        var result = await _editUc.Execute(mappedObject).ConfigureAwait(false);
+        var mappedObject = _mapper.Map<SystemRoleManagePermissionsCommand>(request);
+        var result = await _ucSystemRoleManagePermissions.Execute(mappedObject).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);
     }
 }
