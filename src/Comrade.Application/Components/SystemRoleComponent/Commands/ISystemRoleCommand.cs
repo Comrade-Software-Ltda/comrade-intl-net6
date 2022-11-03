@@ -9,4 +9,5 @@ public interface ISystemRoleCommand
     Task<ISingleResultDto<EntityDto>> Create(SystemRoleCreateDto dto);
     Task<ISingleResultDto<EntityDto>> Edit(SystemRoleEditDto dto);
     Task<ISingleResultDto<EntityDto>> Delete(Guid id);
+    Task<ISingleResultDto<EntityDto>> ManagePermissions(SystemRoleManagePermissionsDto dto);
 }
