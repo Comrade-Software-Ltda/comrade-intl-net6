@@ -38,4 +38,14 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
             : new SingleResult<SystemRole>();
     }
+
+    public async Task<SystemRole?> GetByIdIncludePermissions(Guid id)
+    {
+        return await _context.SystemRoles
+            .Where(x => x.Id == id)
+            .Include(x => x.SystemRolePermissions)
+            .Include(x => x.SystemPermissions)
+            .FirstOrDefaultAsync()
+            .ConfigureAwait(false);
+    }
 }
