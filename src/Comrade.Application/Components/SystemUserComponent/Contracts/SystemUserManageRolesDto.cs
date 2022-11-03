@@ -1,14 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemUserComponent.Contracts;
-
-public class SystemUserManageRolesDto : EntityDto, IRequest<SingleResultDto<EntityDto>>
+namespace Comrade.Application.Components.SystemUserComponent.Contracts
 {
-    public SystemUserManageRolesDto(ICollection<Guid> roles)
+    public class SystemUserManageRolesDto : EntityDto, IRequest<SingleResultDto<EntityDto>>
     {
-        Roles = roles;
+        public ICollection<Guid> SystemRoleIds { get; set; }
     }
-
-    public ICollection<Guid> Roles { get; set; }
 }
