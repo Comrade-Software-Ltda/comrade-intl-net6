@@ -2,9 +2,9 @@
 using Comrade.Domain.Bases;
 using MediatR;
 
-namespace Comrade.Core.SystemUserCore.Commands;
+namespace Comrade.Core.SystemRoleCore.Commands;
 
-public class SystemUserManagePermissionsCommand : Entity, IRequest<ISingleResult<Entity>>
+public class SystemRoleManagePermissionsCommand : Entity, IRequest<ISingleResult<Entity>>
 {
     public ICollection<Guid> SystemPermissionIds { get; set; }
 }
