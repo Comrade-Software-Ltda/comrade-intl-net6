@@ -167,6 +167,7 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemRoleCreateValidation, SystemRoleCreateValidation>();
         services.AddScoped<ISystemRoleManagePermissionsValidation, SystemRoleManagePermissionsValidation>();
         services.AddScoped<ISystemRoleNameUniqueValidation, SystemRoleNameUniqueValidation>();
+        services.AddScoped<ISystemRoleTagUniqueValidation, SystemRoleTagUniqueValidation>();
 
         #endregion
 

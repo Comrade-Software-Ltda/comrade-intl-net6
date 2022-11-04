@@ -27,15 +27,28 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             .Select(s => new Lookup {Key = s.Id, Value = s.Name.ToUpper().Trim()});
         return result;
     }
-
-    public async Task<ISingleResult<SystemRole>> NameUniqueValidation(string name)
+    
+    public async Task<ISingleResult<SystemRole>> UniqueNameValidation(string name)
     {
         var exists = await _context.SystemRoles
             .Where(p => name.ToUpper().Trim()
                 .Equals(p.Name.ToUpper().Trim(), StringComparison.Ordinal))
             .AnyAsync().ConfigureAwait(false);
+
         return exists
-            ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
+            ? new SingleResult<SystemRole>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
+            : new SingleResult<SystemRole>();
+    }
+
+    public async Task<ISingleResult<SystemRole>> UniqueTagValidation(string tag)
+    {
+        var exists = await _context.SystemRoles
+            .Where(p => tag.ToUpper().Trim()
+                .Equals(p.Tag.ToUpper().Trim(), StringComparison.Ordinal))
+            .AnyAsync().ConfigureAwait(false);
+
+        return exists
+            ? new SingleResult<SystemRole>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemRole>();
     }
 
