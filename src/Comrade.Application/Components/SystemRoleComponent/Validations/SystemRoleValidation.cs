@@ -14,4 +14,11 @@ public class SystemRoleValidation<TDto> : DtoValidation<TDto> where TDto : Syste
             .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
             .WithName("Name");
     }
+    protected void ValidateTag()
+    {
+        RuleFor(v => v.Tag)
+            .NotEmpty().WithMessage(ApplicationMessage.CAMPO_OBRIGATORIO)
+            .MaximumLength(255).WithMessage(ApplicationMessage.TAMANHO_ESPECIFICO_CAMPO)
+            .WithName("Tag");
+    }
 }
