@@ -38,15 +38,14 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
             return result;
         }
 
-        var obj = recordExists;
-        HydrateValues(obj, request);
-        _repository.Update(obj);
+        HydrateValues(recordExists, request);
+        _repository.Update(recordExists);
 
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Update(obj);
+        _repository.Update(recordExists);
         await _repository.CommitTransactionAsync().ConfigureAwait(false);
 
-        _mongoDbContext.ReplaceOne(obj);
+        _mongoDbContext.ReplaceOne(recordExists);
 
         return new EditResult<Entity>(true, BusinessMessage.MSG02);
     }
@@ -54,5 +53,6 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
     private static void HydrateValues(SystemRole target, SystemRole source)
     {
         target.Name = source.Name.ToUpper(CultureInfo.CurrentCulture).Trim();
+        target.Tag = source.Tag.ToUpper(CultureInfo.CurrentCulture).Trim();
     }
 }

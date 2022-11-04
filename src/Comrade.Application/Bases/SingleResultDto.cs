@@ -2,6 +2,7 @@
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
+using Comrade.Domain.Bases;
 using Comrade.Domain.Enums;
 using FluentValidation.Results;
 
@@ -41,6 +42,11 @@ public class SingleResultDto<TDto> : ResultDto, ISingleResultDto<TDto>
         Code = result.Code;
         Success = result.Success;
         Message = result.Message;
+
+        if (result is SingleResult<Entity> entityResult)
+        {
+            Messages = entityResult.Messages?.ToList();
+        }
     }
 
     public SingleResultDto(List<ValidationFailure> failures)
