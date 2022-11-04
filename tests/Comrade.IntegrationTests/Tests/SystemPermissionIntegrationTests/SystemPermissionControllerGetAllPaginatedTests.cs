@@ -30,7 +30,7 @@ public class SystemPermissionControllerGetAllPaginatedTests : IClassFixture<Serv
             Assert.NotNull(actualResultValue);
             Assert.Equal(200, actualResultValue?.Code);
             Assert.NotNull(actualResultValue?.Data);
-            Assert.Equal(1, actualResultValue?.Data?.Count);
+            Assert.Equal(4, actualResultValue?.Data?.Count);
         }
     }
 }
