@@ -29,10 +29,9 @@ public sealed class UcSystemRoleCreateTests
 
         var repository = new SystemRoleRepository(context);
         var nameUniqueValidation = new SystemRoleNameUniqueValidation(repository);
-        var createValidation = new SystemRoleCreateValidation(nameUniqueValidation);
-        var mongo = new Mock<IMongoDbCommandContext>();
-
-        var handler = new SystemRoleCreateCoreHandler(createValidation, repository, mongo.Object);
+        var tagUniqueValidation = new SystemRoleTagUniqueValidation(repository);
+        var createValidation = new SystemRoleCreateValidation(nameUniqueValidation,tagUniqueValidation);
+        var handler = new SystemRoleCreateCoreHandler(createValidation, repository);
         var result = await handler.Handle(testObjectInput, CancellationToken.None);
 
         Assert.Equal(expected, result.Code);
