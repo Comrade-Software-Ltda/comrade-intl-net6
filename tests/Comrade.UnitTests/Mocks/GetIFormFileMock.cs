@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Comrade.UnitTests.Mocks;
 
-public class GetIFormFileMock
+public static class GetIFormFileMock
 {
     public static async Task<IFormFile> Execute()
     {
