@@ -23,7 +23,7 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
     public async Task<ISingleResult<Airplane>> CodeUniqueValidation(Guid id, string code)
     {
         var exists = await _context.Airplanes
-            .Where(p => p.Id != id && code.Equals(p.Code, StringComparison.Ordinal))
+            .Where(p => p.Id != id && code.Equals(p.Code))
             .AnyAsync().ConfigureAwait(false);
 
         return exists

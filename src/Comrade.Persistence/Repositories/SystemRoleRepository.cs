@@ -32,7 +32,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
     {
         var exists = await _context.SystemRoles
             .Where(p => name.ToUpper().Trim()
-                .Equals(p.Name.ToUpper().Trim(), StringComparison.Ordinal))
+                .Equals(p.Name.ToUpper().Trim()))
             .AnyAsync().ConfigureAwait(false);
         return exists
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
