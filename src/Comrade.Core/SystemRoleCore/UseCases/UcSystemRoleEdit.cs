@@ -17,12 +17,6 @@ public class UcSystemRoleEdit : UseCase, IUcSystemRoleEdit
 
     public async Task<ISingleResult<Entity>> Execute(SystemRoleEditCommand entity)
     {
-        var isValid = ValidateEntity(entity);
-        if (!isValid.Success)
-        {
-            return isValid;
-        }
-
         return await _mediator.Send(entity).ConfigureAwait(false);
     }
 }

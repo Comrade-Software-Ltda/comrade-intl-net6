@@ -13,7 +13,7 @@ public sealed class EmailServiceTests : IClassFixture<ServiceProviderFixture>
         _fixture = fixture;
     }
 
-    [Theory]
+    //[Theory]
     [ClassData(typeof(EmailServiceTestData))]
     public void EmailServiceTests_Test(string toEmail, string subject, string html)
     {

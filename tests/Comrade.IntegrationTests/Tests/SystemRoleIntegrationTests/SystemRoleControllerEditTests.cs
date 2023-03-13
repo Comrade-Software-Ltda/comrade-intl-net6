@@ -1,7 +1,6 @@
 ﻿using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemRoleComponent.Contracts;
-using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemRoleTests.Bases;
 using Xunit;

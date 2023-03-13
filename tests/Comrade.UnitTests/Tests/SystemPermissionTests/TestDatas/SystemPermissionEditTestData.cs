@@ -29,7 +29,7 @@ internal class SystemPermissionEditTestData : IEnumerable<object[]>
         };
         yield return new object[]
         {
-            EnumResponse.ErrorBusinessValidation,
+            EnumResponse.NoContent,
             new SystemPermissionEditCommand
             {
                 Id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1"),

@@ -7,6 +7,5 @@ public class SystemRoleEditValidation : SystemRoleValidation<SystemRoleEditDto>
     public SystemRoleEditValidation()
     {
         ValidateName();
-        ValidateTag();
     }
 }

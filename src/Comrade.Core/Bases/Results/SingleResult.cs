@@ -10,15 +10,24 @@ public class SingleResult<TEntity> : ISingleResult<TEntity>
 {
     public SingleResult()
     {
-        Code = (int) EnumResponse.Ok;
+        Code = (int)EnumResponse.Ok;
         Success = true;
     }
 
     public SingleResult(IEnumerable<string> messages)
     {
-        Code = (int) EnumResponse.BadRequest;
+        Code = (int)EnumResponse.BadRequest;
         Success = false;
         Messages = messages;
+        Message = messages?.ToList().FirstOrDefault();
+    }
+
+    public SingleResult(int code, IEnumerable<string> messages)
+    {
+        Code = code;
+        Success = false;
+        Messages = messages;
+        Message = messages?.ToList().FirstOrDefault();
     }
 
 
@@ -31,7 +40,7 @@ public class SingleResult<TEntity> : ISingleResult<TEntity>
 
     public SingleResult(TEntity? data)
     {
-        Code = data == null ? (int) EnumResponse.NotFound : (int) EnumResponse.Ok;
+        Code = data == null ? (int)EnumResponse.NotFound : (int)EnumResponse.Ok;
         Success = data != null;
         Message = data == null
             ? BusinessMessage.MSG04
