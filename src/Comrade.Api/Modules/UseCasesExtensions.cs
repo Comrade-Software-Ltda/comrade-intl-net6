@@ -142,24 +142,32 @@ public static class UseCasesExtensions
         // Application - Handlers
         services.AddScoped<IRequestHandler<SystemRoleCreateDto, SingleResultDto<EntityDto>>, SystemRoleCreateHandler>();
         services.AddScoped<IRequestHandler<SystemRoleEditDto, SingleResultDto<EntityDto>>, SystemRoleEditHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleManagePermissionsDto,
+            SingleResultDto<EntityDto>>,SystemRoleManagePermissionsHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemRoleEdit, UcSystemRoleEdit>();
         services.AddScoped<IUcSystemRoleCreate, UcSystemRoleCreate>();
         services.AddScoped<IUcSystemRoleDelete, UcSystemRoleDelete>();
+        services.AddScoped<IUcSystemRoleManagePermissions, UcSystemRoleManagePermissions>();
 
         // Core - CoreHandlers
-        services
-            .AddScoped<IRequestHandler<SystemRoleCreateCommand, ISingleResult<Entity>>, SystemRoleCreateCoreHandler>();
-        services
-            .AddScoped<IRequestHandler<SystemRoleDeleteCommand, ISingleResult<Entity>>, SystemRoleDeleteCoreHandler>();
-        services.AddScoped<IRequestHandler<SystemRoleEditCommand, ISingleResult<Entity>>, SystemRoleEditCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleCreateCommand,
+            ISingleResult<Entity>>, SystemRoleCreateCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleDeleteCommand,
+            ISingleResult<Entity>>, SystemRoleDeleteCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleEditCommand,
+            ISingleResult<Entity>>, SystemRoleEditCoreHandler>();
+        services.AddScoped<IRequestHandler<SystemRoleManagePermissionsCommand,
+            ISingleResult<Entity>>, SystemRoleManagePermissionsCoreHandler>();
 
         // Core - Validations
         services.AddScoped<ISystemRoleEditValidation, SystemRoleEditValidation>();
         services.AddScoped<ISystemRoleDeleteValidation, SystemRoleDeleteValidation>();
         services.AddScoped<ISystemRoleCreateValidation, SystemRoleCreateValidation>();
+        services.AddScoped<ISystemRoleManagePermissionsValidation, SystemRoleManagePermissionsValidation>();
         services.AddScoped<ISystemRoleNameUniqueValidation, SystemRoleNameUniqueValidation>();
+        services.AddScoped<ISystemRoleTagUniqueValidation, SystemRoleTagUniqueValidation>();
 
         #endregion
 

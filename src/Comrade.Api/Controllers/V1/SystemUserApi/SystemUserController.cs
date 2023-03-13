@@ -158,7 +158,7 @@ public class SystemUserController : ControllerBase
         }
     }
 
-    [HttpPut("manage")]
+    [HttpPut("manage-roles")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
     public async Task<IActionResult> ManageRoles([FromBody] [Required] SystemUserManageRolesDto dto)
     {

@@ -49,7 +49,6 @@ public class
         _systemUserRepository.Update(user);
         await _systemUserRepository.CommitTransactionAsync().ConfigureAwait(false);
 
-        return new CreateResult<Entity>(true,
-            BusinessMessage.MSG01);
+        return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }
 }

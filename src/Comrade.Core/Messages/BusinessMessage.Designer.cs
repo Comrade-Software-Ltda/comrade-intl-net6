@@ -151,7 +151,7 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registro já exists com mesmo nome, por favor informe outro nome..
+        ///   Looks up a localized string similar to Outro registro já existe com o mesmo nome, por favor informe outro nome..
         /// </summary>
         public static string MSG10 {
             get {
@@ -160,7 +160,7 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registro já existe com a mesma tag, por favor informe outra tag..
+        ///   Looks up a localized string similar to Outro registro já existe com a mesma tag, por favor informe outra tag..
         /// </summary>
         public static string MSG11 {
             get {
@@ -169,7 +169,7 @@ namespace Comrade.Core.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Já existe um menu cadastrado com esse nome..
+        ///   Looks up a localized string similar to Já existe um menu cadastrado com essa rota..
         /// </summary>
         public static string MSG20 {
             get {

@@ -22,7 +22,8 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
     {
         var testObject = new SystemRoleCreateDto
         {
-            Name = "ROLE"
+            Name = "ROLE",
+            Tag = "TAG_ROLE"
         };
         var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
             _fixture.MongoDbContextFixture, _fixture.Mediator);
@@ -54,7 +55,8 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
     {
         var testObject = new SystemRoleCreateDto
         {
-            Name = " aDm "
+            Name = " aDm ",
+            Tag = "TAG"
         };
         var controller = SystemRoleInjectionController.GetSystemRoleController(_fixture.SqlContextFixture,
             _fixture.MongoDbContextFixture, _fixture.Mediator);
@@ -63,8 +65,9 @@ public sealed class SystemRoleControllerCreateTests : IClassFixture<ServiceProvi
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(409, actualResultValue?.Code);
-            Assert.Equal(BusinessMessage.MSG10, actualResultValue?.Message);
+            Assert.Equal(409, actualResultValue.Code);
+            Assert.NotNull(actualResultValue.Messages);
+            Assert.True(actualResultValue.Messages.Contains(BusinessMessage.MSG10));
         }
     }
 }

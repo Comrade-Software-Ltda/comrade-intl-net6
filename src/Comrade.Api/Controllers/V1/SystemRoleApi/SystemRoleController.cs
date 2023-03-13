@@ -102,4 +102,36 @@ public class SystemRoleController : ComradeController
             return StatusCode(StatusCodes.Status500InternalServerError, new SingleResultDto<EntityDto>(e));
         }
     }
+
+    [HttpGet("get-all-with-permissions")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
+    public async Task<IActionResult> GetAllWithPermissions([FromQuery] PaginationQuery? paginationQuery)
+    {
+        try
+        {
+            var result = await _query.GetAllWithPermissions(paginationQuery).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
+    [HttpPut("manage-permissions")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
+    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemRoleManagePermissionsDto dto)
+    {
+        try
+        {
+            var result = await _command.ManagePermissions(dto).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
 }

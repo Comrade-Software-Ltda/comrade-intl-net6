@@ -77,10 +77,15 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
     [Fact]
     public async Task SystemPermissionController_Create_DuplicateTag_Error()
     {
+        var anySystemPermission = _fixture.SqlContextFixture.SystemPermissions
+            .FirstOrDefault();
+        Assert.NotNull(anySystemPermission);
+        var duplicatedTag = anySystemPermission.Tag;
+
         var testObject = new SystemPermissionCreateDto
         {
             Name = "ACESSO",
-            Tag = "  ace  "
+            Tag = duplicatedTag
         };
         var controller = SystemPermissionInjectionController.GetSystemPermissionController(_fixture.SqlContextFixture,
             _fixture.MongoDbContextFixture, _fixture.Mediator);
@@ -89,8 +94,8 @@ public sealed class SystemPermissionControllerCreateTests : IClassFixture<Servic
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(409, actualResultValue?.Code);
-            Assert.Equal(BusinessMessage.MSG11, actualResultValue?.Message);
+            Assert.Equal(409, actualResultValue.Code);
+            Assert.Equal(BusinessMessage.MSG11, actualResultValue.Message);
         }
     }
 }

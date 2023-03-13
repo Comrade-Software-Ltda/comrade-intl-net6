@@ -43,6 +43,32 @@ public class SystemRoleQuery : ISystemRoleQuery
         return new PageResultDto<SystemRoleDto>(paginationFilter, list);
     }
 
+    public async Task<IPageResultDto<SystemRoleWithPermissionsDto>> GetAllWithPermissions(
+        PaginationQuery? paginationQuery = null)
+    {
+        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+
+        List<SystemRoleWithPermissionsDto> list;
+        if (paginationFilter == null)
+        {
+            list = await Task.Run(() => _repository.GetAllAsNoTracking()
+                .ProjectTo<SystemRoleWithPermissionsDto>(_mapper.ConfigurationProvider)
+                .ToList()).ConfigureAwait(false);
+
+            return new PageResultDto<SystemRoleWithPermissionsDto>(list);
+        }
+
+        var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+            .Take(paginationFilter.PageSize)
+            .ProjectTo<SystemRoleWithPermissionsDto>(_mapper.ConfigurationProvider)
+            .ToList()).ConfigureAwait(false);
+
+        return new PageResultDto<SystemRoleWithPermissionsDto>(paginationFilter, list);
+    }
+
+
     public async Task<ListResultDto<LookupDto>> FindByName(string name)
     {
         var list = await Task.Run(() => _repository.FindByName(name)

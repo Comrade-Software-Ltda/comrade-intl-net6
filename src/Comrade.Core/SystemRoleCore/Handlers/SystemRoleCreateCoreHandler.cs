@@ -5,6 +5,7 @@ using Comrade.Core.Messages;
 using Comrade.Core.SystemRoleCore.Commands;
 using Comrade.Core.SystemRoleCore.Validations;
 using Comrade.Domain.Bases;
+using Comrade.Domain.Models;
 using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.Handlers;
@@ -12,15 +13,13 @@ namespace Comrade.Core.SystemRoleCore.Handlers;
 public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateCommand, ISingleResult<Entity>>
 {
     private readonly ISystemRoleCreateValidation _createValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
     private readonly ISystemRoleRepository _repository;
 
-    public SystemRoleCreateCoreHandler(ISystemRoleCreateValidation createValidation, ISystemRoleRepository repository,
-        IMongoDbCommandContext mongoDbContext)
+    public SystemRoleCreateCoreHandler(ISystemRoleCreateValidation createValidation,
+        ISystemRoleRepository repository)
     {
         _createValidation = createValidation;
         _repository = repository;
-        _mongoDbContext = mongoDbContext;
     }
 
     public async Task<ISingleResult<Entity>> Handle(SystemRoleCreateCommand request,
@@ -33,6 +32,7 @@ public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateComma
         }
 
         HydrateValues(request);
+
         await _repository.Add(request).ConfigureAwait(false);
         await _repository.BeginTransactionAsync().ConfigureAwait(false);
         await _repository.Add(request).ConfigureAwait(false);
@@ -40,8 +40,9 @@ public class SystemRoleCreateCoreHandler : IRequestHandler<SystemRoleCreateComma
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }
 
-    private static void HydrateValues(SystemRoleCreateCommand target)
+    private static void HydrateValues(SystemRole target)
     {
         target.Name = target.Name.ToUpper(CultureInfo.CurrentCulture).Trim();
+        target.Tag = target.Tag.ToUpper(CultureInfo.CurrentCulture).Trim();
     }
 }

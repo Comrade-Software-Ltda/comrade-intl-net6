@@ -32,4 +32,9 @@ public class SystemRoleCommand : ISystemRoleCommand
         var result = await _deleteUc.Execute(id).ConfigureAwait(false);
         return new SingleResultDto<EntityDto>(result);
     }
+
+    public async Task<ISingleResultDto<EntityDto>> ManagePermissions(SystemRoleManagePermissionsDto dto)
+    {
+        return await _mediator.Send(dto).ConfigureAwait(false);
+    }
 }

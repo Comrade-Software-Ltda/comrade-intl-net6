@@ -7,5 +7,6 @@ public class SystemRoleCreateValidation : SystemRoleValidation<SystemRoleCreateD
     public SystemRoleCreateValidation()
     {
         ValidateName();
+        ValidateTag();
     }
 }

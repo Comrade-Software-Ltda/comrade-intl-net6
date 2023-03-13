@@ -1,14 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemUserComponent.Contracts;
-
-public class SystemUserManagePermissionsDto : EntityDto, IRequest<SingleResultDto<EntityDto>>
+namespace Comrade.Application.Components.SystemUserComponent.Contracts
 {
-    public SystemUserManagePermissionsDto(ICollection<Guid> permissions)
+    public class SystemUserManagePermissionsDto : EntityDto, IRequest<SingleResultDto<EntityDto>>
     {
-        Permissions = permissions;
+        public ICollection<Guid> SystemPermissionIds { get; set; }
     }
-
-    public ICollection<Guid> Permissions { get; set; }
 }

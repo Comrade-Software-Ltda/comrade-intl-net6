@@ -30,7 +30,7 @@ public class
     {
         var user = await _systemUserRepository.GetByIdIncludeRoles(request.Id).ConfigureAwait(false);
         var roles = _systemRoleRepository.GetAll()
-            .Where(role => request.Roles.Contains(role.Id)).ToList();
+            .Where(role => request.SystemRoleIds.Contains(role.Id)).ToList();
 
         if (user == null)
             return new DeleteResult<Entity>(false,

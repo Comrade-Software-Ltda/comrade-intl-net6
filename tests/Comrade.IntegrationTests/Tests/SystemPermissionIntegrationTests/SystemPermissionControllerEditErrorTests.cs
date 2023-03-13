@@ -72,8 +72,8 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
     public async Task SystemPermissionController_Edit_DuplicateName_Error()
     {
         var id = new Guid("6adf10d0-1b83-46f2-91eb-0c64f1c638a1");
-        const string changeName = "ACESSO NOVO";
-        const string changeTag = "  ace  ";
+        const string changeName = "READ";
+        const string changeTag = "READ";
         var testObject = new SystemPermissionEditDto
         {
             Id = id,
@@ -87,12 +87,13 @@ public class SystemPermissionControllerEditErrorTests : IClassFixture<ServicePro
         {
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
-            Assert.Equal(409, actualResultValue?.Code);
+            Assert.Equal(409, actualResultValue.Code);
         }
 
         var repository = new SystemPermissionRepository(_fixture.SqlContextFixture);
         var user = await repository.GetById(id);
-        Assert.NotEqual(changeName, user!.Name);
-        Assert.NotEqual(changeTag, user!.Tag);
+        Assert.NotNull(user);
+        Assert.NotEqual(changeName, user.Name);
+        Assert.NotEqual(changeTag, user.Tag);
     }
 }
