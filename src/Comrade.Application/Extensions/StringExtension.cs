@@ -13,7 +13,7 @@ public static class StringExtension
                     string.Join(" ", pattern.Matches(source))
                         .ToLower(CultureInfo.CurrentCulture)
                 )
-                .Replace(@" ", "", StringComparison.CurrentCulture)
+                .Replace(@" ", "")
                 .Select((x, i) => i == 0 ? char.ToLower(x, CultureInfo.CurrentCulture) : x)
                 .ToArray()
         );
@@ -44,7 +44,7 @@ public static class StringExtension
                     string.Join(" ", pattern.Matches(source))
                         .ToLower(CultureInfo.CurrentCulture)
                 )
-                .Replace(@" ", "", StringComparison.CurrentCulture)
+                .Replace(@" ", "")
                 .Select((x, i) => i == 0 ? char.ToUpper(x, CultureInfo.CurrentCulture) : x)
                 .ToArray()
         );
