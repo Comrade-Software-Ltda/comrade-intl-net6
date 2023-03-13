@@ -27,7 +27,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             .Select(s => new Lookup {Key = s.Id, Value = s.Name.ToUpper().Trim()});
         return result;
     }
-    
+
     public async Task<ISingleResult<SystemRole>> UniqueNameValidation(string name)
     {
         var exists = await _context.SystemRoles
@@ -36,7 +36,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<SystemRole>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
+            ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
             : new SingleResult<SystemRole>();
     }
 
@@ -48,7 +48,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             .AnyAsync().ConfigureAwait(false);
 
         return exists
-            ? new SingleResult<SystemRole>((int)EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
+            ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemRole>();
     }
 

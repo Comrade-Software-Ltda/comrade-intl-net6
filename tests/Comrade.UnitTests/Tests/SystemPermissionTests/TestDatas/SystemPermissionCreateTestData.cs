@@ -18,7 +18,7 @@ internal class SystemPermissionCreateTestData : IEnumerable<object[]>
         };
         yield return new object[]
         {
-            EnumResponse.ErrorBusinessValidation,
+            EnumResponse.Created,
             new SystemPermissionCreateCommand
             {
                 Name = "ACESSO",

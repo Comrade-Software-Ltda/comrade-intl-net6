@@ -52,6 +52,7 @@
 
 	<ItemGroup>
 		<Folder Include="Helpers\" />
+		<Folder Include="Tests\FunctionIntegrationTests\" />
 	</ItemGroup>
 
 	<ProjectExtensions>

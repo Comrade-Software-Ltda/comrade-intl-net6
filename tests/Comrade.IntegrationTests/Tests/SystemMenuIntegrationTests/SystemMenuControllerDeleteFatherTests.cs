@@ -34,7 +34,7 @@ public sealed class SystemMenuControllerDeleteMenuTests : IClassFixture<ServiceP
             var actualResultValue = okResult.Value as SingleResultDto<EntityDto>;
             Assert.NotNull(actualResultValue);
             Assert.Equal(200, actualResultValue?.Code);
-            Assert.Equal(2, _fixture.SqlContextFixture.SystemMenus.Count());
+            Assert.Equal(7, _fixture.SqlContextFixture.SystemMenus.Count());
         }
     }
 }

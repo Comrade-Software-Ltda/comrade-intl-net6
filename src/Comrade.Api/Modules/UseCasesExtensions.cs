@@ -143,7 +143,7 @@ public static class UseCasesExtensions
         services.AddScoped<IRequestHandler<SystemRoleCreateDto, SingleResultDto<EntityDto>>, SystemRoleCreateHandler>();
         services.AddScoped<IRequestHandler<SystemRoleEditDto, SingleResultDto<EntityDto>>, SystemRoleEditHandler>();
         services.AddScoped<IRequestHandler<SystemRoleManagePermissionsDto,
-            SingleResultDto<EntityDto>>,SystemRoleManagePermissionsHandler>();
+            SingleResultDto<EntityDto>>, SystemRoleManagePermissionsHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcSystemRoleEdit, UcSystemRoleEdit>();

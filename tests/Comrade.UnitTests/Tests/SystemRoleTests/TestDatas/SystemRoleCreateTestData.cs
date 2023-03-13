@@ -12,7 +12,8 @@ internal class SystemRoleCreateTestData : IEnumerable<object[]>
             EnumResponse.Created,
             new SystemRoleCreateCommand
             {
-                Name = "ROLE"
+                Name = "ROLE",
+                Tag = "Tag"
             }
         };
         yield return new object[]

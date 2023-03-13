@@ -10,10 +10,11 @@ namespace Comrade.Application.Components.SystemRoleComponent.Handlers;
 public class SystemRoleManagePermissionsHandler : IRequestHandler<SystemRoleManagePermissionsDto,
     SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemRoleManagePermissions _ucSystemRoleManagePermissions;
     private readonly IMapper _mapper;
+    private readonly IUcSystemRoleManagePermissions _ucSystemRoleManagePermissions;
 
-    public SystemRoleManagePermissionsHandler(IMapper mapper, IUcSystemRoleManagePermissions ucSystemRoleManagePermissions)
+    public SystemRoleManagePermissionsHandler(IMapper mapper,
+        IUcSystemRoleManagePermissions ucSystemRoleManagePermissions)
     {
         _mapper = mapper;
         _ucSystemRoleManagePermissions = ucSystemRoleManagePermissions;
