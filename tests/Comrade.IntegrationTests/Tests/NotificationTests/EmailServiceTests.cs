@@ -14,7 +14,7 @@ public sealed class EmailServiceTests : IClassFixture<ServiceProviderFixture>
     }
 
     //[Theory]
-    [ClassData(typeof(EmailServiceTestData))]
+    //[ClassData(typeof(EmailServiceTestData))]
     public void EmailServiceTests_Test(string toEmail, string subject, string html)
     {
         var mailKitSettings = _fixture.Sp.GetRequiredService<IMailKitSettings>();
