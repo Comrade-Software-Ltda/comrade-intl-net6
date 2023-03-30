@@ -121,7 +121,7 @@ public class SystemRoleController : ComradeController
 
     [HttpPut("manage-permissions")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemRoleManagePermissionsDto dto)
+    public async Task<IActionResult> ManagePermissions([FromBody] [Required] SystemRoleManagePermissionsDto dto)
     {
         try
         {

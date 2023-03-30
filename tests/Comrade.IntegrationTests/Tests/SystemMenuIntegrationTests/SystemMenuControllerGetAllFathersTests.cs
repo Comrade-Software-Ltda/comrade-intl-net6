@@ -1,4 +1,3 @@
-using System;
 using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemMenuComponent.Contracts;
 using Comrade.Application.Paginations;

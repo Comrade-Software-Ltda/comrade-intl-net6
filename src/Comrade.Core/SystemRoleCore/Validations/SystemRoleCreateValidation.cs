@@ -32,9 +32,9 @@ public class SystemRoleCreateValidation : ISystemRoleCreateValidation
 
         if (registerName.Success && registerTag.Success)
             return new SingleResult<Entity>(entity);
-        
-        var result = new SingleResult<Entity>((int) EnumResponse.ErrorBusinessValidation,messages);
-        
+
+        var result = new SingleResult<Entity>((int) EnumResponse.ErrorBusinessValidation, messages);
+
         return result;
     }
 }

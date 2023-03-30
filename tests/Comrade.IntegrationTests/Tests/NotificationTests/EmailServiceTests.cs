@@ -1,5 +1,4 @@
 using Comrade.Application.Notifications.Email;
-using Comrade.IntegrationTests.Tests.NotificationTests.TestDatas;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.NotificationTests;

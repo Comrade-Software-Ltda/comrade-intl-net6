@@ -42,18 +42,23 @@ public class BotMovement
                     return true;
                 }
 
-                if (item.XAxis < botMovementInput.FinalPositionX)
-                {
-                    positions.Push((item.XAxis + item.YAxis, item.YAxis));
-                }
-
-                if (item.YAxis < botMovementInput.FinalPositionY)
-                {
-                    positions.Push((item.XAxis, item.XAxis + item.YAxis));
-                }
+                NewMethod(botMovementInput, item, positions);
             }
         }
 
         return false;
+    }
+
+    private static void NewMethod(BotMovementInput botMovementInput, (int XAxis, int YAxis) item, Stack<(int XAxis, int YAxis)> positions)
+    {
+        if (item.XAxis < botMovementInput.FinalPositionX)
+        {
+            positions.Push((item.XAxis + item.YAxis, item.YAxis));
+        }
+
+        if (item.YAxis < botMovementInput.FinalPositionY)
+        {
+            positions.Push((item.XAxis, item.XAxis + item.YAxis));
+        }
     }
 }

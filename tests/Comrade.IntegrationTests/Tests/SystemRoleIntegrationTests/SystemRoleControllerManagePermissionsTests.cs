@@ -66,7 +66,7 @@ public class SystemRoleControllerManagePermissions : IClassFixture<ServiceProvid
         return new SystemRoleManagePermissionsDto
         {
             Id = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-            SystemPermissionIds = new List<Guid>{Guid.Parse("6adf10d0-1b83-46f2-91eb-0c64f1c638a1") }
+            SystemPermissionIds = new List<Guid> {Guid.Parse("6adf10d0-1b83-46f2-91eb-0c64f1c638a1")}
         };
     }
 }
