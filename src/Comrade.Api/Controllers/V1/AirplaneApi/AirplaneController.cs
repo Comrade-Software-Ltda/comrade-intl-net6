@@ -36,7 +36,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -56,7 +56,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneQuery.GetByIdDefault(airplaneId).ConfigureAwait(false);
+            var result = await _airplaneQuery.GetByIdDefault(airplaneId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -72,7 +72,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Create(dto).ConfigureAwait(false);
+            var result = await _airplaneCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -88,7 +88,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Edit(dto).ConfigureAwait(false);
+            var result = await _airplaneCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -104,7 +104,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Delete(airplaneId).ConfigureAwait(false);
+            var result = await _airplaneCommand.Delete(airplaneId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

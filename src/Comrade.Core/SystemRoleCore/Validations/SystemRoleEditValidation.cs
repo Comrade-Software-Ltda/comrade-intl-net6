@@ -16,7 +16,7 @@ public class SystemRoleEditValidation : ISystemRoleEditValidation
 
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity, SystemRole? recordExists)
     {
-        var register = await _systemRoleNameUniqueValidation.Execute(entity).ConfigureAwait(false);
+        var register = await _systemRoleNameUniqueValidation.Execute(entity);
         return register.Success ? new SingleResult<Entity>(recordExists) : register;
     }
 }

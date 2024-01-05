@@ -24,7 +24,7 @@ public class SystemRoleManagePermissionsHandler : IRequestHandler<SystemRoleMana
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemRoleManagePermissionsCommand>(request);
-        var result = await _ucSystemRoleManagePermissions.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _ucSystemRoleManagePermissions.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

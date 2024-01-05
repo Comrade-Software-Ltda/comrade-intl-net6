@@ -17,6 +17,6 @@ public class UcSystemUserManagePermissions : UseCase, IUcSystemUserManagePermiss
 
     public async Task<ISingleResult<Entity>> Execute(SystemUserManagePermissionsCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

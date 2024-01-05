@@ -23,6 +23,6 @@ public class UcAirplaneEdit : UseCase, IUcAirplaneEdit
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

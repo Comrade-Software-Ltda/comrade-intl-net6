@@ -21,17 +21,17 @@ public class AirplaneCommand : IAirplaneCommand
 
     public async Task<ISingleResultDto<EntityDto>> Create(AirplaneCreateDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(AirplaneEditDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteAirplane.Execute(id).ConfigureAwait(false);
+        var result = await _deleteAirplane.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 }

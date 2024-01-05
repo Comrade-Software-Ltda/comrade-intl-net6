@@ -31,7 +31,7 @@ public class CommonController : Controller
         try
         {
             var service = _serviceProvider.GetService<ILookupService<SystemUser>>()!;
-            var result = await service.GetLookup().ConfigureAwait(false);
+            var result = await service.GetLookup();
 
             return Ok(new ListResultDto<LookupDto>(result));
         }
@@ -51,7 +51,7 @@ public class CommonController : Controller
             var service = _serviceProvider.GetService<ILookupService<SystemUser>>()!;
 
             Expression<Func<SystemUser, bool>> expression = x => x.Name.Contains(name);
-            var result = await service.GetLookup(expression).ConfigureAwait(false);
+            var result = await service.GetLookup(expression);
 
             return Ok(new ListResultDto<LookupDto>(result));
         }
@@ -68,7 +68,7 @@ public class CommonController : Controller
     {
         try
         {
-            var result = await _systemUserQuery.FindByName(name).ConfigureAwait(false);
+            var result = await _systemUserQuery.FindByName(name);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

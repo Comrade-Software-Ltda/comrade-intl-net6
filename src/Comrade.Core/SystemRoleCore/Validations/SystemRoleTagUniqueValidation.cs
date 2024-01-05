@@ -16,7 +16,7 @@ public class SystemRoleTagUniqueValidation : ISystemRoleTagUniqueValidation
 
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity)
     {
-        var result = await _repository.UniqueTagValidation(entity.Tag).ConfigureAwait(false);
+        var result = await _repository.UniqueTagValidation(entity.Tag);
         return result.Success
             ? new SingleResult<Entity>(entity)
             : new SingleResult<Entity>(result.Code, result.Message);

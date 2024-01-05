@@ -23,7 +23,7 @@ public class
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemUserCreateCommand>(request);
-        var result = await _createSystemUser.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _createSystemUser.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

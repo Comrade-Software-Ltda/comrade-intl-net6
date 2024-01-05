@@ -22,7 +22,7 @@ public class SystemUserManageRolesHandler : IRequestHandler<SystemUserManageRole
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemUserManageRolesCommand>(request);
-        var result = await _ucSystemUserManageRoles.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _ucSystemUserManageRoles.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

@@ -29,7 +29,7 @@ public class TokenController : ControllerBase
     {
         try
         {
-            var result = await _authenticationCommand.GenerateToken(dto).ConfigureAwait(false);
+            var result = await _authenticationCommand.GenerateToken(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

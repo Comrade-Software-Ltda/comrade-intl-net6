@@ -19,17 +19,17 @@ public class SystemPermissionCommand : ISystemPermissionCommand
 
     public async Task<ISingleResultDto<EntityDto>> Create(SystemPermissionCreateDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(SystemPermissionEditDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteUc.Execute(id).ConfigureAwait(false);
+        var result = await _deleteUc.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 }

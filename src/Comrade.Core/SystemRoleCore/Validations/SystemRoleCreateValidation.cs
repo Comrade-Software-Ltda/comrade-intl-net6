@@ -20,8 +20,8 @@ public class SystemRoleCreateValidation : ISystemRoleCreateValidation
 
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity)
     {
-        var registerName = await _systemRoleNameUniqueValidation.Execute(entity).ConfigureAwait(false);
-        var registerTag = await _systemRoleTagUniqueValidation.Execute(entity).ConfigureAwait(false);
+        var registerName = await _systemRoleNameUniqueValidation.Execute(entity);
+        var registerTag = await _systemRoleTagUniqueValidation.Execute(entity);
 
         var messages = new List<string>();
 

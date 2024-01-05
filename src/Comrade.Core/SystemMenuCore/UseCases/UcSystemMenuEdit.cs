@@ -23,6 +23,6 @@ public class UcSystemMenuEdit : UseCase, IUcSystemMenuEdit
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

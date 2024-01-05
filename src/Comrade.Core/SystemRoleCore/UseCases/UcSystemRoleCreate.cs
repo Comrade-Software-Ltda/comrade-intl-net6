@@ -23,6 +23,6 @@ public class UcSystemRoleCreate : UseCase, IUcSystemRoleCreate
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

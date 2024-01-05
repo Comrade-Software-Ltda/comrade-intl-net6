@@ -33,7 +33,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
         var exists = await _context.SystemRoles
             .Where(p => name.ToUpper().Trim()
                 .Equals(p.Name.ToUpper().Trim()))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
@@ -45,7 +45,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
         var exists = await _context.SystemRoles
             .Where(p => tag.ToUpper().Trim()
                 .Equals(p.Tag.ToUpper().Trim(), StringComparison.Ordinal))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
@@ -59,6 +59,6 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
             .Include(x => x.SystemRolePermissions)
             .Include(x => x.SystemPermissions)
             .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+            ;
     }
 }

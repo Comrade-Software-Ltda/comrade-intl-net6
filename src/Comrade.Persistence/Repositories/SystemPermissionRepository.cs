@@ -23,7 +23,7 @@ public class SystemPermissionRepository : Repository<SystemPermission>, ISystemP
         var exists = await _context.SystemPermissions
             .Where(p => tag.ToUpper().Trim()
                 .Equals(p.Tag.ToUpper().Trim()))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
         return exists
             ? new SingleResult<SystemPermission>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemPermission>();

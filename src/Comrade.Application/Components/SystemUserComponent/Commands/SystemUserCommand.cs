@@ -20,27 +20,27 @@ public class SystemUserCommand : ISystemUserCommand
 
     public async Task<ISingleResultDto<EntityDto>> Create(SystemUserCreateDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(SystemUserEditDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteSystemUser.Execute(id).ConfigureAwait(false);
+        var result = await _deleteSystemUser.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 
     public async Task<ISingleResultDto<EntityDto>> ManagePermissions(SystemUserManagePermissionsDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> ManageRoles(SystemUserManageRolesDto dto)
     {
-        return await _mediator.Send(dto).ConfigureAwait(false);
+        return await _mediator.Send(dto);
     }
 }

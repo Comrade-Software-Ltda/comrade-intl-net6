@@ -22,7 +22,7 @@ public class SystemMenuEditHandler : IRequestHandler<SystemMenuEditDto, SingleRe
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemMenuEditCommand>(request);
-        var result = await _editSystemMenu.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _editSystemMenu.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

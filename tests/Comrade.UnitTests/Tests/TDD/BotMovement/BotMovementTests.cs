@@ -33,7 +33,7 @@ public class BotMovementTests
             .Returns(true);
 
         var inputValue = new BotMovementInput(1, 1, 104, 61);
-        
+
         var botMovement = new BotMovement(_botMovementCheckIfIsAlreadyAtTheGoal.Object,
             _botMovementCheckValidInitialPosition.Object);
 

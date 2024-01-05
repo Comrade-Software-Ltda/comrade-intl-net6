@@ -25,7 +25,7 @@ public class
     public async Task<ISingleResult<Entity>> Handle(SystemMenuDeleteCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -41,9 +41,9 @@ public class
 
         var systemMenuId = recordExists.Id;
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Remove(systemMenuId);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

@@ -23,6 +23,6 @@ public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

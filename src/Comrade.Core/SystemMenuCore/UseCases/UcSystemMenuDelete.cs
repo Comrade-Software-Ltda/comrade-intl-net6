@@ -18,6 +18,6 @@ public class UcSystemMenuDelete : UseCase, IUcSystemMenuDelete
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemMenuDeleteCommand {Id = id};
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

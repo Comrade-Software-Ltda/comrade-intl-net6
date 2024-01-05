@@ -17,7 +17,7 @@ public class AirplaneEditValidation : IAirplaneEditValidation
     public async Task<ISingleResult<Entity>> Execute(Airplane entity, Airplane? recordExists)
     {
         var registerSameCode =
-            await _airplaneCodeUniqueValidation.Execute(entity).ConfigureAwait(false);
+            await _airplaneCodeUniqueValidation.Execute(entity);
         if (!registerSameCode.Success)
         {
             return registerSameCode;

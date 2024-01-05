@@ -34,7 +34,7 @@ public class SystemUserQuery : ISystemUserQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<SystemUserDto>(list);
         }
@@ -44,7 +44,7 @@ public class SystemUserQuery : ISystemUserQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<SystemUserDto>(paginationFilter, list);
     }
@@ -53,21 +53,21 @@ public class SystemUserQuery : ISystemUserQuery
     {
         var list = await Task.Run(() => _repository.FindByName(name)
             .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new ListResultDto<LookupDto>(list);
     }
 
     public async Task<ISingleResultDto<SystemUserDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id).ConfigureAwait(false);
+        var entity = await _repository.GetById(id);
         var dto = _mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemUserDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemUser?>(id).ConfigureAwait(false);
+        var entity = await _mongoDbQueryContext.GetById<SystemUser?>(id);
         var dto = _mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
@@ -82,7 +82,7 @@ public class SystemUserQuery : ISystemUserQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<SystemUserWithPermissionsDto>(list);
         }
@@ -92,7 +92,7 @@ public class SystemUserQuery : ISystemUserQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<SystemUserWithPermissionsDto>(paginationFilter, list);
     }
@@ -107,7 +107,7 @@ public class SystemUserQuery : ISystemUserQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<SystemUserWithRolesDto>(list);
         }
@@ -117,7 +117,7 @@ public class SystemUserQuery : ISystemUserQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<SystemUserWithRolesDto>(paginationFilter, list);
     }

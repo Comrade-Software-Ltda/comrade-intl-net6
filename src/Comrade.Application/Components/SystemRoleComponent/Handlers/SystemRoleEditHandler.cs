@@ -21,7 +21,7 @@ public class SystemRoleEditHandler : IRequestHandler<SystemRoleEditDto, SingleRe
     public async Task<SingleResultDto<EntityDto>> Handle(SystemRoleEditDto request, CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemRoleEditCommand>(request);
-        var result = await _editUc.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _editUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

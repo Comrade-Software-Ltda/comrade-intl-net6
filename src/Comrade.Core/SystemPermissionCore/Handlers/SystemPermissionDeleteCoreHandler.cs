@@ -27,7 +27,7 @@ public class SystemPermissionDeleteCoreHandler : IRequestHandler<SystemPermissio
     public async Task<ISingleResult<Entity>> Handle(SystemPermissionDeleteCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(request.Id);
         if (recordExists is null)
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
@@ -41,9 +41,9 @@ public class SystemPermissionDeleteCoreHandler : IRequestHandler<SystemPermissio
 
         var id = recordExists.Id;
         _repository.Remove(id);
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Remove(id);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
         _mongoDbContext.DeleteOne<SystemPermission>(id);
         return new DeleteResult<Entity>(true, BusinessMessage.MSG03);
     }

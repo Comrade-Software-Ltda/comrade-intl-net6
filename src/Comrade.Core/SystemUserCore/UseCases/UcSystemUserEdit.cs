@@ -23,6 +23,6 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

@@ -22,17 +22,17 @@ public class SystemRoleComponentTests : IClassFixture<CustomWebApplicationFactor
 
         var actualResponse = await client
             .GetAsync("/api/v1/system-role/get-all")
-            .ConfigureAwait(false);
+            ;
 
         var actualResponseString = await actualResponse.Content
             .ReadAsStringAsync()
-            .ConfigureAwait(false);
+            ;
 
         Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
-        var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
+        var jsonResponse = await JObject.LoadAsync(reader);
 
         Assert.Equal(JTokenType.String, jsonResponse["data"]![0]!["name"]!.Type);
     }

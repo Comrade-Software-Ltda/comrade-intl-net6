@@ -26,13 +26,13 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
 
     public async Task<ISingleResult<Entity>> Handle(SystemRoleEditCommand request, CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(request.Id);
         if (recordExists is null)
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
 
-        var result = await _editValidation.Execute(request, recordExists).ConfigureAwait(false);
+        var result = await _editValidation.Execute(request, recordExists);
         if (!result.Success)
         {
             return result;
@@ -41,9 +41,9 @@ public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, 
         HydrateValues(recordExists, request);
         _repository.Update(recordExists);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Update(recordExists);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
 
         _mongoDbContext.ReplaceOne(recordExists);
 

@@ -17,6 +17,6 @@ public class UcForgotPassword : UseCase, IUcForgotPassword
 
     public async Task<ISingleResult<Entity>> Execute(ForgotPasswordCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

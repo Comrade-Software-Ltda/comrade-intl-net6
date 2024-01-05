@@ -28,7 +28,7 @@ public class
     public async Task<ISingleResult<Entity>> Handle(SystemUserManagePermissionsCommand request,
         CancellationToken cancellationToken)
     {
-        var user = await _systemUserRepository.GetByIdIncludePermissions(request.Id).ConfigureAwait(false);
+        var user = await _systemUserRepository.GetByIdIncludePermissions(request.Id);
         var permissions = _systemPermissionRepository.GetAll()
             .Where(permission => request.SystemPermissionIds.Contains(permission.Id)).ToList();
 
@@ -45,9 +45,9 @@ public class
 
         user.SystemPermissions = permissions;
 
-        await _systemUserRepository.BeginTransactionAsync().ConfigureAwait(false);
+        await _systemUserRepository.BeginTransactionAsync();
         _systemUserRepository.Update(user);
-        await _systemUserRepository.CommitTransactionAsync().ConfigureAwait(false);
+        await _systemUserRepository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }

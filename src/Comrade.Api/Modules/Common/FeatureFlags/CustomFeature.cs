@@ -49,7 +49,7 @@ public enum CustomFeature
     ///     Get Common.
     /// </summary>
     Common,
-    
+
     /// <summary>
     ///     Use Swagger.
     /// </summary>

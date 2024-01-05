@@ -18,6 +18,6 @@ public class UcSystemRoleDelete : UseCase, IUcSystemRoleDelete
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemRoleDeleteCommand {Id = id};
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

@@ -17,7 +17,7 @@ public class AirplaneCodeUniqueValidation : IAirplaneCodeUniqueValidation
     public async Task<ISingleResult<Entity>> Execute(Airplane entity)
     {
         var result = await _repository.CodeUniqueValidation(entity.Id, entity.Code)
-            .ConfigureAwait(false);
+            ;
 
         return new SingleResult<Entity>(entity);
     }

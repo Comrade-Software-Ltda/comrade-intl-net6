@@ -36,7 +36,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetAllMenus(paginationQuery).ConfigureAwait(false);
+            var result = await _systemMenuQuery.GetAllMenus(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -52,7 +52,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _systemMenuQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -68,7 +68,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetByIdDefault(systemMenuId).ConfigureAwait(false);
+            var result = await _systemMenuQuery.GetByIdDefault(systemMenuId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -84,7 +84,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Create(dto).ConfigureAwait(false);
+            var result = await _systemMenuCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -100,7 +100,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Edit(dto).ConfigureAwait(false);
+            var result = await _systemMenuCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -116,7 +116,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Delete(systemMenuId).ConfigureAwait(false);
+            var result = await _systemMenuCommand.Delete(systemMenuId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

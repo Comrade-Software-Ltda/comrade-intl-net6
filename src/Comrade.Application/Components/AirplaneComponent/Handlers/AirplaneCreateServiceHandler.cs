@@ -23,7 +23,7 @@ public class
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<AirplaneCreateCommand>(request);
-        var result = await _createAirplane.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _createAirplane.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

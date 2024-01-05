@@ -37,13 +37,13 @@ public class UcValidateLogin : IUcValidateLogin
                     Token = "",
                     Roles = roles
                 };
-                user.Token = await _generateToken.Execute(user).ConfigureAwait(false);
+                user.Token = await _generateToken.Execute(user);
 
                 return new SecurityResult(user);
             }
 
             return new SecurityResult(resultPassword.Code, resultPassword.Message);
-        }).ConfigureAwait(false);
+        });
 
         return result;
     }

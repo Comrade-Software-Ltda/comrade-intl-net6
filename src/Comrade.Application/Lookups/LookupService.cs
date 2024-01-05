@@ -21,7 +21,7 @@ public class LookupService<TEntity> : ILookupService<TEntity>
     {
         var list = await Task.Run(() => _repository.GetLookup()
             .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return list.OrderBy(x => x.Value).ToList();
     }
@@ -30,7 +30,7 @@ public class LookupService<TEntity> : ILookupService<TEntity>
     {
         var list = await Task.Run(() => _repository.GetLookup(predicate)
             .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return list;
     }

@@ -34,7 +34,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -51,7 +51,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetByIdDefault(systemUserId).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetByIdDefault(systemUserId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -67,7 +67,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Create(dto).ConfigureAwait(false);
+            var result = await _systemUserCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -83,7 +83,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Edit(dto).ConfigureAwait(false);
+            var result = await _systemUserCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -99,7 +99,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Delete(systemUserId).ConfigureAwait(false);
+            var result = await _systemUserCommand.Delete(systemUserId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -115,7 +115,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAllWithPermissions(paginationQuery).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetAllWithPermissions(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -132,7 +132,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.ManagePermissions(dto).ConfigureAwait(false);
+            var result = await _systemUserCommand.ManagePermissions(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -148,7 +148,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAllWithRoles(paginationQuery).ConfigureAwait(false);
+            var result = await _systemUserQuery.GetAllWithRoles(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -164,7 +164,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.ManageRoles(dto).ConfigureAwait(false);
+            var result = await _systemUserCommand.ManageRoles(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

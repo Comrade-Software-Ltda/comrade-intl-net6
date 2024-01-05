@@ -32,7 +32,7 @@ public class AirplaneQuery : IAirplaneQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<AirplaneDto>(list);
         }
@@ -42,21 +42,21 @@ public class AirplaneQuery : IAirplaneQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id).ConfigureAwait(false);
+        var entity = await _repository.GetById(id);
         var dto = _mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<Airplane?>(id).ConfigureAwait(false);
+        var entity = await _mongoDbQueryContext.GetById<Airplane?>(id);
         var dto = _mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }

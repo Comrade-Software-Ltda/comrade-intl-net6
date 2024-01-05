@@ -22,7 +22,7 @@ public class SystemUserEditHandler : IRequestHandler<SystemUserEditDto, SingleRe
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemUserEditCommand>(request);
-        var result = await _editSystemUser.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _editSystemUser.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

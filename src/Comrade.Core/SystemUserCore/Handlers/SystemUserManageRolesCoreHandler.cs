@@ -28,7 +28,7 @@ public class
     public async Task<ISingleResult<Entity>> Handle(SystemUserManageRolesCommand request,
         CancellationToken cancellationToken)
     {
-        var user = await _systemUserRepository.GetByIdIncludeRoles(request.Id).ConfigureAwait(false);
+        var user = await _systemUserRepository.GetByIdIncludeRoles(request.Id);
         var roles = _systemRoleRepository.GetAll()
             .Where(role => request.SystemRoleIds.Contains(role.Id)).ToList();
 
@@ -43,9 +43,9 @@ public class
             return validate;
         }
 
-        await _systemUserRepository.BeginTransactionAsync().ConfigureAwait(false);
+        await _systemUserRepository.BeginTransactionAsync();
         _systemUserRepository.Update(user);
-        await _systemUserRepository.CommitTransactionAsync().ConfigureAwait(false);
+        await _systemUserRepository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true,
             BusinessMessage.MSG01);

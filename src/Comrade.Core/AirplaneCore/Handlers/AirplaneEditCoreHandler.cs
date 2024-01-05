@@ -28,7 +28,7 @@ public class
     public async Task<ISingleResult<Entity>> Handle(AirplaneEditCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -37,7 +37,7 @@ public class
         }
 
         var validate = await _airplaneEditValidation.Execute(request, recordExists)
-            .ConfigureAwait(false);
+            ;
 
         if (!validate.Success)
         {
@@ -47,9 +47,9 @@ public class
         var obj = recordExists;
         HydrateValues(obj, request);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Update(obj);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
 
         _mongoDbContext.ReplaceOne(obj);
 

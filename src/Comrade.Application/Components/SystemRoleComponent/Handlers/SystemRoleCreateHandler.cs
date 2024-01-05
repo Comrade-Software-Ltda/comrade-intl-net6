@@ -22,7 +22,7 @@ public class SystemRoleCreateHandler : IRequestHandler<SystemRoleCreateDto, Sing
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemRoleCreateCommand>(request);
-        var result = await _createUc.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _createUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

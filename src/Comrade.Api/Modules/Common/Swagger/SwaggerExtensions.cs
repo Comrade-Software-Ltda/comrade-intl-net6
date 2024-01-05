@@ -19,7 +19,7 @@ public static class SwaggerExtensions
 
         var isEnabled = featureManager
             .IsEnabledAsync(nameof(CustomFeature.Swagger))
-            .ConfigureAwait(false)
+            
             .GetAwaiter()
             .GetResult();
 

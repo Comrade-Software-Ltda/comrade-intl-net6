@@ -17,6 +17,6 @@ public class UcUpdatePassword : UseCase, IUcUpdatePassword
 
     public async Task<ISingleResult<Entity>> Execute(UpdatePasswordCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

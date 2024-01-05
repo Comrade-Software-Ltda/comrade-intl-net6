@@ -24,7 +24,7 @@ public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
     {
         var exists = await _context.Airplanes
             .Where(p => p.Id != id && code.Equals(p.Code))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists
             ? new SingleResult<Airplane>((int) EnumResponse.ErrorBusinessValidation,

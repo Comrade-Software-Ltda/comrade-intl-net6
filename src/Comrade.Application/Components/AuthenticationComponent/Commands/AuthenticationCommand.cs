@@ -29,7 +29,7 @@ public class AuthenticationCommand : IAuthenticationCommand
     public async Task<ISingleResultDto<UserDto>> GenerateToken(AuthenticationDto dto)
     {
         var result = await _validateLogin.Execute(dto.Key, dto.Password)
-            .ConfigureAwait(false);
+            ;
 
         if (!result.Success)
         {
@@ -47,7 +47,7 @@ public class AuthenticationCommand : IAuthenticationCommand
     public async Task<ISingleResultDto<EntityDto>> ForgotPassword(AuthenticationDto dto)
     {
         var mappedObject = _mapper.Map<ForgotPasswordCommand>(dto);
-        var result = await _forgotPassword.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _forgotPassword.Execute(mappedObject);
         var resultDto = new SingleResultDto<EntityDto>(result);
         return resultDto;
     }
@@ -55,7 +55,7 @@ public class AuthenticationCommand : IAuthenticationCommand
     public async Task<ISingleResultDto<EntityDto>> UpdatePassword(AuthenticationDto dto)
     {
         var mappedObject = _mapper.Map<UpdatePasswordCommand>(dto);
-        var result = await _updatePassword.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _updatePassword.Execute(mappedObject);
         var resultDto = new SingleResultDto<EntityDto>(result);
         return resultDto;
     }

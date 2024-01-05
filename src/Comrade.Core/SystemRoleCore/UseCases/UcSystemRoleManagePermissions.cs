@@ -23,6 +23,6 @@ public class UcSystemRoleManagePermissions : UseCase, IUcSystemRoleManagePermiss
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

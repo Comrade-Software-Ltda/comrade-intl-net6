@@ -15,7 +15,6 @@ using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
 using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Comrade.Api;
 
@@ -81,11 +80,8 @@ public sealed class Startup
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        
-        services.AddMediatR(config =>
-        {
-            config.RegisterServicesFromAssembly(typeof(Startup).Assembly);
-        });
+
+        services.AddMediatR(config => { config.RegisterServicesFromAssembly(typeof(Startup).Assembly); });
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
@@ -120,9 +116,6 @@ public sealed class Startup
             .UseAuthentication()
             .UseAuthorization()
             .UseSerilogRequestLogging()
-            .UseEndpoints(endpoints =>
-            {
-               endpoints.MapControllers();
-            });
+            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

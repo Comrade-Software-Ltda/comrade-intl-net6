@@ -27,17 +27,17 @@ public class SystemPermissionCreateCoreHandler : IRequestHandler<SystemPermissio
     public async Task<ISingleResult<Entity>> Handle(SystemPermissionCreateCommand request,
         CancellationToken cancellationToken)
     {
-        var result = await _createValidation.Execute(request).ConfigureAwait(false);
+        var result = await _createValidation.Execute(request);
         if (!result.Success)
         {
             return result;
         }
 
         HydrateValues(request);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.Add(request);
+        await _repository.BeginTransactionAsync();
+        await _repository.Add(request);
+        await _repository.CommitTransactionAsync();
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }
 

@@ -18,6 +18,6 @@ public class UcSystemPermissionDelete : UseCase, IUcSystemPermissionDelete
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemPermissionDeleteCommand {Id = id};
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

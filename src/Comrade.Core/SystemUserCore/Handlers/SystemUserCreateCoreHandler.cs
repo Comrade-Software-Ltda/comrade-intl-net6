@@ -40,11 +40,11 @@ public class
         request.Password = _passwordHasher.Hash(request.Password);
         request.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
 
-        await _repository.Add(request).ConfigureAwait(false);
+        await _repository.Add(request);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
+        await _repository.Add(request);
+        await _repository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true,
             BusinessMessage.MSG01);

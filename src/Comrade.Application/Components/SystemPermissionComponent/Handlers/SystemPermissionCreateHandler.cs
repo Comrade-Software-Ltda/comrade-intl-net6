@@ -22,7 +22,7 @@ public class SystemPermissionCreateHandler : IRequestHandler<SystemPermissionCre
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemPermissionCreateCommand>(request);
-        var result = await _createUc.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _createUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

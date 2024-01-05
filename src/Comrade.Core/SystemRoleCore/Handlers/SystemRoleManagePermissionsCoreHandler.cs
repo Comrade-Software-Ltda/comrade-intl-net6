@@ -28,7 +28,7 @@ public class SystemRoleManagePermissionsCoreHandler
     public async Task<ISingleResult<Entity>> Handle(SystemRoleManagePermissionsCommand request,
         CancellationToken cancellationToken)
     {
-        var role = await _repository.GetByIdIncludePermissions(request.Id).ConfigureAwait(false);
+        var role = await _repository.GetByIdIncludePermissions(request.Id);
         var permissions = _systemPermissionRepository.GetAll()
             .Where(permission => request.SystemPermissionIds.Contains(permission.Id)).ToList();
 
@@ -45,9 +45,9 @@ public class SystemRoleManagePermissionsCoreHandler
 
         role.SystemPermissions = permissions;
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Update(role);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }

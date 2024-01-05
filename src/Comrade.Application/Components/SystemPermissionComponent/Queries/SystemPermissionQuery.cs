@@ -31,7 +31,7 @@ public class SystemPermissionQuery : ISystemPermissionQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<SystemPermissionDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
             return new PageResultDto<SystemPermissionDto>(list);
         }
 
@@ -39,20 +39,20 @@ public class SystemPermissionQuery : ISystemPermissionQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemPermissionDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
         return new PageResultDto<SystemPermissionDto>(paginationFilter, list);
     }
 
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id).ConfigureAwait(false);
+        var entity = await _repository.GetById(id);
         var dto = _mapper.Map<SystemPermissionDto>(entity);
         return new SingleResultDto<SystemPermissionDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemRole?>(id).ConfigureAwait(false);
+        var entity = await _mongoDbQueryContext.GetById<SystemRole?>(id);
         var dto = _mapper.Map<SystemPermissionDto>(entity);
         return new SingleResultDto<SystemPermissionDto>(dto);
     }

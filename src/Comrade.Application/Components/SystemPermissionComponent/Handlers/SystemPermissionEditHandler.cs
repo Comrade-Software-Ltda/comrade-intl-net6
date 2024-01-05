@@ -22,7 +22,7 @@ public class SystemPermissionEditHandler : IRequestHandler<SystemPermissionEditD
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemPermissionEditCommand>(request);
-        var result = await _editUc.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _editUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

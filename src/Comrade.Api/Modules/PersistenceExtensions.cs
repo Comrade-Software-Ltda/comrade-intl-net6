@@ -22,19 +22,19 @@ public static class PersistenceExtensions
 
         var isMsSqlServerEnabled = featureManager
             .IsEnabledAsync(nameof(CustomFeature.MsSqlServer))
-            .ConfigureAwait(false)
+            
             .GetAwaiter()
             .GetResult();
 
         var isPostgresSqlEnabled = featureManager
             .IsEnabledAsync(nameof(CustomFeature.PostgresSql))
-            .ConfigureAwait(false)
+            
             .GetAwaiter()
             .GetResult();
 
         var injectInitialData = featureManager
             .IsEnabledAsync(nameof(CustomFeature.InjectInitialData))
-            .ConfigureAwait(false)
+            
             .GetAwaiter()
             .GetResult();
 

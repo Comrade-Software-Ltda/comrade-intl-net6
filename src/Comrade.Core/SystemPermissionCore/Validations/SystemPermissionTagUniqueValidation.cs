@@ -16,7 +16,7 @@ public class SystemPermissionTagUniqueValidation : ISystemPermissionTagUniqueVal
 
     public async Task<ISingleResult<Entity>> Execute(SystemPermission entity)
     {
-        var result = await _repository.TagUniqueValidation(entity.Tag).ConfigureAwait(false);
+        var result = await _repository.TagUniqueValidation(entity.Tag);
 
         return result.Success
             ? new SingleResult<Entity>(entity)

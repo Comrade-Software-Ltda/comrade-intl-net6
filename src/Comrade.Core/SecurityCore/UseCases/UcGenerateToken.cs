@@ -16,7 +16,7 @@ public class UcGenerateToken : IUcGenerateToken
     {
         try
         {
-            return await _mediator.Send(entity).ConfigureAwait(false);
+            return await _mediator.Send(entity);
         }
         catch (Exception e)
         {

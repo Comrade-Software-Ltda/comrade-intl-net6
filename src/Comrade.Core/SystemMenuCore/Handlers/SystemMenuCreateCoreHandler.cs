@@ -28,15 +28,15 @@ public class
     public async Task<ISingleResult<Entity>> Handle(SystemMenuCreateCommand request,
         CancellationToken cancellationToken)
     {
-        var validate = await _systemMenuCreateValidation.Execute(request).ConfigureAwait(false);
+        var validate = await _systemMenuCreateValidation.Execute(request);
         if (!validate.Success)
         {
             return validate;
         }
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
+        await _repository.Add(request);
+        await _repository.CommitTransactionAsync();
 
         SaveInMongo(request);
 

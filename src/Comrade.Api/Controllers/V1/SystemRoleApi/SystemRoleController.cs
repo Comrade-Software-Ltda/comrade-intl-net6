@@ -33,7 +33,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _query.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _query.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -49,7 +49,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _query.GetByIdDefault(systemRoleId).ConfigureAwait(false);
+            var result = await _query.GetByIdDefault(systemRoleId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -64,7 +64,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Create(dto).ConfigureAwait(false);
+            var result = await _command.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -79,7 +79,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Edit(dto).ConfigureAwait(false);
+            var result = await _command.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -94,7 +94,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Delete(systemRoleId).ConfigureAwait(false);
+            var result = await _command.Delete(systemRoleId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -109,7 +109,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _query.GetAllWithPermissions(paginationQuery).ConfigureAwait(false);
+            var result = await _query.GetAllWithPermissions(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -125,7 +125,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.ManagePermissions(dto).ConfigureAwait(false);
+            var result = await _command.ManagePermissions(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

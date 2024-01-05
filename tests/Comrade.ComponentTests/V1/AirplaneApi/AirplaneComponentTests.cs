@@ -27,11 +27,11 @@ public class AirplaneComponentTests : IClassFixture<CustomWebApplicationFactoryF
 
         var actualResponse = await client
             .GetAsync("/api/v1/airplane/get-all")
-            .ConfigureAwait(false);
+            ;
 
         var actualResponseString = await actualResponse.Content
             .ReadAsStringAsync()
-            .ConfigureAwait(false);
+            ;
 
         Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
@@ -39,7 +39,7 @@ public class AirplaneComponentTests : IClassFixture<CustomWebApplicationFactoryF
         using JsonTextReader reader = new(stringReader)
             {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader)
-            .ConfigureAwait(false);
+            ;
 
         Assert.Equal(JTokenType.String, jsonResponse["data"]![0]!["model"]!.Type);
         Assert.Equal(JTokenType.Integer, jsonResponse["data"]![0]!["passengerQuantity"]!.Type);

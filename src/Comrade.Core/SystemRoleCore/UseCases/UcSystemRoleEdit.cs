@@ -17,6 +17,6 @@ public class UcSystemRoleEdit : UseCase, IUcSystemRoleEdit
 
     public async Task<ISingleResult<Entity>> Execute(SystemRoleEditCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

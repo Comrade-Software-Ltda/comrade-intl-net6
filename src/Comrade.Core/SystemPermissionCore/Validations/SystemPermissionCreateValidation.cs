@@ -16,7 +16,7 @@ public class SystemPermissionCreateValidation : ISystemPermissionCreateValidatio
 
     public async Task<ISingleResult<Entity>> Execute(SystemPermission entity)
     {
-        var register = await _systemPermissionTagUniqueValidation.Execute(entity).ConfigureAwait(false);
+        var register = await _systemPermissionTagUniqueValidation.Execute(entity);
         return register.Success ? new SingleResult<Entity>(entity) : register;
     }
 }

@@ -42,8 +42,8 @@ public class MongoDbContext : IMongoDbCommandContext, IMongoDbQueryContext
         var filter = Builders<T>.Filter;
         var eqFilter = filter.Eq(x => x.Id, id);
 
-        var result = await GetCollection<T>().FindAsync<T>(eqFilter).ConfigureAwait(false);
-        return await result.FirstOrDefaultAsync().ConfigureAwait(false);
+        var result = await GetCollection<T>().FindAsync<T>(eqFilter);
+        return await result.FirstOrDefaultAsync();
     }
 
     private IMongoCollection<T> GetCollection<T>()

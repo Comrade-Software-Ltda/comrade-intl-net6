@@ -32,7 +32,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _query.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _query.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -48,7 +48,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _query.GetByIdDefault(systemPermissionId).ConfigureAwait(false);
+            var result = await _query.GetByIdDefault(systemPermissionId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -63,7 +63,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Create(dto).ConfigureAwait(false);
+            var result = await _command.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -78,7 +78,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Edit(dto).ConfigureAwait(false);
+            var result = await _command.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -93,7 +93,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Delete(systemPermissionId).ConfigureAwait(false);
+            var result = await _command.Delete(systemPermissionId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

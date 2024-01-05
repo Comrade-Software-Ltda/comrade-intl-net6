@@ -16,7 +16,7 @@ public class SystemRoleNameUniqueValidation : ISystemRoleNameUniqueValidation
 
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity)
     {
-        var result = await _repository.UniqueNameValidation(entity.Name).ConfigureAwait(false);
+        var result = await _repository.UniqueNameValidation(entity.Name);
         return result.Success
             ? new SingleResult<Entity>(entity)
             : new SingleResult<Entity>(result.Code, result.Message);

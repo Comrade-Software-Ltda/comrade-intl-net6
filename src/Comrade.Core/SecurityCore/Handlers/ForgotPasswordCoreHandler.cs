@@ -34,7 +34,7 @@ public class
     public async Task<ISingleResult<Entity>> Handle(ForgotPasswordCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await _repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -49,9 +49,9 @@ public class
 
         HydrateValues(obj);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
+        await _repository.BeginTransactionAsync();
         _repository.Update(obj);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await _repository.CommitTransactionAsync();
 
         _mongoDbContext.ReplaceOne(obj);
 

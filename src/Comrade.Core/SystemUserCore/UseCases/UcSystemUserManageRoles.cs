@@ -17,6 +17,6 @@ public class UcSystemUserManageRoles : UseCase, IUcSystemUserManageRoles
 
     public async Task<ISingleResult<Entity>> Execute(SystemUserManageRolesCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await _mediator.Send(entity);
     }
 }

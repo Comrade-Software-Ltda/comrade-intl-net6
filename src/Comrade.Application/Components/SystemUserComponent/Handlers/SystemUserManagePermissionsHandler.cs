@@ -24,7 +24,7 @@ public class
         CancellationToken cancellationToken)
     {
         var mappedObject = _mapper.Map<SystemUserManagePermissionsCommand>(request);
-        var result = await _ucSystemUserManagePermissions.Execute(mappedObject).ConfigureAwait(false);
+        var result = await _ucSystemUserManagePermissions.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

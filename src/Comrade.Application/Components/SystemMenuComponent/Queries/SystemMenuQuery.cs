@@ -32,7 +32,7 @@ public class SystemMenuQuery : ISystemMenuQuery
         {
             list = await Task.Run(() => _repository.GetAllAsNoTracking()
                 .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<SystemMenuSimpleDto>(list);
         }
@@ -42,7 +42,7 @@ public class SystemMenuQuery : ISystemMenuQuery
         list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<SystemMenuSimpleDto>(paginationFilter, list);
     }
@@ -56,7 +56,7 @@ public class SystemMenuQuery : ISystemMenuQuery
         {
             list = await Task.Run(() => _repository.GetAllMenus()
                 .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
-                .ToList()).ConfigureAwait(false);
+                .ToList());
 
             return new PageResultDto<SystemMenuDto>(list);
         }
@@ -66,21 +66,21 @@ public class SystemMenuQuery : ISystemMenuQuery
         list = await Task.Run(() => _repository.GetAllMenus().Skip(skip)
             .Take(paginationFilter.PageSize)
             .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
-            .ToList()).ConfigureAwait(false);
+            .ToList());
 
         return new PageResultDto<SystemMenuDto>(paginationFilter, list);
     }
 
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id).ConfigureAwait(false);
+        var entity = await _repository.GetById(id);
         var dto = _mapper.Map<SystemMenuDto>(entity);
         return new SingleResultDto<SystemMenuDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemMenu?>(id).ConfigureAwait(false);
+        var entity = await _mongoDbQueryContext.GetById<SystemMenu?>(id);
         var dto = _mapper.Map<SystemMenuDto>(entity);
         return new SingleResultDto<SystemMenuDto>(dto);
     }

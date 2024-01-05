@@ -35,7 +35,7 @@ public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepositor
             .Include(x => x.SystemUserPermissions)
             .Include(x => x.SystemPermissions)
             .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+            ;
     }
 
     public async Task<SystemUser?> GetByIdIncludeRoles(Guid id)
@@ -45,6 +45,6 @@ public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepositor
             .Include(x => x.SystemUserRoles)
             .Include(x => x.SystemRoles)
             .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+            ;
     }
 }
