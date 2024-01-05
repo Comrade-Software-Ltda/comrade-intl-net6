@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Core.SystemUserCore;
 using Comrade.Core.SystemUserCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemUserComponent.Handlers;
+namespace Comrade.Application.Components.SystemUser.Handlers;
 
 public class
     SystemUserManagePermissionsHandler(

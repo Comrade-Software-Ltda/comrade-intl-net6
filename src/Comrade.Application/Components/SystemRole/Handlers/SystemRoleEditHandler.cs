@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Core.SystemRoleCore;
 using Comrade.Core.SystemRoleCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Handlers;
+namespace Comrade.Application.Components.SystemRole.Handlers;
 
 public class SystemRoleEditHandler(IMapper mapper, IUcSystemRoleEdit editUc)
     : IRequestHandler<SystemRoleEditDto, SingleResultDto<EntityDto>>

@@ -1,9 +1,9 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Application.Messages;
 using FluentValidation;
 
-namespace Comrade.Application.Components.SystemUserComponent.Validations;
+namespace Comrade.Application.Components.SystemUser.Validations;
 
 public class SystemUserValidation<TDto> : DtoValidation<TDto>
     where TDto : SystemUserDto

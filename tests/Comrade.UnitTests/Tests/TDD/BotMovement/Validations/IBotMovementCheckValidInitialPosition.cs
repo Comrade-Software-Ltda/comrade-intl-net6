@@ -1,4 +1,4 @@
-﻿namespace Comrade.UnitTests.Tests.TDD.BotMovement;
+﻿namespace Comrade.UnitTests.Tests.TDD.BotMovement.Validations;
 
 public interface IBotMovementCheckValidInitialPosition
 {

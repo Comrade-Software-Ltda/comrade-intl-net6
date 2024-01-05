@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Commands;
+namespace Comrade.Application.Components.SystemMenu.Commands;
 
 public interface ISystemMenuCommand
 {

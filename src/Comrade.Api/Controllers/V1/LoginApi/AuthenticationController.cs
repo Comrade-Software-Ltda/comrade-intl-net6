@@ -1,7 +1,7 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AuthenticationComponent.Commands;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Commands;
+using Comrade.Application.Components.Authentication.Contracts;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.LoginApi;

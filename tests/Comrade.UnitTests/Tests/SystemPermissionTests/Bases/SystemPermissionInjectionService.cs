@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
+using Comrade.Application.Components.SystemPermission.Commands;
+using Comrade.Application.Components.SystemPermission.Queries;
 using Comrade.Core.SystemPermissionCore.UseCases;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;

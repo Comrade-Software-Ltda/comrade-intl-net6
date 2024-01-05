@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.AirplaneComponent.Contracts;
+﻿using Comrade.Application.Components.Airplane.Contracts;
 
-namespace Comrade.Application.Components.AirplaneComponent.Validations;
+namespace Comrade.Application.Components.Airplane.Validations;
 
 public class AirplaneDeleteValidation : AirplaneValidation<AirplaneDeleteDto>
 {

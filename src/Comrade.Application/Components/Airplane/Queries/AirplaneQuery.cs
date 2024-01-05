@@ -2,12 +2,11 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Application.Paginations;
 using Comrade.Core.AirplaneCore;
-using Comrade.Domain.Models;
 
-namespace Comrade.Application.Components.AirplaneComponent.Queries;
+namespace Comrade.Application.Components.Airplane.Queries;
 
 public class AirplaneQuery(
     IAirplaneRepository repository,
@@ -48,7 +47,7 @@ public class AirplaneQuery(
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdMongo(Guid id)
     {
-        var entity = await mongoDbQueryContext.GetById<Airplane?>(id);
+        var entity = await mongoDbQueryContext.GetById<Domain.Models.Airplane?>(id);
         var dto = mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }

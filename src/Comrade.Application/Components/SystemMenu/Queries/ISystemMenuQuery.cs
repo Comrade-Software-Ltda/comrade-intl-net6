@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Paginations;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Queries;
+namespace Comrade.Application.Components.SystemMenu.Queries;
 
 public interface ISystemMenuQuery
 {

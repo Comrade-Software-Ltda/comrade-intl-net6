@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Core.SystemUserCore;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemUserComponent.Commands;
+namespace Comrade.Application.Components.SystemUser.Commands;
 
 public class SystemUserCommand(IUcSystemUserDelete deleteSystemUser, IMediator mediator) : ISystemUserCommand
 {

@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.SystemMenuComponent.Contracts;
+﻿using Comrade.Application.Components.SystemMenu.Contracts;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Validations;
+namespace Comrade.Application.Components.SystemMenu.Validations;
 
 public class SystemMenuEditValidation : SystemMenuValidation<SystemMenuEditDto>
 {

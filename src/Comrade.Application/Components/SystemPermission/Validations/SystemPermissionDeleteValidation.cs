@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+﻿using Comrade.Application.Components.SystemPermission.Contracts;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Validations;
+namespace Comrade.Application.Components.SystemPermission.Validations;
 
 public class SystemPermissionDeleteValidation : SystemPermissionValidation<SystemPermissionDto>
 {

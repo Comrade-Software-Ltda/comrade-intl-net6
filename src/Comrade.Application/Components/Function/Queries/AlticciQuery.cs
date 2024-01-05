@@ -2,7 +2,7 @@
 using Comrade.Application.Caches.FunctionCache;
 using Comrade.Domain.Enums;
 
-namespace Comrade.Application.Components.FunctionComponent.Queries;
+namespace Comrade.Application.Components.Function.Queries;
 
 public class AlticciQuery(IRedisCacheFunctionService cacheService) : IAlticciQuery
 {

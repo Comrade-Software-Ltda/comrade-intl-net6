@@ -1,5 +1,4 @@
 ﻿using Comrade.Application.Extensions;
-using Xunit;
 
 namespace Comrade.UnitTests.Tests.UtilTests;
 

@@ -2,12 +2,11 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Application.Paginations;
 using Comrade.Core.SystemPermissionCore;
-using Comrade.Domain.Models;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Queries;
+namespace Comrade.Application.Components.SystemPermission.Queries;
 
 public class SystemPermissionQuery(
     ISystemPermissionRepository repository,
@@ -44,7 +43,7 @@ public class SystemPermissionQuery(
 
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdMongo(Guid id)
     {
-        var entity = await mongoDbQueryContext.GetById<SystemRole?>(id);
+        var entity = await mongoDbQueryContext.GetById<Domain.Models.SystemRole?>(id);
         var dto = mapper.Map<SystemPermissionDto>(entity);
         return new SingleResultDto<SystemPermissionDto>(dto);
     }

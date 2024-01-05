@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Application.Paginations;
 
-namespace Comrade.Application.Components.AirplaneComponent.Queries;
+namespace Comrade.Application.Components.Airplane.Queries;
 
 public interface IAirplaneQuery
 {

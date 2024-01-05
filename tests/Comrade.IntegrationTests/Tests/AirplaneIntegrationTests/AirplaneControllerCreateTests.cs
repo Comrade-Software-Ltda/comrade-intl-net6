@@ -1,6 +1,6 @@
 using System.Text.Json;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Xunit;
 using Xunit.Abstractions;

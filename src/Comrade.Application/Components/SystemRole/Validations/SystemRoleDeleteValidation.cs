@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.SystemRoleComponent.Contracts;
+﻿using Comrade.Application.Components.SystemRole.Contracts;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Validations;
+namespace Comrade.Application.Components.SystemRole.Validations;
 
 public class SystemRoleDeleteValidation : SystemRoleValidation<SystemRoleDto>
 {

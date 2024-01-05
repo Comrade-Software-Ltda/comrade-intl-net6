@@ -2,12 +2,11 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Paginations;
 using Comrade.Core.SystemMenuCore;
-using Comrade.Domain.Models;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Queries;
+namespace Comrade.Application.Components.SystemMenu.Queries;
 
 public class SystemMenuQuery(
     ISystemMenuRepository repository,
@@ -72,7 +71,7 @@ public class SystemMenuQuery(
 
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdMongo(Guid id)
     {
-        var entity = await mongoDbQueryContext.GetById<SystemMenu?>(id);
+        var entity = await mongoDbQueryContext.GetById<Domain.Models.SystemMenu?>(id);
         var dto = mapper.Map<SystemMenuDto>(entity);
         return new SingleResultDto<SystemMenuDto>(dto);
     }

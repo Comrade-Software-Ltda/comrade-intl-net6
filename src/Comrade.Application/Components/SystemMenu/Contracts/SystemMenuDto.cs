@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Contracts;
+namespace Comrade.Application.Components.SystemMenu.Contracts;
 
 public class SystemMenuDto : EntityDto
 {

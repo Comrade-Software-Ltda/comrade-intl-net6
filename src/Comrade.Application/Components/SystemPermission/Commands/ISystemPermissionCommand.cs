@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Commands;
+namespace Comrade.Application.Components.SystemPermission.Commands;
 
 public interface ISystemPermissionCommand
 {

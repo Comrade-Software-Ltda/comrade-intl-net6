@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Core.AirplaneCore;
 using MediatR;
 
-namespace Comrade.Application.Components.AirplaneComponent.Commands;
+namespace Comrade.Application.Components.Airplane.Commands;
 
 public class AirplaneCommand(
     IUcAirplaneDelete deleteAirplane,

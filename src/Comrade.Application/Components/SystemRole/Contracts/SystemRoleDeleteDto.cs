@@ -1,4 +1,4 @@
-﻿namespace Comrade.Application.Components.SystemRoleComponent.Contracts;
+﻿namespace Comrade.Application.Components.SystemRole.Contracts;
 
 public class SystemRoleDeleteDto : SystemRoleDto
 {

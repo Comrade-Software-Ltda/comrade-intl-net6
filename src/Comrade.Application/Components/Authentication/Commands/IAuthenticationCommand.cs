@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Contracts;
 
-namespace Comrade.Application.Components.AuthenticationComponent.Commands;
+namespace Comrade.Application.Components.Authentication.Commands;
 
 public interface IAuthenticationCommand
 {

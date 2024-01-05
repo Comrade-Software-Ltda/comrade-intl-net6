@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Contracts;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.Commands;
 
-namespace Comrade.Application.Components.AuthenticationComponent.Commands;
+namespace Comrade.Application.Components.Authentication.Commands;
 
 public class AuthenticationCommand(
     IUcUpdatePassword updatePassword,

@@ -1,4 +1,4 @@
-﻿namespace Comrade.Application.Components.SystemUserComponent.Contracts;
+﻿namespace Comrade.Application.Components.SystemUser.Contracts;
 
 public class SystemUserDeleteDto : SystemUserDto
 {

@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Queries;
+namespace Comrade.Application.Components.SystemRole.Queries;
 
 public interface ISystemRoleQuery
 {

@@ -1,5 +1,4 @@
 ﻿using Comrade.UnitTests.Tests.TDD.PrimeEvaluation.TestDatas;
-using Xunit;
 
 namespace Comrade.UnitTests.Tests.TDD.PrimeEvaluation;
 

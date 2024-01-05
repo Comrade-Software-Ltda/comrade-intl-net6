@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Core.SystemMenuCore;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Commands;
+namespace Comrade.Application.Components.SystemMenu.Commands;
 
 public class SystemMenuCommand(
     IUcSystemMenuDelete deleteSystemMenu,

@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Commands;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
-using Comrade.Application.Components.AirplaneComponent.Queries;
+using Comrade.Application.Components.Airplane.Commands;
+using Comrade.Application.Components.Airplane.Contracts;
+using Comrade.Application.Components.Airplane.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 

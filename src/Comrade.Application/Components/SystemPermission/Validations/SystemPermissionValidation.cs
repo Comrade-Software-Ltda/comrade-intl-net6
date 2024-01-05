@@ -1,9 +1,9 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Application.Messages;
 using FluentValidation;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Validations;
+namespace Comrade.Application.Components.SystemPermission.Validations;
 
 public class SystemPermissionValidation<TDto> : DtoValidation<TDto> where TDto : SystemPermissionDto
 {

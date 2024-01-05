@@ -1,7 +1,7 @@
-﻿using Comrade.Application.Components.SystemMenuComponent.Contracts;
+﻿using Comrade.Application.Components.SystemMenu.Contracts;
 using FluentValidation;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Validations;
+namespace Comrade.Application.Components.SystemMenu.Validations;
 
 public class AirplaneDeleteValidation : AbstractValidator<SystemMenuDeleteDto>
 {

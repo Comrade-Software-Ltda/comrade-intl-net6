@@ -1,7 +1,7 @@
 ﻿using Comrade.Application.Bases;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Contracts;
+namespace Comrade.Application.Components.SystemMenu.Contracts;
 
 public class SystemMenuCreateDto : EntityDto, IRequest<SingleResultDto<EntityDto>>
 {

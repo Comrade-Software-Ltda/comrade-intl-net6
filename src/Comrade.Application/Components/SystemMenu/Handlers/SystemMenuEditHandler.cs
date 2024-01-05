@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Core.SystemMenuCore;
 using Comrade.Core.SystemMenuCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Handlers;
+namespace Comrade.Application.Components.SystemMenu.Handlers;
 
 public class SystemMenuEditHandler(IMapper mapper, IUcSystemMenuEdit editSystemMenu)
     : IRequestHandler<SystemMenuEditDto, SingleResultDto<EntityDto>>

@@ -1,4 +1,6 @@
-﻿namespace Comrade.UnitTests.Tests.TDD.BotMovement;
+﻿using Comrade.UnitTests.Tests.TDD.BotMovement.Validations;
+
+namespace Comrade.UnitTests.Tests.TDD.BotMovement;
 
 public class BotMovement(
     IBotMovementCheckIfIsAlreadyAtTheGoal botMovementCheckIfIsAlreadyAtTheGoal,

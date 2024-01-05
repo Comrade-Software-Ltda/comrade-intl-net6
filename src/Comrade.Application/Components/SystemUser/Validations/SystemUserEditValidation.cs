@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.SystemUserComponent.Contracts;
+﻿using Comrade.Application.Components.SystemUser.Contracts;
 
-namespace Comrade.Application.Components.SystemUserComponent.Validations;
+namespace Comrade.Application.Components.SystemUser.Validations;
 
 public class SystemUserEditValidation : SystemUserValidation<SystemUserEditDto>
 {

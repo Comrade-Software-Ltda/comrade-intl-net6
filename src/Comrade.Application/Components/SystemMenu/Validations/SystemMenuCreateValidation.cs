@@ -1,8 +1,8 @@
-﻿using Comrade.Application.Components.SystemMenuComponent.Contracts;
+﻿using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Messages;
 using FluentValidation;
 
-namespace Comrade.Application.Components.SystemMenuComponent.Validations;
+namespace Comrade.Application.Components.SystemMenu.Validations;
 
 public class SystemMenuCreateValidation : AbstractValidator<SystemMenuCreateDto>
 {

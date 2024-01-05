@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Commands;
+namespace Comrade.Application.Components.SystemRole.Commands;
 
 public interface ISystemRoleCommand
 {

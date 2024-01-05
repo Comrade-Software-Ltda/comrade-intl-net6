@@ -1,10 +1,10 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Core.SystemPermissionCore;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Commands;
+namespace Comrade.Application.Components.SystemPermission.Commands;
 
 public class SystemPermissionCommand(IUcSystemPermissionDelete deleteUc, IMediator mediator) : ISystemPermissionCommand
 {

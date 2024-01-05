@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.FunctionComponent.Queries;
+namespace Comrade.Application.Components.Function.Queries;
 
 public interface IAlticciQuery
 {

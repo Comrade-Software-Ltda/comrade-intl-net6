@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Contracts;
+namespace Comrade.Application.Components.SystemPermission.Contracts;
 
 public class SystemPermissionDto : EntityDto
 {

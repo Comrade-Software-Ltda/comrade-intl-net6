@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
-using Comrade.Application.Components.SystemRoleComponent.Queries;
+using Comrade.Application.Components.SystemRole.Commands;
+using Comrade.Application.Components.SystemRole.Contracts;
+using Comrade.Application.Components.SystemRole.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 

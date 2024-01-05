@@ -2,13 +2,12 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
 using Comrade.Core.SystemUserCore;
-using Comrade.Domain.Models;
 
-namespace Comrade.Application.Components.SystemUserComponent.Queries;
+namespace Comrade.Application.Components.SystemUser.Queries;
 
 public class SystemUserQuery(
     ISystemUserRepository repository,
@@ -59,7 +58,7 @@ public class SystemUserQuery(
 
     public async Task<ISingleResultDto<SystemUserDto>> GetByIdMongo(Guid id)
     {
-        var entity = await mongoDbQueryContext.GetById<SystemUser?>(id);
+        var entity = await mongoDbQueryContext.GetById<Domain.Models.SystemUser?>(id);
         var dto = mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }

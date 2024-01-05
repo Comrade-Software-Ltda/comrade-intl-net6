@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Contracts;
+namespace Comrade.Application.Components.SystemRole.Contracts;
 
 public class SystemRoleDto : EntityDto
 {

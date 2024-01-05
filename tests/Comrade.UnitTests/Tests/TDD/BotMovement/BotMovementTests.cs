@@ -1,6 +1,5 @@
 ﻿using Comrade.UnitTests.Tests.TDD.BotMovement.TestDatas;
 using Comrade.UnitTests.Tests.TDD.BotMovement.Validations;
-using Xunit;
 
 namespace Comrade.UnitTests.Tests.TDD.BotMovement;
 

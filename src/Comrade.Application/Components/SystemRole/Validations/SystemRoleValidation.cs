@@ -1,9 +1,9 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Application.Messages;
 using FluentValidation;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Validations;
+namespace Comrade.Application.Components.SystemRole.Validations;
 
 public class SystemRoleValidation<TDto> : DtoValidation<TDto> where TDto : SystemRoleDto
 {

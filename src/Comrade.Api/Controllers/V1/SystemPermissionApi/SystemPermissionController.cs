@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
+using Comrade.Application.Components.SystemPermission.Commands;
+using Comrade.Application.Components.SystemPermission.Contracts;
+using Comrade.Application.Components.SystemPermission.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 

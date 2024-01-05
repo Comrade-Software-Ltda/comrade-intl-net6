@@ -1,6 +1,6 @@
-﻿using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+﻿using Comrade.Application.Components.SystemPermission.Contracts;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Contracts;
+namespace Comrade.Application.Components.SystemRole.Contracts;
 
 public class SystemRoleWithPermissionsDto : SystemRoleDto
 {

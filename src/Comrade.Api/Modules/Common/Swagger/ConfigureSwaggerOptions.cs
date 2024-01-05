@@ -16,7 +16,8 @@ namespace Comrade.Api.Modules.Common.Swagger;
 ///     The <see cref="IApiVersionDescriptionProvider">provider</see> used to generate Swagger
 ///     documents.
 /// </param>
-public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
+public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
+    : IConfigureOptions<SwaggerGenOptions>
 {
     private const string UriString = "http://urlaqui.net";
 

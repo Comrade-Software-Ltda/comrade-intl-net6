@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Components.AirplaneComponent.Handlers;
+namespace Comrade.Application.Components.Airplane.Handlers;
 
 public class
     AirplaneCreateServiceHandler(IMapper mapper, IUcAirplaneCreate createAirplane)

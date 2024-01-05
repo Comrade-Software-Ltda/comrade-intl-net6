@@ -1,8 +1,8 @@
 ﻿using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Application.Paginations;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Queries;
+namespace Comrade.Application.Components.SystemPermission.Queries;
 
 public interface ISystemPermissionQuery
 {

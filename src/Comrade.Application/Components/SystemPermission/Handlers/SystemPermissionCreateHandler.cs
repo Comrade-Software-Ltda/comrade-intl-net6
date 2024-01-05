@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Core.SystemPermissionCore;
 using Comrade.Core.SystemPermissionCore.Commands;
 using MediatR;
 
-namespace Comrade.Application.Components.SystemPermissionComponent.Handlers;
+namespace Comrade.Application.Components.SystemPermission.Handlers;
 
 public class SystemPermissionCreateHandler(IMapper mapper, IUcSystemPermissionCreate createUc)
     : IRequestHandler<SystemPermissionCreateDto, SingleResultDto<EntityDto>>

@@ -8,7 +8,6 @@ using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemRoleTests.TestDatas;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Xunit;
 
 namespace Comrade.UnitTests.Tests.SystemRoleTests;
 

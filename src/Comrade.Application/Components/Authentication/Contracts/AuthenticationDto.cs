@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 
-namespace Comrade.Application.Components.AuthenticationComponent.Contracts;
+namespace Comrade.Application.Components.Authentication.Contracts;
 
 public class AuthenticationDto : EntityDto
 {

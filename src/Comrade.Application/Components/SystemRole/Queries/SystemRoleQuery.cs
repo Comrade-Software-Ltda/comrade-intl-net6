@@ -2,13 +2,12 @@
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Application.Paginations;
 using Comrade.Core.SystemRoleCore;
-using Comrade.Domain.Models;
 
-namespace Comrade.Application.Components.SystemRoleComponent.Queries;
+namespace Comrade.Application.Components.SystemRole.Queries;
 
 public class SystemRoleQuery(ISystemRoleRepository repository, IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
     : ISystemRoleQuery
@@ -76,7 +75,7 @@ public class SystemRoleQuery(ISystemRoleRepository repository, IMongoDbQueryCont
 
     public async Task<ISingleResultDto<SystemRoleDto>> GetByIdMongo(Guid id)
     {
-        var entity = await mongoDbQueryContext.GetById<SystemRole?>(id);
+        var entity = await mongoDbQueryContext.GetById<Domain.Models.SystemRole?>(id);
         var dto = mapper.Map<SystemRoleDto>(entity);
         return new SingleResultDto<SystemRoleDto>(dto);
     }
