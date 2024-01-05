@@ -12,25 +12,16 @@ namespace Comrade.Api.Controllers.V1;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class CommonController : Controller
+public class CommonController(IServiceProvider serviceProvider, ISystemUserQuery systemUserQuery)
+    : Controller
 {
-    private readonly IServiceProvider _serviceProvider;
-    private readonly ISystemUserQuery _systemUserQuery;
-
-    public CommonController(IServiceProvider serviceProvider, ISystemUserQuery systemUserQuery)
-    {
-        _serviceProvider = serviceProvider;
-        _systemUserQuery = systemUserQuery;
-    }
-
-
     [HttpGet("lookup-system-user")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetLookupSystemUser()
     {
         try
         {
-            var service = _serviceProvider.GetService<ILookupService<SystemUser>>()!;
+            var service = serviceProvider.GetService<ILookupService<SystemUser>>()!;
             var result = await service.GetLookup();
 
             return Ok(new ListResultDto<LookupDto>(result));
@@ -48,7 +39,7 @@ public class CommonController : Controller
     {
         try
         {
-            var service = _serviceProvider.GetService<ILookupService<SystemUser>>()!;
+            var service = serviceProvider.GetService<ILookupService<SystemUser>>()!;
 
             Expression<Func<SystemUser, bool>> expression = x => x.Name.Contains(name);
             var result = await service.GetLookup(expression);
@@ -68,7 +59,7 @@ public class CommonController : Controller
     {
         try
         {
-            var result = await _systemUserQuery.FindByName(name);
+            var result = await systemUserQuery.FindByName(name);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

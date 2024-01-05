@@ -6,30 +6,21 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemPermissionComponent.Commands;
 
-public class SystemPermissionCommand : ISystemPermissionCommand
+public class SystemPermissionCommand(IUcSystemPermissionDelete deleteUc, IMediator mediator) : ISystemPermissionCommand
 {
-    private readonly IUcSystemPermissionDelete _deleteUc;
-    private readonly IMediator _mediator;
-
-    public SystemPermissionCommand(IUcSystemPermissionDelete deleteUc, IMediator mediator)
-    {
-        _deleteUc = deleteUc;
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResultDto<EntityDto>> Create(SystemPermissionCreateDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(SystemPermissionEditDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteUc.Execute(id);
+        var result = await deleteUc.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 }

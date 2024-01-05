@@ -4,16 +4,10 @@ using Comrade.Domain.Enums;
 
 namespace Comrade.Application.Components.FunctionComponent.Queries;
 
-public class AlticciQuery : IAlticciQuery
+public class AlticciQuery(IRedisCacheFunctionService cacheService) : IAlticciQuery
 {
     private const EnumFunction NameFunction = EnumFunction.Alticci;
-    private readonly IRedisCacheFunctionService _cacheService;
     private FunctionReturnDto? _functionReturnDto;
-
-    public AlticciQuery(IRedisCacheFunctionService cacheService)
-    {
-        _cacheService = cacheService;
-    }
 
     public FunctionReturnDto? CalculaAlticci(long n)
     {
@@ -31,21 +25,21 @@ public class AlticciQuery : IAlticciQuery
     private long CalculaAlticciFunc(long n)
     {
         long result;
-        var cache = _cacheService.GetCacheFunction(NameFunction, n);
+        var cache = cacheService.GetCacheFunction(NameFunction, n);
         if (cache is null)
         {
             // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (n <= 0)
             {
-                result = _cacheService.SetCacheFunction(NameFunction, 0, 0);
+                result = cacheService.SetCacheFunction(NameFunction, 0, 0);
             }
             else if (n is 1 or 2)
             {
-                result = _cacheService.SetCacheFunction(NameFunction, n, 1);
+                result = cacheService.SetCacheFunction(NameFunction, n, 1);
             }
             else
             {
-                result = _cacheService.SetCacheFunction(NameFunction, n,
+                result = cacheService.SetCacheFunction(NameFunction, n,
                     CalculaAlticciFunc(n - 3) + CalculaAlticciFunc(n - 2));
             }
 

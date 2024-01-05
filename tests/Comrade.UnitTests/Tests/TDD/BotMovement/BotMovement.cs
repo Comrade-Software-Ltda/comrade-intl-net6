@@ -1,28 +1,19 @@
 ﻿namespace Comrade.UnitTests.Tests.TDD.BotMovement;
 
-public class BotMovement
+public class BotMovement(
+    IBotMovementCheckIfIsAlreadyAtTheGoal botMovementCheckIfIsAlreadyAtTheGoal,
+    IBotMovementCheckValidInitialPosition botMovementCheckValidInitialPosition)
 {
-    private readonly IBotMovementCheckIfIsAlreadyAtTheGoal _botMovementCheckIfIsAlreadyAtTheGoal;
-    private readonly IBotMovementCheckValidInitialPosition _botMovementCheckValidInitialPosition;
-
-    public BotMovement(IBotMovementCheckIfIsAlreadyAtTheGoal botMovementCheckIfIsAlreadyAtTheGoal,
-        IBotMovementCheckValidInitialPosition botMovementCheckValidInitialPosition)
-    {
-        _botMovementCheckIfIsAlreadyAtTheGoal = botMovementCheckIfIsAlreadyAtTheGoal;
-        _botMovementCheckValidInitialPosition = botMovementCheckValidInitialPosition;
-    }
-
-
     public bool IsAchievable(BotMovementInput botMovementInput)
     {
-        var isAlreadyAtTheGoal = _botMovementCheckIfIsAlreadyAtTheGoal.CheckIfIsAlreadyAtTheGoal(botMovementInput);
+        var isAlreadyAtTheGoal = botMovementCheckIfIsAlreadyAtTheGoal.CheckIfIsAlreadyAtTheGoal(botMovementInput);
 
         if (isAlreadyAtTheGoal)
         {
             return true;
         }
 
-        var validInitialPosition = _botMovementCheckValidInitialPosition.CheckValidInitialPosition(botMovementInput);
+        var validInitialPosition = botMovementCheckValidInitialPosition.CheckValidInitialPosition(botMovementInput);
 
         if (!validInitialPosition)
         {

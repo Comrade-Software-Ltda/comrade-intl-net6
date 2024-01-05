@@ -7,22 +7,14 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemPermissionComponent.Handlers;
 
-public class SystemPermissionCreateHandler : IRequestHandler<SystemPermissionCreateDto, SingleResultDto<EntityDto>>
+public class SystemPermissionCreateHandler(IMapper mapper, IUcSystemPermissionCreate createUc)
+    : IRequestHandler<SystemPermissionCreateDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemPermissionCreate _createUc;
-    private readonly IMapper _mapper;
-
-    public SystemPermissionCreateHandler(IMapper mapper, IUcSystemPermissionCreate createUc)
-    {
-        _mapper = mapper;
-        _createUc = createUc;
-    }
-
     public async Task<SingleResultDto<EntityDto>> Handle(SystemPermissionCreateDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemPermissionCreateCommand>(request);
-        var result = await _createUc.Execute(mappedObject);
+        var mappedObject = mapper.Map<SystemPermissionCreateCommand>(request);
+        var result = await createUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

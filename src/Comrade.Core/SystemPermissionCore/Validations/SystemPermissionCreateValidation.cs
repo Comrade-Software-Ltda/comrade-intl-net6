@@ -5,18 +5,12 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemPermissionCore.Validations;
 
-public class SystemPermissionCreateValidation : ISystemPermissionCreateValidation
+public class SystemPermissionCreateValidation(ISystemPermissionTagUniqueValidation systemPermissionTagUniqueValidation)
+    : ISystemPermissionCreateValidation
 {
-    private readonly ISystemPermissionTagUniqueValidation _systemPermissionTagUniqueValidation;
-
-    public SystemPermissionCreateValidation(ISystemPermissionTagUniqueValidation systemPermissionTagUniqueValidation)
-    {
-        _systemPermissionTagUniqueValidation = systemPermissionTagUniqueValidation;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemPermission entity)
     {
-        var register = await _systemPermissionTagUniqueValidation.Execute(entity);
+        var register = await systemPermissionTagUniqueValidation.Execute(entity);
         return register.Success ? new SingleResult<Entity>(entity) : register;
     }
 }

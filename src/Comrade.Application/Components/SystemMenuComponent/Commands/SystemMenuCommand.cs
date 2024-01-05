@@ -6,32 +6,24 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemMenuComponent.Commands;
 
-public class SystemMenuCommand : ISystemMenuCommand
+public class SystemMenuCommand(
+    IUcSystemMenuDelete deleteSystemMenu,
+    IMediator mediator)
+    : ISystemMenuCommand
 {
-    private readonly IUcSystemMenuDelete _deleteSystemMenu;
-    private readonly IMediator _mediator;
-
-    public SystemMenuCommand(
-        IUcSystemMenuDelete deleteSystemMenu,
-        IMediator mediator)
-    {
-        _deleteSystemMenu = deleteSystemMenu;
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResultDto<EntityDto>> Create(SystemMenuCreateDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(SystemMenuEditDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteSystemMenu.Execute(id);
+        var result = await deleteSystemMenu.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 }

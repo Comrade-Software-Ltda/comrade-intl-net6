@@ -6,15 +6,8 @@ using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
-public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
+public class UcSystemUserEdit(IMediator mediator) : UseCase, IUcSystemUserEdit
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemUserEdit(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemUserEditCommand entity)
     {
         var isValid = ValidateEntity(entity);
@@ -23,6 +16,6 @@ public class UcSystemUserEdit : UseCase, IUcSystemUserEdit
             return isValid;
         }
 
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

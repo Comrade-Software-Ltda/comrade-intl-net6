@@ -22,7 +22,6 @@ public static class AuthenticationExtensions
 
         var isEnabled = featureManager
             .IsEnabledAsync(nameof(CustomFeature.Authentication))
-            
             .GetAwaiter()
             .GetResult();
 

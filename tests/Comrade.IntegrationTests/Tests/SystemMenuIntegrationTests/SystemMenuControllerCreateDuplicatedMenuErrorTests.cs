@@ -7,15 +7,9 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerCreateDuplicatedMenuErrorTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerCreateDuplicatedMenuErrorTests(ServiceProviderFixture fixture)
+    : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-
-    public SystemMenuControllerCreateDuplicatedMenuErrorTests(ServiceProviderFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async Task SystemMenuController_CreateDuplicatedMenu_Error()
     {
@@ -34,12 +28,12 @@ public sealed class SystemMenuControllerCreateDuplicatedMenuErrorTests : IClassF
             Route = ""
         };
         var systemMenuController =
-            SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            SystemMenuInjectionController.GetSystemMenuController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
-        _fixture.SqlContextFixture.SystemMenus.Add(menu1);
-        await _fixture.SqlContextFixture.SaveChangesAsync();
+        fixture.SqlContextFixture.SystemMenus.Add(menu1);
+        await fixture.SqlContextFixture.SaveChangesAsync();
 
         var resultFilho = await systemMenuController.Create(menu2);
 

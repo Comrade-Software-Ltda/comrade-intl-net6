@@ -15,26 +15,18 @@ namespace Comrade.Api.Controllers.V1.SystemUserApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class SystemUserController : ControllerBase
+public class SystemUserController(
+    ISystemUserCommand systemUserCommand,
+    ISystemUserQuery systemUserQuery)
+    : ControllerBase
 {
-    private readonly ISystemUserCommand _systemUserCommand;
-    private readonly ISystemUserQuery _systemUserQuery;
-
-    public SystemUserController(ISystemUserCommand systemUserCommand,
-        ISystemUserQuery systemUserQuery)
-    {
-        _systemUserCommand = systemUserCommand;
-        _systemUserQuery = systemUserQuery;
-    }
-
-
     [HttpGet("get-all")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAll([FromQuery] PaginationQuery? paginationQuery)
     {
         try
         {
-            var result = await _systemUserQuery.GetAll(paginationQuery);
+            var result = await systemUserQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -51,7 +43,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetByIdDefault(systemUserId);
+            var result = await systemUserQuery.GetByIdDefault(systemUserId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -67,7 +59,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Create(dto);
+            var result = await systemUserCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -83,7 +75,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Edit(dto);
+            var result = await systemUserCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -99,7 +91,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.Delete(systemUserId);
+            var result = await systemUserCommand.Delete(systemUserId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -115,7 +107,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAllWithPermissions(paginationQuery);
+            var result = await systemUserQuery.GetAllWithPermissions(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -132,7 +124,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.ManagePermissions(dto);
+            var result = await systemUserCommand.ManagePermissions(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -148,7 +140,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAllWithRoles(paginationQuery);
+            var result = await systemUserQuery.GetAllWithRoles(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -164,7 +156,7 @@ public class SystemUserController : ControllerBase
     {
         try
         {
-            var result = await _systemUserCommand.ManageRoles(dto);
+            var result = await systemUserCommand.ManageRoles(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

@@ -10,30 +10,22 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Components.SystemUserComponent.Queries;
 
-public class SystemUserQuery : ISystemUserQuery
+public class SystemUserQuery(
+    ISystemUserRepository repository,
+    IMongoDbQueryContext mongoDbQueryContext,
+    IMapper mapper)
+    : ISystemUserQuery
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoDbQueryContext _mongoDbQueryContext;
-    private readonly ISystemUserRepository _repository;
-
-    public SystemUserQuery(ISystemUserRepository repository,
-        IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
-    {
-        _repository = repository;
-        _mongoDbQueryContext = mongoDbQueryContext;
-        _mapper = mapper;
-    }
-
     public async Task<IPageResultDto<SystemUserDto>> GetAll(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
 
         List<SystemUserDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemUserDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemUserDto>(list);
@@ -41,9 +33,9 @@ public class SystemUserQuery : ISystemUserQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemUserDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemUserDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemUserDto>(paginationFilter, list);
@@ -51,8 +43,8 @@ public class SystemUserQuery : ISystemUserQuery
 
     public async Task<ListResultDto<LookupDto>> FindByName(string name)
     {
-        var list = await Task.Run(() => _repository.FindByName(name)
-            .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
+        var list = await Task.Run(() => repository.FindByName(name)
+            .ProjectTo<LookupDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new ListResultDto<LookupDto>(list);
@@ -60,28 +52,28 @@ public class SystemUserQuery : ISystemUserQuery
 
     public async Task<ISingleResultDto<SystemUserDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id);
-        var dto = _mapper.Map<SystemUserDto>(entity);
+        var entity = await repository.GetById(id);
+        var dto = mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemUserDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemUser?>(id);
-        var dto = _mapper.Map<SystemUserDto>(entity);
+        var entity = await mongoDbQueryContext.GetById<SystemUser?>(id);
+        var dto = mapper.Map<SystemUserDto>(entity);
         return new SingleResultDto<SystemUserDto>(dto);
     }
 
     public async Task<IPageResultDto<SystemUserWithPermissionsDto>> GetAllWithPermissions(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
 
         List<SystemUserWithPermissionsDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemUserWithPermissionsDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemUserWithPermissionsDto>(list);
@@ -89,9 +81,9 @@ public class SystemUserQuery : ISystemUserQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemUserWithPermissionsDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemUserWithPermissionsDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemUserWithPermissionsDto>(paginationFilter, list);
@@ -100,13 +92,13 @@ public class SystemUserQuery : ISystemUserQuery
     public async Task<IPageResultDto<SystemUserWithRolesDto>> GetAllWithRoles(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
 
         List<SystemUserWithRolesDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemUserWithRolesDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemUserWithRolesDto>(list);
@@ -114,9 +106,9 @@ public class SystemUserQuery : ISystemUserQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemUserWithRolesDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemUserWithRolesDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemUserWithRolesDto>(paginationFilter, list);

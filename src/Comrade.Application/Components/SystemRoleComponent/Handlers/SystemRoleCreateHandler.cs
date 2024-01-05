@@ -7,22 +7,14 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemRoleComponent.Handlers;
 
-public class SystemRoleCreateHandler : IRequestHandler<SystemRoleCreateDto, SingleResultDto<EntityDto>>
+public class SystemRoleCreateHandler(IMapper mapper, IUcSystemRoleCreate createUc)
+    : IRequestHandler<SystemRoleCreateDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemRoleCreate _createUc;
-    private readonly IMapper _mapper;
-
-    public SystemRoleCreateHandler(IMapper mapper, IUcSystemRoleCreate createUc)
-    {
-        _mapper = mapper;
-        _createUc = createUc;
-    }
-
     public async Task<SingleResultDto<EntityDto>> Handle(SystemRoleCreateDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemRoleCreateCommand>(request);
-        var result = await _createUc.Execute(mappedObject);
+        var mappedObject = mapper.Map<SystemRoleCreateCommand>(request);
+        var result = await createUc.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

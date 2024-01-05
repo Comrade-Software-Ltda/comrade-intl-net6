@@ -4,25 +4,16 @@ using Comrade.Core.SecurityCore.Validation;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
-public class UcValidateLogin : IUcValidateLogin
+public class UcValidateLogin(
+    ISystemUserPasswordValidation systemUserPasswordValidation,
+    IUcGenerateToken generateToken)
+    : IUcValidateLogin
 {
-    private readonly IUcGenerateToken _generateToken;
-    private readonly ISystemUserPasswordValidation _systemUserPasswordValidation;
-
-
-    public UcValidateLogin(
-        ISystemUserPasswordValidation systemUserPasswordValidation,
-        IUcGenerateToken generateToken)
-    {
-        _systemUserPasswordValidation = systemUserPasswordValidation;
-        _generateToken = generateToken;
-    }
-
     public async Task<SecurityResult> Execute(Guid key, string password)
     {
         var result = await Task.Run(async () =>
         {
-            var resultPassword = _systemUserPasswordValidation.Execute(key, password);
+            var resultPassword = systemUserPasswordValidation.Execute(key, password);
 
             if (resultPassword.Success)
             {
@@ -37,7 +28,7 @@ public class UcValidateLogin : IUcValidateLogin
                     Token = "",
                     Roles = roles
                 };
-                user.Token = await _generateToken.Execute(user);
+                user.Token = await generateToken.Execute(user);
 
                 return new SecurityResult(user);
             }

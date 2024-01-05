@@ -10,16 +10,10 @@ using Comrade.Persistence.DataAccess;
 
 namespace Comrade.Persistence.Repositories;
 
-public class SystemMenuRepository : Repository<SystemMenu>, ISystemMenuRepository
+public class SystemMenuRepository(ComradeContext context) : Repository<SystemMenu>(context), ISystemMenuRepository
 {
-    private readonly ComradeContext _context;
-
-    public SystemMenuRepository(ComradeContext context)
-        : base(context)
-    {
-        _context = context ??
-                   throw new ArgumentNullException(nameof(context));
-    }
+    private readonly ComradeContext _context = context ??
+                                               throw new ArgumentNullException(nameof(context));
 
     public async Task<ISingleResult<Entity>> UniqueValidation(SystemMenu entity)
     {

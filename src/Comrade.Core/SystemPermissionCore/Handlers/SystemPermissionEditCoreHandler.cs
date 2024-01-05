@@ -10,30 +10,22 @@ using MediatR;
 
 namespace Comrade.Core.SystemPermissionCore.Handlers;
 
-public class SystemPermissionEditCoreHandler : IRequestHandler<SystemPermissionEditCommand, ISingleResult<Entity>>
+public class SystemPermissionEditCoreHandler(
+    ISystemPermissionEditValidation editValidation,
+    ISystemPermissionRepository repository,
+    IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemPermissionEditCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemPermissionEditValidation _editValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemPermissionRepository _repository;
-
-    public SystemPermissionEditCoreHandler(ISystemPermissionEditValidation editValidation,
-        ISystemPermissionRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _editValidation = editValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemPermissionEditCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
         if (recordExists is null)
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
 
-        var result = await _editValidation.Execute(request, recordExists);
+        var result = await editValidation.Execute(request, recordExists);
         if (!result.Success)
         {
             return result;
@@ -41,11 +33,11 @@ public class SystemPermissionEditCoreHandler : IRequestHandler<SystemPermissionE
 
         var obj = recordExists;
         HydrateValues(obj, request);
-        _repository.Update(obj);
-        await _repository.BeginTransactionAsync();
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync();
-        _mongoDbContext.ReplaceOne(obj);
+        repository.Update(obj);
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
+        mongoDbContext.ReplaceOne(obj);
         return new EditResult<Entity>(true, BusinessMessage.MSG02);
     }
 

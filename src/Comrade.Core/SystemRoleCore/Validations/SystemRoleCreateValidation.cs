@@ -6,22 +6,15 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemRoleCore.Validations;
 
-public class SystemRoleCreateValidation : ISystemRoleCreateValidation
+public class SystemRoleCreateValidation(
+    ISystemRoleNameUniqueValidation systemRoleNameUniqueValidation,
+    ISystemRoleTagUniqueValidation systemRoleTagUniqueValidation)
+    : ISystemRoleCreateValidation
 {
-    private readonly ISystemRoleNameUniqueValidation _systemRoleNameUniqueValidation;
-    private readonly ISystemRoleTagUniqueValidation _systemRoleTagUniqueValidation;
-
-    public SystemRoleCreateValidation(ISystemRoleNameUniqueValidation systemRoleNameUniqueValidation,
-        ISystemRoleTagUniqueValidation systemRoleTagUniqueValidation)
-    {
-        _systemRoleNameUniqueValidation = systemRoleNameUniqueValidation;
-        _systemRoleTagUniqueValidation = systemRoleTagUniqueValidation;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity)
     {
-        var registerName = await _systemRoleNameUniqueValidation.Execute(entity);
-        var registerTag = await _systemRoleTagUniqueValidation.Execute(entity);
+        var registerName = await systemRoleNameUniqueValidation.Execute(entity);
+        var registerTag = await systemRoleTagUniqueValidation.Execute(entity);
 
         var messages = new List<string>();
 

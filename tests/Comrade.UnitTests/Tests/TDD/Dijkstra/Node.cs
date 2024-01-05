@@ -2,14 +2,9 @@
 
 namespace Comrade.UnitTests.Tests.TDD.Dijkstra;
 
-public class Node
+public class Node(string label)
 {
-    public Node(string label)
-    {
-        Label = label;
-    }
-
-    public string Label { get; }
+    public string Label { get; } = label;
     private List<Edge> Edges { get; } = new();
 
     public IEnumerable<NeighborhoodInfo> Neighbors =>
@@ -29,16 +24,10 @@ public class Node
         Edge.Create(connectionValue, this, other);
     }
 
-    public struct NeighborhoodInfo
+    public struct NeighborhoodInfo(Node node, int weightToNode)
     {
-        public Node Node { get; }
-        public int WeightToNode { get; }
-
-        public NeighborhoodInfo(Node node, int weightToNode)
-        {
-            Node = node;
-            WeightToNode = weightToNode;
-        }
+        public Node Node { get; } = node;
+        public int WeightToNode { get; } = weightToNode;
     }
 
     public class Edge

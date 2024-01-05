@@ -6,18 +6,11 @@ using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.UseCases;
 
-public class UcSystemRoleDelete : UseCase, IUcSystemRoleDelete
+public class UcSystemRoleDelete(IMediator mediator) : UseCase, IUcSystemRoleDelete
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemRoleDelete(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemRoleDeleteCommand {Id = id};
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

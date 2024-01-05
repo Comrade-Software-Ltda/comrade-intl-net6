@@ -6,17 +6,10 @@ using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
-public class UcSystemUserManagePermissions : UseCase, IUcSystemUserManagePermissions
+public class UcSystemUserManagePermissions(IMediator mediator) : UseCase, IUcSystemUserManagePermissions
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemUserManagePermissions(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemUserManagePermissionsCommand entity)
     {
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

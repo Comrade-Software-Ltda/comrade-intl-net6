@@ -10,35 +10,25 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Components.SystemRoleComponent.Queries;
 
-public class SystemRoleQuery : ISystemRoleQuery
+public class SystemRoleQuery(ISystemRoleRepository repository, IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
+    : ISystemRoleQuery
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoDbQueryContext _mongoDbQueryContext;
-    private readonly ISystemRoleRepository _repository;
-
-    public SystemRoleQuery(ISystemRoleRepository repository, IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
-    {
-        _repository = repository;
-        _mongoDbQueryContext = mongoDbQueryContext;
-        _mapper = mapper;
-    }
-
     public async Task<IPageResultDto<SystemRoleDto>> GetAll(PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemRoleDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemRoleDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemRoleDto>(mapper.ConfigurationProvider)
                 .ToList());
             return new PageResultDto<SystemRoleDto>(list);
         }
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemRoleDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemRoleDto>(mapper.ConfigurationProvider)
             .ToList());
         return new PageResultDto<SystemRoleDto>(paginationFilter, list);
     }
@@ -46,13 +36,13 @@ public class SystemRoleQuery : ISystemRoleQuery
     public async Task<IPageResultDto<SystemRoleWithPermissionsDto>> GetAllWithPermissions(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
 
         List<SystemRoleWithPermissionsDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemRoleWithPermissionsDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemRoleWithPermissionsDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemRoleWithPermissionsDto>(list);
@@ -60,9 +50,9 @@ public class SystemRoleQuery : ISystemRoleQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemRoleWithPermissionsDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemRoleWithPermissionsDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemRoleWithPermissionsDto>(paginationFilter, list);
@@ -71,23 +61,23 @@ public class SystemRoleQuery : ISystemRoleQuery
 
     public async Task<ListResultDto<LookupDto>> FindByName(string name)
     {
-        var list = await Task.Run(() => _repository.FindByName(name)
-            .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
+        var list = await Task.Run(() => repository.FindByName(name)
+            .ProjectTo<LookupDto>(mapper.ConfigurationProvider)
             .ToList());
         return new ListResultDto<LookupDto>(list);
     }
 
     public async Task<ISingleResultDto<SystemRoleDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id);
-        var dto = _mapper.Map<SystemRoleDto>(entity);
+        var entity = await repository.GetById(id);
+        var dto = mapper.Map<SystemRoleDto>(entity);
         return new SingleResultDto<SystemRoleDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemRoleDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemRole?>(id);
-        var dto = _mapper.Map<SystemRoleDto>(entity);
+        var entity = await mongoDbQueryContext.GetById<SystemRole?>(id);
+        var dto = mapper.Map<SystemRoleDto>(entity);
         return new SingleResultDto<SystemRoleDto>(dto);
     }
 }

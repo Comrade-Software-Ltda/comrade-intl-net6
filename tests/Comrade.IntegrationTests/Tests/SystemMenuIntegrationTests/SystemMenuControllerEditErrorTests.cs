@@ -6,15 +6,9 @@ using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerEditErrorTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerEditErrorTests(ServiceProviderFixture fixture)
+    : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-
-    public SystemMenuControllerEditErrorTests(ServiceProviderFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async Task SystemMenuController_Edit_Error()
     {
@@ -32,9 +26,9 @@ public sealed class SystemMenuControllerEditErrorTests : IClassFixture<ServicePr
         };
 
         var systemMenuController =
-            SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            SystemMenuInjectionController.GetSystemMenuController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await systemMenuController.Edit(testObject);
 

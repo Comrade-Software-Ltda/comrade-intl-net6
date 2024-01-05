@@ -5,20 +5,13 @@ using MediatR;
 namespace Comrade.Core.SecurityCore.Handlers;
 
 public class
-    GenerateTokenCoreHandler : IRequestHandler<GenerateTokenCommand, string>
+    GenerateTokenCoreHandler(IConfiguration configuration) : IRequestHandler<GenerateTokenCommand, string>
 {
-    private readonly IConfiguration _configuration;
-
-    public GenerateTokenCoreHandler(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public async Task<string> Handle(GenerateTokenCommand request,
         CancellationToken cancellationToken)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:key"]));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>

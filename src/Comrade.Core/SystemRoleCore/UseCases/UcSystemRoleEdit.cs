@@ -6,17 +6,10 @@ using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.UseCases;
 
-public class UcSystemRoleEdit : UseCase, IUcSystemRoleEdit
+public class UcSystemRoleEdit(IMediator mediator) : UseCase, IUcSystemRoleEdit
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemRoleEdit(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemRoleEditCommand entity)
     {
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

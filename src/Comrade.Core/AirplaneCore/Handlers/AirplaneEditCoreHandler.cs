@@ -11,24 +11,16 @@ using MediatR;
 namespace Comrade.Core.AirplaneCore.Handlers;
 
 public class
-    AirplaneEditCoreHandler : IRequestHandler<AirplaneEditCommand, ISingleResult<Entity>>
+    AirplaneEditCoreHandler(
+        IAirplaneEditValidation airplaneEditValidation,
+        IAirplaneRepository repository,
+        IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<AirplaneEditCommand, ISingleResult<Entity>>
 {
-    private readonly IAirplaneEditValidation _airplaneEditValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly IAirplaneRepository _repository;
-
-    public AirplaneEditCoreHandler(IAirplaneEditValidation airplaneEditValidation,
-        IAirplaneRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _airplaneEditValidation = airplaneEditValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(AirplaneEditCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -36,7 +28,7 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = await _airplaneEditValidation.Execute(request, recordExists)
+        var validate = await airplaneEditValidation.Execute(request, recordExists)
             ;
 
         if (!validate.Success)
@@ -47,11 +39,11 @@ public class
         var obj = recordExists;
         HydrateValues(obj, request);
 
-        await _repository.BeginTransactionAsync();
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync();
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(obj);
+        mongoDbContext.ReplaceOne(obj);
 
         return new EditResult<Entity>(true,
             BusinessMessage.MSG02);

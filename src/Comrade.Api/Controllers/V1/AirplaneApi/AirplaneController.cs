@@ -16,19 +16,13 @@ namespace Comrade.Api.Controllers.V1.AirplaneApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class AirplaneController : ComradeController
+public class AirplaneController(
+    IAirplaneCommand airplaneCommand,
+    IAirplaneQuery airplaneQuery,
+    ILogger<AirplaneController> logger)
+    : ComradeController
 {
-    private readonly IAirplaneCommand _airplaneCommand;
-    private readonly IAirplaneQuery _airplaneQuery;
-    private readonly ILogger<AirplaneController> _logger;
-
-    public AirplaneController(IAirplaneCommand airplaneCommand,
-        IAirplaneQuery airplaneQuery, ILogger<AirplaneController> logger)
-    {
-        _airplaneCommand = airplaneCommand;
-        _airplaneQuery = airplaneQuery;
-        _logger = logger;
-    }
+    private readonly ILogger<AirplaneController> _logger = logger;
 
     [HttpGet("get-all")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
@@ -36,7 +30,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneQuery.GetAll(paginationQuery);
+            var result = await airplaneQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -56,7 +50,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneQuery.GetByIdDefault(airplaneId);
+            var result = await airplaneQuery.GetByIdDefault(airplaneId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -72,7 +66,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Create(dto);
+            var result = await airplaneCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -88,7 +82,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Edit(dto);
+            var result = await airplaneCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -104,7 +98,7 @@ public class AirplaneController : ComradeController
     {
         try
         {
-            var result = await _airplaneCommand.Delete(airplaneId);
+            var result = await airplaneCommand.Delete(airplaneId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

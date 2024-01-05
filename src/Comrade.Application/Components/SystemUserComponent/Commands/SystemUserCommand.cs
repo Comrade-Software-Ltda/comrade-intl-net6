@@ -6,41 +6,31 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemUserComponent.Commands;
 
-public class SystemUserCommand : ISystemUserCommand
+public class SystemUserCommand(IUcSystemUserDelete deleteSystemUser, IMediator mediator) : ISystemUserCommand
 {
-    private readonly IUcSystemUserDelete _deleteSystemUser;
-    private readonly IMediator _mediator;
-
-    public SystemUserCommand(
-        IUcSystemUserDelete deleteSystemUser, IMediator mediator)
-    {
-        _deleteSystemUser = deleteSystemUser;
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResultDto<EntityDto>> Create(SystemUserCreateDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Edit(SystemUserEditDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> Delete(Guid id)
     {
-        var result = await _deleteSystemUser.Execute(id);
+        var result = await deleteSystemUser.Execute(id);
         return new SingleResultDto<EntityDto>(result);
     }
 
     public async Task<ISingleResultDto<EntityDto>> ManagePermissions(SystemUserManagePermissionsDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 
     public async Task<ISingleResultDto<EntityDto>> ManageRoles(SystemUserManageRolesDto dto)
     {
-        return await _mediator.Send(dto);
+        return await mediator.Send(dto);
     }
 }

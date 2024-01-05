@@ -11,32 +11,24 @@ using MediatR;
 namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    SystemUserManagePermissionsCoreHandler : IRequestHandler<SystemUserManagePermissionsCommand, ISingleResult<Entity>>
+    SystemUserManagePermissionsCoreHandler(
+        ISystemUserRepository systemUserRepository,
+        ISystemPermissionRepository systemPermissionRepository,
+        ISystemUserManagePermissionsValidation validation)
+    : IRequestHandler<SystemUserManagePermissionsCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemPermissionRepository _systemPermissionRepository;
-    private readonly ISystemUserRepository _systemUserRepository;
-    private readonly ISystemUserManagePermissionsValidation _validation;
-
-    public SystemUserManagePermissionsCoreHandler(ISystemUserRepository systemUserRepository,
-        ISystemPermissionRepository systemPermissionRepository, ISystemUserManagePermissionsValidation validation)
-    {
-        _systemUserRepository = systemUserRepository;
-        _systemPermissionRepository = systemPermissionRepository;
-        _validation = validation;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemUserManagePermissionsCommand request,
         CancellationToken cancellationToken)
     {
-        var user = await _systemUserRepository.GetByIdIncludePermissions(request.Id);
-        var permissions = _systemPermissionRepository.GetAll()
+        var user = await systemUserRepository.GetByIdIncludePermissions(request.Id);
+        var permissions = systemPermissionRepository.GetAll()
             .Where(permission => request.SystemPermissionIds.Contains(permission.Id)).ToList();
 
         if (user == null)
             return new DeleteResult<Entity>(false,
                 BusinessMessage.MSG04);
 
-        var validate = _validation.Execute(user);
+        var validate = validation.Execute(user);
 
         if (!validate.Success)
         {
@@ -45,9 +37,9 @@ public class
 
         user.SystemPermissions = permissions;
 
-        await _systemUserRepository.BeginTransactionAsync();
-        _systemUserRepository.Update(user);
-        await _systemUserRepository.CommitTransactionAsync();
+        await systemUserRepository.BeginTransactionAsync();
+        systemUserRepository.Update(user);
+        await systemUserRepository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }

@@ -5,22 +5,13 @@ using Comrade.Domain.Bases;
 
 namespace Comrade.Application.Lookups;
 
-public class LookupService<TEntity> : ILookupService<TEntity>
+public class LookupService<TEntity>(IRepository<TEntity> repository, IMapper mapper) : ILookupService<TEntity>
     where TEntity : Entity
 {
-    private readonly IMapper _mapper;
-    private readonly IRepository<TEntity> _repository;
-
-    public LookupService(IRepository<TEntity> repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
-
     public async Task<List<LookupDto>> GetLookup()
     {
-        var list = await Task.Run(() => _repository.GetLookup()
-            .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
+        var list = await Task.Run(() => repository.GetLookup()
+            .ProjectTo<LookupDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return list.OrderBy(x => x.Value).ToList();
@@ -28,8 +19,8 @@ public class LookupService<TEntity> : ILookupService<TEntity>
 
     public async Task<List<LookupDto>> GetLookup(Expression<Func<TEntity, bool>> predicate)
     {
-        var list = await Task.Run(() => _repository.GetLookup(predicate)
-            .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
+        var list = await Task.Run(() => repository.GetLookup(predicate)
+            .ProjectTo<LookupDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return list;

@@ -1,22 +1,13 @@
 ﻿namespace Comrade.Persistence.ADO;
 
-public class DbOto
+public class DbOto(string? databaseName, short dbId, DateTime creationDate)
 {
-    public DbOto()
+    public DbOto() : this("", 0, new DateTime())
     {
-        DatabaseName = "";
-        DbID = 0;
     }
 
 
-    public DbOto(string? databaseName, short dbId, DateTime creationDate)
-    {
-        DatabaseName = databaseName;
-        DbID = dbId;
-        CreationDate = creationDate;
-    }
-
-    public string? DatabaseName { get; set; }
-    public short DbID { get; set; }
-    public DateTime CreationDate { get; set; }
+    public string? DatabaseName { get; set; } = databaseName;
+    public short DbID { get; set; } = dbId;
+    public DateTime CreationDate { get; set; } = creationDate;
 }

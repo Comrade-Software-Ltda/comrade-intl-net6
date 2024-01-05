@@ -1,13 +1,7 @@
 ﻿namespace Comrade.UnitTests.Tests.TDD.Dijkstra;
 
-public class Weight
+public class Weight(Node? from, int value)
 {
-    public Weight(Node? from, int value)
-    {
-        From = from;
-        Value = value;
-    }
-
-    public Node? From { get; }
-    public int Value { get; }
+    public Node? From { get; } = from;
+    public int Value { get; } = value;
 }

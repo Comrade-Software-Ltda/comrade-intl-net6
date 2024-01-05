@@ -9,29 +9,21 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Components.AirplaneComponent.Queries;
 
-public class AirplaneQuery : IAirplaneQuery
+public class AirplaneQuery(
+    IAirplaneRepository repository,
+    IMongoDbQueryContext mongoDbQueryContext,
+    IMapper mapper)
+    : IAirplaneQuery
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoDbQueryContext _mongoDbQueryContext;
-    private readonly IAirplaneRepository _repository;
-
-    public AirplaneQuery(IAirplaneRepository repository,
-        IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
-    {
-        _repository = repository;
-        _mongoDbQueryContext = mongoDbQueryContext;
-        _mapper = mapper;
-    }
-
     public async Task<IPageResultDto<AirplaneDto>> GetAll(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<AirplaneDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<AirplaneDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<AirplaneDto>(list);
@@ -39,9 +31,9 @@ public class AirplaneQuery : IAirplaneQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<AirplaneDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<AirplaneDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
@@ -49,15 +41,15 @@ public class AirplaneQuery : IAirplaneQuery
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id);
-        var dto = _mapper.Map<AirplaneDto>(entity);
+        var entity = await repository.GetById(id);
+        var dto = mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<Airplane?>(id);
-        var dto = _mapper.Map<AirplaneDto>(entity);
+        var entity = await mongoDbQueryContext.GetById<Airplane?>(id);
+        var dto = mapper.Map<AirplaneDto>(entity);
         return new SingleResultDto<AirplaneDto>(dto);
     }
 }

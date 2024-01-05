@@ -9,19 +9,12 @@ using ILogger = Serilog.ILogger;
 
 namespace Comrade.Persistence.ADO;
 
-public class MigrateDatabase
+public class MigrateDatabase(GetAllDatabases getAllDatabases)
 {
     private static readonly ILogger Logger = Log.Logger = new LoggerConfiguration()
         .Enrich.FromLogContext()
         .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
         .CreateLogger();
-
-    private readonly GetAllDatabases _getAllDatabases;
-
-    public MigrateDatabase(GetAllDatabases getAllDatabases)
-    {
-        _getAllDatabases = getAllDatabases;
-    }
 
     public async Task Execute()
     {
@@ -74,7 +67,7 @@ public class MigrateDatabase
         IConfiguration config = builder.Build();
 
 
-        var teste = _getAllDatabases.Execute();
+        var teste = getAllDatabases.Execute();
 
         var oto = new List<MigratorTenantInfo>();
         oto.Add(new MigratorTenantInfo

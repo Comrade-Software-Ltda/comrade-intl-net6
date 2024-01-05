@@ -9,51 +9,43 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Components.SystemPermissionComponent.Queries;
 
-public class SystemPermissionQuery : ISystemPermissionQuery
+public class SystemPermissionQuery(
+    ISystemPermissionRepository repository,
+    IMongoDbQueryContext mongoDbQueryContext,
+    IMapper mapper)
+    : ISystemPermissionQuery
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoDbQueryContext _mongoDbQueryContext;
-    private readonly ISystemPermissionRepository _repository;
-
-    public SystemPermissionQuery(ISystemPermissionRepository repository, IMongoDbQueryContext mongoDbQueryContext,
-        IMapper mapper)
-    {
-        _repository = repository;
-        _mongoDbQueryContext = mongoDbQueryContext;
-        _mapper = mapper;
-    }
-
     public async Task<IPageResultDto<SystemPermissionDto>> GetAll(PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemPermissionDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemPermissionDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemPermissionDto>(mapper.ConfigurationProvider)
                 .ToList());
             return new PageResultDto<SystemPermissionDto>(list);
         }
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemPermissionDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemPermissionDto>(mapper.ConfigurationProvider)
             .ToList());
         return new PageResultDto<SystemPermissionDto>(paginationFilter, list);
     }
 
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id);
-        var dto = _mapper.Map<SystemPermissionDto>(entity);
+        var entity = await repository.GetById(id);
+        var dto = mapper.Map<SystemPermissionDto>(entity);
         return new SingleResultDto<SystemPermissionDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemPermissionDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemRole?>(id);
-        var dto = _mapper.Map<SystemPermissionDto>(entity);
+        var entity = await mongoDbQueryContext.GetById<SystemRole?>(id);
+        var dto = mapper.Map<SystemPermissionDto>(entity);
         return new SingleResultDto<SystemPermissionDto>(dto);
     }
 }

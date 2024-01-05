@@ -1,17 +1,9 @@
 ﻿namespace Comrade.UnitTests.Tests.TDD.BotMovement;
 
-public class BotMovementInput
+public class BotMovementInput(int startPositionX, int startPositionY, int finalPositionX, int finalPositionY)
 {
-    public BotMovementInput(int startPositionX, int startPositionY, int finalPositionX, int finalPositionY)
-    {
-        StartPositionX = startPositionX;
-        StartPositionY = startPositionY;
-        FinalPositionX = finalPositionX;
-        FinalPositionY = finalPositionY;
-    }
-
-    public int StartPositionX { get; set; }
-    public int StartPositionY { get; set; }
-    public int FinalPositionX { get; set; }
-    public int FinalPositionY { get; set; }
+    public int StartPositionX { get; set; } = startPositionX;
+    public int StartPositionY { get; set; } = startPositionY;
+    public int FinalPositionX { get; set; } = finalPositionX;
+    public int FinalPositionY { get; set; } = finalPositionY;
 }

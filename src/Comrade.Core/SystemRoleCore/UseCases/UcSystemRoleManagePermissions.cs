@@ -6,15 +6,8 @@ using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.UseCases;
 
-public class UcSystemRoleManagePermissions : UseCase, IUcSystemRoleManagePermissions
+public class UcSystemRoleManagePermissions(IMediator mediator) : UseCase, IUcSystemRoleManagePermissions
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemRoleManagePermissions(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemRoleManagePermissionsCommand entity)
     {
         var isValid = ValidateEntity(entity);
@@ -23,6 +16,6 @@ public class UcSystemRoleManagePermissions : UseCase, IUcSystemRoleManagePermiss
             return isValid;
         }
 
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

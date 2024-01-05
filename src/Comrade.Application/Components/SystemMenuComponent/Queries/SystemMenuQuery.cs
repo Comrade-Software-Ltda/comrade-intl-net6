@@ -9,29 +9,21 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Application.Components.SystemMenuComponent.Queries;
 
-public class SystemMenuQuery : ISystemMenuQuery
+public class SystemMenuQuery(
+    ISystemMenuRepository repository,
+    IMongoDbQueryContext mongoDbQueryContext,
+    IMapper mapper)
+    : ISystemMenuQuery
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoDbQueryContext _mongoDbQueryContext;
-    private readonly ISystemMenuRepository _repository;
-
-    public SystemMenuQuery(ISystemMenuRepository repository,
-        IMongoDbQueryContext mongoDbQueryContext, IMapper mapper)
-    {
-        _repository = repository;
-        _mongoDbQueryContext = mongoDbQueryContext;
-        _mapper = mapper;
-    }
-
     public async Task<IPageResultDto<SystemMenuSimpleDto>> GetAll(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemMenuSimpleDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllAsNoTracking()
-                .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllAsNoTracking()
+                .ProjectTo<SystemMenuSimpleDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemMenuSimpleDto>(list);
@@ -39,9 +31,9 @@ public class SystemMenuQuery : ISystemMenuQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllAsNoTracking().Skip(skip)
+        list = await Task.Run(() => repository.GetAllAsNoTracking().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemMenuSimpleDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemMenuSimpleDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemMenuSimpleDto>(paginationFilter, list);
@@ -50,12 +42,12 @@ public class SystemMenuQuery : ISystemMenuQuery
     public async Task<IPageResultDto<SystemMenuDto>> GetAllMenus(
         PaginationQuery? paginationQuery = null)
     {
-        var paginationFilter = _mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
+        var paginationFilter = mapper.Map<PaginationQuery?, PaginationFilter?>(paginationQuery);
         List<SystemMenuDto> list;
         if (paginationFilter == null)
         {
-            list = await Task.Run(() => _repository.GetAllMenus()
-                .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
+            list = await Task.Run(() => repository.GetAllMenus()
+                .ProjectTo<SystemMenuDto>(mapper.ConfigurationProvider)
                 .ToList());
 
             return new PageResultDto<SystemMenuDto>(list);
@@ -63,9 +55,9 @@ public class SystemMenuQuery : ISystemMenuQuery
 
         var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
 
-        list = await Task.Run(() => _repository.GetAllMenus().Skip(skip)
+        list = await Task.Run(() => repository.GetAllMenus().Skip(skip)
             .Take(paginationFilter.PageSize)
-            .ProjectTo<SystemMenuDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SystemMenuDto>(mapper.ConfigurationProvider)
             .ToList());
 
         return new PageResultDto<SystemMenuDto>(paginationFilter, list);
@@ -73,15 +65,15 @@ public class SystemMenuQuery : ISystemMenuQuery
 
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdDefault(Guid id)
     {
-        var entity = await _repository.GetById(id);
-        var dto = _mapper.Map<SystemMenuDto>(entity);
+        var entity = await repository.GetById(id);
+        var dto = mapper.Map<SystemMenuDto>(entity);
         return new SingleResultDto<SystemMenuDto>(dto);
     }
 
     public async Task<ISingleResultDto<SystemMenuDto>> GetByIdMongo(Guid id)
     {
-        var entity = await _mongoDbQueryContext.GetById<SystemMenu?>(id);
-        var dto = _mapper.Map<SystemMenuDto>(entity);
+        var entity = await mongoDbQueryContext.GetById<SystemMenu?>(id);
+        var dto = mapper.Map<SystemMenuDto>(entity);
         return new SingleResultDto<SystemMenuDto>(dto);
     }
 }

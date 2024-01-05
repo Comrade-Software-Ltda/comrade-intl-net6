@@ -3,16 +3,10 @@ using Xunit.Abstractions;
 
 namespace Comrade.UnitTests.Tests.TDD.Dijkstra;
 
-public class TravelDistanceTests
+public class TravelDistanceTests(ITestOutputHelper output)
 {
-    private readonly GpsFitSolution _gpsFitSolution;
-    private readonly ITestOutputHelper _output;
-
-    public TravelDistanceTests(ITestOutputHelper output)
-    {
-        _output = output;
-        _gpsFitSolution = new GpsFitSolution();
-    }
+    private readonly GpsFitSolution _gpsFitSolution = new();
+    private readonly ITestOutputHelper _output = output;
 
     [Fact]
     public void TravelDistance()

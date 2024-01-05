@@ -10,22 +10,15 @@ using MediatR;
 namespace Comrade.Core.SystemMenuCore.Handlers;
 
 public class
-    SystemMenuDeleteCoreHandler : IRequestHandler<SystemMenuDeleteCommand, ISingleResult<Entity>>
-{
-    private readonly ISystemMenuRepository _repository;
-    private readonly SystemMenuDeleteValidation _systemMenuDeleteValidation;
-
-    public SystemMenuDeleteCoreHandler(SystemMenuDeleteValidation systemMenuDeleteValidation,
+    SystemMenuDeleteCoreHandler(
+        SystemMenuDeleteValidation systemMenuDeleteValidation,
         ISystemMenuRepository repository)
-    {
-        _systemMenuDeleteValidation = systemMenuDeleteValidation;
-        _repository = repository;
-    }
-
+    : IRequestHandler<SystemMenuDeleteCommand, ISingleResult<Entity>>
+{
     public async Task<ISingleResult<Entity>> Handle(SystemMenuDeleteCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -33,7 +26,7 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = _systemMenuDeleteValidation.Execute(recordExists);
+        var validate = systemMenuDeleteValidation.Execute(recordExists);
         if (!validate.Success)
         {
             return validate;
@@ -41,9 +34,9 @@ public class
 
         var systemMenuId = recordExists.Id;
 
-        await _repository.BeginTransactionAsync();
-        _repository.Remove(systemMenuId);
-        await _repository.CommitTransactionAsync();
+        await repository.BeginTransactionAsync();
+        repository.Remove(systemMenuId);
+        await repository.CommitTransactionAsync();
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

@@ -1,30 +1,21 @@
 ﻿namespace Comrade.UnitTests.Tests.TDD.Dijkstra;
 
-public class GpsTravel
+public class GpsTravel(
+    int city,
+    List<string> cityNames,
+    int road,
+    List<DistanceCity> distanceCities,
+    string cityFrom,
+    string cityTo)
 {
-    public GpsTravel()
+    public GpsTravel() : this(0, new List<string>(), 0, new List<DistanceCity>(), "", "")
     {
-        DistanceCities = new List<DistanceCity>();
-        CityNames = new List<string>();
-        CityFrom = "";
-        CityTo = "";
     }
 
-    public GpsTravel(int city, List<string> cityNames, int road, List<DistanceCity> distanceCities, string cityFrom,
-        string cityTo)
-    {
-        City = city;
-        CityNames = cityNames;
-        Road = road;
-        DistanceCities = distanceCities;
-        CityFrom = cityFrom;
-        CityTo = cityTo;
-    }
-
-    public int City { get; set; }
-    public List<string> CityNames { get; set; }
-    public int Road { get; set; }
-    public List<DistanceCity> DistanceCities { get; set; }
-    public string CityFrom { get; set; }
-    public string CityTo { get; set; }
+    public int City { get; set; } = city;
+    public List<string> CityNames { get; set; } = cityNames;
+    public int Road { get; set; } = road;
+    public List<DistanceCity> DistanceCities { get; set; } = distanceCities;
+    public string CityFrom { get; set; } = cityFrom;
+    public string CityTo { get; set; } = cityTo;
 }

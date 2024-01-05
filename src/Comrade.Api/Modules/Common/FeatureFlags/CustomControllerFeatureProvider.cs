@@ -41,7 +41,6 @@ public sealed class
                     var typedArgumentValue = (CustomFeature) (int) typedArgument.Value!;
                     var isFeatureEnabled = _featureManager
                         .IsEnabledAsync(typedArgumentValue.ToString())
-                        
                         .GetAwaiter()
                         .GetResult();
 

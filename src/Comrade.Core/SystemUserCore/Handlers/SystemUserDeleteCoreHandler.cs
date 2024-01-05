@@ -11,24 +11,16 @@ using MediatR;
 namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    SystemUserDeleteCoreHandler : IRequestHandler<SystemUserDeleteCommand, ISingleResult<Entity>>
+    SystemUserDeleteCoreHandler(
+        ISystemUserDeleteValidation systemUserDeleteValidation,
+        ISystemUserRepository repository,
+        IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemUserDeleteCommand, ISingleResult<Entity>>
 {
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemUserRepository _repository;
-    private readonly ISystemUserDeleteValidation _systemUserDeleteValidation;
-
-    public SystemUserDeleteCoreHandler(ISystemUserDeleteValidation systemUserDeleteValidation,
-        ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _systemUserDeleteValidation = systemUserDeleteValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemUserDeleteCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -36,20 +28,20 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = _systemUserDeleteValidation.Execute(recordExists);
+        var validate = systemUserDeleteValidation.Execute(recordExists);
         if (!validate.Success)
         {
             return validate;
         }
 
         var systemUserId = recordExists.Id;
-        _repository.Remove(systemUserId);
+        repository.Remove(systemUserId);
 
-        await _repository.BeginTransactionAsync();
-        _repository.Remove(systemUserId);
-        await _repository.CommitTransactionAsync();
+        await repository.BeginTransactionAsync();
+        repository.Remove(systemUserId);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.DeleteOne<SystemUser>(systemUserId);
+        mongoDbContext.DeleteOne<SystemUser>(systemUserId);
 
         return new DeleteResult<Entity>(true,
             BusinessMessage.MSG03);

@@ -8,22 +8,14 @@ using MediatR;
 namespace Comrade.Application.Components.AirplaneComponent.Handlers;
 
 public class
-    AirplaneCreateServiceHandler : IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>
+    AirplaneCreateServiceHandler(IMapper mapper, IUcAirplaneCreate createAirplane)
+    : IRequestHandler<AirplaneCreateDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcAirplaneCreate _createAirplane;
-    private readonly IMapper _mapper;
-
-    public AirplaneCreateServiceHandler(IMapper mapper, IUcAirplaneCreate createAirplane)
-    {
-        _mapper = mapper;
-        _createAirplane = createAirplane;
-    }
-
     public async Task<SingleResultDto<EntityDto>> Handle(AirplaneCreateDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<AirplaneCreateCommand>(request);
-        var result = await _createAirplane.Execute(mappedObject);
+        var mappedObject = mapper.Map<AirplaneCreateCommand>(request);
+        var result = await createAirplane.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

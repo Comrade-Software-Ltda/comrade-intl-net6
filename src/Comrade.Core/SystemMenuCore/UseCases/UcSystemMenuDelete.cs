@@ -6,18 +6,11 @@ using MediatR;
 
 namespace Comrade.Core.SystemMenuCore.UseCases;
 
-public class UcSystemMenuDelete : UseCase, IUcSystemMenuDelete
+public class UcSystemMenuDelete(IMediator mediator) : UseCase, IUcSystemMenuDelete
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemMenuDelete(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemMenuDeleteCommand {Id = id};
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

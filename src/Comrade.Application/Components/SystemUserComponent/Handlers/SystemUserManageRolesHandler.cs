@@ -7,22 +7,14 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
-public class SystemUserManageRolesHandler : IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>
+public class SystemUserManageRolesHandler(IMapper mapper, IUcSystemUserManageRoles ucSystemUserManageRoles)
+    : IRequestHandler<SystemUserManageRolesDto, SingleResultDto<EntityDto>>
 {
-    private readonly IMapper _mapper;
-    private readonly IUcSystemUserManageRoles _ucSystemUserManageRoles;
-
-    public SystemUserManageRolesHandler(IMapper mapper, IUcSystemUserManageRoles ucSystemUserManageRoles)
-    {
-        _mapper = mapper;
-        _ucSystemUserManageRoles = ucSystemUserManageRoles;
-    }
-
     public async Task<SingleResultDto<EntityDto>> Handle(SystemUserManageRolesDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemUserManageRolesCommand>(request);
-        var result = await _ucSystemUserManageRoles.Execute(mappedObject);
+        var mappedObject = mapper.Map<SystemUserManageRolesCommand>(request);
+        var result = await ucSystemUserManageRoles.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

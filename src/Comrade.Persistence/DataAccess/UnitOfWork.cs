@@ -2,15 +2,9 @@ using Comrade.Core.Bases.Interfaces;
 
 namespace Comrade.Persistence.DataAccess;
 
-public sealed class UnitOfWork : IUnitOfWork, IDisposable
+public sealed class UnitOfWork(ComradeContext context) : IUnitOfWork, IDisposable
 {
-    private readonly ComradeContext _context;
     private bool _disposed;
-
-    public UnitOfWork(ComradeContext context)
-    {
-        _context = context;
-    }
 
     public void Dispose()
     {
@@ -20,13 +14,13 @@ public sealed class UnitOfWork : IUnitOfWork, IDisposable
 
     public async Task<bool> Commit()
     {
-        return await _context.SaveChangesAsync() > 0;
+        return await context.SaveChangesAsync() > 0;
     }
 
     public async Task<int> AffectedRows()
     {
-        var affectedRows = await _context
-            .SaveChangesAsync()
+        var affectedRows = await context
+                .SaveChangesAsync()
             ;
         return affectedRows;
     }
@@ -35,7 +29,7 @@ public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {
         if (!_disposed && disposing)
         {
-            _context.Dispose();
+            context.Dispose();
         }
 
         _disposed = true;

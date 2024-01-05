@@ -6,15 +6,8 @@ using MediatR;
 
 namespace Comrade.Core.SystemMenuCore.UseCases;
 
-public class UcSystemMenuCreate : UseCase, IUcSystemMenuCreate
+public class UcSystemMenuCreate(IMediator mediator) : UseCase, IUcSystemMenuCreate
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemMenuCreate(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemMenuCreateCommand entity)
     {
         var isValid = ValidateEntity(entity);
@@ -23,6 +16,6 @@ public class UcSystemMenuCreate : UseCase, IUcSystemMenuCreate
             return isValid;
         }
 
-        return await _mediator.Send(entity);
+        return await mediator.Send(entity);
     }
 }

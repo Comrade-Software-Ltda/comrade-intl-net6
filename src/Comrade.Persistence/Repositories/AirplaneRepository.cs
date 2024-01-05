@@ -9,16 +9,10 @@ using Comrade.Persistence.DataAccess;
 
 namespace Comrade.Persistence.Repositories;
 
-public class AirplaneRepository : Repository<Airplane>, IAirplaneRepository
+public class AirplaneRepository(ComradeContext context) : Repository<Airplane>(context), IAirplaneRepository
 {
-    private readonly ComradeContext _context;
-
-    public AirplaneRepository(ComradeContext context)
-        : base(context)
-    {
-        _context = context ??
-                   throw new ArgumentNullException(nameof(context));
-    }
+    private readonly ComradeContext _context = context ??
+                                               throw new ArgumentNullException(nameof(context));
 
     public async Task<ISingleResult<Airplane>> CodeUniqueValidation(Guid id, string code)
     {

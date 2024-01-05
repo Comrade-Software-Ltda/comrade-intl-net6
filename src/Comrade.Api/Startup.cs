@@ -21,17 +21,12 @@ namespace Comrade.Api;
 /// <summary>
 ///     Startup.
 /// </summary>
-public sealed class Startup
+/// <remarks>
+///     Startup constructor.
+/// </remarks>
+public sealed class Startup(IConfiguration configuration)
 {
-    /// <summary>
-    ///     Startup constructor.
-    /// </summary>
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
-
-    private IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; } = configuration;
 
     /// <summary>
     ///     Configure dependencies from application.

@@ -9,26 +9,21 @@ namespace Comrade.Api.Modules.Common.Swagger;
 ///     This allows API versioning to define a Swagger document per API version after the
 ///     <see cref="IApiVersionDescriptionProvider" /> service has been resolved from the service container.
 /// </remarks>
-public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+/// <remarks>
+///     Initializes a new instance of the <see cref="ConfigureSwaggerOptions" /> class.
+/// </remarks>
+/// <param name="provider">
+///     The <see cref="IApiVersionDescriptionProvider">provider</see> used to generate Swagger
+///     documents.
+/// </param>
+public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
 {
     private const string UriString = "http://urlaqui.net";
 
     private const string UriString1 =
         "https://raw.urlaqui.com/README.md";
 
-    private readonly IApiVersionDescriptionProvider _provider;
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ConfigureSwaggerOptions" /> class.
-    /// </summary>
-    /// <param name="provider">
-    ///     The <see cref="IApiVersionDescriptionProvider">provider</see> used to generate Swagger
-    ///     documents.
-    /// </param>
-    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
-    {
-        _provider = provider;
-    }
+    private readonly IApiVersionDescriptionProvider _provider = provider;
 
     /// <inheritdoc />
     public void Configure(SwaggerGenOptions options)

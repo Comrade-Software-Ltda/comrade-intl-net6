@@ -7,19 +7,9 @@ using Xunit.Abstractions;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProviderFixture>
+public sealed class AirplaneControllerCreateTests(ServiceProviderFixture fixture, ITestOutputHelper output)
+    : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-    private readonly ITestOutputHelper _output;
-
-
-    public AirplaneControllerCreateTests(ServiceProviderFixture fixture, ITestOutputHelper output)
-    {
-        _fixture = fixture;
-        _output = output;
-    }
-
-
     [Fact]
     public async Task AirplaneController_Create()
     {
@@ -32,13 +22,13 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
 
         var oto = JsonSerializer.Serialize(testObject);
 
-        _output.WriteLine(oto);
-        _output.WriteLine(testObject.ToString());
+        output.WriteLine(oto);
+        output.WriteLine(testObject.ToString());
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 
@@ -61,9 +51,9 @@ public sealed class AirplaneControllerCreateTests : IClassFixture<ServiceProvide
         };
 
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await airplaneController.Create(testObject);
 

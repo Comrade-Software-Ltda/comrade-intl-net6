@@ -7,22 +7,14 @@ using MediatR;
 
 namespace Comrade.Application.Components.SystemUserComponent.Handlers;
 
-public class SystemUserEditHandler : IRequestHandler<SystemUserEditDto, SingleResultDto<EntityDto>>
+public class SystemUserEditHandler(IMapper mapper, IUcSystemUserEdit editSystemUser)
+    : IRequestHandler<SystemUserEditDto, SingleResultDto<EntityDto>>
 {
-    private readonly IUcSystemUserEdit _editSystemUser;
-    private readonly IMapper _mapper;
-
-    public SystemUserEditHandler(IMapper mapper, IUcSystemUserEdit editSystemUser)
-    {
-        _mapper = mapper;
-        _editSystemUser = editSystemUser;
-    }
-
     public async Task<SingleResultDto<EntityDto>> Handle(SystemUserEditDto request,
         CancellationToken cancellationToken)
     {
-        var mappedObject = _mapper.Map<SystemUserEditCommand>(request);
-        var result = await _editSystemUser.Execute(mappedObject);
+        var mappedObject = mapper.Map<SystemUserEditCommand>(request);
+        var result = await editSystemUser.Execute(mappedObject);
         return new SingleResultDto<EntityDto>(result);
     }
 }

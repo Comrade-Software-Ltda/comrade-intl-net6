@@ -5,20 +5,13 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemMenuCore.Validations;
 
-public class SystemMenuUniqueValidation : ISystemMenuUniqueValidation
+public class SystemMenuUniqueValidation(ISystemMenuRepository repository) : ISystemMenuUniqueValidation
 {
-    private readonly ISystemMenuRepository _repository;
-
-    public SystemMenuUniqueValidation(ISystemMenuRepository repository)
-    {
-        _repository = repository;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemMenu entity)
     {
         var registerSameCode =
-            await _repository.UniqueValidation(entity)
-                ;
+                await repository.UniqueValidation(entity)
+            ;
 
         return !registerSameCode.Success ? registerSameCode : new SingleResult<Entity>(entity);
     }

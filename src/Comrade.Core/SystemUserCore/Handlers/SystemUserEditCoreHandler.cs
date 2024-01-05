@@ -11,24 +11,16 @@ using MediatR;
 namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    SystemUserEditCoreHandler : IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>
+    SystemUserEditCoreHandler(
+        ISystemUserEditValidation systemUserEditValidation,
+        ISystemUserRepository repository,
+        IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemUserEditCommand, ISingleResult<Entity>>
 {
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemUserRepository _repository;
-    private readonly ISystemUserEditValidation _systemUserEditValidation;
-
-    public SystemUserEditCoreHandler(ISystemUserEditValidation systemUserEditValidation,
-        ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _systemUserEditValidation = systemUserEditValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemUserEditCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -36,7 +28,7 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var result = _systemUserEditValidation.Execute(request, recordExists);
+        var result = systemUserEditValidation.Execute(request, recordExists);
         if (!result.Success)
         {
             return result;
@@ -46,13 +38,13 @@ public class
 
         HydrateValues(obj, request);
 
-        _repository.Update(obj);
+        repository.Update(obj);
 
-        await _repository.BeginTransactionAsync();
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync();
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(obj);
+        mongoDbContext.ReplaceOne(obj);
 
         return new EditResult<Entity>(true,
             BusinessMessage.MSG02);

@@ -7,28 +7,16 @@ using Comrade.Core.SecurityCore.Commands;
 
 namespace Comrade.Application.Components.AuthenticationComponent.Commands;
 
-public class AuthenticationCommand : IAuthenticationCommand
+public class AuthenticationCommand(
+    IUcUpdatePassword updatePassword,
+    IUcValidateLogin validateLogin,
+    IUcForgotPassword forgotPassword,
+    IMapper mapper)
+    : IAuthenticationCommand
 {
-    private readonly IUcForgotPassword _forgotPassword;
-    private readonly IMapper _mapper;
-    private readonly IUcUpdatePassword _updatePassword;
-    private readonly IUcValidateLogin _validateLogin;
-
-
-    public AuthenticationCommand(IUcUpdatePassword updatePassword,
-        IUcValidateLogin validateLogin,
-        IUcForgotPassword forgotPassword,
-        IMapper mapper)
-    {
-        _updatePassword = updatePassword;
-        _forgotPassword = forgotPassword;
-        _validateLogin = validateLogin;
-        _mapper = mapper;
-    }
-
     public async Task<ISingleResultDto<UserDto>> GenerateToken(AuthenticationDto dto)
     {
-        var result = await _validateLogin.Execute(dto.Key, dto.Password)
+        var result = await validateLogin.Execute(dto.Key, dto.Password)
             ;
 
         if (!result.Success)
@@ -46,16 +34,16 @@ public class AuthenticationCommand : IAuthenticationCommand
 
     public async Task<ISingleResultDto<EntityDto>> ForgotPassword(AuthenticationDto dto)
     {
-        var mappedObject = _mapper.Map<ForgotPasswordCommand>(dto);
-        var result = await _forgotPassword.Execute(mappedObject);
+        var mappedObject = mapper.Map<ForgotPasswordCommand>(dto);
+        var result = await forgotPassword.Execute(mappedObject);
         var resultDto = new SingleResultDto<EntityDto>(result);
         return resultDto;
     }
 
     public async Task<ISingleResultDto<EntityDto>> UpdatePassword(AuthenticationDto dto)
     {
-        var mappedObject = _mapper.Map<UpdatePasswordCommand>(dto);
-        var result = await _updatePassword.Execute(mappedObject);
+        var mappedObject = mapper.Map<UpdatePasswordCommand>(dto);
+        var result = await updatePassword.Execute(mappedObject);
         var resultDto = new SingleResultDto<EntityDto>(result);
         return resultDto;
     }

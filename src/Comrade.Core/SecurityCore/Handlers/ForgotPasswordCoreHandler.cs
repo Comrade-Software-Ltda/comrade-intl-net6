@@ -13,28 +13,17 @@ using MediatR;
 namespace Comrade.Core.SecurityCore.Handlers;
 
 public class
-    ForgotPasswordCoreHandler : IRequestHandler<ForgotPasswordCommand, ISingleResult<Entity>>
-{
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly IPasswordHasher _passwordHasher;
-    private readonly ISystemUserRepository _repository;
-    private readonly ISystemUserForgotPasswordValidation _systemUserForgotPasswordValidation;
-
-    public ForgotPasswordCoreHandler(IPasswordHasher passwordHasher,
+    ForgotPasswordCoreHandler(
+        IPasswordHasher passwordHasher,
         ISystemUserRepository repository,
         ISystemUserForgotPasswordValidation systemUserForgotPasswordValidation,
         IMongoDbCommandContext mongoDbContext)
-    {
-        _passwordHasher = passwordHasher;
-        _repository = repository;
-        _systemUserForgotPasswordValidation = systemUserForgotPasswordValidation;
-        _mongoDbContext = mongoDbContext;
-    }
-
+    : IRequestHandler<ForgotPasswordCommand, ISingleResult<Entity>>
+{
     public async Task<ISingleResult<Entity>> Handle(ForgotPasswordCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -42,18 +31,18 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var result = _systemUserForgotPasswordValidation.Execute(request, recordExists);
+        var result = systemUserForgotPasswordValidation.Execute(request, recordExists);
         if (!result.Success) return result;
 
         var obj = recordExists;
 
         HydrateValues(obj);
 
-        await _repository.BeginTransactionAsync();
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync();
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(obj);
+        mongoDbContext.ReplaceOne(obj);
 
         return new EditResult<Entity>();
     }
@@ -61,6 +50,6 @@ public class
     private void HydrateValues(SystemUser target)
     {
         var ruleForgotPassword = "123456";
-        target.Password = _passwordHasher.Hash(ruleForgotPassword);
+        target.Password = passwordHasher.Hash(ruleForgotPassword);
     }
 }
