@@ -49,12 +49,7 @@ public enum CustomFeature
     ///     Get Common.
     /// </summary>
     Common,
-
-    /// <summary>
-    ///     HealthChecks.
-    /// </summary>
-    HealthChecks,
-
+    
     /// <summary>
     ///     Use Swagger.
     /// </summary>

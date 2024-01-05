@@ -14,8 +14,8 @@ using Comrade.Persistence.ADO;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
 using FluentValidation;
-using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Comrade.Api;
 
@@ -55,12 +55,11 @@ public sealed class Startup
         services.AddSingleton<IRedisCacheService, RedisCacheService>();
         services.AddStackExchangeRedisCache(options =>
         {
-            options.InstanceName = "Sistema";
+            options.InstanceName = "COM1";
             options.Configuration = "localhost:6379";
         });
         services.AddAutoMapperSetup();
         services.AddLogging();
-        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
         services.Configure<MongoDbContextSettings>(
             Configuration.GetSection(nameof(MongoDbContextSettings)));
@@ -82,7 +81,11 @@ public sealed class Startup
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddMediatR(typeof(Startup));
+        
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(typeof(Startup).Assembly);
+        });
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
@@ -119,13 +122,7 @@ public sealed class Startup
             .UseSerilogRequestLogging()
             .UseEndpoints(endpoints =>
             {
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-
-                endpoints.MapControllers();
+               endpoints.MapControllers();
             });
     }
 }

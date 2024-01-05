@@ -23,7 +23,6 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
                         ["FeatureManagement:SystemPermission"] = "true",
                         ["FeatureManagement:SystemMenu"] = "true",
                         ["FeatureManagement:Common"] = "true",
-                        ["FeatureManagement:HealthChecks"] = "false",
                         ["FeatureManagement:Swagger"] = "true",
                         ["FeatureManagement:Authentication"] = "true",
                         ["FeatureManagement:SQLServer"] = "false",

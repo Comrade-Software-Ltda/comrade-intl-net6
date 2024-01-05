@@ -40,7 +40,6 @@ public static class GetServiceCollection
 
         services.AddAutoMapperSetup();
         services.AddLogging();
-        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
         services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
 
