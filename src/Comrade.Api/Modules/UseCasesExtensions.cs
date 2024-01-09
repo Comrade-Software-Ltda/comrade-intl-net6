@@ -6,6 +6,7 @@ using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Application.Components.Airplane.Handlers;
 using Comrade.Application.Components.Airplane.Queries;
 using Comrade.Application.Components.Authentication.Commands;
+using Comrade.Application.Components.DeliveryOptimizer.Command;
 using Comrade.Application.Components.Function.Queries;
 using Comrade.Application.Components.SystemMenu.Commands;
 using Comrade.Application.Components.SystemMenu.Contracts;
@@ -304,6 +305,9 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemMenuUniqueValidation, SystemMenuUniqueValidation>();
 
         #endregion
+
+        services.AddScoped<IDeliveryOptimizerCommand, DeliveryOptimizerCommand>();
+
 
         #region Alticci
 
