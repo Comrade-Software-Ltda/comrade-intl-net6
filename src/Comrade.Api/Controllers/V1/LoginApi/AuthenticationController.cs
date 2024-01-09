@@ -1,7 +1,7 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AuthenticationComponent.Commands;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Commands;
+using Comrade.Application.Components.Authentication.Contracts;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.LoginApi;
@@ -11,15 +11,8 @@ namespace Comrade.Api.Controllers.V1.LoginApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController(IAuthenticationCommand authenticationCommand) : ControllerBase
 {
-    private readonly IAuthenticationCommand _authenticationCommand;
-
-    public AuthenticationController(IAuthenticationCommand authenticationCommand)
-    {
-        _authenticationCommand = authenticationCommand;
-    }
-
     [HttpPost("update-password")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
@@ -29,7 +22,7 @@ public class AuthenticationController : ControllerBase
     {
         try
         {
-            var result = await _authenticationCommand.UpdatePassword(dto).ConfigureAwait(false);
+            var result = await authenticationCommand.UpdatePassword(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -48,7 +41,7 @@ public class AuthenticationController : ControllerBase
     {
         try
         {
-            var result = await _authenticationCommand.ForgotPassword(dto).ConfigureAwait(false);
+            var result = await authenticationCommand.ForgotPassword(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

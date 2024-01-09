@@ -4,34 +4,28 @@ using Xunit;
 
 namespace Comrade.ComponentTests.V1.AirplaneApi;
 
-public class AirplaneComponentTests : IClassFixture<CustomWebApplicationFactoryFixture>
+public class AirplaneComponentTests(CustomWebApplicationFactoryFixture fixture)
+    : IClassFixture<CustomWebApplicationFactoryFixture>
 {
-    private readonly CustomWebApplicationFactoryFixture _fixture;
-
-    public AirplaneComponentTests(CustomWebApplicationFactoryFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async Task GetAirplaneReturnsList()
     {
-        var client = _fixture
+        var client = fixture
             .CustomWebApplicationFactory
             .CreateClient();
 
-        var token = await GenerateFakeToken.Execute(_fixture.Mediator);
+        var token = await GenerateFakeToken.Execute(fixture.Mediator);
 
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
 
         var actualResponse = await client
-            .GetAsync("/api/v1/airplane/get-all")
-            .ConfigureAwait(false);
+                .GetAsync("/api/v1/airplane/get-all")
+            ;
 
         var actualResponseString = await actualResponse.Content
-            .ReadAsStringAsync()
-            .ConfigureAwait(false);
+                .ReadAsStringAsync()
+            ;
 
         Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
@@ -39,7 +33,7 @@ public class AirplaneComponentTests : IClassFixture<CustomWebApplicationFactoryF
         using JsonTextReader reader = new(stringReader)
             {DateParseHandling = DateParseHandling.None};
         var jsonResponse = await JObject.LoadAsync(reader)
-            .ConfigureAwait(false);
+            ;
 
         Assert.Equal(JTokenType.String, jsonResponse["data"]![0]!["model"]!.Type);
         Assert.Equal(JTokenType.Integer, jsonResponse["data"]![0]!["passengerQuantity"]!.Type);

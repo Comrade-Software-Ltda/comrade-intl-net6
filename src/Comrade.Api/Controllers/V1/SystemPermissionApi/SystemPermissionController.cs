@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
+using Comrade.Application.Components.SystemPermission.Commands;
+using Comrade.Application.Components.SystemPermission.Contracts;
+using Comrade.Application.Components.SystemPermission.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
@@ -15,24 +15,16 @@ namespace Comrade.Api.Controllers.V1.SystemPermissionApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class SystemPermissionController : ComradeController
+public class SystemPermissionController(ISystemPermissionCommand command, ISystemPermissionQuery query)
+    : ComradeController
 {
-    private readonly ISystemPermissionCommand _command;
-    private readonly ISystemPermissionQuery _query;
-
-    public SystemPermissionController(ISystemPermissionCommand command, ISystemPermissionQuery query)
-    {
-        _command = command;
-        _query = query;
-    }
-
     [HttpGet("get-all")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAll([FromQuery] PaginationQuery? paginationQuery)
     {
         try
         {
-            var result = await _query.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await query.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -48,7 +40,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _query.GetByIdDefault(systemPermissionId).ConfigureAwait(false);
+            var result = await query.GetByIdDefault(systemPermissionId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -63,7 +55,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Create(dto).ConfigureAwait(false);
+            var result = await command.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -78,7 +70,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Edit(dto).ConfigureAwait(false);
+            var result = await command.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -93,7 +85,7 @@ public class SystemPermissionController : ComradeController
     {
         try
         {
-            var result = await _command.Delete(systemPermissionId).ConfigureAwait(false);
+            var result = await command.Delete(systemPermissionId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

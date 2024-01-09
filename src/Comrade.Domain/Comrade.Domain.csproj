@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<LangVersion>preview</LangVersion>
-		<NoWarn>$(NoWarn);CA1014;CA1062;CA2252;1591</NoWarn>
-		<Nullable>enable</Nullable>
-		<NullableReferenceTypes>true</NullableReferenceTypes>
-		<NeutralLanguage>en</NeutralLanguage>
-		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
-		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>preview</LangVersion>
+        <NoWarn>$(NoWarn);CA1014;CA1062;CA2007;CA2252;1591</NoWarn>
+        <Nullable>enable</Nullable>
+        <NullableReferenceTypes>true</NullableReferenceTypes>
+        <NeutralLanguage>en</NeutralLanguage>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+        <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<Folder Include="Models\Views\" />
-	</ItemGroup>
+    <ItemGroup>
+        <Folder Include="Models\Views\" />
+    </ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="MongoDB.Bson" Version="2.18.0" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MongoDB.Bson" Version="2.23.1" />
+    </ItemGroup>
 
 </Project>

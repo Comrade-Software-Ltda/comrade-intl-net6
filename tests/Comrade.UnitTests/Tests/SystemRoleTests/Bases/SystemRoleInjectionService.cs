@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Comrade.Application.Components.SystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemRoleComponent.Queries;
+using Comrade.Application.Components.SystemRole.Commands;
+using Comrade.Application.Components.SystemRole.Queries;
 using Comrade.Core.SystemRoleCore.UseCases;
 using Comrade.Persistence.DataAccess;
 using Comrade.Persistence.Repositories;

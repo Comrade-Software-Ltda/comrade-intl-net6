@@ -6,18 +6,11 @@ using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
-public class UcSystemUserDelete : UseCase, IUcSystemUserDelete
+public class UcSystemUserDelete(IMediator mediator) : UseCase, IUcSystemUserDelete
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemUserDelete(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new SystemUserDeleteCommand {Id = id};
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await mediator.Send(entity);
     }
 }

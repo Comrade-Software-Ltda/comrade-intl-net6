@@ -10,33 +10,24 @@ using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.Handlers;
 
-public class SystemRoleManagePermissionsCoreHandler
+public class SystemRoleManagePermissionsCoreHandler(
+    ISystemRoleRepository repository,
+    ISystemRoleManagePermissionsValidation validation,
+    ISystemPermissionRepository systemPermissionRepository)
     : IRequestHandler<SystemRoleManagePermissionsCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemRoleRepository _repository;
-    private readonly ISystemPermissionRepository _systemPermissionRepository;
-    private readonly ISystemRoleManagePermissionsValidation _validation;
-
-    public SystemRoleManagePermissionsCoreHandler(ISystemRoleRepository repository,
-        ISystemRoleManagePermissionsValidation validation, ISystemPermissionRepository systemPermissionRepository)
-    {
-        _repository = repository;
-        _validation = validation;
-        _systemPermissionRepository = systemPermissionRepository;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemRoleManagePermissionsCommand request,
         CancellationToken cancellationToken)
     {
-        var role = await _repository.GetByIdIncludePermissions(request.Id).ConfigureAwait(false);
-        var permissions = _systemPermissionRepository.GetAll()
+        var role = await repository.GetByIdIncludePermissions(request.Id);
+        var permissions = systemPermissionRepository.GetAll()
             .Where(permission => request.SystemPermissionIds.Contains(permission.Id)).ToList();
 
         if (role == null)
             return new DeleteResult<Entity>(false,
                 BusinessMessage.MSG04);
 
-        var validate = _validation.Execute(role);
+        var validate = validation.Execute(role);
 
         if (!validate.Success)
         {
@@ -45,9 +36,9 @@ public class SystemRoleManagePermissionsCoreHandler
 
         role.SystemPermissions = permissions;
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Update(role);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.BeginTransactionAsync();
+        repository.Update(role);
+        await repository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }

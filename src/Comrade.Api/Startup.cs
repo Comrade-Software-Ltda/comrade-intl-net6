@@ -14,7 +14,6 @@ using Comrade.Persistence.ADO;
 using Comrade.Persistence.Bases;
 using Comrade.Persistence.DataAccess;
 using FluentValidation;
-using HealthChecks.UI.Client;
 using MediatR;
 
 namespace Comrade.Api;
@@ -22,17 +21,12 @@ namespace Comrade.Api;
 /// <summary>
 ///     Startup.
 /// </summary>
-public sealed class Startup
+/// <remarks>
+///     Startup constructor.
+/// </remarks>
+public sealed class Startup(IConfiguration configuration)
 {
-    /// <summary>
-    ///     Startup constructor.
-    /// </summary>
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
-
-    private IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; } = configuration;
 
     /// <summary>
     ///     Configure dependencies from application.
@@ -55,12 +49,11 @@ public sealed class Startup
         services.AddSingleton<IRedisCacheService, RedisCacheService>();
         services.AddStackExchangeRedisCache(options =>
         {
-            options.InstanceName = "Sistema";
+            options.InstanceName = "COM1";
             options.Configuration = "localhost:6379";
         });
         services.AddAutoMapperSetup();
         services.AddLogging();
-        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
         services.Configure<MongoDbContextSettings>(
             Configuration.GetSection(nameof(MongoDbContextSettings)));
@@ -82,7 +75,8 @@ public sealed class Startup
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddMediatR(typeof(Startup));
+
+        services.AddMediatR(config => { config.RegisterServicesFromAssembly(typeof(Startup).Assembly); });
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();
@@ -117,15 +111,6 @@ public sealed class Startup
             .UseAuthentication()
             .UseAuthorization()
             .UseSerilogRequestLogging()
-            .UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-
-                endpoints.MapControllers();
-            });
+            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

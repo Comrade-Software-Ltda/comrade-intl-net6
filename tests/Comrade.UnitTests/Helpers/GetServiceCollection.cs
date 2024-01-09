@@ -40,7 +40,6 @@ public static class GetServiceCollection
 
         services.AddAutoMapperSetup();
         services.AddLogging();
-        services.AddHealthChecks().AddCheck<MemoryHealthCheck>("Memory");
 
         services.AddScoped<IMongoDbCommandContext, MongoDbContext>();
 
@@ -48,7 +47,7 @@ public static class GetServiceCollection
         services.AddScoped<IMongoDbQueryContext, MongoDbContext>();
         services.AddScoped(typeof(ILookupService<>), typeof(LookupService<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddMediatR(typeof(Startup));
+        services.AddMediatR(config => { config.RegisterServicesFromAssembly(typeof(Startup).Assembly); });
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssemblyContaining<EntityDto>();

@@ -6,17 +6,10 @@ using MediatR;
 
 namespace Comrade.Core.SecurityCore.UseCases;
 
-public class UcUpdatePassword : UseCase, IUcUpdatePassword
+public class UcUpdatePassword(IMediator mediator) : UseCase, IUcUpdatePassword
 {
-    private readonly IMediator _mediator;
-
-    public UcUpdatePassword(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(UpdatePasswordCommand entity)
     {
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await mediator.Send(entity);
     }
 }

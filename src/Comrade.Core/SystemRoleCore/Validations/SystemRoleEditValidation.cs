@@ -5,18 +5,12 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.SystemRoleCore.Validations;
 
-public class SystemRoleEditValidation : ISystemRoleEditValidation
+public class SystemRoleEditValidation(ISystemRoleNameUniqueValidation systemRoleNameUniqueValidation)
+    : ISystemRoleEditValidation
 {
-    private readonly ISystemRoleNameUniqueValidation _systemRoleNameUniqueValidation;
-
-    public SystemRoleEditValidation(ISystemRoleNameUniqueValidation systemRoleNameUniqueValidation)
-    {
-        _systemRoleNameUniqueValidation = systemRoleNameUniqueValidation;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemRole entity, SystemRole? recordExists)
     {
-        var register = await _systemRoleNameUniqueValidation.Execute(entity).ConfigureAwait(false);
+        var register = await systemRoleNameUniqueValidation.Execute(entity);
         return register.Success ? new SingleResult<Entity>(recordExists) : register;
     }
 }

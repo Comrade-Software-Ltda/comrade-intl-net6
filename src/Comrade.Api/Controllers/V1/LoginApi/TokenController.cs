@@ -1,7 +1,7 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AuthenticationComponent.Commands;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Commands;
+using Comrade.Application.Components.Authentication.Contracts;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.LoginApi;
@@ -11,16 +11,8 @@ namespace Comrade.Api.Controllers.V1.LoginApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class TokenController : ControllerBase
+public class TokenController(IAuthenticationCommand authenticationCommand) : ControllerBase
 {
-    private readonly IAuthenticationCommand _authenticationCommand;
-
-    public TokenController(IAuthenticationCommand authenticationCommand)
-    {
-        _authenticationCommand = authenticationCommand;
-    }
-
-
     [HttpPost("generate-token")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(SingleResultDto<EntityDto>),
@@ -29,7 +21,7 @@ public class TokenController : ControllerBase
     {
         try
         {
-            var result = await _authenticationCommand.GenerateToken(dto).ConfigureAwait(false);
+            var result = await authenticationCommand.GenerateToken(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

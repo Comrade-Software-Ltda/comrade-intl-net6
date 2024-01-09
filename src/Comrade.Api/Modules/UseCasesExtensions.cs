@@ -1,28 +1,29 @@
 using Comrade.Application.Bases;
 using Comrade.Application.Caches;
 using Comrade.Application.Caches.FunctionCache;
-using Comrade.Application.Components.AirplaneComponent.Commands;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
-using Comrade.Application.Components.AirplaneComponent.Handlers;
-using Comrade.Application.Components.AirplaneComponent.Queries;
-using Comrade.Application.Components.AuthenticationComponent.Commands;
-using Comrade.Application.Components.FunctionComponent.Queries;
-using Comrade.Application.Components.SystemMenuComponent.Commands;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
-using Comrade.Application.Components.SystemMenuComponent.Handlers;
-using Comrade.Application.Components.SystemMenuComponent.Queries;
-using Comrade.Application.Components.SystemPermissionComponent.Commands;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemPermissionComponent.Handlers;
-using Comrade.Application.Components.SystemPermissionComponent.Queries;
-using Comrade.Application.Components.SystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
-using Comrade.Application.Components.SystemRoleComponent.Handlers;
-using Comrade.Application.Components.SystemRoleComponent.Queries;
-using Comrade.Application.Components.SystemUserComponent.Commands;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
-using Comrade.Application.Components.SystemUserComponent.Handlers;
-using Comrade.Application.Components.SystemUserComponent.Queries;
+using Comrade.Application.Components.Airplane.Commands;
+using Comrade.Application.Components.Airplane.Contracts;
+using Comrade.Application.Components.Airplane.Handlers;
+using Comrade.Application.Components.Airplane.Queries;
+using Comrade.Application.Components.Authentication.Commands;
+using Comrade.Application.Components.DeliveryOptimizer.Command;
+using Comrade.Application.Components.Function.Queries;
+using Comrade.Application.Components.SystemMenu.Commands;
+using Comrade.Application.Components.SystemMenu.Contracts;
+using Comrade.Application.Components.SystemMenu.Handlers;
+using Comrade.Application.Components.SystemMenu.Queries;
+using Comrade.Application.Components.SystemPermission.Commands;
+using Comrade.Application.Components.SystemPermission.Contracts;
+using Comrade.Application.Components.SystemPermission.Handlers;
+using Comrade.Application.Components.SystemPermission.Queries;
+using Comrade.Application.Components.SystemRole.Commands;
+using Comrade.Application.Components.SystemRole.Contracts;
+using Comrade.Application.Components.SystemRole.Handlers;
+using Comrade.Application.Components.SystemRole.Queries;
+using Comrade.Application.Components.SystemUser.Commands;
+using Comrade.Application.Components.SystemUser.Contracts;
+using Comrade.Application.Components.SystemUser.Handlers;
+using Comrade.Application.Components.SystemUser.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
@@ -304,6 +305,9 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemMenuUniqueValidation, SystemMenuUniqueValidation>();
 
         #endregion
+
+        services.AddScoped<IDeliveryOptimizerCommand, DeliveryOptimizerCommand>();
+
 
         #region Alticci
 

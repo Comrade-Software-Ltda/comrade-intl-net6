@@ -2,28 +2,21 @@
 
 namespace Comrade.Application.Caches.FunctionCache;
 
-public class RedisCacheFunctionService : IRedisCacheFunctionService
+public class RedisCacheFunctionService(IRedisCacheService cacheService) : IRedisCacheFunctionService
 {
-    private readonly IRedisCacheService _cacheService;
-
-    public RedisCacheFunctionService(IRedisCacheService cacheService)
-    {
-        _cacheService = cacheService;
-    }
-
     public long? GetCacheFunction(EnumFunction nameFunction, long n)
     {
-        return _cacheService.GetCache<long?>(FormatCacheKey(nameFunction, n));
+        return cacheService.GetCache<long?>(FormatCacheKey(nameFunction, n));
     }
 
     public long SetCacheFunction(EnumFunction nameFunction, long n, long valor)
     {
-        return _cacheService.SetCache(FormatCacheKey(nameFunction, n), valor);
+        return cacheService.SetCache(FormatCacheKey(nameFunction, n), valor);
     }
 
     public void RemoveCacheFunction(EnumFunction nameFunction, long n)
     {
-        _cacheService.RemoveCache(FormatCacheKey(nameFunction, n));
+        cacheService.RemoveCache(FormatCacheKey(nameFunction, n));
     }
 
     public void RemoveAllCacheBelowOrEqualFunction(EnumFunction nameFunction, long threshold)

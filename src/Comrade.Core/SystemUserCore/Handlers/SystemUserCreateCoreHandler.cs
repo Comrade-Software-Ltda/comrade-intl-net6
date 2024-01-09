@@ -11,40 +11,32 @@ using MediatR;
 namespace Comrade.Core.SystemUserCore.Handlers;
 
 public class
-    SystemUserCreateCoreHandler : IRequestHandler<SystemUserCreateCommand, ISingleResult<Entity>>
-{
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly IPasswordHasher _passwordHasher;
-    private readonly ISystemUserRepository _repository;
-    private readonly ISystemUserCreateValidation _systemUserCreateValidation;
-
-    public SystemUserCreateCoreHandler(ISystemUserCreateValidation systemUserCreateValidation,
-        ISystemUserRepository repository, IMongoDbCommandContext mongoDbContext,
+    SystemUserCreateCoreHandler(
+        ISystemUserCreateValidation systemUserCreateValidation,
+        ISystemUserRepository repository,
+        IMongoDbCommandContext mongoDbContext,
         IPasswordHasher passwordHasher)
-    {
-        _systemUserCreateValidation = systemUserCreateValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-        _passwordHasher = passwordHasher;
-    }
+    : IRequestHandler<SystemUserCreateCommand, ISingleResult<Entity>>
+{
+    private readonly IMongoDbCommandContext _mongoDbContext = mongoDbContext;
 
     public async Task<ISingleResult<Entity>> Handle(SystemUserCreateCommand request,
         CancellationToken cancellationToken)
     {
-        var validate = _systemUserCreateValidation.Execute(request);
+        var validate = systemUserCreateValidation.Execute(request);
         if (!validate.Success)
         {
             return validate;
         }
 
-        request.Password = _passwordHasher.Hash(request.Password);
+        request.Password = passwordHasher.Hash(request.Password);
         request.RegisterDate = DateTimeBrasilia.GetDateTimeBrasilia();
 
-        await _repository.Add(request).ConfigureAwait(false);
+        await repository.Add(request);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.BeginTransactionAsync();
+        await repository.Add(request);
+        await repository.CommitTransactionAsync();
 
         return new CreateResult<Entity>(true,
             BusinessMessage.MSG01);

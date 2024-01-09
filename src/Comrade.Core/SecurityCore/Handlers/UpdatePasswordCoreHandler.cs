@@ -13,27 +13,17 @@ using MediatR;
 namespace Comrade.Core.SecurityCore.Handlers;
 
 public class
-    UpdatePasswordCoreHandler : IRequestHandler<UpdatePasswordCommand, ISingleResult<Entity>>
-{
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly IPasswordHasher _passwordHasher;
-    private readonly ISystemUserRepository _repository;
-    private readonly ISystemUserEditValidation _systemUserEditValidation;
-
-    public UpdatePasswordCoreHandler(IPasswordHasher passwordHasher,
-        ISystemUserRepository repository, ISystemUserEditValidation systemUserEditValidation,
+    UpdatePasswordCoreHandler(
+        IPasswordHasher passwordHasher,
+        ISystemUserRepository repository,
+        ISystemUserEditValidation systemUserEditValidation,
         IMongoDbCommandContext mongoDbContext)
-    {
-        _passwordHasher = passwordHasher;
-        _repository = repository;
-        _systemUserEditValidation = systemUserEditValidation;
-        _mongoDbContext = mongoDbContext;
-    }
-
+    : IRequestHandler<UpdatePasswordCommand, ISingleResult<Entity>>
+{
     public async Task<ISingleResult<Entity>> Handle(UpdatePasswordCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -41,7 +31,7 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var result = _systemUserEditValidation.Execute(request, recordExists);
+        var result = systemUserEditValidation.Execute(request, recordExists);
         if (!result.Success)
         {
             return result;
@@ -51,17 +41,17 @@ public class
 
         HydrateValues(obj, request);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(obj);
+        mongoDbContext.ReplaceOne(obj);
 
         return new SingleResult<Entity>(request);
     }
 
     private void HydrateValues(SystemUser target, SystemUser source)
     {
-        target.Password = _passwordHasher.Hash(source.Password);
+        target.Password = passwordHasher.Hash(source.Password);
     }
 }

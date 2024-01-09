@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemMenuComponent.Commands;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
-using Comrade.Application.Components.SystemMenuComponent.Queries;
+using Comrade.Application.Components.SystemMenu.Commands;
+using Comrade.Application.Components.SystemMenu.Contracts;
+using Comrade.Application.Components.SystemMenu.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
@@ -16,19 +16,13 @@ namespace Comrade.Api.Controllers.V1.SystemMenuApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class SystemMenuController : ComradeController
+public class SystemMenuController(
+    ISystemMenuCommand systemMenuCommand,
+    ISystemMenuQuery systemMenuQuery,
+    ILogger<SystemMenuController> logger)
+    : ComradeController
 {
-    private readonly ILogger<SystemMenuController> _logger;
-    private readonly ISystemMenuCommand _systemMenuCommand;
-    private readonly ISystemMenuQuery _systemMenuQuery;
-
-    public SystemMenuController(ISystemMenuCommand systemMenuCommand,
-        ISystemMenuQuery systemMenuQuery, ILogger<SystemMenuController> logger)
-    {
-        _systemMenuCommand = systemMenuCommand;
-        _systemMenuQuery = systemMenuQuery;
-        _logger = logger;
-    }
+    private readonly ILogger<SystemMenuController> _logger = logger;
 
     [HttpGet("get-all-menus")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
@@ -36,7 +30,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetAllMenus(paginationQuery).ConfigureAwait(false);
+            var result = await systemMenuQuery.GetAllMenus(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -52,7 +46,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await systemMenuQuery.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -68,7 +62,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuQuery.GetByIdDefault(systemMenuId).ConfigureAwait(false);
+            var result = await systemMenuQuery.GetByIdDefault(systemMenuId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -84,7 +78,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Create(dto).ConfigureAwait(false);
+            var result = await systemMenuCommand.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -100,7 +94,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Edit(dto).ConfigureAwait(false);
+            var result = await systemMenuCommand.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -116,7 +110,7 @@ public class SystemMenuController : ComradeController
     {
         try
         {
-            var result = await _systemMenuCommand.Delete(systemMenuId).ConfigureAwait(false);
+            var result = await systemMenuCommand.Delete(systemMenuId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

@@ -6,18 +6,11 @@ using MediatR;
 
 namespace Comrade.Core.AirplaneCore.UseCases;
 
-public class UcAirplaneDelete : UseCase, IUcAirplaneDelete
+public class UcAirplaneDelete(IMediator mediator) : UseCase, IUcAirplaneDelete
 {
-    private readonly IMediator _mediator;
-
-    public UcAirplaneDelete(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(Guid id)
     {
         var entity = new AirplaneDeleteCommand {Id = id};
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await mediator.Send(entity);
     }
 }

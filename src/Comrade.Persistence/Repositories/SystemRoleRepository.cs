@@ -10,14 +10,9 @@ using Comrade.Persistence.DataAccess;
 
 namespace Comrade.Persistence.Repositories;
 
-public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepository
+public class SystemRoleRepository(ComradeContext context) : Repository<SystemRole>(context), ISystemRoleRepository
 {
-    private readonly ComradeContext _context;
-
-    public SystemRoleRepository(ComradeContext context) : base(context)
-    {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
-    }
+    private readonly ComradeContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
     public IQueryable<Lookup>? FindByName(string name)
     {
@@ -33,7 +28,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
         var exists = await _context.SystemRoles
             .Where(p => name.ToUpper().Trim()
                 .Equals(p.Name.ToUpper().Trim()))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG10)
@@ -45,7 +40,7 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
         var exists = await _context.SystemRoles
             .Where(p => tag.ToUpper().Trim()
                 .Equals(p.Tag.ToUpper().Trim(), StringComparison.Ordinal))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists
             ? new SingleResult<SystemRole>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
@@ -55,10 +50,10 @@ public class SystemRoleRepository : Repository<SystemRole>, ISystemRoleRepositor
     public async Task<SystemRole?> GetByIdIncludePermissions(Guid id)
     {
         return await _context.SystemRoles
-            .Where(x => x.Id == id)
-            .Include(x => x.SystemRolePermissions)
-            .Include(x => x.SystemPermissions)
-            .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+                .Where(x => x.Id == id)
+                .Include(x => x.SystemRolePermissions)
+                .Include(x => x.SystemPermissions)
+                .FirstOrDefaultAsync()
+            ;
     }
 }

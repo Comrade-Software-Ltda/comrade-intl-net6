@@ -22,14 +22,14 @@ public class SystemRoleComponentCreateTests : IClassFixture<CustomWebApplication
             new StringContent(JsonConvert.SerializeObject(new SystemRole {Name = "ROLE", Tag = "TAG"}), Encoding.UTF8);
         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-        var actualResponse = await client.PostAsync("/api/v1/system-role/create", httpContent).ConfigureAwait(false);
-        var actualResponseString = await actualResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var actualResponse = await client.PostAsync("/api/v1/system-role/create", httpContent);
+        var actualResponseString = await actualResponse.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.Created, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
-        var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
+        var jsonResponse = await JObject.LoadAsync(reader);
 
         Assert.Equal(BusinessMessage.MSG01, jsonResponse["message"]);
     }

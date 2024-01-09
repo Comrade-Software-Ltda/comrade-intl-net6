@@ -3,18 +3,11 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Comrade.Application.Caches;
 
-public sealed class RedisCacheService : IRedisCacheService
+public sealed class RedisCacheService(IDistributedCache cache) : IRedisCacheService
 {
-    private readonly IDistributedCache _cache;
-
-    public RedisCacheService(IDistributedCache cache)
-    {
-        _cache = cache;
-    }
-
     public T? GetCache<T>(string key)
     {
-        var value = _cache.GetString(key);
+        var value = cache.GetString(key);
         return value is not null ? JsonSerializer.Deserialize<T>(value) : default;
     }
 
@@ -25,12 +18,12 @@ public sealed class RedisCacheService : IRedisCacheService
             AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24),
             SlidingExpiration = TimeSpan.FromMinutes(60)
         };
-        _cache.SetString(key, JsonSerializer.Serialize(value), timeOut);
+        cache.SetString(key, JsonSerializer.Serialize(value), timeOut);
         return value;
     }
 
     public void RemoveCache(string key)
     {
-        _cache.Remove(key);
+        cache.Remove(key);
     }
 }

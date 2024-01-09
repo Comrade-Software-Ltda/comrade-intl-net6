@@ -10,28 +10,21 @@ namespace Comrade.Api.Controllers.V1.TenantSelectorApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class TenantSelectorController : ComradeController
+public class TenantSelectorController(
+    ILogger<TenantSelectorController> logger,
+    GetAllDatabases getAllDatabases,
+    CreateDatabase createDatabase,
+    MigrateDatabase migrateDatabase)
+    : ComradeController
 {
-    private readonly CreateDatabase _createDatabase;
-    private readonly GetAllDatabases _getAllDatabases;
-    private readonly ILogger<TenantSelectorController> _logger;
-    private readonly MigrateDatabase _migrateDatabase;
-
-    public TenantSelectorController(ILogger<TenantSelectorController> logger, GetAllDatabases getAllDatabases,
-        CreateDatabase createDatabase, MigrateDatabase migrateDatabase)
-    {
-        _logger = logger;
-        _getAllDatabases = getAllDatabases;
-        _createDatabase = createDatabase;
-        _migrateDatabase = migrateDatabase;
-    }
+    private readonly ILogger<TenantSelectorController> _logger = logger;
 
 
     [HttpGet("get-all-databases")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Get))]
     public IActionResult GetAllDatabases()
     {
-        var teste = _getAllDatabases.Execute();
+        var teste = getAllDatabases.Execute();
         return StatusCode(200, teste);
     }
 
@@ -40,7 +33,7 @@ public class TenantSelectorController : ComradeController
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
     public IActionResult CreateDatabase([FromBody] [Required] string databaseName)
     {
-        _createDatabase.Execute(databaseName);
+        createDatabase.Execute(databaseName);
         return StatusCode(201, null);
     }
 
@@ -48,7 +41,7 @@ public class TenantSelectorController : ComradeController
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
     public async Task<IActionResult> MigrateDatabase([FromBody] [Required] string databaseName)
     {
-        await _migrateDatabase.Execute();
+        await migrateDatabase.Execute();
         return StatusCode(201, null);
     }
 }

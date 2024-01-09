@@ -1,6 +1,5 @@
-using System;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Paginations;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemMenuTests.Bases;

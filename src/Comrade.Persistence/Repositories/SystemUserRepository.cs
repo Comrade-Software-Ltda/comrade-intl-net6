@@ -6,16 +6,10 @@ using Comrade.Persistence.DataAccess;
 
 namespace Comrade.Persistence.Repositories;
 
-public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepository
+public class SystemUserRepository(ComradeContext context) : Repository<SystemUser>(context), ISystemUserRepository
 {
-    private readonly ComradeContext _context;
-
-    public SystemUserRepository(ComradeContext context)
-        : base(context)
-    {
-        _context = context ??
-                   throw new ArgumentNullException(nameof(context));
-    }
+    private readonly ComradeContext _context = context ??
+                                               throw new ArgumentNullException(nameof(context));
 
 
     public IQueryable<Lookup>? FindByName(string name)
@@ -31,20 +25,20 @@ public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepositor
     public async Task<SystemUser?> GetByIdIncludePermissions(Guid id)
     {
         return await _context.SystemUsers
-            .Where(x => x.Id == id)
-            .Include(x => x.SystemUserPermissions)
-            .Include(x => x.SystemPermissions)
-            .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+                .Where(x => x.Id == id)
+                .Include(x => x.SystemUserPermissions)
+                .Include(x => x.SystemPermissions)
+                .FirstOrDefaultAsync()
+            ;
     }
 
     public async Task<SystemUser?> GetByIdIncludeRoles(Guid id)
     {
         return await _context.SystemUsers
-            .Where(x => x.Id == id)
-            .Include(x => x.SystemUserRoles)
-            .Include(x => x.SystemRoles)
-            .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+                .Where(x => x.Id == id)
+                .Include(x => x.SystemUserRoles)
+                .Include(x => x.SystemRoles)
+                .FirstOrDefaultAsync()
+            ;
     }
 }

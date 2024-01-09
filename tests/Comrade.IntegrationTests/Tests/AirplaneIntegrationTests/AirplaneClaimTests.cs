@@ -1,29 +1,21 @@
 ﻿using System.Security.Claims;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.UnitTests.Tests.AirplaneTests.Bases;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.AirplaneIntegrationTests;
 
-public class AirplaneClaimTests : IClassFixture<ServiceProviderFixture>
+public class AirplaneClaimTests(ServiceProviderFixture fixture) : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-
-    public AirplaneClaimTests(ServiceProviderFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
-
     [Fact]
     public async Task Airplane_Claim()
     {
         var airplaneController =
-            AirplaneInjectionController.GetAirplaneController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            AirplaneInjectionController.GetAirplaneController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var testObject = new AirplaneCreateDto
         {

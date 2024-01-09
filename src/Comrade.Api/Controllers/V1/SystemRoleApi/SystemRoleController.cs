@@ -3,9 +3,9 @@ using Comrade.Api.Bases;
 using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemRoleComponent.Commands;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
-using Comrade.Application.Components.SystemRoleComponent.Queries;
+using Comrade.Application.Components.SystemRole.Commands;
+using Comrade.Application.Components.SystemRole.Contracts;
+using Comrade.Application.Components.SystemRole.Queries;
 using Comrade.Application.Paginations;
 using Microsoft.AspNetCore.Http;
 
@@ -15,25 +15,15 @@ namespace Comrade.Api.Controllers.V1.SystemRoleApi;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class SystemRoleController : ComradeController
+public class SystemRoleController(ISystemRoleCommand command, ISystemRoleQuery query) : ComradeController
 {
-    private readonly ISystemRoleCommand _command;
-    private readonly ISystemRoleQuery _query;
-
-    public SystemRoleController(ISystemRoleCommand command, ISystemRoleQuery query)
-    {
-        _command = command;
-        _query = query;
-    }
-
-
     [HttpGet("get-all")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
     public async Task<IActionResult> GetAll([FromQuery] PaginationQuery? paginationQuery)
     {
         try
         {
-            var result = await _query.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await query.GetAll(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -49,7 +39,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _query.GetByIdDefault(systemRoleId).ConfigureAwait(false);
+            var result = await query.GetByIdDefault(systemRoleId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -64,7 +54,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Create(dto).ConfigureAwait(false);
+            var result = await command.Create(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -79,7 +69,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Edit(dto).ConfigureAwait(false);
+            var result = await command.Edit(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -94,7 +84,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _command.Delete(systemRoleId).ConfigureAwait(false);
+            var result = await command.Delete(systemRoleId);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -109,7 +99,7 @@ public class SystemRoleController : ComradeController
     {
         try
         {
-            var result = await _query.GetAllWithPermissions(paginationQuery).ConfigureAwait(false);
+            var result = await query.GetAllWithPermissions(paginationQuery);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -121,11 +111,11 @@ public class SystemRoleController : ComradeController
 
     [HttpPut("manage-permissions")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> ManagePermissions([FromBody][Required] SystemRoleManagePermissionsDto dto)
+    public async Task<IActionResult> ManagePermissions([FromBody] [Required] SystemRoleManagePermissionsDto dto)
     {
         try
         {
-            var result = await _command.ManagePermissions(dto).ConfigureAwait(false);
+            var result = await command.ManagePermissions(dto);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)

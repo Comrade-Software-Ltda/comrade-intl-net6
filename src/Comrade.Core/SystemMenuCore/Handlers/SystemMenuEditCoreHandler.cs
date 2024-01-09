@@ -11,24 +11,16 @@ using MediatR;
 namespace Comrade.Core.SystemMenuCore.Handlers;
 
 public class
-    SystemMenuEditCoreHandler : IRequestHandler<SystemMenuEditCommand, ISingleResult<Entity>>
+    SystemMenuEditCoreHandler(
+        ISystemMenuEditValidation systemMenuEditValidation,
+        ISystemMenuRepository repository,
+        IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemMenuEditCommand, ISingleResult<Entity>>
 {
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemMenuRepository _repository;
-    private readonly ISystemMenuEditValidation _systemMenuEditValidation;
-
-    public SystemMenuEditCoreHandler(ISystemMenuEditValidation systemMenuEditValidation,
-        ISystemMenuRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _systemMenuEditValidation = systemMenuEditValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemMenuEditCommand request,
         CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await repository.GetById(request.Id);
 
         if (recordExists is null)
         {
@@ -36,8 +28,8 @@ public class
                 BusinessMessage.MSG04);
         }
 
-        var validate = await _systemMenuEditValidation.Execute(request, recordExists)
-            .ConfigureAwait(false);
+        var validate = await systemMenuEditValidation.Execute(request, recordExists)
+            ;
 
         if (!validate.Success)
         {
@@ -47,11 +39,11 @@ public class
         var obj = recordExists;
         HydrateValues(obj, request);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Update(obj);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.BeginTransactionAsync();
+        repository.Update(obj);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(obj);
+        mongoDbContext.ReplaceOne(obj);
 
         return new EditResult<Entity>(true,
             BusinessMessage.MSG02);

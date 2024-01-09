@@ -18,7 +18,7 @@ public class SystemMenuCreateValidation : ISystemMenuCreateValidation
     public async Task<ISingleResult<Entity>> Execute(SystemMenu entity)
     {
         var registerSameCode =
-            await _systemMenuValidateSameCode.Execute(entity).ConfigureAwait(false);
+            await _systemMenuValidateSameCode.Execute(entity);
         return registerSameCode.Success ? new SingleResult<Entity>(entity) : registerSameCode;
     }
 }

@@ -10,34 +10,28 @@ using MediatR;
 
 namespace Comrade.Core.SystemPermissionCore.Handlers;
 
-public class SystemPermissionCreateCoreHandler : IRequestHandler<SystemPermissionCreateCommand, ISingleResult<Entity>>
+public class SystemPermissionCreateCoreHandler(
+    ISystemPermissionCreateValidation createValidation,
+    ISystemPermissionRepository repository,
+    IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemPermissionCreateCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemPermissionCreateValidation _createValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemPermissionRepository _repository;
-
-    public SystemPermissionCreateCoreHandler(ISystemPermissionCreateValidation createValidation,
-        ISystemPermissionRepository repository, IMongoDbCommandContext mongoDbContext)
-    {
-        _createValidation = createValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
+    private readonly IMongoDbCommandContext _mongoDbContext = mongoDbContext;
 
     public async Task<ISingleResult<Entity>> Handle(SystemPermissionCreateCommand request,
         CancellationToken cancellationToken)
     {
-        var result = await _createValidation.Execute(request).ConfigureAwait(false);
+        var result = await createValidation.Execute(request);
         if (!result.Success)
         {
             return result;
         }
 
         HydrateValues(request);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        await _repository.Add(request).ConfigureAwait(false);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.Add(request);
+        await repository.BeginTransactionAsync();
+        await repository.Add(request);
+        await repository.CommitTransactionAsync();
         return new CreateResult<Entity>(true, BusinessMessage.MSG01);
     }
 

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Comrade.Application.Components.AirplaneComponent.Contracts;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
-using Comrade.Application.Components.SystemRoleComponent.Contracts;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.Airplane.Contracts;
+using Comrade.Application.Components.Authentication.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
+using Comrade.Application.Components.SystemRole.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemMenuCore.Commands;

@@ -1,6 +1,6 @@
 using System;
 using Comrade.Application.Bases;
-using Comrade.Application.Components.AuthenticationComponent.Contracts;
+using Comrade.Application.Components.Authentication.Contracts;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.AuthenticationTests.Bases;
 using Xunit;

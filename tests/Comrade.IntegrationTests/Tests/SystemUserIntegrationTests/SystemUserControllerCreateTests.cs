@@ -1,20 +1,13 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemUserComponent.Contracts;
+using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.UnitTests.Tests.SystemUserTests.Bases;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemUserIntegrationTests;
 
-public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemUserControllerCreateTests(ServiceProviderFixture fixture)
+    : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-
-    public SystemUserControllerCreateTests(ServiceProviderFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
-
     [Fact]
     public async Task SystemUserController_Create()
     {
@@ -26,9 +19,9 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            SystemUserInjectionController.GetSystemUserController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);
 
@@ -51,9 +44,9 @@ public sealed class SystemUserControllerCreateTests : IClassFixture<ServiceProvi
         };
 
         var systemUserController =
-            SystemUserInjectionController.GetSystemUserController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            SystemUserInjectionController.GetSystemUserController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await systemUserController.Create(testObject);
 

@@ -33,7 +33,7 @@ public static class ReverseProxyExtensions
             {
                 context.Request.PathBase = basePath;
                 await next.Invoke()
-                    .ConfigureAwait(false);
+                    ;
             });
 
         app.UseForwardedHeaders(new ForwardedHeadersOptions

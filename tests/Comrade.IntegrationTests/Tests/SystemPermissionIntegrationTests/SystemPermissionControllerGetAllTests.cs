@@ -1,5 +1,5 @@
 ﻿using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemPermissionComponent.Contracts;
+using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemPermissionTests.Bases;
 using Xunit;

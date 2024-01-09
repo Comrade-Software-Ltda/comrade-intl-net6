@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemRoleCore.Commands;
 using Comrade.Core.SystemRoleCore.Handlers;
 using Comrade.Core.SystemRoleCore.Validations;
@@ -8,7 +7,6 @@ using Comrade.Persistence.Repositories;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemRoleTests.TestDatas;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Xunit;
 
 namespace Comrade.UnitTests.Tests.SystemRoleTests;
 
@@ -30,7 +28,7 @@ public sealed class UcSystemRoleCreateTests
         var repository = new SystemRoleRepository(context);
         var nameUniqueValidation = new SystemRoleNameUniqueValidation(repository);
         var tagUniqueValidation = new SystemRoleTagUniqueValidation(repository);
-        var createValidation = new SystemRoleCreateValidation(nameUniqueValidation,tagUniqueValidation);
+        var createValidation = new SystemRoleCreateValidation(nameUniqueValidation, tagUniqueValidation);
         var handler = new SystemRoleCreateCoreHandler(createValidation, repository);
         var result = await handler.Handle(testObjectInput, CancellationToken.None);
 

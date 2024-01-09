@@ -51,11 +51,6 @@ public enum CustomFeature
     Common,
 
     /// <summary>
-    ///     HealthChecks.
-    /// </summary>
-    HealthChecks,
-
-    /// <summary>
     ///     Use Swagger.
     /// </summary>
     Swagger,

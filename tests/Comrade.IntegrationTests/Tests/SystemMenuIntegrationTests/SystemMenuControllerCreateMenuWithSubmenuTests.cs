@@ -1,19 +1,13 @@
 using Comrade.Application.Bases;
-using Comrade.Application.Components.SystemMenuComponent.Contracts;
+using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.UnitTests.Tests.SystemMenuTests.Bases;
 using Xunit;
 
 namespace Comrade.IntegrationTests.Tests.SystemMenuIntegrationTests;
 
-public sealed class SystemMenuControllerCreateMenuWithSubmenuTests : IClassFixture<ServiceProviderFixture>
+public sealed class SystemMenuControllerCreateMenuWithSubmenuTests(ServiceProviderFixture fixture)
+    : IClassFixture<ServiceProviderFixture>
 {
-    private readonly ServiceProviderFixture _fixture;
-
-    public SystemMenuControllerCreateMenuWithSubmenuTests(ServiceProviderFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async Task SystemMenuController_CreateMenuWithSubmenu()
     {
@@ -35,9 +29,9 @@ public sealed class SystemMenuControllerCreateMenuWithSubmenuTests : IClassFixtu
         };
         menu.Submenus.Add(subMenu);
         var systemMenuController =
-            SystemMenuInjectionController.GetSystemMenuController(_fixture.SqlContextFixture,
-                _fixture.MongoDbContextFixture,
-                _fixture.Mediator);
+            SystemMenuInjectionController.GetSystemMenuController(fixture.SqlContextFixture,
+                fixture.MongoDbContextFixture,
+                fixture.Mediator);
 
         var result = await systemMenuController.Create(menu);
 

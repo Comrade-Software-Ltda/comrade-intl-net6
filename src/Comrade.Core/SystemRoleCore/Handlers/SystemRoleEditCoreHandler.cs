@@ -10,42 +10,34 @@ using MediatR;
 
 namespace Comrade.Core.SystemRoleCore.Handlers;
 
-public class SystemRoleEditCoreHandler : IRequestHandler<SystemRoleEditCommand, ISingleResult<Entity>>
+public class SystemRoleEditCoreHandler(
+    ISystemRoleEditValidation editValidation,
+    ISystemRoleRepository repository,
+    IMongoDbCommandContext mongoDbContext)
+    : IRequestHandler<SystemRoleEditCommand, ISingleResult<Entity>>
 {
-    private readonly ISystemRoleEditValidation _editValidation;
-    private readonly IMongoDbCommandContext _mongoDbContext;
-    private readonly ISystemRoleRepository _repository;
-
-    public SystemRoleEditCoreHandler(ISystemRoleEditValidation editValidation, ISystemRoleRepository repository,
-        IMongoDbCommandContext mongoDbContext)
-    {
-        _editValidation = editValidation;
-        _repository = repository;
-        _mongoDbContext = mongoDbContext;
-    }
-
     public async Task<ISingleResult<Entity>> Handle(SystemRoleEditCommand request, CancellationToken cancellationToken)
     {
-        var recordExists = await _repository.GetById(request.Id).ConfigureAwait(false);
+        var recordExists = await repository.GetById(request.Id);
         if (recordExists is null)
         {
             return new DeleteResult<Entity>(false, BusinessMessage.MSG04);
         }
 
-        var result = await _editValidation.Execute(request, recordExists).ConfigureAwait(false);
+        var result = await editValidation.Execute(request, recordExists);
         if (!result.Success)
         {
             return result;
         }
 
         HydrateValues(recordExists, request);
-        _repository.Update(recordExists);
+        repository.Update(recordExists);
 
-        await _repository.BeginTransactionAsync().ConfigureAwait(false);
-        _repository.Update(recordExists);
-        await _repository.CommitTransactionAsync().ConfigureAwait(false);
+        await repository.BeginTransactionAsync();
+        repository.Update(recordExists);
+        await repository.CommitTransactionAsync();
 
-        _mongoDbContext.ReplaceOne(recordExists);
+        mongoDbContext.ReplaceOne(recordExists);
 
         return new EditResult<Entity>(true, BusinessMessage.MSG02);
     }

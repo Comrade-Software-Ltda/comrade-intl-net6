@@ -9,21 +9,17 @@ using Comrade.Persistence.DataAccess;
 
 namespace Comrade.Persistence.Repositories;
 
-public class SystemPermissionRepository : Repository<SystemPermission>, ISystemPermissionRepository
+public class SystemPermissionRepository(ComradeContext context)
+    : Repository<SystemPermission>(context), ISystemPermissionRepository
 {
-    private readonly ComradeContext _context;
-
-    public SystemPermissionRepository(ComradeContext context) : base(context)
-    {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
-    }
+    private readonly ComradeContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
     public async Task<ISingleResult<SystemPermission>> TagUniqueValidation(string tag)
     {
         var exists = await _context.SystemPermissions
             .Where(p => tag.ToUpper().Trim()
                 .Equals(p.Tag.ToUpper().Trim()))
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
         return exists
             ? new SingleResult<SystemPermission>((int) EnumResponse.ErrorBusinessValidation, BusinessMessage.MSG11)
             : new SingleResult<SystemPermission>();

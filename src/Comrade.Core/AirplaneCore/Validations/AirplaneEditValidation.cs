@@ -5,19 +5,13 @@ using Comrade.Domain.Models;
 
 namespace Comrade.Core.AirplaneCore.Validations;
 
-public class AirplaneEditValidation : IAirplaneEditValidation
+public class AirplaneEditValidation(IAirplaneCodeUniqueValidation airplaneCodeUniqueValidation)
+    : IAirplaneEditValidation
 {
-    private readonly IAirplaneCodeUniqueValidation _airplaneCodeUniqueValidation;
-
-    public AirplaneEditValidation(IAirplaneCodeUniqueValidation airplaneCodeUniqueValidation)
-    {
-        _airplaneCodeUniqueValidation = airplaneCodeUniqueValidation;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(Airplane entity, Airplane? recordExists)
     {
         var registerSameCode =
-            await _airplaneCodeUniqueValidation.Execute(entity).ConfigureAwait(false);
+            await airplaneCodeUniqueValidation.Execute(entity);
         if (!registerSameCode.Success)
         {
             return registerSameCode;

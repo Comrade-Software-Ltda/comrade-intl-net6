@@ -1,4 +1,4 @@
-﻿using Comrade.Application.Components.AuthenticationComponent.Contracts;
+﻿using Comrade.Application.Components.Authentication.Contracts;
 
 namespace Comrade.UnitTests.Tests.AuthenticationTests.TestDatas;
 

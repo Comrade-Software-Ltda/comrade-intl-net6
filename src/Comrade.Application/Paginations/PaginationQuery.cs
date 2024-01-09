@@ -1,19 +1,11 @@
 ﻿namespace Comrade.Application.Paginations;
 
-public class PaginationQuery
+public class PaginationQuery(int pageNumber, int pageSize)
 {
-    public PaginationQuery()
+    public PaginationQuery() : this(1, 50)
     {
-        PageNumber = 1;
-        PageSize = 50;
     }
 
-    public PaginationQuery(int pageNumber, int pageSize)
-    {
-        PageNumber = pageNumber;
-        PageSize = pageSize;
-    }
-
-    public int PageNumber { get; set; }
-    public int PageSize { get; set; }
+    public int PageNumber { get; set; } = pageNumber;
+    public int PageSize { get; set; } = pageSize;
 }

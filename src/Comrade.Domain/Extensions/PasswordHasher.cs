@@ -1,16 +1,11 @@
 ﻿namespace Comrade.Domain.Extensions;
 
-public sealed class PasswordHasher : IPasswordHasher
+public sealed class PasswordHasher(HashingOptions options) : IPasswordHasher
 {
     private const int SaltSize = 16; // 128 bit 
     private const int KeySize = 32; // 256 bit
 
-    public PasswordHasher(HashingOptions options)
-    {
-        Options = options;
-    }
-
-    private HashingOptions Options { get; }
+    private HashingOptions Options { get; } = options;
 
     public string Hash(string password)
     {

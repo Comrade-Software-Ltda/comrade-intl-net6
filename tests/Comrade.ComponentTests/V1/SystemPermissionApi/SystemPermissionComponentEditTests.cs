@@ -27,14 +27,14 @@ public class SystemPermissionComponentEditTests : IClassFixture<CustomWebApplica
         HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(systemPermission), Encoding.UTF8);
         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-        var actualResponse = await client.PutAsync("/api/v1/system-permission/edit", httpContent).ConfigureAwait(false);
-        var actualResponseString = await actualResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var actualResponse = await client.PutAsync("/api/v1/system-permission/edit", httpContent);
+        var actualResponseString = await actualResponse.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.NoContent, actualResponse.StatusCode);
 
         using StringReader stringReader = new(actualResponseString);
         using JsonTextReader reader = new(stringReader) {DateParseHandling = DateParseHandling.None};
-        var jsonResponse = await JObject.LoadAsync(reader).ConfigureAwait(false);
+        var jsonResponse = await JObject.LoadAsync(reader);
 
         Assert.Equal(BusinessMessage.MSG02, jsonResponse["message"]);
     }

@@ -6,15 +6,8 @@ using MediatR;
 
 namespace Comrade.Core.SystemUserCore.UseCases;
 
-public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
+public class UcSystemUserCreate(IMediator mediator) : UseCase, IUcSystemUserCreate
 {
-    private readonly IMediator _mediator;
-
-    public UcSystemUserCreate(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<ISingleResult<Entity>> Execute(SystemUserCreateCommand entity)
     {
         var isValid = ValidateEntity(entity);
@@ -23,6 +16,6 @@ public class UcSystemUserCreate : UseCase, IUcSystemUserCreate
             return isValid;
         }
 
-        return await _mediator.Send(entity).ConfigureAwait(false);
+        return await mediator.Send(entity);
     }
 }

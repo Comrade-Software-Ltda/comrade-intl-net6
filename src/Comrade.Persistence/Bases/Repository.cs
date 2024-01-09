@@ -28,16 +28,16 @@ public class Repository<TEntity> : IRepository<TEntity>
         }
 
         _currentTransaction = await _db.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
-            .ConfigureAwait(false);
+            ;
     }
 
     public async Task CommitTransactionAsync()
     {
         try
         {
-            await _db.SaveChangesAsync().ConfigureAwait(false);
+            await _db.SaveChangesAsync();
 
-            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask).ConfigureAwait(false);
+            await (_currentTransaction?.CommitAsync() ?? Task.CompletedTask);
         }
         catch
         {
@@ -56,17 +56,17 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public virtual async Task CommitChangesAsync()
     {
-        await _db.SaveChangesAsync().ConfigureAwait(false);
+        await _db.SaveChangesAsync();
     }
 
     public virtual async Task Add(TEntity obj)
     {
-        await _dbSet.AddAsync(obj).ConfigureAwait(false);
+        await _dbSet.AddAsync(obj);
     }
 
     public virtual async Task AddAll(IList<TEntity> obj)
     {
-        await _dbSet.AddRangeAsync(obj).ConfigureAwait(false);
+        await _dbSet.AddRangeAsync(obj);
     }
 
     public virtual void Update(TEntity obj)
@@ -96,18 +96,18 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public virtual async Task<TEntity?> GetById(Guid id)
     {
-        return await GetById(id, null, includes: null).ConfigureAwait(false);
+        return await GetById(id, null, includes: null);
     }
 
     public virtual async Task<TEntity?> GetById(Guid id, params string[] includes)
     {
-        return await GetById(id, null, includes).ConfigureAwait(false);
+        return await GetById(id, null, includes);
     }
 
     public virtual async Task<TEntity?> GetById(Guid id,
         Expression<Func<TEntity, TEntity>> projection)
     {
-        return await GetById(id, projection, null).ConfigureAwait(false);
+        return await GetById(id, projection, null);
     }
 
     public virtual async Task<TEntity?> GetById(Guid id,
@@ -122,12 +122,12 @@ public class Repository<TEntity> : IRepository<TEntity>
 
         query = query.Where(p => p.Id == id);
 
-        return await query.FirstOrDefaultAsync().ConfigureAwait(false);
+        return await query.FirstOrDefaultAsync();
     }
 
     public virtual async Task<TEntity?> GetByValue(string value)
     {
-        return await GetByValue(value, null).ConfigureAwait(false);
+        return await GetByValue(value, null);
     }
 
     public virtual async Task<TEntity?> GetByValue(string value,
@@ -138,7 +138,7 @@ public class Repository<TEntity> : IRepository<TEntity>
 
         query = query.Where(p => p.Value == value);
 
-        return await query.FirstOrDefaultAsync().ConfigureAwait(false);
+        return await query.FirstOrDefaultAsync();
     }
 
     public virtual async Task<bool> ValueExists(Guid id, string value)
@@ -146,7 +146,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         var exists = await GetAll()
             .Where(p => p.Id != id
                         && p.Value == value)
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return exists;
     }
@@ -157,7 +157,7 @@ public class Repository<TEntity> : IRepository<TEntity>
 
         var exists = await query
             .Where(predicate)
-            .AnyAsync().ConfigureAwait(false);
+            .AnyAsync();
 
         return !exists;
     }
@@ -180,7 +180,7 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public async Task<TEntity?> GetByPredicate(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _dbSet.SingleOrDefaultAsync(predicate).ConfigureAwait(false);
+        return await _dbSet.SingleOrDefaultAsync(predicate);
     }
 
     public virtual IQueryable<Lookup> GetLookup()

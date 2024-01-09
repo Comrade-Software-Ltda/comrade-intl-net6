@@ -1,13 +1,7 @@
 namespace Comrade.Api.Modules.Common;
 
-/// <summary>
-///     Versioning Extensions.
-/// </summary>
 public static class VersioningExtensions
 {
-    /// <summary>
-    ///     Method that adds versioning to the api.
-    /// </summary>
     public static IServiceCollection AddVersioning(this IServiceCollection services)
     {
         services.AddApiVersioning(
