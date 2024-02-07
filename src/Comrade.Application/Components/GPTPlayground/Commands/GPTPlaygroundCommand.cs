@@ -11,7 +11,7 @@ public class GPTPlaygroundCommand : IGPTPlaygroundCommand
 {
     public async Task<dynamic> Create()
     {
-        var apiKey ="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";
+        var apiKey ="";
         HttpClient client = new();
         client.BaseAddress = new Uri("https://api.openai.com/v1/");
         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
