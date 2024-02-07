@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comrade-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: comrade
+  template:
+    metadata:
+      labels:
+        app: comrade
+    spec:
+      containers:
+      - name: comrade
+        image: hracuityregistrynamev1.azurecr.io/comrade-api-oto:v4
+        ports:
+        - containerPort: 8080

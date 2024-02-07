@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemPermission.Contracts;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 
 namespace Comrade.Application.Components.SystemPermission.Queries;
 

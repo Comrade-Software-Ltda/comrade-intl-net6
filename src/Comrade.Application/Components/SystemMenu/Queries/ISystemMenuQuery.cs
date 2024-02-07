@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemMenu.Contracts;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 
 namespace Comrade.Application.Components.SystemMenu.Queries;
 

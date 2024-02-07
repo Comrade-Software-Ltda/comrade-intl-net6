@@ -8,6 +8,7 @@ using Comrade.Application.Components.Airplane.Queries;
 using Comrade.Application.Components.Authentication.Commands;
 using Comrade.Application.Components.DeliveryOptimizer.Command;
 using Comrade.Application.Components.Function.Queries;
+using Comrade.Application.Components.GPTPlayground.Commands;
 using Comrade.Application.Components.SystemMenu.Commands;
 using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Components.SystemMenu.Handlers;
@@ -307,6 +308,7 @@ public static class UseCasesExtensions
         #endregion
 
         services.AddScoped<IDeliveryOptimizerCommand, DeliveryOptimizerCommand>();
+        services.AddScoped<IGPTPlaygroundCommand, GPTPlaygroundCommand>();
 
 
         #region Alticci

@@ -1,5 +1,5 @@
 ﻿using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Comrade.Core.Messages;
 using Comrade.Domain.Enums;
 
@@ -16,6 +16,14 @@ public class PageResultDto<T> : ResultDto, IPageResultDto<T>
         Message = data == null
             ? BusinessMessage.MSG04
             : string.Empty;
+    }
+
+    public PageResultDto(string message)
+    {
+        Data = null;
+        Code = (int) EnumResponse.NotFound;
+        Success = false;
+        Message = message;
     }
 
     public PageResultDto(PaginationFilter pagination, List<T>? data)

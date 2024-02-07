@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Comrade.Application.Paginations;
+namespace Comrade.Application.Pagination;
 
 public class PaginationProfile : Profile
 {

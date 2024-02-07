@@ -1,6 +1,7 @@
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Persistence.DataAccess;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Options;
 
 namespace Comrade.Api.Modules;
 
@@ -38,13 +39,15 @@ public static class PersistenceExtensions
         if (isMsSqlServerEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
-                options.UseSqlServer(
+                options.UseLoggerFactory(new LoggerFactory().AddSerilog())
+                .UseSqlServer(
                     configuration.GetValue<string>("PersistenceModule:MsSqlDbConnection")!));
         }
         else if (isPostgresSqlEnabled)
         {
             services.AddDbContext<ComradeContext>(options =>
-                options.UseNpgsql(
+                options.UseLoggerFactory(new LoggerFactory().AddSerilog())
+                .UseNpgsql(
                     configuration.GetValue<string>("PersistenceModule:PostgresSqlDbConnection")!));
         }
         else

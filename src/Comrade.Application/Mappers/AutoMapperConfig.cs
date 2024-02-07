@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 
 namespace Comrade.Application.Mappers;
 

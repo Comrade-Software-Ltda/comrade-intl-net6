@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Comrade.Application.Mappers;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 
 namespace Comrade.UnitTests.Helpers;
 

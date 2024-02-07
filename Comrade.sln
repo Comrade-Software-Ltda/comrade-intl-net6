@@ -14,6 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{3EBA0177-BABE-46B8-9FB4-8F6A0C2DB60C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Persistence", "5 - Persistence", "{469CB850-3794-4596-B7CA-2B5B883E87B3}"
+	ProjectSection(SolutionItems) = preProject
+		src\comrade.Application\ExpressionBuilder.cs = src\comrade.Application\ExpressionBuilder.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{597E8C1B-7401-4A6E-8857-46D5A273FD82}"
 EndProject
@@ -39,7 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Persistence.ADO", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{004D55BC-CF29-4D10-A39F-EA3874ED0874}"
 	ProjectSection(SolutionItems) = preProject
-		Dockerfile = Dockerfile
+		deployments\deployment.yaml = deployments\deployment.yaml
+		deployments\Dockerfile = deployments\Dockerfile
+		deployments\service.yaml = deployments\service.yaml
 	EndProjectSection
 EndProject
 Global

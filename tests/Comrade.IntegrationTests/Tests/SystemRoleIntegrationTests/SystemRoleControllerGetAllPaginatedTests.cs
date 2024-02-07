@@ -1,6 +1,6 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemRole.Contracts;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Comrade.UnitTests.DataInjectors;
 using Comrade.UnitTests.Tests.SystemRoleTests.Bases;
 using Xunit;

@@ -31,6 +31,7 @@ public interface IRepository<TEntity> : IDisposable
     IQueryable<TEntity> GetLookupQuery(Expression<Func<TEntity, TEntity>> projection);
     IQueryable<TEntity> GetAll();
     IQueryable<TEntity> GetAllAsNoTracking();
+    IQueryable<TEntity> GetByProjection(Expression<Func<TEntity, bool>>? projection);
     IEnumerable<TEntity> GetAllAsNoTracking(Expression<Func<TEntity, TEntity>> projection);
     Task<TEntity?> GetByPredicate(Expression<Func<TEntity, bool>> predicate);
 }

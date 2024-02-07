@@ -6,7 +6,7 @@ using Comrade.Application.Bases;
 using Comrade.Application.Components.Airplane.Commands;
 using Comrade.Application.Components.Airplane.Contracts;
 using Comrade.Application.Components.Airplane.Queries;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.AirplaneApi;

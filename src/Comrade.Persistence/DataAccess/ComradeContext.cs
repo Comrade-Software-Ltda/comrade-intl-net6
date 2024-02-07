@@ -1,5 +1,7 @@
 using Comrade.Domain.Models;
 using Comrade.Persistence.Mappings;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Comrade.Persistence.DataAccess;
 

@@ -183,6 +183,14 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await _dbSet.SingleOrDefaultAsync(predicate);
     }
 
+    public virtual IQueryable<TEntity> GetByProjection(Expression<Func<TEntity, bool>>? projection)
+    {
+        var query = GetAll();
+        if (projection != null) query = query.Where(projection);
+
+        return query;
+    }
+
     public virtual IQueryable<Lookup> GetLookup()
     {
         return _dbSet

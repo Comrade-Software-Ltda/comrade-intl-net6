@@ -6,7 +6,7 @@ using Comrade.Application.Bases;
 using Comrade.Application.Components.SystemPermission.Commands;
 using Comrade.Application.Components.SystemPermission.Contracts;
 using Comrade.Application.Components.SystemPermission.Queries;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Microsoft.AspNetCore.Http;
 
 namespace Comrade.Api.Controllers.V1.SystemPermissionApi;

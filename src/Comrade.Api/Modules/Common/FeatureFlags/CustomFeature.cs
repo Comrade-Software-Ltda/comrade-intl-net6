@@ -8,6 +8,11 @@ public enum CustomFeature
     /// <summary>
     ///     Get Airplane.
     /// </summary>
+    GPTPlayground,
+
+    /// <summary>
+    ///     Get Airplane.
+    /// </summary>
     Airplane,
 
     /// <summary>

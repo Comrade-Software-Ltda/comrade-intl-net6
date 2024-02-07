@@ -6,10 +6,10 @@ namespace Comrade.Api.Modules.Common;
 /// </summary>
 public static class LoggingExtensions
 {
-    public static void CreateLogMongoDb(LoggerProviderCollection providers)
+    public static void CreateLog(LoggerProviderCollection providers)
     {
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
+            .MinimumLevel.Debug()
             .Enrich.With(new ApplicationDetailsEnricher())
             .Enrich.FromLogContext()
             .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)

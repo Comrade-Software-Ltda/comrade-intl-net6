@@ -45,7 +45,7 @@ public sealed class Startup(IConfiguration configuration)
             .AddCustomCors()
             .AddProxy()
             .AddCustomDataProtection();
-
+            
         services.AddSingleton<IRedisCacheService, RedisCacheService>();
         services.AddStackExchangeRedisCache(options =>
         {

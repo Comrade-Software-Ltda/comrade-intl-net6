@@ -16,6 +16,7 @@ public class MigrateDatabase(GetAllDatabases getAllDatabases)
         .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
         .CreateLogger();
 
+
     public async Task Execute()
     {
         var tenants = GetConfiguredTenants();

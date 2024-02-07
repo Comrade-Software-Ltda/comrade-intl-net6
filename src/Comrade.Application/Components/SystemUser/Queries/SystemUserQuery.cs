@@ -4,7 +4,7 @@ using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemUser.Contracts;
 using Comrade.Application.Lookups;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Comrade.Core.SystemUserCore;
 
 namespace Comrade.Application.Components.SystemUser.Queries;

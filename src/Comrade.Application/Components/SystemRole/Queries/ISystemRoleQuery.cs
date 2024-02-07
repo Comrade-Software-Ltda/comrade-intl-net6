@@ -2,7 +2,7 @@
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Application.Lookups;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 
 namespace Comrade.Application.Components.SystemRole.Queries;
 

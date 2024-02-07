@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using AutoMapper.Execution;
 using AutoMapper.QueryableExtensions;
 using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.Airplane.Contracts;
-using Comrade.Application.Paginations;
+using Comrade.Application.Pagination;
 using Comrade.Core.AirplaneCore;
+using Comrade.Core.Bases.Interfaces;
 
 namespace Comrade.Application.Components.Airplane.Queries;
 
@@ -36,6 +38,25 @@ public class AirplaneQuery(
             .ToList());
 
         return new PageResultDto<AirplaneDto>(paginationFilter, list);
+    }
+
+    public IPageResultDto<AirplaneDto> GetByProjection(PaginationSearchQuery paginationSearchQuery)
+    {
+        var result = repository.GetByProjection(paginationSearchQuery.PropertyName, paginationSearchQuery.SearchValue);
+
+        if (!result.Any())
+        {
+            return new PageResultDto<AirplaneDto>("error the projection don`t generate any results");
+        }
+
+        var skip = (paginationSearchQuery.PageNumber - 1) * paginationSearchQuery.PageSize;
+        var list = result
+            .ProjectTo<AirplaneDto>(mapper.ConfigurationProvider)
+            .Skip(skip)
+            .Take(paginationSearchQuery.PageSize)
+            .ToList();
+
+        return new PageResultDto<AirplaneDto>(list);
     }
 
     public async Task<ISingleResultDto<AirplaneDto>> GetByIdDefault(Guid id)

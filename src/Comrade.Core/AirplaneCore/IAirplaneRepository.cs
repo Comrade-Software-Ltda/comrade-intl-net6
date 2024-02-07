@@ -6,4 +6,5 @@ namespace Comrade.Core.AirplaneCore;
 public interface IAirplaneRepository : IRepository<Airplane>
 {
     Task<ISingleResult<Airplane>> CodeUniqueValidation(Guid id, string code);
+    IQueryable<Airplane> GetByProjection(string propertyName, string searchValue);
 }
