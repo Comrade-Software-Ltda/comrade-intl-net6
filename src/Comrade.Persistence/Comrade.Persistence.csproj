@@ -76,12 +76,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Comrade.Application\Comrade.Application.csproj" />
-        <ProjectReference Include="..\Comrade.Core\Comrade.Core.csproj" />
-        <ProjectReference Include="..\Comrade.Domain\Comrade.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
         <Name Update="Migrations\20210409032938_incial_Up.sql">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Name>
@@ -91,6 +85,11 @@
         <Folder Include="Mappings\Views\" />
         <Folder Include="Migrations\" />
         <Folder Include="Repositories\Views\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Comrade.Core\Comrade.Core.csproj" />
+      <ProjectReference Include="..\Comrade.Domain\Comrade.Domain.csproj" />
     </ItemGroup>
 
 </Project>

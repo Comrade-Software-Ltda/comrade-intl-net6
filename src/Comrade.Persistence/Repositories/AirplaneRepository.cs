@@ -1,8 +1,4 @@
-﻿using Comrade.Application.Bases;
-using Comrade.Application.Components.Airplane.Contracts;
-using Comrade.Application.Pagination;
-using Comrade.Application;
-using Comrade.Core.AirplaneCore;
+﻿using Comrade.Core.AirplaneCore;
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;

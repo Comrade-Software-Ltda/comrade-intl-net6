@@ -54,9 +54,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Comrade.Domain\Comrade.Domain.csproj" />
-        <ProjectReference Include="..\..\src\Comrade.Persistence\Comrade.Persistence.csproj" />
-        <ProjectReference Include="..\..\src\comrade.Api\Comrade.Api.csproj" />
+      <ProjectReference Include="..\..\src\Comrade.Api\Comrade.Api.csproj" />
+      <ProjectReference Include="..\..\src\Comrade.Persistence\Comrade.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

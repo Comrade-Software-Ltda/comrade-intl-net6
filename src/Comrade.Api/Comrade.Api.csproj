@@ -58,9 +58,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\comrade.Application\Comrade.Application.csproj" />
-        <ProjectReference Include="..\Comrade.Persistence.ADO\Comrade.Persistence.ADO.csproj" />
-        <ProjectReference Include="..\Comrade.Persistence\Comrade.Persistence.csproj" />
+      <ProjectReference Include="..\Comrade.Application\Comrade.Application.csproj" />
+      <ProjectReference Include="..\Comrade.Persistence.ADO\Comrade.Persistence.ADO.csproj" />
+      <ProjectReference Include="..\Comrade.Persistence\Comrade.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

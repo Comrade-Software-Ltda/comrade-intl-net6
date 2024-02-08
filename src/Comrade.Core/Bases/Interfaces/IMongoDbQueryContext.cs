@@ -1,6 +1,6 @@
 ﻿using Comrade.Domain.Bases;
 
-namespace Comrade.Application.Bases.Interfaces;
+namespace Comrade.Core.Bases.Interfaces;
 
 public interface IMongoDbQueryContext
 {

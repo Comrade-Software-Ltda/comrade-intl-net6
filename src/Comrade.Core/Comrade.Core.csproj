@@ -20,10 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Comrade.Domain\Comrade.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
         <Compile Update="Messages\BusinessMessage.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
@@ -40,6 +36,10 @@
 
     <ItemGroup>
         <Folder Include="Views\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Comrade.Domain\Comrade.Domain.csproj" />
     </ItemGroup>
 
 </Project>

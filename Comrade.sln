@@ -15,22 +15,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Persistence", "5 - Persistence", "{469CB850-3794-4596-B7CA-2B5B883E87B3}"
 	ProjectSection(SolutionItems) = preProject
-		src\comrade.Application\ExpressionBuilder.cs = src\comrade.Application\ExpressionBuilder.cs
+		src\Comrade.Application\ExpressionBuilder.cs = src\Comrade.Application\ExpressionBuilder.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{597E8C1B-7401-4A6E-8857-46D5A273FD82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Application", "src\comrade.Application\Comrade.Application.csproj", "{927BF290-C2E0-4C83-8135-B43AB74CFD99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Application", "src\Comrade.Application\Comrade.Application.csproj", "{927BF290-C2E0-4C83-8135-B43AB74CFD99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Api", "src\comrade.Api\Comrade.Api.csproj", "{0FB4B8DD-BF9B-4167-91FE-63CAA1FB3ECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Api", "src\Comrade.Api\Comrade.Api.csproj", "{0FB4B8DD-BF9B-4167-91FE-63CAA1FB3ECF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Core", "src\comrade.Core\Comrade.Core.csproj", "{83301418-BDE8-4DB9-BBD8-D5E7F9EF1954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Core", "src\Comrade.Core\Comrade.Core.csproj", "{83301418-BDE8-4DB9-BBD8-D5E7F9EF1954}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Domain", "src\comrade.Domain\Comrade.Domain.csproj", "{13FAEEEB-3857-4CE8-8C1E-0EC8BA1F838F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Domain", "src\Comrade.Domain\Comrade.Domain.csproj", "{13FAEEEB-3857-4CE8-8C1E-0EC8BA1F838F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.UnitTests", "tests\comrade.UnitTests\Comrade.UnitTests.csproj", "{0A07755C-DDAA-4F3F-A802-612F9C11F7D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.UnitTests", "tests\Comrade.UnitTests\Comrade.UnitTests.csproj", "{0A07755C-DDAA-4F3F-A802-612F9C11F7D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.IntegrationTests", "tests\comrade.IntegrationTests\Comrade.IntegrationTests.csproj", "{DE69CD1F-3698-4B83-A773-B8DD5864820F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.IntegrationTests", "tests\Comrade.IntegrationTests\Comrade.IntegrationTests.csproj", "{DE69CD1F-3698-4B83-A773-B8DD5864820F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.ComponentTests", "tests\Comrade.ComponentTests\Comrade.ComponentTests.csproj", "{BA7417A3-9138-40DC-AFF3-30B48839ABEA}"
 EndProject
@@ -42,8 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comrade.Persistence.ADO", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{004D55BC-CF29-4D10-A39F-EA3874ED0874}"
 	ProjectSection(SolutionItems) = preProject
+		deployments\AKS-commands.txt = deployments\AKS-commands.txt
 		deployments\deployment.yaml = deployments\deployment.yaml
-		deployments\Dockerfile = deployments\Dockerfile
+		Dockerfile = Dockerfile
 		deployments\service.yaml = deployments\service.yaml
 	EndProjectSection
 EndProject

@@ -1,5 +1,4 @@
-﻿using Comrade.Application.Bases.Interfaces;
-using Comrade.Core.Bases.Interfaces;
+﻿using Comrade.Core.Bases.Interfaces;
 using Comrade.Domain.Bases;
 using MongoDB.Driver;
 

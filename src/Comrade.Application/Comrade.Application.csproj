@@ -31,8 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Comrade.Core\Comrade.Core.csproj" />
-        <ProjectReference Include="..\Comrade.Domain\Comrade.Domain.csproj" />
+      <ProjectReference Include="..\Comrade.Core\Comrade.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>

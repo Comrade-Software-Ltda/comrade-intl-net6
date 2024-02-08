@@ -12,8 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Name Remove="Helpers\appsettings.Development.json" />
-        <Name Remove="Helpers\appsettings.json" />
+        <None Remove="appsettings.test.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,14 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-        <PackageReference Include="coverlet.collector" Version="6.0.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="xunit" Version="2.6.6" />
         <PackageReference Include="xunit.runner.console" Version="2.6.6">
             <PrivateAssets>all</PrivateAssets>
@@ -42,22 +33,16 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+        <PackageReference Include="coverlet.collector" Version="6.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Helpers\" />
-        <Folder Include="Tests\FunctionIntegrationTests\" />
+        <ProjectReference Include="..\Comrade.UnitTests\Comrade.UnitTests.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\src\Comrade.Application\Comrade.Application.csproj" />
-      <ProjectReference Include="..\Comrade.UnitTests\Comrade.UnitTests.csproj" />
-    </ItemGroup>
-
-    <ProjectExtensions>
-        <VisualStudio>
-            <UserProperties />
-        </VisualStudio>
-    </ProjectExtensions>
 
 </Project>

@@ -4,6 +4,7 @@ using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemMenu.Contracts;
 using Comrade.Application.Pagination;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemMenuCore;
 
 namespace Comrade.Application.Components.SystemMenu.Queries;

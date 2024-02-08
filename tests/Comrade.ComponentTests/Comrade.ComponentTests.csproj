@@ -42,8 +42,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\comrade.Api\Comrade.Api.csproj" />
-        <ProjectReference Include="..\comrade.UnitTests\Comrade.UnitTests.csproj" />
+      <ProjectReference Include="..\..\src\Comrade.Api\Comrade.Api.csproj" />
+      <ProjectReference Include="..\..\src\Comrade.Domain\Comrade.Domain.csproj" />
+      <ProjectReference Include="..\Comrade.UnitTests\Comrade.UnitTests.csproj" />
     </ItemGroup>
 
 </Project>

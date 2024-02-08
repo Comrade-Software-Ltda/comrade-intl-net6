@@ -5,6 +5,7 @@ using Comrade.Application.Bases.Interfaces;
 using Comrade.Application.Components.SystemRole.Contracts;
 using Comrade.Application.Lookups;
 using Comrade.Application.Pagination;
+using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.SystemRoleCore;
 
 namespace Comrade.Application.Components.SystemRole.Queries;
